@@ -110,7 +110,7 @@ kotlin {
 
 
 val zzzVersionName = "Luciana 2025.03.14"
-val bundleVersionName = "1.1.34"
+val bundleVersionName = "1.1.35"
 val zzzVersionCode = 6
 val zzzPackageId = "com.mrfatworm.zzzarchive"
 
@@ -174,6 +174,7 @@ compose.desktop {
         val isAppStoreRelease = project.property("macOsAppStoreRelease").toString().toBoolean()
 
         nativeDistributions {
+            modules("jdk.unsupported")
             if (isAppStoreRelease) {
                 appResourcesRootDir.set(project.layout.projectDirectory.dir("resources"))
             }
