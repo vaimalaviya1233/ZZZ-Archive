@@ -5,11 +5,14 @@
 
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.setSingletonImageLoaderFactory
-import ui.navigation.NavActions
+import feature.splash.InitViewModel
+import org.koin.compose.viewmodel.koinViewModel
 import ui.navigation.graph.RootNavGraph
+import ui.theme.AppTheme
 import ui.theme.ZzzArchiveTheme
 import utils.imageLoaderDiskCache
 
@@ -21,14 +24,19 @@ fun ZzzArchiveApp() {
         imageLoaderDiskCache(context)
     }
     ZzzArchiveTheme {
-        val rootNavController = rememberNavController()
-        val rootNavActions = remember(rootNavController) {
-            NavActions(rootNavController)
-        }
 
-        RootNavGraph(
-            rootNavController = rootNavController,
-            rootNavActions = rootNavActions
-        )
+
+        val viewModel: InitViewModel = koinViewModel()
+        val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+        var isDark by AppTheme.isDark
+        isDark = uiState.isDark
+        var uiScale by AppTheme.uiScale
+        uiScale = uiState.uiScale
+        var fontScale by AppTheme.fontScale
+        fontScale = uiState.fontScale
+
+        if (!uiState.isLoading) {
+            RootNavGraph()
+        }
     }
 }

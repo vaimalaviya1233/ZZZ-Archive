@@ -75,7 +75,7 @@ import feature.setting.domain.LanguageUseCaseImpl
 import feature.setting.domain.ThemeUseCase
 import feature.setting.domain.UiScaleUseCase
 import feature.setting.presentation.SettingViewModel
-import feature.splash.SplashViewModel
+import feature.splash.InitViewModel
 import feature.wengine.data.database.WEnginesListDB
 import feature.wengine.data.repository.WEngineRepository
 import feature.wengine.data.repository.WEngineRepositoryImpl
@@ -179,7 +179,7 @@ val sharedModule = module {
     single<CoroutineDispatcher> { Dispatchers.IO }
 
     // ViewModels
-    viewModelOf(::SplashViewModel)
+    viewModelOf(::InitViewModel)
     viewModelOf(::MainContainerViewModel)
     viewModelOf(::HomeViewModel)
     viewModelOf(::WikiViewModel)

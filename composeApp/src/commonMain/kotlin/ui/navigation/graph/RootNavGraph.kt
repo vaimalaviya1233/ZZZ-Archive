@@ -6,23 +6,22 @@
 package ui.navigation.graph
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
+import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import feature.splash.SplashScreen
 import root.MainContainer
 import ui.navigation.NavActions
 import ui.navigation.RootFlow
 
 @Composable
-fun RootNavGraph(
-    modifier: Modifier = Modifier,
-    rootNavController: NavHostController,
-    rootNavActions: NavActions
-) {
+fun RootNavGraph() {
+    val rootNavController = rememberNavController()
+    val rootNavActions = remember(rootNavController) {
+        NavActions(rootNavController)
+    }
     NavHost(
-        modifier = modifier,
         navController = rootNavController,
         startDestination = RootFlow.MainContainer.route
     ) {

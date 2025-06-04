@@ -21,7 +21,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class SplashViewModelTest {
+class InitViewModelTest {
 
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
@@ -30,7 +30,7 @@ class SplashViewModelTest {
     private val uiScaleUseCase = mockk<UiScaleUseCase>()
     private val languageUseCase = mockk<LanguageUseCase>()
     private val appInfoUseCase = mockk<AppInfoUseCase>()
-    private lateinit var viewModel: SplashViewModel
+    private lateinit var viewModel: InitViewModel
 
     @BeforeTest
     fun setup() {
@@ -40,7 +40,7 @@ class SplashViewModelTest {
         every { uiScaleUseCase.getUiScale() } returns flowOf(1f)
         every { uiScaleUseCase.getFontScale() } returns flowOf(1f)
 
-        viewModel = SplashViewModel(themeUseCase, uiScaleUseCase, languageUseCase, appInfoUseCase)
+        viewModel = InitViewModel(themeUseCase, uiScaleUseCase, languageUseCase, appInfoUseCase)
     }
 
     @Test

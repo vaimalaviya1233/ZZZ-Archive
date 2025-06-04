@@ -6,7 +6,7 @@ import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
 import feature.setting.domain.UiScaleUseCase
-import feature.splash.model.SplashState
+import feature.splash.model.InitState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
@@ -14,13 +14,13 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import utils.changePlatformLanguage
 
-class SplashViewModel(
+class InitViewModel(
     private val themeUseCase: ThemeUseCase,
     private val uiScaleUseCase: UiScaleUseCase,
     private val languageUseCase: LanguageUseCase,
     private val appInfoUseCase: AppInfoUseCase
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(SplashState())
+    private val _uiState = MutableStateFlow(InitState())
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -36,7 +36,7 @@ class SplashViewModel(
     private suspend fun initIsDarkTheme() {
         val isDark = themeUseCase.getPreferenceIsDarkTheme().first()
         _uiState.update {
-            it.copy(isDark = isDark)
+            it.copy(isDark = isDark, isLoading = false)
         }
     }
 
