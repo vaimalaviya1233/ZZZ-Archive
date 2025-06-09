@@ -12,6 +12,7 @@ import zzzarchive.composeapp.generated.resources.ic_specialty_attack
 import zzzarchive.composeapp.generated.resources.ic_specialty_defense
 import zzzarchive.composeapp.generated.resources.ic_specialty_stun
 import zzzarchive.composeapp.generated.resources.ic_specialty_support
+import zzzarchive.composeapp.generated.resources.rupture
 import zzzarchive.composeapp.generated.resources.stun
 import zzzarchive.composeapp.generated.resources.support
 import zzzarchive.composeapp.generated.resources.unknown
@@ -22,6 +23,7 @@ enum class AgentSpecialty(val textRes: StringResource, val iconRes: DrawableReso
     Support(Res.string.support, Res.drawable.ic_specialty_support),
     Anomaly(Res.string.anomaly, Res.drawable.ic_specialty_anomaly),
     Defense(Res.string.defense, Res.drawable.ic_specialty_defense),
+    Rupture(Res.string.rupture, Res.drawable.ic_help),
     None(Res.string.unknown, Res.drawable.ic_help)
 }
 
@@ -37,6 +39,7 @@ fun findAgentSpecialtyFromHoYoLab(specialtyId: Int): AgentSpecialty {
         3 -> AgentSpecialty.Anomaly
         4 -> AgentSpecialty.Support
         5 -> AgentSpecialty.Defense
+        6 -> AgentSpecialty.Rupture
         else -> AgentSpecialty.None
     }
 }

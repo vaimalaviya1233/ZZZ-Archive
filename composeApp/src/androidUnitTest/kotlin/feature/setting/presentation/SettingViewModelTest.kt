@@ -20,7 +20,6 @@ import io.mockk.verify
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.test.runTest
-import org.junit.Ignore
 import org.junit.Rule
 import utils.AppActionsUseCase
 import kotlin.test.BeforeTest
@@ -89,14 +88,5 @@ class SettingViewModelTest {
     fun `Restart App`() = runTest {
         viewModel.onAction(SettingAction.RestartApp)
         verify { appActionsUseCase.restart() }
-    }
-
-
-    @Ignore("Issue: kotlinx.coroutines.test.UncaughtExceptionsBeforeTest")
-    @Test
-    fun `Set Language`() = runTest {
-        viewModel.onAction(SettingAction.ChangeLanguage("zh"))
-        val state = viewModel.uiState.value
-        assertEquals("zh", state.language.code)
     }
 }

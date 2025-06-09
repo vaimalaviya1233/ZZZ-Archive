@@ -60,6 +60,7 @@
     <string name="support">Support</string>
     <string name="anomaly">Anomaly</string>
     <string name="defense">Defense</string>
+    <string name="rupture">Rupture</string>
 
     <!-- Attack Type -->
     <string name="pierce">Pierce</string>
@@ -75,6 +76,9 @@
     <string name="criminal_investigation_special_response_team">Criminal Investigation Special Response Team</string>
     <string name="sons_of_calydon">Sons of Calydon</string>
     <string name="stars_of_lyra">Stars of Lyra</string>
+    <string name="silver_squad">Silver Squad</string>
+    <string name="mockingbird">Mockingbird</string>
+    <string name="yunkui_summit">Yunkui Summit</string>
 
     <!-- Home -->
     <string name="popular">Popular</string>

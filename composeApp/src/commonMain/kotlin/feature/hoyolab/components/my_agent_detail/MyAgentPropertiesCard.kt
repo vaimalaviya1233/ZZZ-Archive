@@ -45,7 +45,7 @@ fun MyAgentPropertiesCard(
                 }
             }
             Column(modifier = Modifier.weight(1f)) {
-                for (index in 6..11) {
+                for (index in 6 until properties.size) {
                     MyAgentPropertyItem(
                         title = properties[index].propertyName,
                         value = properties[index].final,

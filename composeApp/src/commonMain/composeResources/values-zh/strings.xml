@@ -60,6 +60,7 @@
     <string name="support">支援</string>
     <string name="anomaly">異常</string>
     <string name="defense">防護</string>
+    <string name="rupture">命破</string>
 
     <!-- Attack Type -->
     <string name="pierce">穿透</string>
@@ -75,6 +76,9 @@
     <string name="criminal_investigation_special_response_team">刑偵特勤組</string>
     <string name="sons_of_calydon">卡呂冬之子</string>
     <string name="stars_of_lyra">天琴座</string>
+    <string name="silver_squad">白銀小隊</string>
+    <string name="mockingbird">反舌鳥</string>
+    <string name="yunkui_summit">雲巋山</string>
 
     <!-- Home -->
     <string name="popular">熱門</string>

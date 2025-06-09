@@ -11,12 +11,15 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.belobog_heavy_industries
 import zzzarchive.composeapp.generated.resources.criminal_investigation_special_response_team
 import zzzarchive.composeapp.generated.resources.gentle_house
+import zzzarchive.composeapp.generated.resources.mockingbird
 import zzzarchive.composeapp.generated.resources.obol_squad
 import zzzarchive.composeapp.generated.resources.section_6
+import zzzarchive.composeapp.generated.resources.silver_squad
 import zzzarchive.composeapp.generated.resources.sons_of_calydon
 import zzzarchive.composeapp.generated.resources.stars_of_lyra
 import zzzarchive.composeapp.generated.resources.unknown
 import zzzarchive.composeapp.generated.resources.victoria_housekeeping
+import zzzarchive.composeapp.generated.resources.yunkui_summit
 
 data class Faction(
     val id: Int
@@ -31,6 +34,9 @@ data class Faction(
             6 -> Res.string.criminal_investigation_special_response_team
             7 -> Res.string.sons_of_calydon
             8 -> Res.string.stars_of_lyra
+            9 -> Res.string.silver_squad
+            10 -> Res.string.mockingbird
+            11 -> Res.string.yunkui_summit
             else -> Res.string.unknown
         }
     }

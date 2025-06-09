@@ -17,6 +17,8 @@ fun highlightText(content: String, colorScheme: ColorScheme): AnnotatedString {
         "以太" to colorScheme.ether,
         "以太屬性" to colorScheme.ether,
         " Ether " to colorScheme.ether,
+        "玄墨" to colorScheme.ether,
+        " Auric Ink " to colorScheme.ether,
         "火屬性" to colorScheme.fire,
         " Fire " to colorScheme.fire,
         "冰屬性" to colorScheme.ice,

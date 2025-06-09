@@ -62,7 +62,8 @@ fun AllForumCard(uiState: AllForumState) {
         HorizontalPager(
             modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
             state = pagerState,
-            verticalAlignment = Alignment.Top
+            verticalAlignment = Alignment.Top,
+            userScrollEnabled = false
         ) { currentPager ->
             when (currentPager) {
                 0 -> RedditList(uiState.reddit)
