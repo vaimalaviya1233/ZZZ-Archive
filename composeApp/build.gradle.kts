@@ -109,9 +109,9 @@ kotlin {
 }
 
 
-val zzzVersionName = "Luciana 2025.03.14"
-val bundleVersionName = "1.1.35"
-val zzzVersionCode = 6
+val zzzVersionName = "Luciana 2025.06.10"
+val bundleVersionName = "1.1.36"
+val zzzVersionCode = 7
 val zzzPackageId = "com.mrfatworm.zzzarchive"
 
 android {
@@ -128,7 +128,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
 
     buildTypes {
         release {
