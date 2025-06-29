@@ -13,11 +13,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
+import kotlinx.datetime.number
 import kotlinx.datetime.toLocalDateTime
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 
 class HoYoLabManageUseCase(
     private val hoYoLabConfigRepository: HoYoLabConfigRepository,
@@ -60,6 +62,7 @@ class HoYoLabManageUseCase(
         })
     }
 
+    @OptIn(ExperimentalTime::class)
     private suspend fun encryptAndSaveToDatabase(
         uid: String,
         region: String,
@@ -121,13 +124,14 @@ class HoYoLabManageUseCase(
         }
     }
 
+    @OptIn(ExperimentalTime::class)
     fun convertToLocalDatetime(
         timestamp: Long, timeZone: TimeZone = TimeZone.currentSystemDefault()
     ): String {
         val instant = Instant.fromEpochMilliseconds(timestamp)
         val datetimeInSystemZone: LocalDateTime = instant.toLocalDateTime(timeZone)
         return datetimeInSystemZone.run {
-            "${year}-${monthNumber}-${dayOfMonth} ${hour}:${minute}"
+            "${year}-${month.number}-$day ${hour}:${minute}"
         }
     }
 }
