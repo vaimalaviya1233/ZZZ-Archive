@@ -35,11 +35,17 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 
 ## 桌面端執行方法
 
-1. [Set up your environment](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html)
-2. 在 Android Studio 中, 選擇上排選單 **Run** > **Edit Configurations** > **New** > **Gradle**.
-3. 設定如下:
-  - Run: `desktopRun -DmainClass=MainKt --quiet`
-  - Environment Variables: `VARIANT=Dev`
+- Desktop App
+
+```
+./gradlew run
+```
+
+- Desktop Hot Reload
+
+```
+./gradlew runHot
+```
 
 ## 使用套件
 
@@ -49,6 +55,7 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 - JetBrains Adaptive Layout
 - JetBrains Navigation Compose
 - JetBrains Lifecycle ViewModel
+- JetBrains Compose Hot Reload
 - Androidx Room Database
 - Androidx DataStore
 - Koin

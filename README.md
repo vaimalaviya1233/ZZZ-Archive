@@ -33,11 +33,17 @@ ZZZ Archive is a companion app for the action game Zenless Zone Zero, where user
 
 ## Running on Desktop
 
-1. [Set up your environment](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-setup.html)
-2. In Android Studio, go to **Run** > **Edit Configurations** > **New** > **Gradle**.
-3. Configure as follows:
-  - Run: `desktopRun -DmainClass=MainKt --quiet`
-  - Environment Variables: `VARIANT=Dev`
+- Desktop App
+
+```
+./gradlew run
+```
+
+- Desktop Hot Reload
+
+```
+./gradlew runHot
+```
 
 ## Library
 
@@ -47,6 +53,7 @@ Thanks to all the contributors who made KMP/CMP possible!
 - JetBrains Adaptive Layout
 - JetBrains Navigation Compose
 - JetBrains Lifecycle ViewModel
+- JetBrains Compose Hot Reload
 - Androidx Room Database
 - Androidx DataStore
 - Koin
