@@ -126,12 +126,12 @@ val zzzPackageId = "com.mrfatworm.zzzarchive"
 
 android {
     namespace = "com.mrfatworm.zzzarchive"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = zzzPackageId
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = zzzVersionCode
         versionName = zzzVersionName
 
