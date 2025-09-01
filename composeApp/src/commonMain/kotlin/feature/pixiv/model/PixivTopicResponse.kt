@@ -8,10 +8,10 @@ package feature.pixiv.model
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PixivTopicResponse(val body: Body)
+data class PixivTopicResponse(val body: PixivBodyResponse? = null)
 
 @Serializable
-data class Body(val illustManga: IllustMangaResponse? = null)
+data class PixivBodyResponse(val illustManga: IllustMangaResponse? = null)
 
 @Serializable
 data class IllustMangaResponse(
@@ -29,7 +29,7 @@ data class RecentArticleResponse(
 )
 
 val stubPixivTopicResponse = PixivTopicResponse(
-    Body(
+    PixivBodyResponse(
         IllustMangaResponse(
             listOf(
                 RecentArticleResponse(

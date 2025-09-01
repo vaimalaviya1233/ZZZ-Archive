@@ -67,7 +67,7 @@ import zzzarchive.composeapp.generated.resources.popular
 
 @Composable
 fun PixivCard(
-    recentArticlesListResponse: List<PixivArticleItem>, onPixivTagChange: (String) -> Unit
+    pixivArticlesList: List<PixivArticleItem>, onPixivTagChange: (String) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()
@@ -82,15 +82,8 @@ fun PixivCard(
             contentPadding = cardPaddingWithHeader(),
             horizontalArrangement = rowListGap()
         ) {
-            items(items = recentArticlesListResponse, key = { it.id }) { item ->
-                PixivTopicItem(
-                    artworkId = item.id,
-                    artworkName = item.title,
-                    artworkUrl = item.url,
-                    profileId = item.userId,
-                    profileName = item.userName,
-                    profileUrl = item.profileImageUrl
-                )
+            items(items = pixivArticlesList, key = { it.id }) { item ->
+                PixivTopicItem(item)
             }
         }
     }
@@ -175,19 +168,17 @@ private fun TagDropDownButton(onPixivTagChange: (String) -> Unit) {
 
 @Composable
 private fun PixivTopicItem(
-    artworkId: String,
-    artworkName: String,
-    artworkUrl: String?,
-    profileId: String,
-    profileName: String,
-    profileUrl: String?
+    pixivArticle: PixivArticleItem
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val urlHandler = LocalUriHandler.current
     val header = NetworkHeaders.Builder().add("Referer", "https://app-api.pixiv.net/").build()
     val imageState = rememberAsyncImagePainter(
-        model = ImageRequest.Builder(LocalPlatformContext.current).httpHeaders(header)
-            .data(artworkUrl).size(Size.ORIGINAL).build()
+        model = ImageRequest
+            .Builder(LocalPlatformContext.current)
+            .httpHeaders(header)
+            .data(pixivArticle.artworkImageUrl)
+            .size(Size.ORIGINAL).build()
     )
     Column(
         modifier = Modifier.width(AppTheme.size.s144),
@@ -195,33 +186,52 @@ private fun PixivTopicItem(
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().aspectRatio(1f).clip(AppTheme.shape.r400)
+            modifier = Modifier
+                .fillMaxSize()
+                .aspectRatio(1f)
+                .clip(AppTheme.shape.r400)
         ) {
-            if (artworkUrl != null) {
+            if (pixivArticle.artworkImageUrl.isNotEmpty()) {
                 Image(
-                    modifier = Modifier.fillMaxSize().pointerHoverIcon(PointerIcon.Hand)
-                        .clickable(interactionSource = interactionSource, indication = null) {
-                            urlHandler.openUri("https://www.pixiv.net/artworks/$artworkId")
-                        }, painter = imageState, contentDescription = artworkName
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .pointerHoverIcon(PointerIcon.Hand)
+                        .clickable(
+                            interactionSource = interactionSource,
+                            indication = null
+                        ) {
+                            urlHandler.openUri(pixivArticle.artworkUrl)
+                        },
+                    painter = imageState, contentDescription = pixivArticle.title
                 )
             } else {
                 ImageNotFound()
             }
         }
         Text(
-            modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand)
-                .clickable(interactionSource = interactionSource, indication = null) {
-                    urlHandler.openUri("https://www.pixiv.net/artworks/$artworkId")
-                },
-            text = artworkName,
+            modifier = Modifier
+                .fillMaxWidth()
+                .pointerHoverIcon(PointerIcon.Hand)
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null
+                ) {
+                    urlHandler.openUri(pixivArticle.artworkUrl)
+                  },
+            text = pixivArticle.title,
             overflow = TextOverflow.Ellipsis,
             style = AppTheme.typography.labelMedium,
             color = AppTheme.colors.onSurfaceVariant,
             maxLines = 1
         )
-        AuthorInfo(profileName, profileUrl, header, onClick = {
-            urlHandler.openUri("https://www.pixiv.net/users/$profileId")
-        })
+        AuthorInfo(
+            profileName = pixivArticle.profileName,
+            profileUrl = pixivArticle.profileImageUrl,
+            header = header,
+            onClick = {
+                urlHandler.openUri(pixivArticle.profileUrl)
+            }
+        )
     }
 }
 

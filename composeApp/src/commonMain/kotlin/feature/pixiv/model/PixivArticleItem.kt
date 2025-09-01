@@ -8,8 +8,10 @@ package feature.pixiv.model
 data class PixivArticleItem(
     val id: String,
     val title: String,
-    val url: String,
-    val userId: String,
-    val userName: String,
+    val artworkUrl: String,
+    val artworkImageUrl: String,
+    val profileId: String,
+    val profileName: String,
+    val profileUrl: String,
     val profileImageUrl: String
 )
