@@ -3,39 +3,36 @@
  * License: MIT
  */
 
-package feature.pixiv.data
+package feature.pixiv.model
 
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class PixivTopicResponse(val body: Body)
 
 @Serializable
-@SerialName("illustManga")
-data class Body(val illustManga: IllustManga)
+data class Body(val illustManga: IllustMangaResponse? = null)
 
 @Serializable
-data class IllustManga(
-    @SerialName("data")
-    val data: List<RecentArticle>
+data class IllustMangaResponse(
+    val data: List<RecentArticleResponse>? = null
 )
 
 @Serializable
-data class RecentArticle(
-    val id: String,
-    val title: String?,
-    val url: String,
-    val userId: String,
-    val userName: String,
-    val profileImageUrl: String
+data class RecentArticleResponse(
+    val id: String? = null,
+    val title: String? = null,
+    val url: String? = null,
+    val userId: String? = null,
+    val userName: String? = null,
+    val profileImageUrl: String? = null
 )
 
 val stubPixivTopicResponse = PixivTopicResponse(
     Body(
-        IllustManga(
+        IllustMangaResponse(
             listOf(
-                RecentArticle(
+                RecentArticleResponse(
                     id = "123456789",
                     title = "Ellen",
                     url = "https://i.pximg.net",

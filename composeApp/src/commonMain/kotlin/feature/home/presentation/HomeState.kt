@@ -17,13 +17,13 @@ import feature.hoyolab.model.SurveyPointsState
 import feature.hoyolab.model.VhsSaleState
 import feature.hoyolab.model.WeeklyTaskState
 import feature.news.model.OfficialNewsListItem
-import feature.pixiv.data.RecentArticle
+import feature.pixiv.model.PixivArticleItem
 
 data class HomeState(
     val banner: BannerResponse? = null,
     val coverImage: List<CoverImageListItemEntity> = emptyList(),
     val newsList: List<OfficialNewsListItem> = emptyList(),
-    val pixivTopics: List<RecentArticle> = emptyList(),
+    val pixivTopics: List<PixivArticleItem> = emptyList(),
     val gameRecord: GameRecordState = emptyGameRecordState,
     val signResult: String? = null,
     val allForum: AllForumState = emptyAllForumState,

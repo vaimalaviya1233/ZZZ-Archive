@@ -1,4 +1,4 @@
-package feature.home.model
+package feature.pixiv.model
 
 data class PixivTagDropdownItem(
     val tagText: String,

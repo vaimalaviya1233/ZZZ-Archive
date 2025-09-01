@@ -5,7 +5,7 @@
 
 package network
 
-import feature.pixiv.data.PixivTopicResponse
+import feature.pixiv.model.PixivTopicResponse
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.request.get

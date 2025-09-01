@@ -11,11 +11,11 @@ import database.UpdateDatabaseUseCase
 import feature.banner.domain.BannerUseCase
 import feature.cover_image.domain.CoverImageUseCase
 import feature.forum.domain.ForumUseCase
-import feature.home.model.pixivTagDropdownItems
 import feature.hoyolab.data.mapper.toGameRecordState
 import feature.hoyolab.domain.GameRecordUseCase
 import feature.news.domain.OfficialNewsUseCase
-import feature.pixiv.domain.PixivUseCase
+import feature.pixiv.data.PixivRepository
+import feature.pixiv.model.pixivTagDropdownItems
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -31,7 +31,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel(
     private val bannerUseCase: BannerUseCase,
     private val coverImageUseCase: CoverImageUseCase,
-    private val pixivUseCase: PixivUseCase,
+    private val pixivRepository: PixivRepository,
     private val newsUseCase: OfficialNewsUseCase,
     private val forumUseCase: ForumUseCase,
     private val updateDatabaseUseCase: UpdateDatabaseUseCase,
@@ -110,7 +110,7 @@ class HomeViewModel(
 
     private fun updatePixivTopic(zzzTag: String = pixivTagDropdownItems.first().tagOnPixiv) {
         viewModelScope.launch {
-            pixivUseCase.updateZzzTopic(zzzTag)
+            pixivRepository.updateZzzTopic(zzzTag)
         }
     }
 
@@ -209,7 +209,7 @@ class HomeViewModel(
     private fun observePixivTopic() {
         pixivTopicJob?.cancel()
         pixivTopicJob = viewModelScope.launch {
-            pixivUseCase.invoke().collect { pixivArticleList ->
+            pixivRepository.getZzzTopic().collect { pixivArticleList ->
                 _uiState.update {
                     it.copy(pixivTopics = pixivArticleList)
                 }

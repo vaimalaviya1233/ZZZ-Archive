@@ -21,8 +21,9 @@ import feature.hoyolab.model.stubSignResponse
 import feature.news.data.stubOfficialNewsDataResponse
 import feature.news.domain.OfficialNewsUseCase
 import feature.news.model.stubOfficialNewsListItem
-import feature.pixiv.data.stubPixivTopicResponse
-import feature.pixiv.domain.PixivUseCase
+import feature.pixiv.data.FakePixivRepository
+import feature.pixiv.data.mapper.toPixivArticleList
+import feature.pixiv.model.stubPixivTopicResponse
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -43,7 +44,7 @@ class HomeViewModelTest {
 
     private val bannerUseCase = mockk<BannerUseCase>()
     private val coverImageUseCase = mockk<CoverImageUseCase>()
-    private val pixivUseCase = mockk<PixivUseCase>()
+    private val pixivRepository = FakePixivRepository()
     private val officialNewsUseCase = mockk<OfficialNewsUseCase>()
     private val updateDatabaseUseCase = mockk<UpdateDatabaseUseCase>()
     private val gameRecordUseCase = mockk<GameRecordUseCase>()
@@ -57,8 +58,6 @@ class HomeViewModelTest {
         coEvery { bannerUseCase.invoke() } returns Result.success(stubBannerResponse)
         coEvery { bannerUseCase.setBannerIgnoreId(any()) } returns Unit
         coEvery { coverImageUseCase.invoke() } returns flowOf(listOf(stubCoverImageListItemEntity))
-        coEvery { pixivUseCase.invoke() } returns flowOf(stubPixivTopicResponse.body.illustManga.data)
-        coEvery { pixivUseCase.updateZzzTopic(any()) } returns Result.success(stubPixivTopicResponse)
         coEvery {
             officialNewsUseCase.getNewsPeriodically(any(), any())
         } returns flowOf(Result.success(stubOfficialNewsDataResponse.data.list))
@@ -79,7 +78,7 @@ class HomeViewModelTest {
         viewModel = HomeViewModel(
             bannerUseCase,
             coverImageUseCase,
-            pixivUseCase,
+            pixivRepository,
             officialNewsUseCase,
             forumUseCase,
             updateDatabaseUseCase,
@@ -93,7 +92,7 @@ class HomeViewModelTest {
         val state = viewModel.uiState.first()
         assertEquals(stubBannerResponse, state.banner)
         assertEquals(listOf(stubCoverImageListItemEntity), state.coverImage)
-        assertEquals(stubPixivTopicResponse.body.illustManga.data, state.pixivTopics)
+        assertEquals(stubPixivTopicResponse.toPixivArticleList(), state.pixivTopics)
         assertEquals(stubOfficialNewsListItem, state.newsList.first())
         assertEquals(stubAllForumState, state.allForum)
         coVerify { updateDatabaseUseCase.updateAssetsIfNewVersionAvailable() }

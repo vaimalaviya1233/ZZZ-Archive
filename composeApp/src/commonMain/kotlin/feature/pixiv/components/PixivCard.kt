@@ -49,8 +49,8 @@ import coil3.network.NetworkHeaders
 import coil3.network.httpHeaders
 import coil3.request.ImageRequest
 import coil3.size.Size
-import feature.home.model.pixivTagDropdownItems
-import feature.pixiv.data.RecentArticle
+import feature.pixiv.model.PixivArticleItem
+import feature.pixiv.model.pixivTagDropdownItems
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -64,11 +64,10 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_favorite
 import zzzarchive.composeapp.generated.resources.ic_pixiv
 import zzzarchive.composeapp.generated.resources.popular
-import zzzarchive.composeapp.generated.resources.unknown
 
 @Composable
 fun PixivCard(
-    recentArticlesList: List<RecentArticle>, onPixivTagChange: (String) -> Unit
+    recentArticlesListResponse: List<PixivArticleItem>, onPixivTagChange: (String) -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()
@@ -83,10 +82,10 @@ fun PixivCard(
             contentPadding = cardPaddingWithHeader(),
             horizontalArrangement = rowListGap()
         ) {
-            items(items = recentArticlesList, key = { it.id }) { item ->
+            items(items = recentArticlesListResponse, key = { it.id }) { item ->
                 PixivTopicItem(
                     artworkId = item.id,
-                    artworkName = item.title ?: stringResource(Res.string.unknown),
+                    artworkName = item.title,
                     artworkUrl = item.url,
                     profileId = item.userId,
                     profileName = item.userName,

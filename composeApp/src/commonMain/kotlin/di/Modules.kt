@@ -64,7 +64,6 @@ import feature.news.data.OfficialNewsRepositoryImpl
 import feature.news.domain.OfficialNewsUseCase
 import feature.pixiv.data.PixivRepository
 import feature.pixiv.data.PixivRepositoryImpl
-import feature.pixiv.domain.PixivUseCase
 import feature.setting.data.PreferencesRepository
 import feature.setting.data.PreferencesRepositoryImpl
 import feature.setting.data.SystemConfigRepository
@@ -152,7 +151,6 @@ val sharedModule = module {
 
     // Use cases
     single<CoverImageUseCase> { CoverImageUseCase(get()) }
-    single<PixivUseCase> { PixivUseCase(get()) }
     single<BannerUseCase> { BannerUseCase(get(), get(), get()) }
     single<LanguageUseCase> { LanguageUseCaseImpl(get()) }
     single<OfficialNewsUseCase> { OfficialNewsUseCase(get(), get()) }

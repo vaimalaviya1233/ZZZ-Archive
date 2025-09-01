@@ -5,8 +5,8 @@
 
 package network
 
-import feature.pixiv.data.PixivTopicResponse
-import feature.pixiv.data.stubPixivTopicResponse
+import feature.pixiv.model.PixivTopicResponse
+import feature.pixiv.model.stubPixivTopicResponse
 
 class FakePixivHttp : PixivHttp {
     private var isError = false
