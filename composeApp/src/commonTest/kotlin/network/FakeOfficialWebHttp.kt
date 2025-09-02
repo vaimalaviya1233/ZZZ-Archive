@@ -5,8 +5,8 @@
 
 package network
 
-import feature.news.data.OfficialNewsResponse
-import feature.news.data.stubOfficialNewsDataResponse
+import feature.news.model.OfficialNewsResponse
+import feature.news.model.stubOfficialNewsDataResponseResponse
 
 class FakeOfficialWebHttp : OfficialWebHttp {
     private var isError = false
@@ -19,7 +19,7 @@ class FakeOfficialWebHttp : OfficialWebHttp {
         return if (isError) {
             throw Exception()
         } else {
-            stubOfficialNewsDataResponse
+            stubOfficialNewsDataResponseResponse
         }
     }
 }

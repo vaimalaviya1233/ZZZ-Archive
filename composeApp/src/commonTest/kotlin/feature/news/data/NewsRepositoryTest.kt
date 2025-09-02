@@ -5,6 +5,7 @@
 
 package feature.news.data
 
+import feature.news.model.stubOfficialNewsDataResponseResponse
 import kotlinx.coroutines.test.runTest
 import network.FakeOfficialWebHttp
 import kotlin.test.Test
@@ -20,7 +21,7 @@ class NewsRepositoryTest {
     @Test
     fun `Get news success`() = runTest {
         val result = repository.getNews(0, "").getOrNull()
-        assertEquals(stubOfficialNewsDataResponse.data.list, result)
+        assertEquals(stubOfficialNewsDataResponseResponse, result)
     }
 
     @Test

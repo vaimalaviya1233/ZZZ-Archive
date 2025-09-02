@@ -5,6 +5,9 @@
 
 package feature.news.data
 
+import feature.news.model.OfficialNewsResponse
+import feature.news.model.stubOfficialNewsDataResponseResponse
+
 class FakeOfficialNewsRepository : OfficialNewsRepository {
     private var isError = false
 
@@ -15,11 +18,11 @@ class FakeOfficialNewsRepository : OfficialNewsRepository {
     override suspend fun getNews(
         amount: Int,
         languagePath: String
-    ): Result<List<OfficialNewsListItemResponse>> {
+    ): Result<OfficialNewsResponse> {
         return if (isError) {
             Result.failure(Exception())
         } else {
-            Result.success(listOf(stubNewsListItem))
+            Result.success(stubOfficialNewsDataResponseResponse)
         }
     }
 }

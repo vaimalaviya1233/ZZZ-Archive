@@ -1,0 +1,44 @@
+/*
+ * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
+ * License: MIT
+ */
+
+package feature.news.data.mapper
+
+import feature.news.model.NewsBannerResponse
+import feature.news.model.OfficialNewsListItem
+import feature.news.model.OfficialNewsResponse
+import kotlinx.serialization.json.Json
+
+fun OfficialNewsResponse.toOfficialNewsList(): List<OfficialNewsListItem> {
+    return this.data?.list?.map { newsItem ->
+
+        // 解析 sExt 中的圖片 URL
+        val imageUrl = try {
+            val json = Json {
+                ignoreUnknownKeys = true
+                isLenient = true
+            }
+            val newsBannerResponse =
+                json.decodeFromString<NewsBannerResponse>(newsItem.sExt.orEmpty())
+            newsBannerResponse.newsBanner?.firstOrNull()?.url ?: ""
+        } catch (e: Exception) {
+            ""
+        }
+
+        // 格式化日期
+        val formattedDate = try {
+            newsItem.dtStartTime?.split(" ")?.firstOrNull() ?: newsItem.dtStartTime
+        } catch (e: Exception) {
+            newsItem.dtStartTime
+        }
+
+        OfficialNewsListItem(
+            title = newsItem.sTitle.orEmpty(),
+            description = newsItem.sIntro.orEmpty(),
+            imageUrl = imageUrl,
+            date = formattedDate.orEmpty(),
+            newsUrl = "https://zenless.hoyoverse.com/en-us/news/${newsItem.iInfoId}"
+        )
+    } ?: emptyList()
+}

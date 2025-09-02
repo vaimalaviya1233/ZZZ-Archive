@@ -18,7 +18,6 @@ import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.domain.GameRecordUseCase
 import feature.hoyolab.model.stubGameRecordResponse
 import feature.hoyolab.model.stubSignResponse
-import feature.news.data.stubOfficialNewsDataResponse
 import feature.news.domain.OfficialNewsUseCase
 import feature.news.model.stubOfficialNewsListItem
 import feature.pixiv.data.FakePixivRepository
@@ -59,11 +58,8 @@ class HomeViewModelTest {
         coEvery { bannerUseCase.setBannerIgnoreId(any()) } returns Unit
         coEvery { coverImageUseCase.invoke() } returns flowOf(listOf(stubCoverImageListItemEntity))
         coEvery {
-            officialNewsUseCase.getNewsPeriodically(any(), any())
-        } returns flowOf(Result.success(stubOfficialNewsDataResponse.data.list))
-        coEvery { officialNewsUseCase.convertToOfficialNewsState(any()) } returns listOf(
-            stubOfficialNewsListItem
-        )
+            officialNewsUseCase.getNewsListPeriodically(any(), any())
+        } returns flowOf(Result.success(listOf(stubOfficialNewsListItem)))
         coEvery { gameRecordUseCase.getDefaultUid() } returns flowOf(1300051361)
         coEvery { gameRecordUseCase.getDefaultHoYoLabAccount(any()) } returns flowOf(
             stubHoYoLabAccountEntity

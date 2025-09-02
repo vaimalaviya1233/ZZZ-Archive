@@ -151,10 +151,10 @@ class HomeViewModel(
     private fun updateOfficialNewsEveryTenMinutes() {
         officialNewsJob?.cancel()
         officialNewsJob = viewModelScope.launch {
-            newsUseCase.getNewsPeriodically(10, 6).collect { result ->
+            newsUseCase.getNewsListPeriodically(10, 6).collect { result ->
                 result.fold(onSuccess = { newsList ->
                     _uiState.update { state ->
-                        state.copy(newsList = newsUseCase.convertToOfficialNewsState(newsList))
+                        state.copy(newsList = newsList)
                     }
                 }, onFailure = {
                     println("get news error: ${it.message}")

@@ -5,9 +5,11 @@
 
 package feature.news.data
 
+import feature.news.model.OfficialNewsResponse
+
 interface OfficialNewsRepository {
     suspend fun getNews(
         amount: Int,
         languagePath: String
-    ): Result<List<OfficialNewsListItemResponse>>
+    ): Result<OfficialNewsResponse>
 }
