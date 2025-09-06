@@ -163,7 +163,7 @@
     <string name="suggestion">Suggestion</string>
     <string name="other">Other</string>
     <string name="input_your_issue">Input your issue</string>
-    <string name="your_nickname_optional">Your Nickname (Optional)</string>
+    <string name="your_email_optional">Your Email (Optional)</string>
     <string name="app_version">App Version</string>
     <string name="device_name">Device Name</string>
     <string name="operating_system">OS</string>

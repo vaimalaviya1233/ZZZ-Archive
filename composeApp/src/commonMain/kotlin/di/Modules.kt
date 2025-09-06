@@ -37,7 +37,6 @@ import feature.drive.domain.DrivesListUseCase
 import feature.drive.presentation.DrivesListViewModel
 import feature.feedback.data.GoogleDocRepository
 import feature.feedback.data.GoogleDocRepositoryImpl
-import feature.feedback.domain.GoogleDocUseCase
 import feature.feedback.presentation.FeedbackViewModel
 import feature.forum.data.ForumRepository
 import feature.forum.data.ForumRepositoryImpl
@@ -162,7 +161,6 @@ val sharedModule = module {
     single<WEngineDetailUseCase> { WEngineDetailUseCase(get(), get()) }
     single<DrivesListUseCase> { DrivesListUseCase(get(), get()) }
     single<AppInfoUseCase> { AppInfoUseCase() }
-    single<GoogleDocUseCase> { GoogleDocUseCase(get()) }
     single<ThemeUseCase> { ThemeUseCase(get()) }
     single<UpdateDatabaseUseCase> {
         UpdateDatabaseUseCase(get(), get(), get(), get(), get(), get(), get(), get())

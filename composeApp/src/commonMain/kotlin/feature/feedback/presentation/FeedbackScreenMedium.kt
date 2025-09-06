@@ -14,16 +14,11 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import feature.feedback.components.FeedbackFormCard
 import feature.feedback.model.FeedbackState
-import feature.feedback.model.feedbackIssueTypes
 import org.jetbrains.compose.resources.stringResource
 import ui.components.TopBarRound
 import ui.components.buttons.ZzzPrimaryButton
@@ -42,9 +37,6 @@ fun FeedbackScreenMedium(
     uiState: FeedbackState,
     onAction: (FeedbackAction) -> Unit
 ) {
-    var issueTextFieldValue by remember { mutableStateOf("") }
-    var nicknameTextFieldValue by remember { mutableStateOf("") }
-    var selectedIssue by remember { mutableStateOf(feedbackIssueTypes.first()) }
     Column(
         modifier = Modifier.widthIn(max = 640.dp)
             .verticalScroll(rememberScrollState())
@@ -56,18 +48,18 @@ fun FeedbackScreenMedium(
             onAction(FeedbackAction.ClickBack)
         })
 
-        FeedbackFormCard(uiState,
-            issueTextFieldValue,
-            nicknameTextFieldValue,
-            onIssueDescChange = {
-                issueTextFieldValue = it
-            },
-            onNickNameChange = {
-                nicknameTextFieldValue = it
-            },
+        FeedbackFormCard(
+            feedbackState = uiState,
             onIssueSelected = {
-                selectedIssue = it
-            })
+                onAction(FeedbackAction.OnSelectedIssueChange(it))
+            },
+            onDescChanged = {
+                onAction(FeedbackAction.OnDescTextFieldChange(it))
+            },
+            onEmailChanged = {
+                onAction(FeedbackAction.OnEmailTextFieldChange(it))
+            }
+        )
 
         if (uiState.invalidForm) {
             Text(
@@ -85,13 +77,7 @@ fun FeedbackScreenMedium(
             iconRes = Res.drawable.ic_arrow_up,
             enabled = !uiState.isLoading
         ) {
-            onAction(
-                FeedbackAction.SubmitForm(
-                    selectedIssue,
-                    issueTextFieldValue,
-                    nicknameTextFieldValue
-                )
-            )
+            onAction(FeedbackAction.SubmitForm)
         }
     }
 

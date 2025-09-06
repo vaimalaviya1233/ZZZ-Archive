@@ -12,8 +12,8 @@ class GoogleDocRepositoryImpl(private val httpClient: GoogleDocHttp) : GoogleDoc
     override suspend fun submitFeedbackForm(
         issueType: String,
         language: String,
-        issueContent: String,
-        nickname: String,
+        issueDesc: String,
+        email: String,
         appVersion: String,
         deviceName: String,
         operatingSystem: String
@@ -22,8 +22,8 @@ class GoogleDocRepositoryImpl(private val httpClient: GoogleDocHttp) : GoogleDoc
                 httpClient.submitFeedbackForm(
                     issueType,
                     language,
-                    issueContent,
-                    nickname,
+                    issueDesc,
+                    email,
                     appVersion,
                     deviceName,
                     operatingSystem

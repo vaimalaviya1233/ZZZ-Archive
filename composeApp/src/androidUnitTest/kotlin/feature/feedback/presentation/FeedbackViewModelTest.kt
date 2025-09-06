@@ -7,7 +7,7 @@ package feature.feedback.presentation
 
 
 import MainDispatcherRule
-import feature.feedback.domain.GoogleDocUseCase
+import feature.feedback.data.GoogleDocRepository
 import feature.feedback.model.feedbackIssueTypes
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
@@ -28,7 +28,7 @@ class FeedbackViewModelTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     private val appInfoUseCase = mockk<AppInfoUseCase>()
-    private val googleDocUseCase = mockk<GoogleDocUseCase>()
+    private val googleDocRepository = mockk<GoogleDocRepository>()
     private val languageUseCase = mockk<LanguageUseCase>()
     private lateinit var viewModel: FeedbackViewModel
 
@@ -39,12 +39,12 @@ class FeedbackViewModelTest {
         every { appInfoUseCase.getDeviceOs() } returns "Android 35"
         coEvery { languageUseCase.getLanguage() } returns flowOf(Language.English)
         coEvery {
-            googleDocUseCase.submitFeedbackForm(
+            googleDocRepository.submitFeedbackForm(
                 any(), any(), any(), any(), any(), any(), any()
             )
         } returns Result.success(Unit)
 
-        viewModel = FeedbackViewModel(appInfoUseCase, googleDocUseCase, languageUseCase)
+        viewModel = FeedbackViewModel(appInfoUseCase, googleDocRepository, languageUseCase)
     }
 
     @Test
@@ -59,12 +59,16 @@ class FeedbackViewModelTest {
     @Test
     fun `Submit Feedback Success`() {
         viewModel.onAction(
-            FeedbackAction.SubmitForm(
-                feedbackIssueTypes[2],
-                "Issue Desc",
-                "Mr.fatworm"
+            FeedbackAction.OnSelectedIssueChange(
+                feedbackIssueTypes[2]
             )
         )
+        viewModel.onAction(
+            FeedbackAction.OnDescTextFieldChange(
+                "Issue Desc"
+            )
+        )
+        viewModel.onAction(FeedbackAction.SubmitForm)
         val state = viewModel.uiState.value
         assertTrue(state.showSubmitSuccessDialog)
     }
@@ -72,19 +76,23 @@ class FeedbackViewModelTest {
     @Test
     fun `Submit Feedback With Unspecified Issue Type`() {
         viewModel.onAction(
-            FeedbackAction.SubmitForm(
-                feedbackIssueTypes.first(),
-                "Issue Desc",
-                "Mr.fatworm"
+            FeedbackAction.OnDescTextFieldChange(
+                "Issue Desc"
             )
         )
+        viewModel.onAction(FeedbackAction.SubmitForm)
         val state = viewModel.uiState.value
         assertTrue(state.invalidForm)
     }
 
     @Test
     fun `Submit Feedback With Empty Issue Content`() {
-        viewModel.onAction(FeedbackAction.SubmitForm(feedbackIssueTypes[2], "", "Mr.fatworm"))
+        viewModel.onAction(
+            FeedbackAction.OnSelectedIssueChange(
+                feedbackIssueTypes[2]
+            )
+        )
+        viewModel.onAction(FeedbackAction.SubmitForm)
         val state = viewModel.uiState.value
         assertTrue(state.invalidForm)
     }

@@ -38,16 +38,14 @@ import zzzarchive.composeapp.generated.resources.input_your_issue
 import zzzarchive.composeapp.generated.resources.issue_type
 import zzzarchive.composeapp.generated.resources.operating_system
 import zzzarchive.composeapp.generated.resources.please_select
-import zzzarchive.composeapp.generated.resources.your_nickname_optional
+import zzzarchive.composeapp.generated.resources.your_email_optional
 
 @Composable
 fun FeedbackFormCard(
     feedbackState: FeedbackState,
-    issueText: String,
-    nicknameText: String,
-    onIssueDescChange: (String) -> Unit,
-    onNickNameChange: (String) -> Unit,
-    onIssueSelected: (FeedbackIssueType) -> Unit
+    onIssueSelected: (FeedbackIssueType) -> Unit,
+    onDescChanged: (String) -> Unit,
+    onEmailChanged: (String) -> Unit
 ) {
     ContentCard(hasDefaultPadding = false) {
         Column(modifier = Modifier.padding(vertical = AppTheme.spacing.s400)) {
@@ -55,12 +53,19 @@ fun FeedbackFormCard(
                 feedbackIssueTypes = feedbackState.issueTypes,
                 onIssueSelected = onIssueSelected
             )
-            IssueTextField(issueText, onIssueDescChange, nicknameText, onNickNameChange)
-            SettingItemText(
-                title = stringResource(Res.string.app_version), content = feedbackState.appVersion
+            IssueTextField(
+                issueText = feedbackState.issueTextFieldValue,
+                onDescChanged = onDescChanged,
+                emailText = feedbackState.emailTextFieldValue,
+                onEmailChanged = onEmailChanged
             )
             SettingItemText(
-                title = stringResource(Res.string.device_name), content = feedbackState.deviceName
+                title = stringResource(Res.string.app_version),
+                content = feedbackState.appVersion
+            )
+            SettingItemText(
+                title = stringResource(Res.string.device_name),
+                content = feedbackState.deviceName
             )
             SettingItemText(
                 title = stringResource(Res.string.operating_system),
@@ -73,9 +78,9 @@ fun FeedbackFormCard(
 @Composable
 private fun IssueTextField(
     issueText: String,
-    onIssueChange: (String) -> Unit,
-    nicknameText: String,
-    onNickNameChange: (String) -> Unit
+    onDescChanged: (String) -> Unit,
+    emailText: String,
+    onEmailChanged: (String) -> Unit
 ) {
     Column(
         modifier = Modifier.padding(
@@ -87,16 +92,16 @@ private fun IssueTextField(
         ZzzTextFiled(
             modifier = Modifier.fillMaxWidth(),
             hint = stringResource(Res.string.input_your_issue),
-            issueText,
-            onValueChange = onIssueChange,
+            value = issueText,
+            onValueChange = onDescChanged,
             minLines = 8,
             maxLines = 16
         )
         ZzzTextFiled(
             modifier = Modifier.fillMaxWidth(),
-            hint = stringResource(Res.string.your_nickname_optional),
-            nicknameText,
-            onValueChange = onNickNameChange,
+            hint = stringResource(Res.string.your_email_optional),
+            value = emailText,
+            onValueChange = onEmailChanged,
             maxLines = 1
         )
     }

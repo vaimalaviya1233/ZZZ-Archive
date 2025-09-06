@@ -7,7 +7,7 @@ package feature.feedback.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import feature.feedback.domain.GoogleDocUseCase
+import feature.feedback.data.GoogleDocRepository
 import feature.feedback.model.FeedbackIssueType
 import feature.feedback.model.FeedbackState
 import feature.feedback.model.feedbackIssueTypes
@@ -23,7 +23,7 @@ import zzzarchive.composeapp.generated.resources.unknown_error
 
 class FeedbackViewModel(
     private val appInfoUseCase: AppInfoUseCase,
-    private val googleDocUseCase: GoogleDocUseCase,
+    private val googleDocRepository: GoogleDocRepository,
     private val languageUseCase: LanguageUseCase
 ) : ViewModel() {
 
@@ -41,52 +41,64 @@ class FeedbackViewModel(
 
     fun onAction(action: FeedbackAction) {
         when (action) {
-            is FeedbackAction.SubmitForm -> {
-                submitFeedback(action.issueIndex, action.issueContent, action.nickname)
+            is FeedbackAction.SubmitForm -> submitFeedback()
+
+            FeedbackAction.DismissDialog -> dismissSubmitSuccessDialog()
+
+            is FeedbackAction.OnDescTextFieldChange -> {
+                _uiState.update { it.copy(issueTextFieldValue = action.value) }
             }
 
-            FeedbackAction.DismissDialog -> {
-                dismissSubmitSuccessDialog()
+            is FeedbackAction.OnEmailTextFieldChange -> {
+                _uiState.update { it.copy(emailTextFieldValue = action.value) }
+            }
+
+            is FeedbackAction.OnSelectedIssueChange -> {
+                _uiState.update { it.copy(selectedIssue = action.value) }
             }
 
             else -> {}
         }
     }
 
-    private fun submitFeedback(
-        issueTypeIndex: FeedbackIssueType,
-        issueContent: String,
-        nickname: String
-    ) {
-        if (issueTypeIndex == feedbackIssueTypes.first() || issueContent.isBlank()) {
+    private fun submitFeedback() {
+        val currentState = _uiState.value
+        if (currentState.selectedIssue == feedbackIssueTypes.first() || currentState.issueTextFieldValue.isBlank()) {
             _uiState.update {
                 it.copy(
-                    invalidForm = true, invalidMessage = Res.string.invalid_feedback_form
+                    invalidForm = true,
+                    invalidMessage = Res.string.invalid_feedback_form
                 )
             }
         } else {
             _uiState.update { it.copy(invalidForm = false) }
             viewModelScope.launch {
-                postGoogleDoc(issueTypeIndex, issueContent, nickname)
+                postGoogleDoc(currentState.selectedIssue)
             }
         }
     }
 
-    private suspend fun postGoogleDoc(
-        issueTypeIndex: FeedbackIssueType, issueContent: String, nickname: String
-    ) {
+    private suspend fun postGoogleDoc(issueType: FeedbackIssueType) {
         _uiState.update { it.copy(isLoading = true) }
-        val result = googleDocUseCase.submitFeedbackForm(
-            issueTypeIndex.chtString,
-            uiState.value.language,
-            issueContent,
-            nickname,
-            uiState.value.appVersion,
-            uiState.value.deviceName,
-            uiState.value.operatingSystem
+        val result = googleDocRepository.submitFeedbackForm(
+            issueType = issueType.chtString,
+            language = uiState.value.language,
+            issueDesc = uiState.value.issueTextFieldValue,
+            email = uiState.value.emailTextFieldValue,
+            appVersion = uiState.value.appVersion,
+            deviceName = uiState.value.deviceName,
+            operatingSystem = uiState.value.operatingSystem
         )
         result.fold(onSuccess = {
-            _uiState.update { it.copy(showSubmitSuccessDialog = true, isLoading = false) }
+            _uiState.update {
+                it.copy(
+                    showSubmitSuccessDialog = true,
+                    isLoading = false,
+                    issueTextFieldValue = "",
+                    emailTextFieldValue = "",
+                    selectedIssue = feedbackIssueTypes.first()
+                )
+            }
         }, onFailure = {
             _uiState.update {
                 it.copy(

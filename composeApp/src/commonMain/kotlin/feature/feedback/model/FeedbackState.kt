@@ -24,7 +24,10 @@ data class FeedbackState(
     val showSubmitSuccessDialog: Boolean = false,
     val invalidForm: Boolean = false,
     val invalidMessage: StringResource = Res.string.unknown_error,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val issueTextFieldValue: String = "",
+    val emailTextFieldValue: String = "",
+    val selectedIssue: FeedbackIssueType = feedbackIssueTypes.first()
 )
 
 data class FeedbackIssueType(
@@ -39,8 +42,3 @@ val feedbackIssueTypes = listOf(
     FeedbackIssueType(Res.string.suggestion, "建議"),
     FeedbackIssueType(Res.string.other, "其他")
 )
-
-
-
-
-

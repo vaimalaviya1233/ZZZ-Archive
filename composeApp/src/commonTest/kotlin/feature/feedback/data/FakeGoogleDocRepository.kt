@@ -16,8 +16,8 @@ class FakeGoogleDocRepository : GoogleDocRepository {
     override suspend fun submitFeedbackForm(
         issueType: String,
         language: String,
-        issueContent: String,
-        nickname: String,
+        issueDesc: String,
+        email: String,
         appVersion: String,
         deviceName: String,
         operatingSystem: String

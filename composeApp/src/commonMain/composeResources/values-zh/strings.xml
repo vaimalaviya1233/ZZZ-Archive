@@ -163,7 +163,7 @@
     <string name="suggestion">建議</string>
     <string name="other">其他</string>
     <string name="input_your_issue">輸入您遇到的問題</string>
-    <string name="your_nickname_optional">您的暱稱（選填）</string>
+    <string name="your_email_optional">您的信箱（選填）</string>
     <string name="app_version">應用程式版本</string>
     <string name="device_name">裝置名稱</string>
     <string name="operating_system">作業系統</string>
