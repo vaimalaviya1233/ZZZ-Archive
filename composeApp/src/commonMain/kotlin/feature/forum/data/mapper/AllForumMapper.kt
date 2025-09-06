@@ -1,73 +1,78 @@
+/*
+ * Copyright 2025 The ZZZ Archive Open Source Project by mrfatworm
+ * License: MIT
+ */
+
 package feature.forum.data.mapper
 
 import feature.forum.model.AllForumResponse
 import feature.forum.model.AllForumState
-import feature.forum.model.BahamutForumListItem
+import feature.forum.model.BahamutForumListItemResponse
 import feature.forum.model.BahamutForumListState
-import feature.forum.model.NgaForumListItem
+import feature.forum.model.NgaForumListItemResponse
 import feature.forum.model.NgaForumListState
-import feature.forum.model.PttForumListItem
+import feature.forum.model.PttForumListItemResponse
 import feature.forum.model.PttForumListState
 import feature.forum.model.RedditForumListItem
 import feature.forum.model.RedditForumListState
-import feature.forum.model.TwitterForumListItem
+import feature.forum.model.TwitterForumListItemResponse
 import feature.forum.model.TwitterForumListState
 
 fun AllForumResponse.toAllForumState(): AllForumState {
     return AllForumState(
-        reddit = reddit.map { it.toRedditForumListState() },
-        bahamut = bahamut.map { it.toBahamutForumListState() },
-        ptt = ptt.map { it.toPttForumListState() },
-        twitter = twitter.map { it.toTwitterForumListState() },
-        nga = nga.map { it.toNgaForumListState() },
+        reddit = reddit?.map { it.toRedditForumListState() } ?: emptyList(),
+        bahamut = bahamut?.map { it.toBahamutForumListState() } ?: emptyList(),
+        ptt = ptt?.map { it.toPttForumListState() } ?: emptyList(),
+        twitter = twitter?.map { it.toTwitterForumListState() } ?: emptyList(),
+        nga = nga?.map { it.toNgaForumListState() } ?: emptyList(),
     )
 }
 
 fun RedditForumListItem.toRedditForumListState(): RedditForumListState {
     return RedditForumListState(
-        title = title,
-        link = link,
-        imgUrl = image,
+        title = title.orEmpty(),
+        link = link.orEmpty(),
+        imgUrl = image.orEmpty(),
         upVotes = upVotes.toString(),
         comments = comments.toString(),
         score = score.toString()
     )
 }
 
-fun BahamutForumListItem.toBahamutForumListState(): BahamutForumListState {
+fun BahamutForumListItemResponse.toBahamutForumListState(): BahamutForumListState {
     return BahamutForumListState(
-        title = splitBahamutText(title).second,
-        category = splitBahamutText(title).first,
-        link = link,
-        imgUrl = imgSrc,
+        title = splitBahamutText(title.orEmpty()).second,
+        category = splitBahamutText(title.orEmpty()).first,
+        link = link.orEmpty(),
+        imgUrl = imgSrc.orEmpty(),
         gp = gp.toString()
     )
 }
 
-fun PttForumListItem.toPttForumListState(): PttForumListState {
+fun PttForumListItemResponse.toPttForumListState(): PttForumListState {
     return PttForumListState(
-        link = link,
-        title = title,
-        popularity = if (popularity >= 100) "爆" else popularity.toString(),
-        source = source
+        link = link.orEmpty(),
+        title = title.orEmpty(),
+        popularity = if ((popularity ?: 0) >= 100) "爆" else popularity.toString(),
+        source = source.orEmpty()
     )
 }
 
-fun TwitterForumListItem.toTwitterForumListState(): TwitterForumListState {
+fun TwitterForumListItemResponse.toTwitterForumListState(): TwitterForumListState {
     return TwitterForumListState(
-        title = title,
-        link = link,
-        imgUrl = image,
-        author = author,
-        authorUrl = authorProfile,
-        hashtag = hashtag
+        title = title.orEmpty(),
+        link = link.orEmpty(),
+        imgUrl = image.orEmpty(),
+        author = author.orEmpty(),
+        authorUrl = authorProfile.orEmpty(),
+        hashtag = hashtag.orEmpty()
     )
 }
 
-fun NgaForumListItem.toNgaForumListState(): NgaForumListState {
+fun NgaForumListItemResponse.toNgaForumListState(): NgaForumListState {
     return NgaForumListState(
-        title = title,
-        link = link,
+        title = title.orEmpty(),
+        link = link.orEmpty(),
         replies = replies.toString()
     )
 }
