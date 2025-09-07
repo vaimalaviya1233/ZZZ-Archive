@@ -281,7 +281,7 @@ buildkonfig {
 kotlinter {
     ignoreFormatFailures = false
     ignoreLintFailures = false
-    reporters = arrayOf("checkstyle")
+    reporters = arrayOf("checkstyle", "plain")
 }
 
 tasks.register<ComposeHotRun>("runHot") {
