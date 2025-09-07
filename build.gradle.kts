@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.compose.compiler) apply false
     alias(libs.plugins.composeHotReload) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.kotlinter) apply false
     alias(libs.plugins.buildKonfig) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.ksp) apply false

@@ -2,11 +2,12 @@ name: On Push and PR
 
 on:
   push:
-    branches-ignore:
-      - "doc/**"
-      - 'release/**'
+    branches:
+      - main
+      - dev
 
     paths-ignore:
+      - '**.md'
       - "**/*.md"
 
   pull_request:

@@ -13,6 +13,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.composeHotReload)
+    alias(libs.plugins.kotlinter)
     alias(libs.plugins.buildKonfig)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.ksp)
@@ -275,6 +276,12 @@ buildkonfig {
         buildConfigField(FieldSpec.Type.STRING, "VERSION", zzzVersionName)
         buildConfigField(FieldSpec.Type.STRING, "AES_KEY", aesKey)
     }
+}
+
+kotlinter {
+    ignoreFormatFailures = false
+    ignoreLintFailures = false
+    reporters = arrayOf("checkstyle")
 }
 
 tasks.register<ComposeHotRun>("runHot") {
