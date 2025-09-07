@@ -35,71 +35,20 @@ ZZZ Archive is a companion app for the action game Zenless Zone Zero, where user
 
 ## Running on Desktop
 
-- Desktop App
-
-```
-./gradlew run
-```
-
-- Desktop Hot Reload
-
-```
-./gradlew runHot
-```
-
-## Code Quality & Testing
-
-### Kotlin Code Style Check
-
-This project uses [kotlinter](https://github.com/jeremymailen/kotlinter-gradle) for Kotlin code
-style enforcement. Before submitting a PR, ensure your code passes the style checks:
-
-#### Check Code Style
-
 ```bash
-./gradlew kotlinterCheck
-```
-
-#### Auto-fix Code Style Issues
-
-```bash
-./gradlew kotlinterFormat
-```
-
-#### Run All Lint Checks
-
-```bash
-./gradlew lintDevDebug kotlinterCheck
-```
-
-### PR Requirements
-
-To ensure your PR passes the CI checks:
-
-1. **Run kotlinter check locally:**
-   ```bash
-   ./gradlew kotlinterCheck
+   # Regular run
+   ./gradlew run
+   
+   # Hot reload development
+   ./gradlew runHot
    ```
 
-2. **Fix any style issues:**
-   ```bash
-   ./gradlew kotlinterFormat
-   ```
+## Contributing
 
-3. **Run Android lint check:**
-   ```bash
-   ./gradlew lintDevDebug
-   ```
-
-4. **Commit your changes:**
-   ```bash
-   git add .
-   git commit -m "feat: your feature description"
-   git push
-   ```
-
-The CI workflow will automatically run both `lintDevDebug` and `kotlinterCheck` to ensure code
-quality standards are met.
+- We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for detailed
+  information
+- UI/UX design contribution... (Coming soon)
+-
 
 ## Library
 

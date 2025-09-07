@@ -35,17 +35,18 @@ ZZZ Archive 是動作遊戲 "絕區零" 的維基應用程式，使用者可查�
 
 ## 桌面端執行方法
 
-- Desktop App
+```bash
+   # Regular run
+   ./gradlew run
+   
+   # Hot reload development
+   ./gradlew runHot
+   ```
 
-```
-./gradlew run
-```
+## 參與專案開發
 
-- Desktop Hot Reload
-
-```
-./gradlew runHot
-```
+- 歡迎一同參與 ZZZ Archive 開發! 詳細資訊請查看 [開發指南](/CONTRIBUTING.md)
+- UI/UX 設計協作 (敬請期待...)
 
 ## 使用套件
 
