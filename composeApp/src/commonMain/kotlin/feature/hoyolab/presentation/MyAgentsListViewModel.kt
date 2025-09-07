@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MyAgentsListViewModel(private val hoYoLabAgentUseCase: HoYoLabAgentUseCase) : ViewModel() {
-
     private val _uiState = MutableStateFlow(MyAgentsListState())
     val uiState = _uiState.asStateFlow()
 
@@ -32,6 +31,7 @@ class MyAgentsListViewModel(private val hoYoLabAgentUseCase: HoYoLabAgentUseCase
                     println("Get Hoyolab agent fail")
                     state.copy(errorMessage = it.message ?: "Unknown error")
                 }
-            })
+            }
+        )
     }
 }

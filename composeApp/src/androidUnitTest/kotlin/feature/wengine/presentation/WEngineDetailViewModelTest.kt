@@ -5,26 +5,25 @@
 
 package feature.wengine.presentation
 
-
 import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
 import feature.wengine.domain.WEngineDetailUseCase
 import feature.wengine.model.stubWEngineDetail
 import io.mockk.coEvery
 import io.mockk.mockk
-import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.junit.Rule
 
 class WEngineDetailViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val savedStateHandle = SavedStateHandle().apply {
-        set("wEngineId", 47)
-    }
+    private val savedStateHandle =
+        SavedStateHandle().apply {
+            set("wEngineId", 47)
+        }
     private val wEngineDetailUseCase = mockk<WEngineDetailUseCase>()
     private lateinit var viewModel: WEngineDetailViewModel
 

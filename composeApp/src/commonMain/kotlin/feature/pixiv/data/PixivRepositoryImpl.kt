@@ -13,17 +13,16 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import network.PixivHttp
 
 class PixivRepositoryImpl(private val httpClient: PixivHttp) : PixivRepository {
-    private val _pixivArticleList = MutableStateFlow<List<PixivArticleItem>>(emptyList())
-    override fun getZzzTopic(): Flow<List<PixivArticleItem>> = _pixivArticleList
+    private val pixivArticleList = MutableStateFlow<List<PixivArticleItem>>(emptyList())
 
-    override suspend fun updateZzzTopic(zzzTag: String): Result<PixivTopicResponse> {
-        return try {
-            val result = httpClient.requestZzzTopic(zzzTag)
-            val articleList = result.toPixivArticleList()
-            _pixivArticleList.value = articleList
-            Result.success(result)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override fun getZzzTopic(): Flow<List<PixivArticleItem>> = pixivArticleList
+
+    override suspend fun updateZzzTopic(zzzTag: String): Result<PixivTopicResponse> = try {
+        val result = httpClient.requestZzzTopic(zzzTag)
+        val articleList = result.toPixivArticleList()
+        pixivArticleList.value = articleList
+        Result.success(result)
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 }

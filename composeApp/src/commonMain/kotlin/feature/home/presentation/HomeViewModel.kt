@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import database.UpdateDatabaseUseCase
 import feature.banner.domain.BannerUseCase
-import feature.cover_image.domain.CoverImageUseCase
+import feature.cover.domain.CoverImageUseCase
 import feature.forum.domain.ForumUseCase
 import feature.hoyolab.data.mapper.toGameRecordState
 import feature.hoyolab.domain.GameRecordUseCase
@@ -38,7 +38,6 @@ class HomeViewModel(
     private val gameRecordUseCase: GameRecordUseCase,
     dispatcher: CoroutineDispatcher
 ) : ViewModel() {
-
     private var gameRecordJob: Job? = null
     private var officialNewsJob: Job? = null
     private var defaultAccountJob: Job? = null
@@ -47,18 +46,23 @@ class HomeViewModel(
     private var pixivTopicJob: Job? = null
 
     private var _uiState = MutableStateFlow(HomeState())
-    val uiState = _uiState.onStart {
-        updateForumListEveryTenMinutes()
-        checkVersionAndUpdateDatabase()
-        updatePixivTopic()
-        updateBanner()
-        updateOfficialNewsEveryTenMinutes()
-        observeDefaultAccount()
-        observeCoverImage()
-        observePixivTopic()
-    }.flowOn(dispatcher).stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(5000L), _uiState.value
-    )
+    val uiState =
+        _uiState
+            .onStart {
+                updateForumListEveryTenMinutes()
+                checkVersionAndUpdateDatabase()
+                updatePixivTopic()
+                updateBanner()
+                updateOfficialNewsEveryTenMinutes()
+                observeDefaultAccount()
+                observeCoverImage()
+                observePixivTopic()
+            }.flowOn(dispatcher)
+            .stateIn(
+                viewModelScope,
+                SharingStarted.WhileSubscribed(5000L),
+                _uiState.value
+            )
 
     fun onAction(action: HomeAction) {
         when (action) {
@@ -93,13 +97,14 @@ class HomeViewModel(
 
     private fun updateForumListEveryTenMinutes() {
         allForumJob?.cancel()
-        allForumJob = viewModelScope.launch {
-            forumUseCase.getAllForumListPeriodically(10).collect { allForum ->
-                _uiState.update {
-                    it.copy(allForum = allForum)
+        allForumJob =
+            viewModelScope.launch {
+                forumUseCase.getAllForumListPeriodically(10).collect { allForum ->
+                    _uiState.update {
+                        it.copy(allForum = allForum)
+                    }
                 }
             }
-        }
     }
 
     private fun checkVersionAndUpdateDatabase() {
@@ -126,95 +131,101 @@ class HomeViewModel(
 
     private fun updateGameRecordEveryTenMinutes() {
         gameRecordJob?.cancel()
-        gameRecordJob = viewModelScope.launch {
-            gameRecordUseCase.getGameRecordPeriodically(10).collect { result ->
-                result.fold(onSuccess = { gameRecord ->
-                    _uiState.update { state ->
-                        state.copy(
-                            gameRecord = gameRecord.toGameRecordState(
-                                state.gameRecord.hasAccount,
-                                state.gameRecord.nickname,
-                                state.gameRecord.server,
-                                state.gameRecord.uid,
-                                state.gameRecord.profileUrl,
-                                state.gameRecord.cardUrl
+        gameRecordJob =
+            viewModelScope.launch {
+                gameRecordUseCase.getGameRecordPeriodically(10).collect { result ->
+                    result.fold(onSuccess = { gameRecord ->
+                        _uiState.update { state ->
+                            state.copy(
+                                gameRecord =
+                                gameRecord.toGameRecordState(
+                                    hasAccount = state.gameRecord.hasAccount,
+                                    nickname = state.gameRecord.nickname,
+                                    server = state.gameRecord.server,
+                                    uid = state.gameRecord.uid,
+                                    profileUrl = state.gameRecord.profileUrl,
+                                    cardUrl = state.gameRecord.cardUrl
+                                )
                             )
-                        )
-                    }
-                }, onFailure = {
-                    println("get game record error: ${it.message}")
-                })
+                        }
+                    }, onFailure = {
+                        println("get game record error: ${it.message}")
+                    })
+                }
             }
-        }
     }
 
     private fun updateOfficialNewsEveryTenMinutes() {
         officialNewsJob?.cancel()
-        officialNewsJob = viewModelScope.launch {
-            newsUseCase.getNewsListPeriodically(10, 6).collect { result ->
-                result.fold(onSuccess = { newsList ->
-                    _uiState.update { state ->
-                        state.copy(newsList = newsList)
-                    }
-                }, onFailure = {
-                    println("get news error: ${it.message}")
-                })
+        officialNewsJob =
+            viewModelScope.launch {
+                newsUseCase.getNewsListPeriodically(perMinutes = 10, amount = 6).collect { result ->
+                    result.fold(onSuccess = { newsList ->
+                        _uiState.update { state ->
+                            state.copy(newsList = newsList)
+                        }
+                    }, onFailure = {
+                        println("get news error: ${it.message}")
+                    })
+                }
             }
-        }
     }
-
 
     private fun observeCoverImage() {
         coverImageJob?.cancel()
-        coverImageJob = viewModelScope.launch {
-            coverImageUseCase.invoke().collect { coverImagesList ->
-                _uiState.update {
-                    it.copy(coverImage = coverImagesList)
+        coverImageJob =
+            viewModelScope.launch {
+                coverImageUseCase.invoke().collect { coverImagesList ->
+                    _uiState.update {
+                        it.copy(coverImage = coverImagesList)
+                    }
                 }
             }
-        }
     }
 
     private fun observeDefaultAccount() {
         defaultAccountJob?.cancel()
-        defaultAccountJob = viewModelScope.launch {
-            gameRecordUseCase.getDefaultUid().collect { defaultAccountUid ->
-                val defaultAccount =
-                    gameRecordUseCase.getDefaultHoYoLabAccount(defaultAccountUid).firstOrNull()
-                if (defaultAccount != null) {
-                    _uiState.update { state ->
-                        state.copy(
-                            gameRecord = emptyGameRecordState.copy(
-                                hasAccount = true,
-                                nickname = defaultAccount.nickName,
-                                server = defaultAccount.regionName,
-                                uid = defaultAccount.uid.toString(),
-                                profileUrl = defaultAccount.profileUrl,
-                                cardUrl = defaultAccount.cardUrl
+        defaultAccountJob =
+            viewModelScope.launch {
+                gameRecordUseCase.getDefaultUid().collect { defaultAccountUid ->
+                    val defaultAccount =
+                        gameRecordUseCase.getDefaultHoYoLabAccount(defaultAccountUid).firstOrNull()
+                    if (defaultAccount != null) {
+                        _uiState.update { state ->
+                            state.copy(
+                                gameRecord =
+                                emptyGameRecordState.copy(
+                                    hasAccount = true,
+                                    nickname = defaultAccount.nickName,
+                                    server = defaultAccount.regionName,
+                                    uid = defaultAccount.uid.toString(),
+                                    profileUrl = defaultAccount.profileUrl,
+                                    cardUrl = defaultAccount.cardUrl
+                                )
                             )
-                        )
-                    }
-                    updateGameRecordEveryTenMinutes()
-                } else {
-                    _uiState.update { state ->
-                        state.copy(
-                            gameRecord = emptyGameRecordState
-                        )
+                        }
+                        updateGameRecordEveryTenMinutes()
+                    } else {
+                        _uiState.update { state ->
+                            state.copy(
+                                gameRecord = emptyGameRecordState
+                            )
+                        }
                     }
                 }
             }
-        }
     }
 
     private fun observePixivTopic() {
         pixivTopicJob?.cancel()
-        pixivTopicJob = viewModelScope.launch {
-            pixivRepository.getZzzTopic().collect { pixivArticleList ->
-                _uiState.update {
-                    it.copy(pixivTopics = pixivArticleList)
+        pixivTopicJob =
+            viewModelScope.launch {
+                pixivRepository.getZzzTopic().collect { pixivArticleList ->
+                    _uiState.update {
+                        it.copy(pixivTopics = pixivArticleList)
+                    }
                 }
             }
-        }
     }
 
     private suspend fun sign() {

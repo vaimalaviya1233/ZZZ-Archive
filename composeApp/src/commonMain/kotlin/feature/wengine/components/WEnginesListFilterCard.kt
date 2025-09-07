@@ -42,7 +42,7 @@ fun WEnginesListFilterCard(
 ) {
     ContentCard(
         modifier = modifier,
-        hasDefaultPadding = false,
+        hasDefaultPadding = false
     ) {
         AnimatedVisibility(visible = !invisibleFilter) {
             Column(
@@ -51,14 +51,17 @@ fun WEnginesListFilterCard(
             ) {
                 RarityFilterChipsList(uiState.selectedRarity, onRarityChipSelectionChanged)
                 SpecialtyFilterChips(
-                    uiState.selectedSpecialties, 1, onSpecialtyChipSelectionChanged
+                    uiState.selectedSpecialties,
+                    1,
+                    onSpecialtyChipSelectionChanged
                 )
             }
         }
         LazyVerticalGrid(
             state = lazyGridState,
             columns = GridCells.Adaptive(AppTheme.size.s100),
-            modifier = Modifier.fillMaxSize().drawColumnListMask(
+            modifier =
+            Modifier.fillMaxSize().drawColumnListMask(
                 colorScheme = AppTheme.colors,
                 topEnable = lazyGridState.canScrollBackward,
                 bottomEnable = lazyGridState.canScrollForward
@@ -69,7 +72,8 @@ fun WEnginesListFilterCard(
         ) {
             items(
                 count = uiState.filteredWEnginesList.size,
-                key = { index -> uiState.filteredWEnginesList[index].id }) { index ->
+                key = { index -> uiState.filteredWEnginesList[index].id }
+            ) { index ->
                 val wEngine = uiState.filteredWEnginesList[index]
                 RarityItem(
                     modifier = Modifier.animateItem(),
@@ -79,7 +83,8 @@ fun WEnginesListFilterCard(
                     imgUrl = wEngine.imageUrl,
                     onClick = {
                         onWEngineClick(wEngine.id)
-                    })
+                    }
+                )
             }
         }
     }

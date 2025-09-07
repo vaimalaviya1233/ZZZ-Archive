@@ -10,5 +10,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface DriveRepository {
     suspend fun getDrivesList(languagePath: String): Flow<List<DrivesListItemEntity>>
+
     suspend fun requestAndUpdateDrivesListDB(languagePath: String): Result<Unit>
 }

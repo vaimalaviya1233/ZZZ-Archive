@@ -15,11 +15,12 @@ class FakeOfficialWebHttp : OfficialWebHttp {
         this.isError = isError
     }
 
-    override suspend fun requestNews(amount: Int, languagePath: String): OfficialNewsResponse {
-        return if (isError) {
-            throw Exception()
-        } else {
-            stubOfficialNewsDataResponseResponse
-        }
+    override suspend fun requestNews(
+        amount: Int,
+        languagePath: String
+    ): OfficialNewsResponse = if (isError) {
+        throw Exception()
+    } else {
+        stubOfficialNewsDataResponseResponse
     }
 }

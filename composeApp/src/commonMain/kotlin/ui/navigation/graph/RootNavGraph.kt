@@ -18,20 +18,20 @@ import ui.navigation.RootFlow
 @Composable
 fun RootNavGraph() {
     val rootNavController = rememberNavController()
-    val rootNavActions = remember(rootNavController) {
-        NavActions(rootNavController)
-    }
+    val rootNavActions =
+        remember(rootNavController) {
+            NavActions(rootNavController)
+        }
     NavHost(
         navController = rootNavController,
         startDestination = RootFlow.MainContainer.route
     ) {
         composable(RootFlow.Splash.route) {
-            SplashScreen(
-                startMainFlow = { rootNavActions.popAndNavigation(RootFlow.MainContainer) })
+            SplashScreen(startMainFlow = { rootNavActions.popAndNavigation(RootFlow.MainContainer) })
         }
         composable(RootFlow.MainContainer.route) {
             MainContainer(
-                rootNavActions = rootNavActions,
+                rootNavActions = rootNavActions
             )
         }
     }

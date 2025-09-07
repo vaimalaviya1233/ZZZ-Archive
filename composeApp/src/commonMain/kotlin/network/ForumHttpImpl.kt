@@ -10,7 +10,8 @@ import io.ktor.http.contentType
 class ForumHttpImpl(engine: HttpClientEngine) : ForumHttp {
     private val client = createForumHttpClient(engine)
 
-    override suspend fun getAllForumList(): AllForumResponse = client.get {
-        contentType(ContentType.Application.Json)
-    }.body()
+    override suspend fun getAllForumList(): AllForumResponse = client
+        .get {
+            contentType(ContentType.Application.Json)
+        }.body()
 }

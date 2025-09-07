@@ -5,19 +5,19 @@
 
 package feature.hoyolab.model
 
-
 data class PlayerBasicInfo(
     val region: String,
     val regionName: String,
     val uid: String,
     val nickname: String,
-    val level: Int,
+    val level: Int
 )
 
-val stubPlayerBasicInfo = PlayerBasicInfo(
-    region = "prod_gf_jp",
-    regionName = "Asia",
-    uid = "1300051361",
-    nickname = "海豚刑警",
-    level = 56
-)
+val stubPlayerBasicInfo =
+    PlayerBasicInfo(
+        region = "prod_gf_jp",
+        regionName = "Asia",
+        uid = "1300051361",
+        nickname = "海豚刑警",
+        level = 56
+    )

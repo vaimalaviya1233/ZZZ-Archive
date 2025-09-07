@@ -40,24 +40,37 @@ import org.jetbrains.compose.resources.stringResource
 import ui.theme.AppTheme
 
 @Composable
-fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: () -> Unit) {
+fun FactionItem(
+    faction: Faction,
+    isSelected: Boolean = false,
+    onFactionClick: () -> Unit
+) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
 
     Box(
-        modifier = Modifier.aspectRatio(1.8f).fillMaxWidth()
-            .clip(AppTheme.shape.r400).border(
-                AppTheme.size.borderWidth,
-            if (isSelected) AppTheme.colors.primary else Color.Transparent,
-                AppTheme.shape.r400
-        ).pointerHoverIcon(PointerIcon.Hand).clickable(
-            interactionSource = interactionSource, indication = null
-        ) {
-            onFactionClick()
-        }) {
+        modifier =
+        Modifier
+            .aspectRatio(1.8f)
+            .fillMaxWidth()
+            .clip(AppTheme.shape.r400)
+            .border(
+                width = AppTheme.size.borderWidth,
+                color = if (isSelected) AppTheme.colors.primary else Color.Transparent,
+                shape = AppTheme.shape.r400
+            ).pointerHoverIcon(PointerIcon.Hand)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null
+            ) {
+                onFactionClick()
+            }
+    ) {
         AsyncImage(
-            modifier = Modifier.fillMaxSize()
+            modifier =
+            Modifier
+                .fillMaxSize()
                 .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
             model = faction.getFactionThumbnailUrl(),
             contentDescription = stringResource(faction.getFactionNameRes()),
@@ -66,7 +79,11 @@ fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: (
         )
         if (!isSelected) {
             AsyncImage(
-                modifier = Modifier.align(Alignment.Center).fillMaxSize(0.3f).aspectRatio(1f)
+                modifier =
+                Modifier
+                    .align(Alignment.Center)
+                    .fillMaxSize(0.3f)
+                    .aspectRatio(1f)
                     .blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
                 model = faction.getFactionIconUrl(),
                 contentDescription = null,
@@ -74,20 +91,27 @@ fun FactionItem(faction: Faction, isSelected: Boolean = false, onFactionClick: (
             )
         }
         AnimatedVisibility(
-            visible = isPressed.value || isHovered.value, enter = fadeIn(), exit = fadeOut()
+            visible = isPressed.value || isHovered.value,
+            enter = fadeIn(),
+            exit = fadeOut()
         ) {
             FactionInfo(
-                Modifier.align(Alignment.BottomCenter), stringResource(faction.getFactionNameRes())
+                modifier = Modifier.align(Alignment.BottomCenter),
+                factionName = stringResource(faction.getFactionNameRes())
             )
         }
     }
 }
 
-
 @Composable
-private fun FactionInfo(modifier: Modifier, factionName: String) {
+private fun FactionInfo(
+    modifier: Modifier,
+    factionName: String
+) {
     Column(
-        modifier.fillMaxSize().background(AppTheme.colors.hoveredMask)
+        modifier = modifier
+            .fillMaxSize()
+            .background(AppTheme.colors.hoveredMask)
             .padding(AppTheme.spacing.s400),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center

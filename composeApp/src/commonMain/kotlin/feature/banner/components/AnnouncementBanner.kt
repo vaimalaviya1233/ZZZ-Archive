@@ -32,7 +32,8 @@ fun AnnouncementBanner(
                 onActionClicked = onActionClicked,
                 onClosed = {
                     onClosed(banner.id)
-                })
+                }
+            )
         }
     }
 }

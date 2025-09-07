@@ -5,7 +5,6 @@
 
 package feature.agent.presentation
 
-
 import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
 import feature.agent.domain.AgentDetailUseCase
@@ -14,20 +13,20 @@ import feature.drive.data.database.stubDrivesListItemEntity
 import feature.drive.domain.DrivesListUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
-import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlinx.coroutines.flow.flowOf
+import org.junit.Rule
 
 class AgentDetailViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val savedStateHandle = SavedStateHandle().apply {
-        set("agentId", 20)
-    }
+    private val savedStateHandle =
+        SavedStateHandle().apply {
+            set("agentId", 20)
+        }
     private val agentDetailUseCase = mockk<AgentDetailUseCase>()
     private val drivesListUseCase = mockk<DrivesListUseCase>()
     private lateinit var viewModel: AgentDetailViewModel

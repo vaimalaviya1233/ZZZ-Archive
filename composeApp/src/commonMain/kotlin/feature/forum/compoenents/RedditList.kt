@@ -26,19 +26,27 @@ fun RedditList(redditList: List<RedditForumListState>) {
     val urlHandler = LocalUriHandler.current
     Column(verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)) {
         for (index in redditList.indices) {
-            RedditListItem(modifier = Modifier.clickable {
-                urlHandler.openUri(redditList[index].link)
-            }, reddit = redditList[index], isVariantColor = index % 2 == 0)
+            RedditListItem(
+                modifier =
+                Modifier.clickable {
+                    urlHandler.openUri(redditList[index].link)
+                },
+                reddit = redditList[index],
+                isVariantColor = index % 2 == 0
+            )
         }
     }
 }
 
 @Composable
 private fun RedditListItem(
-    modifier: Modifier = Modifier, reddit: RedditForumListState, isVariantColor: Boolean = false
+    modifier: Modifier = Modifier,
+    reddit: RedditForumListState,
+    isVariantColor: Boolean = false
 ) {
     Row(
-        modifier = modifier
+        modifier =
+        modifier
             .background(if (isVariantColor) AppTheme.colors.itemVariant else AppTheme.colors.surfaceContainer)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
@@ -55,9 +63,13 @@ private fun RedditListItem(
                 maxLines = 2
             )
             Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(
-                    AppTheme.spacing.s300, Alignment.End
-                ), verticalAlignment = Alignment.CenterVertically
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement =
+                Arrangement.spacedBy(
+                    AppTheme.spacing.s300,
+                    Alignment.End
+                ),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
                     modifier = Modifier.size(AppTheme.size.icon),

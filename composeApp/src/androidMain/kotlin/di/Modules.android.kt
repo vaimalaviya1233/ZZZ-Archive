@@ -24,14 +24,15 @@ import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
 import utils.AppActionsUseCase
 
-actual val platformModule = module {
-    singleOf(::AppActionsUseCase)
-    singleOf(::RoomDatabaseFactory)
-    singleOf(::DataStoreFactory)
-    single<ZzzHttp> { ZzzHttpImpl(OkHttp.create()) }
-    single<OfficialWebHttp> { OfficialWebHttpImpl(OkHttp.create()) }
-    single<PixivHttp> { PixivHttpImpl(OkHttp.create()) }
-    single<GoogleDocHttp> { GoogleDocHttpImpl(OkHttp.create()) }
-    single<HoYoLabHttp> { HoYoLabHttpImpl(OkHttp.create()) }
-    single<ForumHttp> { ForumHttpImpl(OkHttp.create()) }
-}
+actual val platformModule =
+    module {
+        singleOf(::AppActionsUseCase)
+        singleOf(::RoomDatabaseFactory)
+        singleOf(::DataStoreFactory)
+        single<ZzzHttp> { ZzzHttpImpl(OkHttp.create()) }
+        single<OfficialWebHttp> { OfficialWebHttpImpl(OkHttp.create()) }
+        single<PixivHttp> { PixivHttpImpl(OkHttp.create()) }
+        single<GoogleDocHttp> { GoogleDocHttpImpl(OkHttp.create()) }
+        single<HoYoLabHttp> { HoYoLabHttpImpl(OkHttp.create()) }
+        single<ForumHttp> { ForumHttpImpl(OkHttp.create()) }
+    }

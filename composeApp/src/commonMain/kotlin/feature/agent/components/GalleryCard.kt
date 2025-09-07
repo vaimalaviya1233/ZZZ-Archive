@@ -28,11 +28,12 @@ import zzzarchive.composeapp.generated.resources.gallery
 
 @Composable
 fun GalleryCard(agentDetail: AgentDetail) {
-    val galleryUrlList = listOf(
-        agentDetail.portraitUrl,
-        agentDetail.mindscapePartialUrl,
-        agentDetail.mindscapeFullUrl
-    )
+    val galleryUrlList =
+        listOf(
+            agentDetail.portraitUrl,
+            agentDetail.mindscapePartialUrl,
+            agentDetail.mindscapeFullUrl
+        )
     val openGalleryDialog = remember { mutableStateOf(false) }
     val galleryDialogUrl = remember { mutableStateOf("") }
     val lazyListState = rememberLazyListState()
@@ -61,8 +62,9 @@ fun GalleryCard(agentDetail: AgentDetail) {
         }
     }
     when {
-        openGalleryDialog.value -> GalleryDialog(url = galleryDialogUrl.value, onDismiss = {
-            openGalleryDialog.value = false
-        })
+        openGalleryDialog.value ->
+            GalleryDialog(url = galleryDialogUrl.value, onDismiss = {
+                openGalleryDialog.value = false
+            })
     }
 }

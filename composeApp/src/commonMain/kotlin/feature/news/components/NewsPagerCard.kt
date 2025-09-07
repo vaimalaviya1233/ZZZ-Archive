@@ -44,14 +44,15 @@ import kotlinx.coroutines.launch
 import ui.components.PagerIndicator
 import ui.theme.AppTheme
 
-
 @Composable
 fun NewsPagerCard(newsList: List<OfficialNewsListItem>) {
     if (newsList.isNotEmpty()) {
         val pagerState = rememberPagerState(pageCount = { newsList.size })
         val coroutineScope = rememberCoroutineScope()
         Column(
-            Modifier.clip(AppTheme.shape.r400).background(AppTheme.colors.surfaceContainer)
+            Modifier
+                .clip(AppTheme.shape.r400)
+                .background(AppTheme.colors.surfaceContainer)
                 .padding(bottom = AppTheme.spacing.s400),
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
         ) {
@@ -66,7 +67,8 @@ fun NewsPagerCard(newsList: List<OfficialNewsListItem>) {
                     coroutineScope.launch {
                         pagerState.animateScrollToPage(it)
                     }
-                })
+                }
+            )
         }
 
         LaunchedEffect(key1 = pagerState.settledPage) {
@@ -80,7 +82,6 @@ fun NewsPagerCard(newsList: List<OfficialNewsListItem>) {
     }
 }
 
-
 @Composable
 fun NewsPagerCardItem(newsState: OfficialNewsListItem) {
     val interactionSource = remember { MutableInteractionSource() }
@@ -89,20 +90,25 @@ fun NewsPagerCardItem(newsState: OfficialNewsListItem) {
     Box(
         modifier = Modifier.fillMaxWidth().aspectRatio(1.7f).pointerHoverIcon(PointerIcon.Hand)
     ) {
-
         val urlHandler = LocalUriHandler.current
         AsyncImage(
-            modifier = Modifier.fillMaxSize().clickable(
-                interactionSource = interactionSource, indication = null
-            ) {
-                urlHandler.openUri(newsState.newsUrl)
-            }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
+            modifier =
+            Modifier
+                .fillMaxSize()
+                .clickable(
+                    interactionSource = interactionSource,
+                    indication = null
+                ) {
+                    urlHandler.openUri(newsState.newsUrl)
+                }.blur(if (isPressed.value || isHovered.value) 8.dp else 0.dp),
             model = newsState.imageUrl,
             contentDescription = newsState.title,
             contentScale = ContentScale.Crop
         )
         AnimatedVisibility(
-            visible = isPressed.value || isHovered.value, enter = fadeIn(), exit = fadeOut()
+            visible = isPressed.value || isHovered.value,
+            enter = fadeIn(),
+            exit = fadeOut()
         ) {
             NewsInfo(Modifier.align(Alignment.BottomCenter), newsState)
         }
@@ -110,9 +116,14 @@ fun NewsPagerCardItem(newsState: OfficialNewsListItem) {
 }
 
 @Composable
-private fun NewsInfo(modifier: Modifier, newsState: OfficialNewsListItem) {
+private fun NewsInfo(
+    modifier: Modifier,
+    newsState: OfficialNewsListItem
+) {
     Column(
-        modifier.fillMaxWidth().background(AppTheme.colors.hoveredMask)
+        modifier
+            .fillMaxWidth()
+            .background(AppTheme.colors.hoveredMask)
             .padding(AppTheme.spacing.s400),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {

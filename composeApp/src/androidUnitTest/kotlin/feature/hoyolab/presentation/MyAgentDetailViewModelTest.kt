@@ -5,30 +5,29 @@
 
 package feature.hoyolab.presentation
 
-
 import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
 import feature.hoyolab.domain.HoYoLabAgentUseCase
 import feature.hoyolab.domain.HoYoLabPreferenceUseCase
-import feature.hoyolab.model.my_agent_detail.stubMyAgentDetailListItem
+import feature.hoyolab.model.agent.stubMyAgentDetailListItem
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
-import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlinx.coroutines.flow.flowOf
+import org.junit.Rule
 
 class MyAgentDetailViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
     private val hoYoLabAgentUseCase = mockk<HoYoLabAgentUseCase>()
     private val hoYoLabPreferenceUseCase = mockk<HoYoLabPreferenceUseCase>()
-    private val savedStateHandle = SavedStateHandle().apply {
-        set("agentId", 1)
-    }
+    private val savedStateHandle =
+        SavedStateHandle().apply {
+            set("agentId", 1)
+        }
     private lateinit var viewModel: MyAgentDetailViewModel
 
     @BeforeTest

@@ -15,10 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class DrivesListViewModel(
-    private val drivesListUseCase: DrivesListUseCase
-) : ViewModel() {
-
+class DrivesListViewModel(private val drivesListUseCase: DrivesListUseCase) : ViewModel() {
     private var drivesListJob: Job? = null
 
     private var _uiState = MutableStateFlow(DrivesListState())
@@ -38,15 +35,16 @@ class DrivesListViewModel(
 
     private fun observeDrivesList() {
         drivesListJob?.cancel()
-        drivesListJob = viewModelScope.launch {
-            drivesListUseCase.invoke().collect { drivesList ->
-                _uiState.update { currentState ->
-                    currentState.copy(
-                        drivesList = drivesList
-                    )
+        drivesListJob =
+            viewModelScope.launch {
+                drivesListUseCase.invoke().collect { drivesList ->
+                    _uiState.update { currentState ->
+                        currentState.copy(
+                            drivesList = drivesList
+                        )
+                    }
                 }
             }
-        }
     }
 
     private fun onDriveClick(driveId: Int) {

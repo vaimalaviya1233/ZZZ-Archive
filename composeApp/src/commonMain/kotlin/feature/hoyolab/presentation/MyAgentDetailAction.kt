@@ -7,6 +7,7 @@ package feature.hoyolab.presentation
 
 sealed class MyAgentDetailAction {
     data object ClickBack : MyAgentDetailAction()
+
     data class ConfirmEditImage(
         val showUid: Boolean,
         val isCustom: Boolean,

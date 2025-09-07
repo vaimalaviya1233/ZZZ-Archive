@@ -41,13 +41,12 @@ import ui.utils.AdaptiveLayoutType
 import ui.utils.verticalSafePadding
 
 @Composable
-fun MainContainer(
-    rootNavActions: NavActions
-) {
+fun MainContainer(rootNavActions: NavActions) {
     val mainFunNavController = rememberNavController()
-    val mainFunNavActions = remember(mainFunNavController) {
-        NavActions(mainFunNavController)
-    }
+    val mainFunNavActions =
+        remember(mainFunNavController) {
+            NavActions(mainFunNavController)
+        }
     val navBackStackEntry by mainFunNavController.currentBackStackEntryAsState()
 
     val selectedDestination =
@@ -55,7 +54,10 @@ fun MainContainer(
 
     // BackStack = { null, home_flow, home, [target] <-this, [target_start_destination] }
     val fourthNavDestination =
-        mainFunNavController.currentBackStack.value.getOrNull(3)?.destination?.route
+        mainFunNavController.currentBackStack.value
+            .getOrNull(3)
+            ?.destination
+            ?.route
             ?: MainFlow.Home.route
 
     val selectedMainFlow =
@@ -70,7 +72,8 @@ fun MainContainer(
 
     ModalNavigationDrawer(
         drawerContent = {
-            ModalNavigationDrawerContent(selectedMainFlow = selectedMainFlow,
+            ModalNavigationDrawerContent(
+                selectedMainFlow = selectedMainFlow,
                 navigationActions = mainFunNavActions,
                 onDrawerClicked = {
                     coroutineScope.launch {
@@ -82,10 +85,14 @@ fun MainContainer(
                         viewModel.setIsDarkTheme(!isDark)
                     }
                     isDarkComposeState = !isDark
-                })
-        }, drawerState = drawerState, gesturesEnabled = false
+                }
+            )
+        },
+        drawerState = drawerState,
+        gesturesEnabled = false
     ) {
-        MainFuncContent(mainFunNavController = mainFunNavController,
+        MainFuncContent(
+            mainFunNavController = mainFunNavController,
             mainNavActions = mainFunNavActions,
             rootNavActions = rootNavActions,
             selectedDestination = selectedDestination,
@@ -100,7 +107,8 @@ fun MainContainer(
                     viewModel.setIsDarkTheme(!isDark)
                 }
                 isDarkComposeState = !isDark
-            })
+            }
+        )
     }
 }
 
@@ -119,10 +127,15 @@ fun MainFuncContent(
     ) {
         Row(modifier = Modifier.weight(1f)) {
             AnimatedVisibility(
-                visible = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Medium || AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Expanded
+                visible =
+                AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Medium ||
+                    AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Expanded
             ) {
                 ZzzArchiveNavigationRail(
-                    modifier = Modifier.fillMaxHeight().padding(start = AppTheme.spacing.s300)
+                    modifier =
+                    Modifier
+                        .fillMaxHeight()
+                        .padding(start = AppTheme.spacing.s300)
                         .padding(verticalSafePadding()),
                     selectedMainFlow = selectedMainFlow,
                     navActions = mainNavActions,
@@ -144,9 +157,13 @@ fun MainFuncContent(
         }
         val isBottomNavItem =
             NAV_BOTTOM_MAIN_FLOW.find { it.startScreen.route == selectedDestination }
-        AnimatedVisibility(visible = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact && isBottomNavItem != null) {
+        AnimatedVisibility(
+            visible =
+            AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact && isBottomNavItem != null
+        ) {
             ZzzArchiveBottomNavigationBar(
-                selectedMainFlow = selectedMainFlow, navigationActions = mainNavActions
+                selectedMainFlow = selectedMainFlow,
+                navigationActions = mainNavActions
             )
         }
     }

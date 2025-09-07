@@ -27,7 +27,7 @@ import zzzarchive.composeapp.generated.resources.drives
 @Composable
 fun DrivesListScreenSingle(
     uiState: DrivesListState,
-    onAction: (DrivesListAction) -> Unit,
+    onAction: (DrivesListAction) -> Unit
 ) {
     val openDetailDialog = remember { mutableStateOf(false) }
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
@@ -49,7 +49,7 @@ fun DrivesListScreenSingle(
                 onDriveClick = {
                     onAction(DrivesListAction.ClickDriveDetail(it))
                     openDetailDialog.value = true
-                },
+                }
             )
         }
     }
@@ -59,7 +59,8 @@ fun DrivesListScreenSingle(
                 drivesListItemEntity = uiState.selectedDrive ?: emptyDriveListItemEntity,
                 onDismiss = {
                     openDetailDialog.value = false
-                })
+                }
+            )
         }
     }
 }

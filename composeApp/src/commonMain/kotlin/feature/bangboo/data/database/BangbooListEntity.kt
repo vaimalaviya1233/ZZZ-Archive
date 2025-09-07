@@ -15,14 +15,16 @@ data class BangbooListItemEntity(
     val imageUrl: String,
     val isLeak: Boolean,
     val rarity: Int,
-    val attribute: String,
+    val attribute: String
 )
 
-val stubBangbooListItemEntity = BangbooListItemEntity(
-    id = 6,
-    name = "共鳴布",
-    imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Bangboo/Profile/6.webp",
-    isLeak = false,
-    rarity = 5,
-    attribute = "ether"
-)
+@Suppress("ktlint:standard:max-line-length")
+val stubBangbooListItemEntity =
+    BangbooListItemEntity(
+        id = 6,
+        name = "共鳴布",
+        imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Bangboo/Profile/6.webp",
+        isLeak = false,
+        rarity = 5,
+        attribute = "ether"
+    )

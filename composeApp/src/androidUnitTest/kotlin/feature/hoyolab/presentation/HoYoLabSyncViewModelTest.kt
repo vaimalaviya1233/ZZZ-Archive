@@ -5,7 +5,6 @@
 
 package feature.hoyolab.presentation
 
-
 import MainDispatcherRule
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.domain.HoYoLabManageUseCase
@@ -14,14 +13,13 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
-import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlinx.coroutines.flow.flowOf
+import org.junit.Rule
 
 class HoYoLabSyncViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
@@ -34,11 +32,12 @@ class HoYoLabSyncViewModelTest {
         coEvery {
             hoYoLabManageUseCase.requestUserInfoAndSave(any(), any(), any())
         } returns Result.success(Unit)
-        coEvery { hoYoLabManageUseCase.getAllAccountsFromDB() } returns flowOf(
-            listOf(
-                stubHoYoLabAccountEntity
+        coEvery { hoYoLabManageUseCase.getAllAccountsFromDB() } returns
+            flowOf(
+                listOf(
+                    stubHoYoLabAccountEntity
+                )
             )
-        )
         coEvery { hoYoLabManageUseCase.reSyncAccount(any()) } returns Unit
         coEvery { hoYoLabManageUseCase.deleteAccountFromDB(any()) } returns Unit
         coEvery { hoYoLabPreferenceUseCase.getDefaultHoYoLabAccountUid() } returns flowOf(123456789)

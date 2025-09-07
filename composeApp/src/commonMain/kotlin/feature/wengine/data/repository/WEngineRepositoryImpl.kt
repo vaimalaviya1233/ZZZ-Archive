@@ -16,9 +16,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import network.ZzzHttp
 
-class WEngineRepositoryImpl(
-    private val httpClient: ZzzHttp, private val wEnginesListDao: WEnginesListDao
-) : WEngineRepository {
+class WEngineRepositoryImpl(private val httpClient: ZzzHttp, private val wEnginesListDao: WEnginesListDao) :
+    WEngineRepository {
     override suspend fun getWEnginesList(languagePath: String): Flow<List<WEnginesListItem>> {
         val cachedWEnginesList = wEnginesListDao.getWEnginesList()
         if (cachedWEnginesList.first().isEmpty()) {
@@ -29,22 +28,21 @@ class WEngineRepositoryImpl(
         }
     }
 
-    override suspend fun requestAndUpdateWEnginesListDB(languagePath: String): Result<Unit> {
-        return try {
-            val result = httpClient.requestWEnginesList(languagePath)
-            wEnginesListDao.setWEnginesList(result.wEngines.map { it.toWEnginesListItemEntity() })
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override suspend fun requestAndUpdateWEnginesListDB(languagePath: String): Result<Unit> = try {
+        val result = httpClient.requestWEnginesList(languagePath)
+        wEnginesListDao.setWEnginesList(result.wEngines.map { it.toWEnginesListItemEntity() })
+        Result.success(Unit)
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 
-    override suspend fun getWEngineDetail(id: Int, languagePath: String): Result<WEngineDetail> {
-        return try {
-            val result = httpClient.requestWEngineDetail(id, languagePath)
-            Result.success(result.toWEngineDetail())
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override suspend fun getWEngineDetail(
+        id: Int,
+        languagePath: String
+    ): Result<WEngineDetail> = try {
+        val result = httpClient.requestWEngineDetail(id, languagePath)
+        Result.success(result.toWEngineDetail())
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 }

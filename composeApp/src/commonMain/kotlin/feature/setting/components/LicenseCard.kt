@@ -24,37 +24,36 @@ import zzzarchive.composeapp.generated.resources.resource_licence
 @Composable
 fun LicenseCard(appVersion: String) {
     SelectionContainer {
-    ContentCard {
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(Res.string.app_name),
-            textAlign = TextAlign.Center,
-            style = AppTheme.typography.titleSmall,
-            color = AppTheme.colors.onSurfaceVariant
-        )
-        Spacer(Modifier.size(AppTheme.spacing.s300))
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = appVersion,
-            textAlign = TextAlign.Center,
-            style = AppTheme.typography.labelSmall,
-            color = AppTheme.colors.onSurfaceVariant
-        )
-        Spacer(Modifier.size(AppTheme.spacing.s300))
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(Res.string.resource_licence),
-            style = AppTheme.typography.bodySmall,
-            color = AppTheme.colors.onSurfaceVariant
-        )
-        Spacer(Modifier.size(AppTheme.spacing.s300))
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = stringResource(Res.string.code_licence),
-            style = AppTheme.typography.bodySmall,
-            color = AppTheme.colors.onSurfaceVariant
-        )
-    }
-
+        ContentCard {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(Res.string.app_name),
+                textAlign = TextAlign.Center,
+                style = AppTheme.typography.titleSmall,
+                color = AppTheme.colors.onSurfaceVariant
+            )
+            Spacer(Modifier.size(AppTheme.spacing.s300))
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = appVersion,
+                textAlign = TextAlign.Center,
+                style = AppTheme.typography.labelSmall,
+                color = AppTheme.colors.onSurfaceVariant
+            )
+            Spacer(Modifier.size(AppTheme.spacing.s300))
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(Res.string.resource_licence),
+                style = AppTheme.typography.bodySmall,
+                color = AppTheme.colors.onSurfaceVariant
+            )
+            Spacer(Modifier.size(AppTheme.spacing.s300))
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(Res.string.code_licence),
+                style = AppTheme.typography.bodySmall,
+                color = AppTheme.colors.onSurfaceVariant
+            )
+        }
     }
 }

@@ -17,9 +17,7 @@ data class UserGameRolesResponse(
 )
 
 @Serializable
-data class UserGameRolesData(
-    val list: List<UserGameRole>
-)
+data class UserGameRolesData(val list: List<UserGameRole>)
 
 @Serializable
 data class UserGameRole(
@@ -38,22 +36,24 @@ data class UserGameRole(
     val isOfficial: Boolean
 )
 
-val stubUserGameRolesResponse = UserGameRolesResponse(
-    retCode = 0,
-    message = "OK",
-    data = UserGameRolesData(
-        list = listOf(
-            UserGameRole(
-                gameBiz = "nap_global",
-                region = "prod_gf_jp",
-                gameUid = "1300051361",
-                nickname = "海豚刑警",
-                level = 56,
-                isChosen = false,
-                regionName = "Asia",
-                isOfficial = true
+val stubUserGameRolesResponse =
+    UserGameRolesResponse(
+        retCode = 0,
+        message = "OK",
+        data =
+        UserGameRolesData(
+            list =
+            listOf(
+                UserGameRole(
+                    gameBiz = "nap_global",
+                    region = "prod_gf_jp",
+                    gameUid = "1300051361",
+                    nickname = "海豚刑警",
+                    level = 56,
+                    isChosen = false,
+                    regionName = "Asia",
+                    isOfficial = true
+                )
             )
         )
     )
-)
-

@@ -9,9 +9,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GameRecordResponse(
-    @SerialName("retcode") val retCode: Int, val message: String, val data: GameRecordData
-)
+data class GameRecordResponse(@SerialName("retcode") val retCode: Int, val message: String, val data: GameRecordData)
 
 @Serializable
 data class GameRecordData(
@@ -36,29 +34,19 @@ data class Energy(
 )
 
 @Serializable
-data class Progress(
-    val max: Int, val current: Int
-)
+data class Progress(val max: Int, val current: Int)
 
 @Serializable
-data class VhsSale(
-    @SerialName("sale_state") val saleState: String
-)
+data class VhsSale(@SerialName("sale_state") val saleState: String)
 
 @Serializable
-data class BountyCommission(
-    val num: Int, val total: Int
-)
+data class BountyCommission(val num: Int, val total: Int)
 
 @Serializable
-data class SurveyPoints(
-    val num: Int, val total: Int, @SerialName("is_max_level") val isMaxLevel: Boolean
-)
+data class SurveyPoints(val num: Int, val total: Int, @SerialName("is_max_level") val isMaxLevel: Boolean)
 
 @Serializable
-data class Coffee(
-    val num: Int, val total: Int
-)
+data class Coffee(val num: Int, val total: Int)
 
 @Serializable
 data class WeeklyTask(
@@ -67,24 +55,27 @@ data class WeeklyTask(
     @SerialName("max_point") val maxPoint: Int
 )
 
-val stubGameRecordResponse = GameRecordResponse(
-    retCode = 0,
-    message = "OK",
-    data = GameRecordData(
-        energy = Energy(
-            progress = Progress(max = 240, current = 221),
-            restore = 6803,
-            dayType = 1,
-            hour = 22,
-            minute = 43
-        ),
-        vitality = Progress(max = 400, current = 0),
-        vhsSale = VhsSale(saleState = "SaleStateDone"),
-        cardSign = "CardSignNo",
-        bountyCommission = BountyCommission(num = 0, total = 4),
-        surveyPoints = SurveyPoints(num = 0, total = 8000, isMaxLevel = true),
-        abyssRefresh = 112191,
-        coffee = Coffee(num = 0, total = 0),
-        weeklyTask = WeeklyTask(refreshTime = 112191, curPoint = 1050, maxPoint = 1300)
+val stubGameRecordResponse =
+    GameRecordResponse(
+        retCode = 0,
+        message = "OK",
+        data =
+        GameRecordData(
+            energy =
+            Energy(
+                progress = Progress(max = 240, current = 221),
+                restore = 6803,
+                dayType = 1,
+                hour = 22,
+                minute = 43
+            ),
+            vitality = Progress(max = 400, current = 0),
+            vhsSale = VhsSale(saleState = "SaleStateDone"),
+            cardSign = "CardSignNo",
+            bountyCommission = BountyCommission(num = 0, total = 4),
+            surveyPoints = SurveyPoints(num = 0, total = 8000, isMaxLevel = true),
+            abyssRefresh = 112191,
+            coffee = Coffee(num = 0, total = 0),
+            weeklyTask = WeeklyTask(refreshTime = 112191, curPoint = 1050, maxPoint = 1300)
+        )
     )
-)

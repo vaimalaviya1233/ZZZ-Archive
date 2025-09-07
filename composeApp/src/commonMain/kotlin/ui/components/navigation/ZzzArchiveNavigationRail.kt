@@ -50,19 +50,21 @@ fun ZzzArchiveNavigationRail(
 ) {
     Column(
         modifier
-            .border(AppTheme.size.borderWidth, AppTheme.colors.border, CircleShape)
-            .background(AppTheme.colors.surfaceContainer, CircleShape).widthIn(min = 80.dp)
-            .padding(vertical = AppTheme.spacing.s400).selectableGroup(),
+            .border(width = AppTheme.size.borderWidth, color = AppTheme.colors.border, shape = CircleShape)
+            .background(AppTheme.colors.surfaceContainer, CircleShape)
+            .widthIn(min = 80.dp)
+            .padding(vertical = AppTheme.spacing.s400)
+            .selectableGroup(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {
-            NavigationRailItem(selected = false, onClick = onDrawerClicked, icon = {
-                Icon(
-                    imageVector = vectorResource(Res.drawable.ic_nav),
-                    contentDescription = stringResource(Res.string.navigation_drawer),
-                    tint = AppTheme.colors.onSurfaceVariant
-                )
-            })
+        NavigationRailItem(selected = false, onClick = onDrawerClicked, icon = {
+            Icon(
+                imageVector = vectorResource(Res.drawable.ic_nav),
+                contentDescription = stringResource(Res.string.navigation_drawer),
+                tint = AppTheme.colors.onSurfaceVariant
+            )
+        })
         Spacer(Modifier.height(AppTheme.spacing.s300))
         Column(
             modifier = Modifier.fillMaxHeight().verticalScroll(rememberScrollState()),
@@ -72,14 +74,17 @@ fun ZzzArchiveNavigationRail(
             NAV_RAIL_MAIN_FLOW.forEach { destination ->
                 val isSelected = selectedMainFlow == destination.route
                 NavigationRailItem(
-                    selected = isSelected, onClick = {
+                    selected = isSelected,
+                    onClick = {
                         navActions.navigationToMainScreen(destination)
-                    }, icon = {
+                    },
+                    icon = {
                         Icon(
                             imageVector = vectorResource(destination.iconRes),
                             contentDescription = stringResource(destination.textRes)
                         )
-                    }, colors = navigationRailItemColors()
+                    },
+                    colors = navigationRailItemColors()
                 )
             }
             Spacer(
@@ -98,7 +103,6 @@ fun ZzzArchiveNavigationRail(
             })
         }
     }
-
 }
 
 @Composable

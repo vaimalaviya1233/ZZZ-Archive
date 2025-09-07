@@ -23,20 +23,18 @@ class FakeAgentRepository : AgentRepository {
         emit(stubAgentsList)
     }
 
-
-    override suspend fun requestAndUpdateAgentsListDB(languagePath: String): Result<Unit> {
-        return if (isError) {
-            Result.failure(Exception())
-        } else {
-            Result.success(Unit)
-        }
+    override suspend fun requestAndUpdateAgentsListDB(languagePath: String): Result<Unit> = if (isError) {
+        Result.failure(Exception())
+    } else {
+        Result.success(Unit)
     }
 
-    override suspend fun getAgentDetail(id: Int, languagePath: String): Result<AgentDetail> {
-        return if (isError) {
-            Result.failure(Exception())
-        } else {
-            Result.success(stubAgentDetail)
-        }
+    override suspend fun getAgentDetail(
+        id: Int,
+        languagePath: String
+    ): Result<AgentDetail> = if (isError) {
+        Result.failure(Exception())
+    } else {
+        Result.success(stubAgentDetail)
     }
 }

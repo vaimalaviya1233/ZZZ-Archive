@@ -15,7 +15,10 @@ import ui.theme.AppTheme
 import ui.utils.ContentType
 
 @Composable
-fun HoYoLabSyncScreen(onBackClick: () -> Unit, navigateToFeedback: () -> Unit) {
+fun HoYoLabSyncScreen(
+    onBackClick: () -> Unit,
+    navigateToFeedback: () -> Unit
+) {
     val viewModel: HoYoLabSyncViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     HoYoLabSyncScreenContent(uiState, onAction = { action ->
@@ -29,12 +32,13 @@ fun HoYoLabSyncScreen(onBackClick: () -> Unit, navigateToFeedback: () -> Unit) {
 
 @Composable
 private fun HoYoLabSyncScreenContent(
-    uiState: HoYoLabSyncState, onAction: (HoYoLabSyncAction) -> Unit,
+    uiState: HoYoLabSyncState,
+    onAction: (HoYoLabSyncAction) -> Unit
 ) {
     if (AppTheme.contentType == ContentType.Single) {
-        HoYoLabSyncScreenSingle(uiState, onAction)
+        HoYoLabSyncScreenSingle(uiState = uiState, onAction = onAction)
     } else {
-        HoYoLabSyncScreenDual(uiState, onAction)
+        HoYoLabSyncScreenDual(uiState = uiState, onAction = onAction)
     }
 
     when {
@@ -42,7 +46,9 @@ private fun HoYoLabSyncScreenContent(
             AddHoYoLabAccountDialog(uiState.errorMessage, onSubmit = { region, lToken, ltUid ->
                 onAction(
                     HoYoLabSyncAction.ConnectToHoYoLabAndAdd(
-                        region, lToken, ltUid
+                        region = region,
+                        lToken = lToken,
+                        ltUid = ltUid
                     )
                 )
             }, onDismiss = {

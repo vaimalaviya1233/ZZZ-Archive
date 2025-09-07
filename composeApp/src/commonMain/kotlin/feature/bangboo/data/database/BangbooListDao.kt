@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BangbooListDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun setBangbooList(bangbooList: List<BangbooListItemEntity>)
 

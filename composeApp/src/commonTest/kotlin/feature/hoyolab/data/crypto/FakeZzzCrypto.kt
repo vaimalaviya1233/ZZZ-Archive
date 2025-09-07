@@ -5,15 +5,10 @@
 
 package feature.hoyolab.data.crypto
 
-
 class FakeZzzCrypto : ZzzCrypto {
     override val key: String = "FakeKey"
 
-    override suspend fun encryptData(text: String): ByteArray {
-        return ByteArray(11)
-    }
+    override suspend fun encryptData(text: String): ByteArray = ByteArray(11)
 
-    override suspend fun decryptData(encryptedData: ByteArray): String {
-        return "decodedText"
-    }
+    override suspend fun decryptData(encryptedData: ByteArray): String = "decodedText"
 }

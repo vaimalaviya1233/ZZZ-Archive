@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlin.math.round
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import ui.components.ZzzSlider
@@ -35,7 +36,6 @@ import zzzarchive.composeapp.generated.resources.img_summer_solstice_2023_artwor
 import zzzarchive.composeapp.generated.resources.multiply
 import zzzarchive.composeapp.generated.resources.ui_scale
 import zzzarchive.composeapp.generated.resources.ui_scale_warning
-import kotlin.math.round
 
 @Composable
 fun ScaleFontSizeDialog(
@@ -53,12 +53,14 @@ fun ScaleFontSizeDialog(
         onDismiss()
     }) {
         Column(
-            modifier = Modifier.padding(
+            modifier =
+            Modifier.padding(
                 start = AppTheme.spacing.s500,
                 top = AppTheme.spacing.s500,
                 end = AppTheme.spacing.s500,
                 bottom = AppTheme.spacing.s400
-            ), verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s450)
+            ),
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s450)
         ) {
             ScalePreview()
             ScaleUiSlider(stringResource(Res.string.ui_scale), uiScale, onScaleValueChange = {
@@ -69,7 +71,7 @@ fun ScaleFontSizeDialog(
             })
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300, Alignment.End)
+                horizontalArrangement = Arrangement.spacedBy(space = AppTheme.spacing.s300, alignment = Alignment.End)
             ) {
                 ZzzOutlineButton(text = stringResource(Res.string.default_value)) {
                     uiScale = 1f
@@ -104,7 +106,9 @@ private fun ScalePreview() {
 
 @Composable
 private fun ScaleUiSlider(
-    scaleType: String, scaleValue: Float, onScaleValueChange: (Float) -> Unit
+    scaleType: String,
+    scaleValue: Float,
+    onScaleValueChange: (Float) -> Unit
 ) {
     Column(verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)) {
         val firstDigitPlace = round(scaleValue * 10) / 10

@@ -5,13 +5,12 @@
 
 package feature.home.presentation
 
-
 import MainDispatcherRule
 import database.UpdateDatabaseUseCase
 import feature.banner.data.stubBannerResponse
 import feature.banner.domain.BannerUseCase
-import feature.cover_image.data.database.stubCoverImageListItemEntity
-import feature.cover_image.domain.CoverImageUseCase
+import feature.cover.data.database.stubCoverImageListItemEntity
+import feature.cover.domain.CoverImageUseCase
 import feature.forum.domain.ForumUseCase
 import feature.forum.model.stubAllForumState
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
@@ -26,18 +25,17 @@ import feature.pixiv.model.stubPixivTopicResponse
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Rule
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class HomeViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
@@ -61,26 +59,30 @@ class HomeViewModelTest {
             officialNewsUseCase.getNewsListPeriodically(any(), any())
         } returns flowOf(Result.success(listOf(stubOfficialNewsListItem)))
         coEvery { gameRecordUseCase.getDefaultUid() } returns flowOf(1300051361)
-        coEvery { gameRecordUseCase.getDefaultHoYoLabAccount(any()) } returns flowOf(
-            stubHoYoLabAccountEntity
-        )
-        coEvery { gameRecordUseCase.getGameRecordPeriodically(any()) } returns flowOf(
-            Result.success(stubGameRecordResponse.data)
-        )
+        coEvery { gameRecordUseCase.getDefaultHoYoLabAccount(any()) } returns
+            flowOf(
+                stubHoYoLabAccountEntity
+            )
+        coEvery { gameRecordUseCase.getGameRecordPeriodically(any()) } returns
+            flowOf(
+                Result.success(stubGameRecordResponse.data)
+            )
         coEvery { gameRecordUseCase.sign() } returns Result.success(stubSignResponse)
-        coEvery { forumUseCase.getAllForumListPeriodically(any()) } returns flowOf(
-            stubAllForumState
-        )
-        viewModel = HomeViewModel(
-            bannerUseCase,
-            coverImageUseCase,
-            pixivRepository,
-            officialNewsUseCase,
-            forumUseCase,
-            updateDatabaseUseCase,
-            gameRecordUseCase,
-            UnconfinedTestDispatcher()
-        )
+        coEvery { forumUseCase.getAllForumListPeriodically(any()) } returns
+            flowOf(
+                stubAllForumState
+            )
+        viewModel =
+            HomeViewModel(
+                bannerUseCase = bannerUseCase,
+                coverImageUseCase = coverImageUseCase,
+                pixivRepository = pixivRepository,
+                newsUseCase = officialNewsUseCase,
+                forumUseCase = forumUseCase,
+                updateDatabaseUseCase = updateDatabaseUseCase,
+                gameRecordUseCase = gameRecordUseCase,
+                dispatcher = UnconfinedTestDispatcher()
+            )
     }
 
     @Test

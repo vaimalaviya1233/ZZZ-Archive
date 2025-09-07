@@ -33,15 +33,21 @@ import zzzarchive.composeapp.generated.resources.chain_attack
 @Composable
 fun BangbooDetailScreenDual(
     uiState: BangbooDetailState,
-    onAction: (BangbooDetailAction) -> Unit,
+    onAction: (BangbooDetailAction) -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxSize().background(AppTheme.colors.surface)
+        modifier =
+        Modifier
+            .fillMaxSize()
+            .background(AppTheme.colors.surface)
             .padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+            modifier =
+            Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
                 .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
@@ -52,31 +58,31 @@ fun BangbooDetailScreenDual(
         }
 
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+            modifier =
+            Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
                 .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             MaterialsListCard(uiState.bangbooDetail.levelMaterials)
             HighLightTextCard(
-                stringResource(Res.string.active_skill),
-                uiState.bangbooDetail.activeSkill.description,
-                uiState.bangbooDetail.activeSkill.name
+                title = stringResource(Res.string.active_skill),
+                content = uiState.bangbooDetail.activeSkill.description,
+                subTitle = uiState.bangbooDetail.activeSkill.name
             )
             HighLightTextCard(
-                stringResource(Res.string.additional_ability),
-                uiState.bangbooDetail.additionalAbility.description,
-                uiState.bangbooDetail.additionalAbility.name
+                title = stringResource(Res.string.additional_ability),
+                content = uiState.bangbooDetail.additionalAbility.description,
+                subTitle = uiState.bangbooDetail.additionalAbility.name
             )
             uiState.bangbooDetail.chainAttack?.let {
                 HighLightTextCard(
-                    stringResource(Res.string.chain_attack),
-                    uiState.bangbooDetail.chainAttack.description,
-                    uiState.bangbooDetail.chainAttack.name
+                    title = stringResource(Res.string.chain_attack),
+                    content = uiState.bangbooDetail.chainAttack.description,
+                    subTitle = uiState.bangbooDetail.chainAttack.name
                 )
             }
         }
     }
 }
-
-
-

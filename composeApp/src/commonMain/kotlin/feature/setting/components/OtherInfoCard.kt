@@ -40,9 +40,7 @@ import zzzarchive.composeapp.generated.resources.open_source
 import zzzarchive.composeapp.generated.resources.privacy_policy
 
 @Composable
-fun OtherInfoCard(
-    onFeedbackClick: () -> Unit
-) {
+fun OtherInfoCard(onFeedbackClick: () -> Unit) {
     ContentCard(hasDefaultPadding = false) {
         FeedbackItem(onClick = onFeedbackClick)
         PrivacyPolicyItem()
@@ -64,7 +62,6 @@ private fun FeedbackItem(onClick: () -> Unit) {
                 tint = AppTheme.colors.onSurfaceVariant
             )
         }
-
     }, onClick = onClick)
 }
 
@@ -111,7 +108,6 @@ private fun OpenSourceItem() {
                     tint = AppTheme.colors.onSurfaceContainer
                 )
             }
-
         }, onClick = {
             isExpanded = !isExpanded
         })
@@ -120,24 +116,27 @@ private fun OpenSourceItem() {
                 modifier = Modifier.padding(AppTheme.spacing.s400),
                 horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
             ) {
-                OpenSourceItem(modifier = Modifier.weight(1f),
+                OpenSourceItem(
+                    modifier = Modifier.weight(1f),
                     iconRes = Res.drawable.ic_figma,
                     title = "Figma",
                     label = "CC-BY-SA 4.0",
                     isTintIcon = false,
                     onClick = {
                         urlHandler.openUri("https://www.figma.com/@mrfatworm")
-                    })
-                OpenSourceItem(modifier = Modifier.weight(1f),
+                    }
+                )
+                OpenSourceItem(
+                    modifier = Modifier.weight(1f),
                     iconRes = Res.drawable.ic_github,
                     title = "GitHub",
                     label = "MIT",
                     onClick = {
                         urlHandler.openUri("https://github.com/mrfatworm/ZZZ-Archive")
-                    })
+                    }
+                )
             }
         }
-
     }
 }
 
@@ -151,12 +150,16 @@ fun OpenSourceItem(
     onClick: () -> Unit
 ) {
     Column(
-        modifier = modifier.clip(AppTheme.shape.r400).clickable {
-            onClick()
-        }.border(
-            AppTheme.size.borderWidth,
-            AppTheme.colors.buttonBorder, AppTheme.shape.r400
-        ).padding(AppTheme.spacing.s400),
+        modifier =
+        modifier
+            .clip(AppTheme.shape.r400)
+            .clickable {
+                onClick()
+            }.border(
+                AppTheme.size.borderWidth,
+                AppTheme.colors.buttonBorder,
+                AppTheme.shape.r400
+            ).padding(AppTheme.spacing.s400),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
     ) {

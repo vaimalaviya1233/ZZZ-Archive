@@ -9,9 +9,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class AgentsListResponse(
-    val agents: List<AgentListItemResponse>
-)
+data class AgentsListResponse(val agents: List<AgentListItemResponse>)
 
 @Serializable
 data class AgentListItemResponse(
@@ -30,40 +28,42 @@ data class AgentListItemResponse(
     val factionId: Int
 )
 
-val stubAgentsListResponse = AgentsListResponse(
-    agents = listOf(
-        AgentListItemResponse(
-            id = 3,
-            name = "貓又",
-            fullName = "貓宮 又奈",
-            isLeak = false,
-            rarity = 5,
-            specialty = "attack",
-            attribute = "physical",
-            attackType = "slash",
-            factionId = 1
-        ),
-        AgentListItemResponse(
-            id = 4,
-            name = "安比",
-            fullName = "安比·德瑪拉",
-            isLeak = false,
-            rarity = 4,
-            specialty = "stun",
-            attribute = "electric",
-            attackType = "slash",
-            factionId = 1
-        ),
-        AgentListItemResponse(
-            id = 16,
-            name = "可琳",
-            fullName = "可琳·威克斯",
-            isLeak = false,
-            rarity = 4,
-            specialty = "attack",
-            attribute = "physical",
-            attackType = "slash",
-            factionId = 2
+val stubAgentsListResponse =
+    AgentsListResponse(
+        agents =
+        listOf(
+            AgentListItemResponse(
+                id = 3,
+                name = "貓又",
+                fullName = "貓宮 又奈",
+                isLeak = false,
+                rarity = 5,
+                specialty = "attack",
+                attribute = "physical",
+                attackType = "slash",
+                factionId = 1
+            ),
+            AgentListItemResponse(
+                id = 4,
+                name = "安比",
+                fullName = "安比·德瑪拉",
+                isLeak = false,
+                rarity = 4,
+                specialty = "stun",
+                attribute = "electric",
+                attackType = "slash",
+                factionId = 1
+            ),
+            AgentListItemResponse(
+                id = 16,
+                name = "可琳",
+                fullName = "可琳·威克斯",
+                isLeak = false,
+                rarity = 4,
+                specialty = "attack",
+                attribute = "physical",
+                attackType = "slash",
+                factionId = 2
+            )
         )
     )
-)

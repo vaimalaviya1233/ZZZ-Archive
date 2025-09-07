@@ -16,10 +16,8 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import network.ZzzHttp
 
-class BangbooRepositoryImpl(
-    private val httpClient: ZzzHttp,
-    private val bangbooListDB: BangbooListDao
-) : BangbooRepository {
+class BangbooRepositoryImpl(private val httpClient: ZzzHttp, private val bangbooListDB: BangbooListDao) :
+    BangbooRepository {
     override suspend fun getBangbooList(languagePath: String): Flow<List<BangbooListItem>> {
         val cachedBangbooList = bangbooListDB.getBangbooList()
         if (cachedBangbooList.first().isEmpty()) {
@@ -30,22 +28,21 @@ class BangbooRepositoryImpl(
         }
     }
 
-    override suspend fun requestAndUpdateBangbooListDB(languagePath: String): Result<Unit> {
-        return try {
-            val result = httpClient.requestBangbooList(languagePath)
-            bangbooListDB.setBangbooList(result.bangboo.map { it.toBangbooListItemEntity() })
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override suspend fun requestAndUpdateBangbooListDB(languagePath: String): Result<Unit> = try {
+        val result = httpClient.requestBangbooList(languagePath)
+        bangbooListDB.setBangbooList(result.bangboo.map { it.toBangbooListItemEntity() })
+        Result.success(Unit)
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 
-    override suspend fun getBangbooDetail(id: Int, languagePath: String): Result<BangbooDetail> {
-        return try {
-            val result = httpClient.requestBangbooDetail(id, languagePath)
-            Result.success(result.toBangbooDetail())
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override suspend fun getBangbooDetail(
+        id: Int,
+        languagePath: String
+    ): Result<BangbooDetail> = try {
+        val result = httpClient.requestBangbooDetail(id, languagePath)
+        Result.success(result.toBangbooDetail())
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 }

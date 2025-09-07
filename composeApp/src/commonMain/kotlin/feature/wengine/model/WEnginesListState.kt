@@ -8,7 +8,6 @@ package feature.wengine.model
 import utils.AgentSpecialty
 import utils.ZzzRarity
 
-
 data class WEnginesListState(
     val wEnginesList: List<WEnginesListItem> = emptyList(),
     val filteredWEnginesList: List<WEnginesListItem> = emptyList(),

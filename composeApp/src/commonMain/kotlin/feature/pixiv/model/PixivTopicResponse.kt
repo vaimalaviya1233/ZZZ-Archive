@@ -14,9 +14,7 @@ data class PixivTopicResponse(val body: PixivBodyResponse? = null)
 data class PixivBodyResponse(val illustManga: IllustMangaResponse? = null)
 
 @Serializable
-data class IllustMangaResponse(
-    val data: List<RecentArticleResponse>? = null
-)
+data class IllustMangaResponse(val data: List<RecentArticleResponse>? = null)
 
 @Serializable
 data class RecentArticleResponse(
@@ -28,19 +26,20 @@ data class RecentArticleResponse(
     val profileImageUrl: String? = null
 )
 
-val stubPixivTopicResponse = PixivTopicResponse(
-    PixivBodyResponse(
-        IllustMangaResponse(
-            listOf(
-                RecentArticleResponse(
-                    id = "123456789",
-                    title = "Ellen",
-                    url = "https://i.pximg.net",
-                    userId = "87654321",
-                    userName = "mrfatworm",
-                    profileImageUrl = "https://i.pximg.net"
+val stubPixivTopicResponse =
+    PixivTopicResponse(
+        PixivBodyResponse(
+            IllustMangaResponse(
+                listOf(
+                    RecentArticleResponse(
+                        id = "123456789",
+                        title = "Ellen",
+                        url = "https://i.pximg.net",
+                        userId = "87654321",
+                        userName = "mrfatworm",
+                        profileImageUrl = "https://i.pximg.net"
+                    )
                 )
             )
         )
     )
-)

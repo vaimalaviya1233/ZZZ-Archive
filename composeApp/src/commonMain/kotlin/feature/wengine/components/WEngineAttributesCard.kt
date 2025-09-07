@@ -36,4 +36,3 @@ fun WEngineAttributesCard(wEngineDetail: WEngineDetail) {
         Spacer(Modifier.size(AppTheme.spacing.s200))
     }
 }
-

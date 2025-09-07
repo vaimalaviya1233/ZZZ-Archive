@@ -51,14 +51,17 @@ fun BangbooListCard(
         HoveredIndicatorHeader(
             title = stringResource(Res.string.bangboo),
             isHovered = isHovered.value,
-            lazyListState = lazyListState,
+            lazyListState = lazyListState
         ) {
             if (showViewAll) {
                 Text(
-                    modifier = Modifier.clip(AppTheme.shape.r300)
-                        .clickable { onBangbooOverviewClick() }.pointerHoverIcon(PointerIcon.Hand)
+                    modifier =
+                    Modifier
+                        .clip(AppTheme.shape.r300)
+                        .clickable { onBangbooOverviewClick() }
+                        .pointerHoverIcon(PointerIcon.Hand)
                         .background(AppTheme.colors.surface)
-                        .border(1.dp, AppTheme.colors.border, AppTheme.shape.r300)
+                        .border(width = 1.dp, color = AppTheme.colors.border, shape = AppTheme.shape.r300)
                         .padding(AppTheme.spacing.s300),
                     text = stringResource(Res.string.all_bangboo),
                     style = AppTheme.typography.labelMedium,
@@ -79,7 +82,8 @@ fun BangbooListCard(
                     imgUrl = bangboo.imageUrl,
                     onClick = {
                         onBangbooDetailClick(bangboo.id)
-                    })
+                    }
+                )
             }
         }
     }

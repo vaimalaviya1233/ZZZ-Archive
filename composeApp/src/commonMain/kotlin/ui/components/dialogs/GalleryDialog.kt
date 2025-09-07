@@ -35,28 +35,36 @@ import zzzarchive.composeapp.generated.resources.close
 import zzzarchive.composeapp.generated.resources.ic_close
 
 @Composable
-fun GalleryDialog(url: String, onDismiss: () -> Unit) {
+fun GalleryDialog(
+    url: String,
+    onDismiss: () -> Unit
+) {
     Dialog(
-        properties = DialogProperties(usePlatformDefaultWidth = false), onDismissRequest = onDismiss
+        properties = DialogProperties(usePlatformDefaultWidth = false),
+        onDismissRequest = onDismiss
     ) {
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier =
+            Modifier
+                .fillMaxSize()
                 .background(AppTheme.colors.surface.copy(alpha = 0.7f))
         ) {
             var scale by remember { mutableStateOf(1f) }
             var offset by remember { mutableStateOf(Offset.Zero) }
-            val state = rememberTransformableState { zoomChange, offsetChange, _ ->
-                scale *= zoomChange
-                offset += offsetChange
-            }
+            val state =
+                rememberTransformableState { zoomChange, offsetChange, _ ->
+                    scale *= zoomChange
+                    offset += offsetChange
+                }
             AsyncImage(
-                modifier = Modifier
+                modifier =
+                Modifier
                     .fillMaxSize()
                     .graphicsLayer(
                         scaleX = scale,
                         scaleY = scale,
                         translationX = offset.x * scale,
-                        translationY = offset.y * scale,
+                        translationY = offset.y * scale
                     ).pointerInput(Unit) {
                         awaitPointerEventScope {
                             while (true) {
@@ -71,14 +79,16 @@ fun GalleryDialog(url: String, onDismiss: () -> Unit) {
                                 }
                             }
                         }
-                    }
-                    .transformable(state = state),
-                model = ImageRequest.Builder(LocalPlatformContext.current)
+                    }.transformable(state = state),
+                model =
+                ImageRequest
+                    .Builder(LocalPlatformContext.current)
                     .data(url)
                     .diskCachePolicy(CachePolicy.DISABLED)
-                    .size(Size.ORIGINAL).build(),
+                    .size(Size.ORIGINAL)
+                    .build(),
                 contentDescription = null,
-                filterQuality = FilterQuality.High,
+                filterQuality = FilterQuality.High
             )
         }
         ZzzIconButton(

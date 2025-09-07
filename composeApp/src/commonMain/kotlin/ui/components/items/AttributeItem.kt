@@ -16,11 +16,17 @@ import androidx.compose.ui.text.style.TextAlign
 import ui.theme.AppTheme
 
 @Composable
-fun AttributeItem(title: String, content: String) {
+fun AttributeItem(
+    title: String,
+    content: String
+) {
     Row(
-        modifier = Modifier.padding(
-            horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300
-        ), horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
+        modifier =
+        Modifier.padding(
+            horizontal = AppTheme.spacing.s400,
+            vertical = AppTheme.spacing.s300
+        ),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(

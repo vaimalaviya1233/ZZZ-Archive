@@ -15,19 +15,21 @@ import utils.changePlatformLanguage
 
 interface LanguageUseCase {
     fun getLanguage(): Flow<Language>
+
     suspend fun setLanguage(langCode: String)
 }
 
-class LanguageUseCaseImpl(private val preferencesRepository: PreferencesRepository) :
-    LanguageUseCase {
-
+class LanguageUseCaseImpl(private val preferencesRepository: PreferencesRepository) : LanguageUseCase {
     override fun getLanguage(): Flow<Language> = flow {
         val langCode = preferencesRepository.getLanguageCode().first()
         val deviceLanguage: String = Locale.current.language
         val language =
-            if (langCode == "") Language.entries.firstOrNull { it.code == deviceLanguage }
-                ?: Language.English
-            else Language.entries.firstOrNull { it.code == langCode } ?: Language.English
+            if (langCode == "") {
+                Language.entries.firstOrNull { it.code == deviceLanguage }
+                    ?: Language.English
+            } else {
+                Language.entries.firstOrNull { it.code == langCode } ?: Language.English
+            }
         emit(language)
     }
 

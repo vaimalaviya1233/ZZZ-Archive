@@ -12,18 +12,16 @@ import feature.bangboo.model.bangbooLevelMaterials
 import utils.findAgentAttribute
 import utils.findRarity
 
-fun BangbooDetailResponse.toBangbooDetail(path: String = ZzzConfig.ASSET_PATH): BangbooDetail {
-    return BangbooDetail(
-        id = id,
-        name = name,
-        imageUrl = "https://raw.githubusercontent.com/$path/Bangboo/Portrait/$id.webp",
-        isLeak = isLeak,
-        rarity = findRarity(rarity),
-        attribute = findAgentAttribute(attribute),
-        basicData = basicData,
-        activeSkill = activeSkill,
-        additionalAbility = additionalAbility,
-        chainAttack = chainAttack,
-        levelMaterials = bangbooLevelMaterials
-    )
-}
+fun BangbooDetailResponse.toBangbooDetail(path: String = ZzzConfig.ASSET_PATH): BangbooDetail = BangbooDetail(
+    id = id,
+    name = name,
+    imageUrl = "https://raw.githubusercontent.com/$path/Bangboo/Portrait/$id.webp",
+    isLeak = isLeak,
+    rarity = findRarity(rarity),
+    attribute = findAgentAttribute(attribute),
+    basicData = basicData,
+    activeSkill = activeSkill,
+    additionalAbility = additionalAbility,
+    chainAttack = chainAttack,
+    levelMaterials = bangbooLevelMaterials
+)

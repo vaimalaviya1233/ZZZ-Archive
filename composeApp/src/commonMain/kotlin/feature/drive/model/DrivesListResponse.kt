@@ -9,9 +9,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class DrivesListResponse(
-    val drives: List<DriveListItemResponse>
-)
+data class DrivesListResponse(val drives: List<DriveListItemResponse>)
 
 @Serializable
 data class DriveListItemResponse(
@@ -24,20 +22,23 @@ data class DriveListItemResponse(
     val pieceSetFour: String
 )
 
-val stubDrivesListResponse = DrivesListResponse(
-    drives = listOf(
-        DriveListItemResponse(
-            id = 1,
-            name = "搖擺爵士",
-            isLeak = false,
-            pieceSetTwo = "能量自動回復提升20%。",
-            pieceSetFour = "發動[連攜技]或[終結技]時，全隊造成的傷害提升15%，持續12秒，同名被動效果之間不可疊加。"
-        ), DriveListItemResponse(
-            id = 2,
-            name = "混沌重金屬",
-            isLeak = false,
-            pieceSetTwo = "以太傷害提升10%。",
-            pieceSetFour = "裝備者的暴擊傷害提升20%，隊伍中任意角色觸發[侵蝕]效果的額外傷害時，該增益效果額外提升5.5%，最多疊加6層，持續8秒，重複觸發時重置持續時間。"
+val stubDrivesListResponse =
+    DrivesListResponse(
+        drives =
+        listOf(
+            DriveListItemResponse(
+                id = 1,
+                name = "搖擺爵士",
+                isLeak = false,
+                pieceSetTwo = "能量自動回復提升20%。",
+                pieceSetFour = "發動[連攜技]或[終結技]時，全隊造成的傷害提升15%，持續12秒，同名被動效果之間不可疊加。"
+            ),
+            DriveListItemResponse(
+                id = 2,
+                name = "混沌重金屬",
+                isLeak = false,
+                pieceSetTwo = "以太傷害提升10%。",
+                pieceSetFour = "裝備者的暴擊傷害提升20%，隊伍中任意角色觸發[侵蝕]效果的額外傷害時，該增益效果額外提升5.5%，最多疊加6層，持續8秒，重複觸發時重置持續時間。"
+            )
         )
     )
-)

@@ -11,5 +11,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface PixivRepository {
     fun getZzzTopic(): Flow<List<PixivArticleItem>>
+
     suspend fun updateZzzTopic(zzzTag: String): Result<PixivTopicResponse>
 }

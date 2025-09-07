@@ -34,11 +34,16 @@ import zzzarchive.composeapp.generated.resources.agent_background
 
 @Composable
 fun AgentDetailScreenSingle(
-    uiState: AgentDetailState, onAction: (AgentDetailAction) -> Unit
+    uiState: AgentDetailState,
+    onAction: (AgentDetailAction) -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .background(AppTheme.colors.surface).padding(horizontalSafePadding())
+        modifier =
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(AppTheme.colors.surface)
+            .padding(horizontalSafePadding())
             .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {

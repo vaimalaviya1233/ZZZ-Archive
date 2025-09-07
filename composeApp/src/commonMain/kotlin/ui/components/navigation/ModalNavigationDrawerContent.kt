@@ -56,10 +56,13 @@ fun ModalNavigationDrawerContent(
     onThemeChanged: () -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxHeight().padding(AppTheme.spacing.s200)
+        modifier =
+        Modifier
+            .fillMaxHeight()
+            .padding(AppTheme.spacing.s200)
             .clip(AppTheme.shape.r500)
             .widthIn(min = navigationDrawerMinWidth, max = navigationDrawerMaxWidth)
-            .border(AppTheme.size.borderWidth, AppTheme.colors.border, AppTheme.shape.r500)
+            .border(width = AppTheme.size.borderWidth, color = AppTheme.colors.border, shape = AppTheme.shape.r500)
             .background(AppTheme.colors.surfaceContainer)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s450)
     ) {
@@ -84,7 +87,7 @@ fun ModalNavigationDrawerContent(
 
         Column(
             modifier = Modifier.fillMaxHeight().verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             NAV_RAIL_MAIN_FLOW.forEach { destination ->
                 val isSelected = selectedMainFlow == destination.route
@@ -120,19 +123,18 @@ fun ModalNavigationDrawerContent(
                 icon = {
                     Icon(
                         imageVector = vectorResource(if (isDark) Res.drawable.ic_sun else Res.drawable.ic_moon),
-                        contentDescription = null,
+                        contentDescription = null
                     )
                 },
                 label = {
                     Text(
                         text = stringResource(if (isDark) Res.string.light_theme else Res.string.dark_theme),
-                        style = AppTheme.typography.labelMedium,
+                        style = AppTheme.typography.labelMedium
                     )
                 },
                 colors = navigationDrawerItemColors()
             )
         }
-
     }
 }
 
@@ -145,4 +147,3 @@ private fun navigationDrawerItemColors() = NavigationDrawerItemDefaults.colors(
     unselectedIconColor = AppTheme.colors.onSurfaceContainer,
     unselectedTextColor = AppTheme.colors.onSurfaceContainer
 )
-

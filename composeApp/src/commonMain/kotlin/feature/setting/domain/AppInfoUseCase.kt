@@ -9,15 +9,9 @@ import com.mrfatworm.zzzarchive.ZzzConfig
 import utils.getPlatform
 
 class AppInfoUseCase {
-    fun getAppVersion(): String {
-        return ZzzConfig.VERSION
-    }
+    fun getAppVersion(): String = ZzzConfig.VERSION
 
-    fun getDeviceInfo(): String {
-        return getPlatform().deviceName
-    }
+    fun getDeviceInfo(): String = getPlatform().deviceName
 
-    fun getDeviceOs(): String {
-        return getPlatform().operatingSystemName
-    }
+    fun getDeviceOs(): String = getPlatform().operatingSystemName
 }

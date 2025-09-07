@@ -14,7 +14,10 @@ import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
 
 @Composable
-fun WEnginesListScreen(onWEngineClick: (Int) -> Unit, onBackClick: () -> Unit) {
+fun WEnginesListScreen(
+    onWEngineClick: (Int) -> Unit,
+    onBackClick: () -> Unit
+) {
     val viewModel: WEnginesListViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     WEnginesListContent(uiState, onAction = { action ->
@@ -28,7 +31,8 @@ fun WEnginesListScreen(onWEngineClick: (Int) -> Unit, onBackClick: () -> Unit) {
 
 @Composable
 private fun WEnginesListContent(
-    uiState: WEnginesListState, onAction: (WEnginesListAction) -> Unit
+    uiState: WEnginesListState,
+    onAction: (WEnginesListAction) -> Unit
 ) {
     if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
         WEnginesListScreenSingle(uiState, onAction)

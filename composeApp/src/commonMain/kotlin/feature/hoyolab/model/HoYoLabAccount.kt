@@ -10,5 +10,5 @@ data class HoYoLabAccount(
     val region: String,
     val regionName: String,
     val lToken: String,
-    val ltUid: String,
+    val ltUid: String
 )

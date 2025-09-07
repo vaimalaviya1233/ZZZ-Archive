@@ -38,7 +38,9 @@ fun FeedbackScreenMedium(
     onAction: (FeedbackAction) -> Unit
 ) {
     Column(
-        modifier = Modifier.widthIn(max = 640.dp)
+        modifier =
+        Modifier
+            .widthIn(max = 640.dp)
             .verticalScroll(rememberScrollState())
             .padding(horizontalSafePadding())
             .padding(verticalSafePadding()),
@@ -80,5 +82,4 @@ fun FeedbackScreenMedium(
             onAction(FeedbackAction.SubmitForm)
         }
     }
-
 }

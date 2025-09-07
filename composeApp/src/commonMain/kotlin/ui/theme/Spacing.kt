@@ -21,7 +21,7 @@ class Spacing(
     val s350: Dp,
     val s400: Dp,
     val s450: Dp,
-    val s500: Dp,
+    val s500: Dp
 ) {
     companion object {
         fun regular() = Spacing(
@@ -32,7 +32,7 @@ class Spacing(
             s350 = 12.dp,
             s400 = 16.dp,
             s450 = 24.dp,
-            s500 = 32.dp,
+            s500 = 32.dp
         )
     }
 }

@@ -24,15 +24,16 @@ data class HoYoLabAccountEntity(
     val updatedAt: Long
 )
 
-val stubHoYoLabAccountEntity = HoYoLabAccountEntity(
-    uid = 123456789,
-    region = "prod_gf_jp",
-    regionName = "Asia",
-    level = 55,
-    nickName = "mrfatworm",
-    profileUrl = "https://example.com/profile",
-    cardUrl = "https://example.com/card",
-    lToken = "fake_ltoken".toByteArray(),
-    ltUid = "fake_lt_uid".toByteArray(),
-    updatedAt = 0L
-)
+val stubHoYoLabAccountEntity =
+    HoYoLabAccountEntity(
+        uid = 123456789,
+        region = "prod_gf_jp",
+        regionName = "Asia",
+        level = 55,
+        nickName = "mrfatworm",
+        profileUrl = "https://example.com/profile",
+        cardUrl = "https://example.com/card",
+        lToken = "fake_ltoken".toByteArray(),
+        ltUid = "fake_lt_uid".toByteArray(),
+        updatedAt = 0L
+    )

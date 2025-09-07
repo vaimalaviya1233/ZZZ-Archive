@@ -9,12 +9,9 @@ import feature.setting.data.PreferencesRepository
 import kotlinx.coroutines.flow.Flow
 
 class HoYoLabPreferenceUseCase(private val preferencesRepository: PreferencesRepository) {
-
-    fun getDefaultHoYoLabAccountUid(): Flow<Int> =
-        preferencesRepository.getDefaultHoYoLabAccountUid()
+    fun getDefaultHoYoLabAccountUid(): Flow<Int> = preferencesRepository.getDefaultHoYoLabAccountUid()
 
     suspend fun setDefaultHoYoLabAccountUid(uid: Int) {
         preferencesRepository.setDefaultHoYoLabAccountUid(uid)
     }
-
 }

@@ -35,4 +35,3 @@ fun AgentAttributesCard(agentDetail: AgentDetail) {
         Spacer(Modifier.size(AppTheme.spacing.s200))
     }
 }
-

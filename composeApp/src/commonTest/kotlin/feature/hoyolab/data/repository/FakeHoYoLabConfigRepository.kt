@@ -74,12 +74,10 @@ class FakeHoYoLabConfigRepository : HoYoLabConfigRepository {
         region: String,
         lToken: String,
         ltUid: String
-    ): Result<List<PlayerBasicInfo>> {
-        return if (isError) {
-            Result.failure(Exception())
-        } else {
-            Result.success(listOf(stubPlayerBasicInfo))
-        }
+    ): Result<List<PlayerBasicInfo>> = if (isError) {
+        Result.failure(Exception())
+    } else {
+        Result.success(listOf(stubPlayerBasicInfo))
     }
 
     override suspend fun requestPlayerDetail(
@@ -87,12 +85,10 @@ class FakeHoYoLabConfigRepository : HoYoLabConfigRepository {
         region: String,
         lToken: String,
         ltUid: String
-    ): Result<PlayerDetailResponse> {
-        return if (isError) {
-            Result.failure(Exception())
-        } else {
-            Result.success(stubPlayerDetailResponse)
-        }
+    ): Result<PlayerDetailResponse> = if (isError) {
+        Result.failure(Exception())
+    } else {
+        Result.success(stubPlayerDetailResponse)
     }
 
     override suspend fun requestGameRecord(
@@ -100,23 +96,19 @@ class FakeHoYoLabConfigRepository : HoYoLabConfigRepository {
         region: String,
         lToken: String,
         ltUid: String
-    ): Result<GameRecordResponse> {
-        return if (isError) {
-            Result.failure(Exception())
-        } else {
-            Result.success(stubGameRecordResponse)
-        }
+    ): Result<GameRecordResponse> = if (isError) {
+        Result.failure(Exception())
+    } else {
+        Result.success(stubGameRecordResponse)
     }
 
     override suspend fun requestSign(
         languageCode: String,
         lToken: String,
         ltUid: String
-    ): Result<SignResponse> {
-        return if (isError) {
-            Result.failure(Exception())
-        } else {
-            Result.success(stubSignResponse)
-        }
+    ): Result<SignResponse> = if (isError) {
+        Result.failure(Exception())
+    } else {
+        Result.success(stubSignResponse)
     }
 }

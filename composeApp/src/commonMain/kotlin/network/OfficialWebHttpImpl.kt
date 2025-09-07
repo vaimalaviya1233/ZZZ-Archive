@@ -14,12 +14,14 @@ import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import io.ktor.http.path
 
-class OfficialWebHttpImpl(engine: HttpClientEngine) :
-    OfficialWebHttp {
+class OfficialWebHttpImpl(engine: HttpClientEngine) : OfficialWebHttp {
     private val client = createOfficialWebHttpClient(engine)
 
-    override suspend fun requestNews(amount: Int, languagePath: String): OfficialNewsResponse =
-        client.get {
+    override suspend fun requestNews(
+        amount: Int,
+        languagePath: String
+    ): OfficialNewsResponse = client
+        .get {
             url {
                 path("/content_v2_user/app/3e9196a4b9274bd7/getContentList")
             }
@@ -30,5 +32,3 @@ class OfficialWebHttpImpl(engine: HttpClientEngine) :
             parameter("sLangKey", languagePath)
         }.body()
 }
-
-

@@ -12,11 +12,15 @@ import androidx.compose.ui.graphics.Color
 import ui.theme.AppTheme
 
 @Composable
-fun ZzzSwitch(checkState: Boolean, onCheckChange: (Boolean) -> Unit) {
+fun ZzzSwitch(
+    checkState: Boolean,
+    onCheckChange: (Boolean) -> Unit
+) {
     Switch(
         checked = checkState,
         onCheckedChange = { onCheckChange(it) },
-        colors = SwitchDefaults.colors(
+        colors =
+        SwitchDefaults.colors(
             uncheckedThumbColor = AppTheme.colors.buttonBorder,
             uncheckedBorderColor = AppTheme.colors.buttonBorder,
             uncheckedTrackColor = Color.Companion.Transparent,

@@ -11,6 +11,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface BangbooRepository {
     suspend fun getBangbooList(languagePath: String): Flow<List<BangbooListItem>>
+
     suspend fun requestAndUpdateBangbooListDB(languagePath: String): Result<Unit>
-    suspend fun getBangbooDetail(id: Int, languagePath: String): Result<BangbooDetail>
+
+    suspend fun getBangbooDetail(
+        id: Int,
+        languagePath: String
+    ): Result<BangbooDetail>
 }

@@ -35,7 +35,6 @@ import ui.components.ImageNotFound
 import ui.theme.AppTheme
 import utils.ZzzRarity
 
-
 @Composable
 fun MyAgentItem(
     modifier: Modifier = Modifier,
@@ -50,7 +49,9 @@ fun MyAgentItem(
     val interactionSource = remember { MutableInteractionSource() }
 
     Column(
-        modifier = modifier.width(AppTheme.size.s100)
+        modifier =
+        modifier
+            .width(AppTheme.size.s100)
             .pointerHoverIcon(PointerIcon.Hand)
             .clickable(interactionSource = interactionSource, indication = null) {
                 onClick()
@@ -59,11 +60,17 @@ fun MyAgentItem(
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s250)
     ) {
         Box(
-            modifier = Modifier.aspectRatio(9f / 11).fillMaxSize().background(
-                AppTheme.colors.imageBackground
-            ).border(
-                AppTheme.size.borderWidth, AppTheme.colors.imageBorder, shape = AppTheme.shape.r300
-            ).clip(AppTheme.shape.r300)
+            modifier =
+            Modifier
+                .aspectRatio(9f / 11)
+                .fillMaxSize()
+                .background(
+                    AppTheme.colors.imageBackground
+                ).border(
+                    AppTheme.size.borderWidth,
+                    AppTheme.colors.imageBorder,
+                    shape = AppTheme.shape.r300
+                ).clip(AppTheme.shape.r300)
         ) {
             SubcomposeAsyncImage(
                 modifier = Modifier.fillMaxSize(),
@@ -71,16 +78,22 @@ fun MyAgentItem(
                 contentDescription = name,
                 error = {
                     placeHolder()
-                })
+                }
+            )
 
             if (rank > 0) {
                 CinemaCountTag(Modifier.align(Alignment.TopEnd), rank)
             }
 
             Column(
-                modifier = Modifier.align(Alignment.BottomStart).fillMaxWidth()
-                    .background(AppTheme.colors.hoveredMask).padding(top = AppTheme.spacing.s100),
-                verticalArrangement = Arrangement.spacedBy(
+                modifier =
+                Modifier
+                    .align(Alignment.BottomStart)
+                    .fillMaxWidth()
+                    .background(AppTheme.colors.hoveredMask)
+                    .padding(top = AppTheme.spacing.s100),
+                verticalArrangement =
+                Arrangement.spacedBy(
                     AppTheme.spacing.s100
                 )
             ) {
@@ -95,19 +108,22 @@ fun MyAgentItem(
                 )
                 RarityIndicator(rarity = rarity)
             }
-
         }
-
     }
 }
 
 @Composable
-private fun CinemaCountTag(modifier: Modifier, cinemaCount: Int) {
+private fun CinemaCountTag(
+    modifier: Modifier,
+    cinemaCount: Int
+) {
     Text(
-        modifier = modifier.background(
-            AppTheme.colors.hoveredMask,
-            RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
-        ).padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200),
+        modifier =
+        modifier
+            .background(
+                AppTheme.colors.hoveredMask,
+                RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
+            ).padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200),
         text = cinemaCount.toString(),
         color = AppTheme.colors.onHoveredMask,
         style = AppTheme.typography.titleMedium
@@ -115,9 +131,14 @@ private fun CinemaCountTag(modifier: Modifier, cinemaCount: Int) {
 }
 
 @Composable
-private fun RarityIndicator(modifier: Modifier = Modifier, rarity: ZzzRarity) {
+private fun RarityIndicator(
+    modifier: Modifier = Modifier,
+    rarity: ZzzRarity
+) {
     Spacer(
-        modifier.fillMaxWidth().height(AppTheme.spacing.s300)
+        modifier
+            .fillMaxWidth()
+            .height(AppTheme.spacing.s300)
             .background(rarity.getColor(AppTheme.colors))
     )
 }

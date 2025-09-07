@@ -8,18 +8,16 @@ package feature.wengine.domain
 import feature.setting.domain.FakeLanguageUseCase
 import feature.wengine.data.repository.FakeWEngineRepository
 import feature.wengine.model.stubWEngineDetail
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
-
+import kotlinx.coroutines.test.runTest
 
 class WEngineDetailUseCaseTest {
-
     private val wEngineRepository = FakeWEngineRepository()
     private val languageUseCase = FakeLanguageUseCase()
-    private val wEngineDetailUseCase = WEngineDetailUseCase(wEngineRepository, languageUseCase)
-
+    private val wEngineDetailUseCase =
+        WEngineDetailUseCase(wEngineRepository = wEngineRepository, languageUseCase = languageUseCase)
 
     @Test
     fun `Get W-Engines list success`() = runTest {

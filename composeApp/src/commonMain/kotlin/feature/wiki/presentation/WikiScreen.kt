@@ -46,7 +46,8 @@ fun WikiScreen(
 
 @Composable
 private fun WikiScreenContent(
-    uiState: WikiState, onAction: (WikiAction) -> Unit
+    uiState: WikiState,
+    onAction: (WikiAction) -> Unit
 ) {
     WikiScreenSingle(uiState = uiState, onAction)
 }

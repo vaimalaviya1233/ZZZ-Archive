@@ -7,16 +7,16 @@ package feature.drive.data
 
 import feature.drive.data.database.FakeDrivesListDao
 import feature.drive.data.respository.DriveRepositoryImpl
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
-import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class DriveRepositoryImplTest {
     private val httpClient = FakeZzzHttp()
     private val database = FakeDrivesListDao()
-    private val repository = DriveRepositoryImpl(httpClient, database)
+    private val repository = DriveRepositoryImpl(httpClient = httpClient, drivesListDB = database)
     // Remote: 2 Drive Discs, Local: 1 Drive Disc
 
     @Test
@@ -33,12 +33,11 @@ class DriveRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN drives list DB is empty WHEN Get drives list THEN Auto request and return updated DB`() =
-        runTest {
-            database.deleteDrivesList()
-            val result = repository.getDrivesList("").first()
-            assertEquals(2, result.size)
-        }
+    fun `GIVEN drives list DB is empty WHEN Get drives list THEN Auto request and return updated DB`() = runTest {
+        database.deleteDrivesList()
+        val result = repository.getDrivesList("").first()
+        assertEquals(2, result.size)
+    }
 
     @Test
     fun `WHEN Request drives list error THEN return local DB`() = runTest {
@@ -48,11 +47,10 @@ class DriveRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN drives list DB is empty WHEN Request drives list error THEN return empty DB`() =
-        runTest {
-            httpClient.setError(true)
-            database.deleteDrivesList()
-            val result = repository.getDrivesList("").first()
-            assertEquals(0, result.size)
-        }
+    fun `GIVEN drives list DB is empty WHEN Request drives list error THEN return empty DB`() = runTest {
+        httpClient.setError(true)
+        database.deleteDrivesList()
+        val result = repository.getDrivesList("").first()
+        assertEquals(0, result.size)
+    }
 }

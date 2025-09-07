@@ -31,18 +31,21 @@ import zzzarchive.composeapp.generated.resources.splash_logo
 
 @Composable
 fun SplashScreen(startMainFlow: () -> Unit) {
-
     LaunchedEffect(true) {
         delay(1000)
         startMainFlow()
     }
     SantaSplashScreen()
-    //SplashScreenSingle(uiState)
+    // SplashScreenSingle(uiState)
 }
+
 val splashColor = Color(0xFF3C3C3C)
 
 @Composable
-private fun AppInfo(modifier: Modifier, appVersion: String) {
+private fun AppInfo(
+    modifier: Modifier,
+    appVersion: String
+) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -66,13 +69,10 @@ private fun AppInfo(modifier: Modifier, appVersion: String) {
     }
 }
 
-
 @Composable
-fun SplashScreenSingle(
-    uiState: InitState,
-) {
+fun SplashScreenSingle(uiState: InitState) {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
     ) {
         Image(
             modifier = Modifier.fillMaxSize(),
@@ -81,7 +81,8 @@ fun SplashScreenSingle(
             contentScale = ContentScale.Crop
         )
         AppInfo(
-            modifier = Modifier.align(Alignment.Center), uiState.appVersion
+            modifier = Modifier.align(Alignment.Center),
+            uiState.appVersion
         )
     }
 }

@@ -7,7 +7,7 @@ package feature.hoyolab.presentation
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import feature.hoyolab.model.my_agent_detail.MyAgentDetailState
+import feature.hoyolab.model.agent.MyAgentDetailState
 import org.koin.compose.viewmodel.koinViewModel
 import ui.theme.AppTheme
 import ui.utils.ContentType
@@ -25,7 +25,10 @@ fun MyAgentDetailScreen(onBackClick: () -> Unit) {
 }
 
 @Composable
-fun MyAgentDetailContent(uiState: MyAgentDetailState, onAction: (MyAgentDetailAction) -> Unit) {
+fun MyAgentDetailContent(
+    uiState: MyAgentDetailState,
+    onAction: (MyAgentDetailAction) -> Unit
+) {
     if (AppTheme.contentType == ContentType.Single) {
         MyAgentDetailScreenSingle(uiState, onAction)
     } else {

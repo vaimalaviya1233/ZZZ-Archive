@@ -90,29 +90,32 @@ sealed class MainFlow(
     )
 }
 
-val ALL_MAIN_FLOW = listOf(
-    MainFlow.Home,
-    MainFlow.Agent,
-    MainFlow.WEngine,
-    MainFlow.Bangboo,
-    MainFlow.Drive,
-    MainFlow.Setting,
-    MainFlow.Wiki,
-    MainFlow.Function
-)
+val ALL_MAIN_FLOW =
+    listOf(
+        MainFlow.Home,
+        MainFlow.Agent,
+        MainFlow.WEngine,
+        MainFlow.Bangboo,
+        MainFlow.Drive,
+        MainFlow.Setting,
+        MainFlow.Wiki,
+        MainFlow.Function
+    )
 
-val NAV_RAIL_MAIN_FLOW = listOf(
-    MainFlow.Home,
-    MainFlow.Agent,
-    MainFlow.WEngine,
-    MainFlow.Bangboo,
-    MainFlow.Drive,
-    MainFlow.Setting
-)
+val NAV_RAIL_MAIN_FLOW =
+    listOf(
+        MainFlow.Home,
+        MainFlow.Agent,
+        MainFlow.WEngine,
+        MainFlow.Bangboo,
+        MainFlow.Drive,
+        MainFlow.Setting
+    )
 
-val NAV_BOTTOM_MAIN_FLOW = listOf(
-    MainFlow.Home,
-    MainFlow.Wiki,
-    MainFlow.Function,
-    MainFlow.Setting
-)
+val NAV_BOTTOM_MAIN_FLOW =
+    listOf(
+        MainFlow.Home,
+        MainFlow.Wiki,
+        MainFlow.Function,
+        MainFlow.Setting
+    )

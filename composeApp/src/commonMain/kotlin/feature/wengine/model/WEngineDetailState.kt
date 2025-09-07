@@ -25,8 +25,10 @@ val emptyWEngineDetail =
         specialty = AgentSpecialty.None,
         background = "",
         atk = 0,
-        stat = NameAndValue(
-            name = "N/A", value = "0"
+        stat =
+        NameAndValue(
+            name = "N/A",
+            value = "0"
         ),
         skill = "",
         levelMaterials = emptyList()

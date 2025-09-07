@@ -17,15 +17,14 @@ import io.ktor.http.path
 class PixivHttpImpl(engine: HttpClientEngine) : PixivHttp {
     private val client = createPixivHttpClient(engine)
 
-    override suspend fun requestZzzTopic(zzzTag: String): PixivTopicResponse = client.get {
-        url {
-            path("/ajax/search/artworks/$zzzTag")
-        }
-        parameter("word", zzzTag)
-        parameter("mode", "safe")
-        parameter("lang", "zh")
-        contentType(ContentType.Application.Json)
-    }.body()
+    override suspend fun requestZzzTopic(zzzTag: String): PixivTopicResponse = client
+        .get {
+            url {
+                path("/ajax/search/artworks/$zzzTag")
+            }
+            parameter("word", zzzTag)
+            parameter("mode", "safe")
+            parameter("lang", "zh")
+            contentType(ContentType.Application.Json)
+        }.body()
 }
-
-

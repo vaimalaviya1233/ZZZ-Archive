@@ -5,7 +5,6 @@
 
 package feature.splash
 
-
 import MainDispatcherRule
 import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
@@ -13,16 +12,15 @@ import feature.setting.domain.ThemeUseCase
 import feature.setting.domain.UiScaleUseCase
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
-import org.junit.Rule
-import utils.Language
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import kotlinx.coroutines.flow.flowOf
+import org.junit.Rule
+import utils.Language
 
 class InitViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 

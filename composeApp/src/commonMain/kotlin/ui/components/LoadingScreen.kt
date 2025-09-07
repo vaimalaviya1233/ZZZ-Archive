@@ -33,19 +33,22 @@ fun LoadingScreen() {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(
+        verticalArrangement =
+        Arrangement.spacedBy(
             AppTheme.spacing.s400,
             Alignment.CenterVertically
         )
     ) {
         val infiniteTransition = rememberInfiniteTransition(label = "Rotate Animation")
-        val rotateAnimation = infiniteTransition.animateFloat(
-            initialValue = -60f,
-            targetValue = 60f,
-            animationSpec = infiniteRepeatable(tween(1000), RepeatMode.Reverse),
-        )
+        val rotateAnimation =
+            infiniteTransition.animateFloat(
+                initialValue = -60f,
+                targetValue = 60f,
+                animationSpec = infiniteRepeatable(tween(1000), RepeatMode.Reverse)
+            )
         Icon(
-            modifier = Modifier.size(96.dp).graphicsLayer {
+            modifier =
+            Modifier.size(96.dp).graphicsLayer {
                 rotationZ = rotateAnimation.value
             },
             imageVector = vectorResource(Res.drawable.ic_bangboo),

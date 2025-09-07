@@ -48,9 +48,10 @@ fun ContributorsCard(contributors: Contributors) {
             )
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(
-                    AppTheme.spacing.s300,
-                    Alignment.CenterHorizontally
+                horizontalArrangement =
+                Arrangement.spacedBy(
+                    space = AppTheme.spacing.s300,
+                    alignment = Alignment.CenterHorizontally
                 ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -66,21 +67,34 @@ fun ContributorsCard(contributors: Contributors) {
                     color = AppTheme.colors.onSurfaceVariant
                 )
             }
-            ContributorItem(stringResource(Res.string.author), contributors.author)
-            ContributorItem(stringResource(Res.string.developer), contributors.developer)
-            ContributorItem(stringResource(Res.string.ui_ux_designers), contributors.uiUxDesigner)
-            ContributorItem(stringResource(Res.string.localization), contributors.translation)
+            ContributorItem(title = stringResource(Res.string.author), contributorList = contributors.author)
+            ContributorItem(title = stringResource(Res.string.developer), contributorList = contributors.developer)
             ContributorItem(
-                stringResource(Res.string.data_integration), contributors.dataIntegration
+                title = stringResource(Res.string.ui_ux_designers),
+                contributorList = contributors.uiUxDesigner
             )
-            ContributorItem(stringResource(Res.string.banner_artists), contributors.bannerArtists)
-            ContributorItem(stringResource(Res.string.special_thanks), contributors.specialThanks)
+            ContributorItem(title = stringResource(Res.string.localization), contributorList = contributors.translation)
+            ContributorItem(
+                title = stringResource(Res.string.data_integration),
+                contributorList = contributors.dataIntegration
+            )
+            ContributorItem(
+                title = stringResource(Res.string.banner_artists),
+                contributorList = contributors.bannerArtists
+            )
+            ContributorItem(
+                title = stringResource(Res.string.special_thanks),
+                contributorList = contributors.specialThanks
+            )
         }
     }
 }
 
 @Composable
-fun ContributorItem(title: String, contributorList: List<Contributor>) {
+fun ContributorItem(
+    title: String,
+    contributorList: List<Contributor>
+) {
     Column(modifier = Modifier.fillMaxWidth().padding(vertical = AppTheme.spacing.s200)) {
         Text(
             text = title,

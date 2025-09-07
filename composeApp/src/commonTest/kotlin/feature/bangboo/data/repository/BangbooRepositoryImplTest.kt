@@ -6,12 +6,12 @@
 package feature.bangboo.data.repository
 
 import feature.bangboo.data.database.FakeBangbooListDao
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.runTest
-import network.FakeZzzHttp
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
+import network.FakeZzzHttp
 
 class BangbooRepositoryImplTest {
     private val httpClient = FakeZzzHttp()
@@ -33,12 +33,11 @@ class BangbooRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN Bangboo list DB is empty WHEN Get bangboo list THEN Auto request and return updated DB`() =
-        runTest {
-            bangbooListDao.deleteBangbooList()
-            val result = repository.getBangbooList("").first()
-            assertEquals(3, result.size)
-        }
+    fun `GIVEN Bangboo list DB is empty WHEN Get bangboo list THEN Auto request and return updated DB`() = runTest {
+        bangbooListDao.deleteBangbooList()
+        val result = repository.getBangbooList("").first()
+        assertEquals(3, result.size)
+    }
 
     @Test
     fun `WHEN Request bangboo list error THEN return local DB`() = runTest {
@@ -48,13 +47,12 @@ class BangbooRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN bangboo list DB is empty WHEN Request bangboo list error THEN return empty DB`() =
-        runTest {
-            httpClient.setError(true)
-            bangbooListDao.deleteBangbooList()
-            val result = repository.getBangbooList("").first()
-            assertEquals(0, result.size)
-        }
+    fun `GIVEN bangboo list DB is empty WHEN Request bangboo list error THEN return empty DB`() = runTest {
+        httpClient.setError(true)
+        bangbooListDao.deleteBangbooList()
+        val result = repository.getBangbooList("").first()
+        assertEquals(0, result.size)
+    }
 
     @Test
     fun `Get Bangboo Detail Success`() = runTest {
@@ -67,6 +65,5 @@ class BangbooRepositoryImplTest {
         httpClient.setError(true)
         val result = repository.getBangbooDetail(6, "").getOrNull()
         assertNull(result)
-
     }
 }

@@ -53,12 +53,14 @@ fun HoYoLabSyncGuildCard(navigateToFeedback: () -> Unit) {
     ContentCard(hasDefaultPadding = false) {
         CardHeader(stringResource(Res.string.instruction_guide))
         Column(
-            modifier = Modifier.fillMaxWidth().padding(
+            modifier =
+            Modifier.fillMaxWidth().padding(
                 start = AppTheme.spacing.s400,
                 end = AppTheme.spacing.s400,
                 top = AppTheme.spacing.s300,
                 bottom = AppTheme.spacing.s400
-            ), verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s450)
+            ),
+            verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s450)
         ) {
             Text(
                 text = "1. " + stringResource(Res.string.open_a_desktop_browser),
@@ -90,7 +92,8 @@ private fun StepTwo() {
             val url = "https://act.hoyolab.com/app/zzz-game-record/index.html#/zzz"
             val urlHandler = LocalUriHandler.current
             Text(
-                modifier = Modifier.pointerHoverIcon(PointerIcon.Hand).clickable {
+                modifier =
+                Modifier.pointerHoverIcon(PointerIcon.Hand).clickable {
                     urlHandler.openUri(url)
                 },
                 text = url,
@@ -196,7 +199,8 @@ fun FrequentQuestions(navigateToFeedback: () -> Unit) {
                 style = AppTheme.typography.bodySmall
             )
             Text(
-                text = "A: " + stringResource(Res.string.provide_feedback_via_suggestions_or_report_your_issue_on_github),
+                text =
+                "A: " + stringResource(Res.string.provide_feedback_via_suggestions_or_report_your_issue_on_github),
                 color = AppTheme.colors.onSurfaceVariant,
                 style = AppTheme.typography.bodySmall
             )
@@ -209,7 +213,8 @@ fun FrequentQuestions(navigateToFeedback: () -> Unit) {
         verticalAlignment = CenterVertically
     ) {
         ZzzOutlineButton(
-            modifier = Modifier.weight(1f), text = stringResource(Res.string.feedback)
+            modifier = Modifier.weight(1f),
+            text = stringResource(Res.string.feedback)
         ) {
             navigateToFeedback()
         }

@@ -7,16 +7,16 @@ package database
 
 import feature.agent.data.repository.FakeAgentRepository
 import feature.bangboo.data.repository.FakeBangbooRepository
-import feature.cover_image.data.FakeCoverImageRepository
+import feature.cover.data.FakeCoverImageRepository
 import feature.drive.data.FakeDriveRepository
 import feature.home.data.FakeAssetVersionRepository
 import feature.setting.data.FakeSystemConfigRepository
 import feature.setting.domain.FakeLanguageUseCase
 import feature.wengine.data.repository.FakeWEngineRepository
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
 
 class UpdateDatabaseUseCaseTest {
     private val assetVersionRepository = FakeAssetVersionRepository()
@@ -28,16 +28,17 @@ class UpdateDatabaseUseCaseTest {
     private val systemConfigRepository = FakeSystemConfigRepository()
     private val languageUseCase = FakeLanguageUseCase()
 
-    private val updateDatabaseUseCase = UpdateDatabaseUseCase(
-        assetVersionRepository,
-        coverImageRepository,
-        agentRepository,
-        wEngineRepository,
-        bangbooRepository,
-        driveRepository,
-        systemConfigRepository,
-        languageUseCase
-    )
+    private val updateDatabaseUseCase =
+        UpdateDatabaseUseCase(
+            assetVersionRepository,
+            coverImageRepository,
+            agentRepository,
+            wEngineRepository,
+            bangbooRepository,
+            driveRepository,
+            systemConfigRepository,
+            languageUseCase
+        )
 
     @Test
     fun `Update assets if new version available`() = runTest {

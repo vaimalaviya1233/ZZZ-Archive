@@ -18,11 +18,13 @@ data class WEnginesListItemEntity(
     val specialty: String
 )
 
-val stubWEnginesListItemEntity = WEnginesListItemEntity(
-    id = 44,
-    name = "好鬥的阿炮",
-    imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset//W-Engine/Image/44.webp",
-    isLeak = false,
-    rarity = 4,
-    specialty = "support",
-)
+@Suppress("ktlint:standard:max-line-length")
+val stubWEnginesListItemEntity =
+    WEnginesListItemEntity(
+        id = 44,
+        name = "好鬥的阿炮",
+        imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset//W-Engine/Image/44.webp",
+        isLeak = false,
+        rarity = 4,
+        specialty = "support"
+    )

@@ -9,12 +9,10 @@ import feature.home.model.AssetVersionResponse
 import network.ZzzHttp
 
 class AssetVersionRepositoryImpl(private val httpClient: ZzzHttp) : AssetVersionRepository {
-    override suspend fun requestAssetVersion(): Result<AssetVersionResponse> {
-        return try {
-            val result = httpClient.requestAssetVersion()
-            Result.success(result)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override suspend fun requestAssetVersion(): Result<AssetVersionResponse> = try {
+        val result = httpClient.requestAssetVersion()
+        Result.success(result)
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 }

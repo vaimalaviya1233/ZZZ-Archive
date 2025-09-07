@@ -12,12 +12,11 @@ import kotlinx.coroutines.flow.first
 import utils.AgentSpecialty
 import utils.ZzzRarity
 
-
 class WEnginesListUseCase(
-    private val wEngineRepository: WEngineRepository, private val languageUseCase: LanguageUseCase
+    private val wEngineRepository: WEngineRepository,
+    private val languageUseCase: LanguageUseCase
 ) {
-    suspend fun invoke() =
-        wEngineRepository.getWEnginesList(languageUseCase.getLanguage().first().officialCode)
+    suspend fun invoke() = wEngineRepository.getWEnginesList(languageUseCase.getLanguage().first().officialCode)
 
     suspend fun updateWEnginesList() = wEngineRepository.requestAndUpdateWEnginesListDB(
         languageUseCase.getLanguage().first().officialCode
@@ -26,15 +25,13 @@ class WEnginesListUseCase(
     fun filterWEnginesList(
         wEnginesList: List<WEnginesListItem>,
         selectedRarities: Set<ZzzRarity>,
-        selectedSpecialties: Set<AgentSpecialty>,
-    ): List<WEnginesListItem> {
-        return wEnginesList.filter { wEngine ->
-            val matchRarity =
-                selectedRarities.isEmpty() || selectedRarities.any { it == wEngine.rarity }
-            val matchSpecialty =
-                selectedSpecialties.isEmpty() || selectedSpecialties.any { it == wEngine.specialty }
+        selectedSpecialties: Set<AgentSpecialty>
+    ): List<WEnginesListItem> = wEnginesList.filter { wEngine ->
+        val matchRarity =
+            selectedRarities.isEmpty() || selectedRarities.any { it == wEngine.rarity }
+        val matchSpecialty =
+            selectedSpecialties.isEmpty() || selectedSpecialties.any { it == wEngine.specialty }
 
-            matchRarity && matchSpecialty
-        }
+        matchRarity && matchSpecialty
     }
 }

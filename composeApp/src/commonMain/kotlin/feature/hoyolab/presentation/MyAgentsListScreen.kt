@@ -30,13 +30,14 @@ fun MyAgentsListScreen(
 
                 MyAgentsListAction.ClickBack -> onBackClick()
             }
-        })
+        }
+    )
 }
 
 @Composable
 fun MyAgentsListContent(
     uiState: MyAgentsListState,
-    onAction: (MyAgentsListAction) -> Unit,
+    onAction: (MyAgentsListAction) -> Unit
 ) {
     if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
         MyAgentsListScreenCompact(uiState = uiState, onAction)

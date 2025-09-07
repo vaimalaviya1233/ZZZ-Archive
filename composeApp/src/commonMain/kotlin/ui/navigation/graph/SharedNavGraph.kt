@@ -33,9 +33,11 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
     }
 
     composable(
-        route = Screen.AgentDetail.route, arguments = Screen.AgentDetail.navArguments,
+        route = Screen.AgentDetail.route,
+        arguments = Screen.AgentDetail.navArguments,
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
+    ) {
         AgentDetailScreen(wEngineClick = { id ->
             navActions.navigationToRoute(Screen.WEngineDetail.createRoute(id))
         }, onBackClick = { navActions.back() })
@@ -52,9 +54,11 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
     }
 
     composable(
-        Screen.WEngineDetail.route, arguments = Screen.WEngineDetail.navArguments,
+        Screen.WEngineDetail.route,
+        arguments = Screen.WEngineDetail.navArguments,
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
+    ) {
         WEngineDetailScreen(onBackClick = { navActions.back() })
     }
 
@@ -69,9 +73,11 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
     }
 
     composable(
-        route = Screen.BangbooDetail.route, arguments = Screen.BangbooDetail.navArguments,
+        route = Screen.BangbooDetail.route,
+        arguments = Screen.BangbooDetail.navArguments,
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
+    ) {
         BangbooDetailScreen(onBackClick = { navActions.back() })
     }
 
@@ -90,7 +96,8 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
     composable(
         route = Screen.Feedback.route,
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
+    ) {
         FeedbackScreen {
             navActions.back()
         }
@@ -99,7 +106,8 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
     composable(
         route = Screen.HoYoLabSync.route,
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
+    ) {
         HoYoLabSyncScreen(onBackClick = { navActions.back() }, navigateToFeedback = {
             navActions.navigationTo(Screen.Feedback)
         })
@@ -108,20 +116,24 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
     composable(
         route = Screen.MyAgentsList.route,
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
+    ) {
         MyAgentsListScreen(
             onAgentClick = { id ->
                 navActions.navigationToRoute(Screen.MyAgentDetail.createRoute(id))
             },
             onBackClick = {
-            navActions.back()
-        })
+                navActions.back()
+            }
+        )
     }
 
     composable(
-        route = Screen.MyAgentDetail.route, arguments = Screen.MyAgentDetail.navArguments,
+        route = Screen.MyAgentDetail.route,
+        arguments = Screen.MyAgentDetail.navArguments,
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }) {
+        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
+    ) {
         MyAgentDetailScreen(onBackClick = {
             navActions.back()
         })

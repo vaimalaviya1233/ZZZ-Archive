@@ -42,18 +42,21 @@ fun BangbooListFilterCard(
 ) {
     ContentCard(
         modifier = modifier,
-        hasDefaultPadding = false,
+        hasDefaultPadding = false
     ) {
         AnimatedVisibility(visible = !invisibleFilter) {
             Column(
                 modifier = Modifier.padding(top = cardPadding()),
                 verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
-                RarityFilterChipsList(uiState.selectedRarity, onRarityChipSelectionChanged)
+                RarityFilterChipsList(
+                    selectedRarity = uiState.selectedRarity,
+                    onSelectionChanged = onRarityChipSelectionChanged
+                )
                 AttributeFilterChipsList(
-                    uiState.selectedAttributes,
-                    1,
-                    onAttributeChipSelectionChanged
+                    selectedAttributes = uiState.selectedAttributes,
+                    maxLine = 1,
+                    onSelectionChanged = onAttributeChipSelectionChanged
                 )
             }
         }
@@ -61,7 +64,8 @@ fun BangbooListFilterCard(
         LazyVerticalGrid(
             state = lazyGridState,
             columns = GridCells.Adaptive(AppTheme.size.s100),
-            modifier = Modifier.fillMaxSize().drawColumnListMask(
+            modifier =
+            Modifier.fillMaxSize().drawColumnListMask(
                 colorScheme = AppTheme.colors,
                 topEnable = lazyGridState.canScrollBackward,
                 bottomEnable = lazyGridState.canScrollForward
@@ -72,7 +76,8 @@ fun BangbooListFilterCard(
         ) {
             items(
                 count = uiState.filteredBangbooList.size,
-                key = { index -> uiState.filteredBangbooList[index].id }) { index ->
+                key = { index -> uiState.filteredBangbooList[index].id }
+            ) { index ->
                 val bangboo = uiState.filteredBangbooList[index]
                 RarityItem(
                     modifier = Modifier.animateItem(),
@@ -82,7 +87,8 @@ fun BangbooListFilterCard(
                     imgUrl = bangboo.imageUrl,
                     onClick = {
                         onBangbooClick(bangboo.id)
-                    })
+                    }
+                )
             }
         }
     }

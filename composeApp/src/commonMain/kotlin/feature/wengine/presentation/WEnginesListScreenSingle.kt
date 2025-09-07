@@ -34,7 +34,8 @@ import zzzarchive.composeapp.generated.resources.w_engines
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WEnginesListScreenSingle(
-    uiState: WEnginesListState, onAction: (WEnginesListAction) -> Unit
+    uiState: WEnginesListState,
+    onAction: (WEnginesListAction) -> Unit
 ) {
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
@@ -44,19 +45,22 @@ fun WEnginesListScreenSingle(
             TopBarScaffold(title = stringResource(Res.string.w_engines), onBackClick = {
                 onAction(WEnginesListAction.ClickBack)
             }, actions = {
-                ZzzIconButton(iconRes = if (isFiltered) Res.drawable.ic_filter_filled else Res.drawable.ic_filter,
+                ZzzIconButton(
+                    iconRes = if (isFiltered) Res.drawable.ic_filter_filled else Res.drawable.ic_filter,
                     contentDescriptionRes = Res.string.filter,
                     tint = if (isFiltered) AppTheme.colors.primary else AppTheme.colors.onSurface,
                     onClick = {
                         showBottomSheet = true
-                    })
+                    }
+                )
             })
         }
     }) { scaffoldPadding ->
         Column(
             modifier = Modifier.contentPaddingInScaffold(scaffoldPadding)
         ) {
-            WEnginesListFilterCard(modifier = Modifier.weight(1f),
+            WEnginesListFilterCard(
+                modifier = Modifier.weight(1f),
                 uiState = uiState,
                 invisibleFilter = AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact,
                 onWEngineClick = {
@@ -67,10 +71,12 @@ fun WEnginesListScreenSingle(
                 },
                 onSpecialtyChipSelectionChanged = {
                     onAction(WEnginesListAction.ChangeSpecialtyFilter(it))
-                })
+                }
+            )
         }
         if (showBottomSheet) {
-            WEngineFilterBottomSheet(sheetState = sheetState,
+            WEngineFilterBottomSheet(
+                sheetState = sheetState,
                 uiState = uiState,
                 onRarityChipSelectionChanged = {
                     onAction(WEnginesListAction.ChangeRarityFilter(it))
@@ -78,7 +84,8 @@ fun WEnginesListScreenSingle(
                 onSpecialtyChipSelectionChanged = {
                     onAction(WEnginesListAction.ChangeSpecialtyFilter(it))
                 },
-                onDismiss = { showBottomSheet = false })
+                onDismiss = { showBottomSheet = false }
+            )
         }
     }
 }

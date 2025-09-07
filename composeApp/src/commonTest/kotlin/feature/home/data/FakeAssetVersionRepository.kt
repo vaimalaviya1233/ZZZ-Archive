@@ -15,11 +15,9 @@ class FakeAssetVersionRepository : AssetVersionRepository {
         error = value
     }
 
-    override suspend fun requestAssetVersion(): Result<AssetVersionResponse> {
-        return if (error) {
-            Result.failure(Exception("Fake error"))
-        } else {
-            Result.success(stubAssetVersionResponse)
-        }
+    override suspend fun requestAssetVersion(): Result<AssetVersionResponse> = if (error) {
+        Result.failure(Exception("Fake error"))
+    } else {
+        Result.success(stubAssetVersionResponse)
     }
 }

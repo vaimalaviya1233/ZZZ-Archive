@@ -9,7 +9,6 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 
 class NavActions(private val navController: NavHostController) {
-
     fun navigationTo(destination: Screen) {
         navController.navigate(destination.route)
     }
@@ -23,14 +22,27 @@ class NavActions(private val navController: NavHostController) {
     }
 
     fun navigationToMainScreen(destination: MainFlow) {
-        val thirdRoute = navController.currentBackStack.value.getOrNull(3)?.destination?.route
-            ?: if (destination == MainFlow.Home) return else MainFlow.Home.route
-        val forthRoute = navController.currentBackStack.value.getOrNull(4)?.destination?.route
-        val fifthRoute = navController.currentBackStack.value.getOrNull(5)?.destination?.route
+        val thirdRoute =
+            navController.currentBackStack.value
+                .getOrNull(3)
+                ?.destination
+                ?.route
+                ?: if (destination == MainFlow.Home) return else MainFlow.Home.route
+        val forthRoute =
+            navController.currentBackStack.value
+                .getOrNull(4)
+                ?.destination
+                ?.route
+        val fifthRoute =
+            navController.currentBackStack.value
+                .getOrNull(5)
+                ?.destination
+                ?.route
         val currentMainFlow =
             ALL_MAIN_FLOW.find { it.route == thirdRoute }?.route ?: MainFlow.Home.route
         val isAlreadyInDestination =
-            ALL_MAIN_FLOW.find { it.startScreen.route == forthRoute } != null && fifthRoute == null && currentMainFlow == destination.route
+            ALL_MAIN_FLOW.find { it.startScreen.route == forthRoute } != null && fifthRoute == null &&
+                currentMainFlow == destination.route
 
         if (isAlreadyInDestination) {
             return
@@ -62,5 +74,3 @@ class NavActions(private val navController: NavHostController) {
         navController.popBackStack(route = destination.startScreen.route, inclusive = false)
     }
 }
-
-

@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HoYoLabAccountDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAccount(account: HoYoLabAccountEntity)
 

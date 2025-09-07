@@ -51,14 +51,17 @@ fun AgentsListCard(
         HoveredIndicatorHeader(
             title = stringResource(Res.string.agents),
             isHovered = isHovered.value,
-            lazyListState = lazyListState,
+            lazyListState = lazyListState
         ) {
             if (showViewAll) {
                 Text(
-                    modifier = Modifier.clip(AppTheme.shape.r300)
-                        .clickable { onAgentsOverviewClick() }.pointerHoverIcon(PointerIcon.Hand)
+                    modifier =
+                    Modifier
+                        .clip(AppTheme.shape.r300)
+                        .clickable { onAgentsOverviewClick() }
+                        .pointerHoverIcon(PointerIcon.Hand)
                         .background(AppTheme.colors.surface)
-                        .border(1.dp, AppTheme.colors.border, AppTheme.shape.r300)
+                        .border(width = 1.dp, color = AppTheme.colors.border, shape = AppTheme.shape.r300)
                         .padding(AppTheme.spacing.s300),
                     text = stringResource(Res.string.all_agents),
                     style = AppTheme.typography.labelMedium,
@@ -80,7 +83,8 @@ fun AgentsListCard(
                     imgUrl = agent.imageUrl,
                     onClick = {
                         onAgentDetailClick(agent.id)
-                    })
+                    }
+                )
             }
         }
     }

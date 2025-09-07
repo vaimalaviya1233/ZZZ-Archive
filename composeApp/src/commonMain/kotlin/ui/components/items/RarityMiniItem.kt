@@ -33,7 +33,6 @@ import ui.components.ImageNotFound
 import ui.theme.AppTheme
 import utils.ZzzRarity
 
-
 @Composable
 fun RarityMiniItem(
     modifier: Modifier = Modifier,
@@ -44,7 +43,9 @@ fun RarityMiniItem(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     Column(
-        modifier = modifier.width(AppTheme.size.s64)
+        modifier =
+        modifier
+            .width(AppTheme.size.s64)
             .pointerHoverIcon(if (onClick != null) PointerIcon.Hand else PointerIcon.Default)
             .clickable(interactionSource = interactionSource, indication = null) {
                 if (onClick != null) {
@@ -55,27 +56,36 @@ fun RarityMiniItem(
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().aspectRatio(1f).clip(AppTheme.shape.r300).background(
-                rarity?.getColor(AppTheme.colors) ?: Color.Transparent
-            ).border(
-                AppTheme.size.borderWidth, AppTheme.colors.imageBorder, shape = AppTheme.shape.r300
-            )
-
+            modifier =
+            Modifier
+                .fillMaxSize()
+                .aspectRatio(1f)
+                .clip(AppTheme.shape.r300)
+                .background(
+                    rarity?.getColor(AppTheme.colors) ?: Color.Transparent
+                ).border(
+                    AppTheme.size.borderWidth,
+                    AppTheme.colors.imageBorder,
+                    shape = AppTheme.shape.r300
+                )
         ) {
             Box(
-                modifier = Modifier.fillMaxWidth().fillMaxHeight(if (rarity == null) 1f else 0.86f)
+                modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(if (rarity == null) 1f else 0.86f)
                     .background(AppTheme.colors.imageBackground)
-
             ) {
                 if (imgUrl == null) {
                     ImageNotFound()
                 } else {
                     AsyncImage(
-                        modifier = Modifier.fillMaxSize(), model = imgUrl, contentDescription = null
+                        modifier = Modifier.fillMaxSize(),
+                        model = imgUrl,
+                        contentDescription = null
                     )
                 }
             }
-
         }
         text?.let {
             Text(
@@ -88,6 +98,5 @@ fun RarityMiniItem(
                 maxLines = 1
             )
         }
-
     }
 }

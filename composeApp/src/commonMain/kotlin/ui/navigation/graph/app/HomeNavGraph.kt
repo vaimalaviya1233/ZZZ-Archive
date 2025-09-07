@@ -16,7 +16,8 @@ import ui.navigation.graph.sharedNavGraph
 
 fun NavGraphBuilder.homeNavGraph(navActions: NavActions) {
     navigation(
-        route = MainFlow.Home.route, startDestination = MainFlow.Home.startScreen.route
+        route = MainFlow.Home.route,
+        startDestination = MainFlow.Home.startScreen.route
     ) {
         composable(Screen.Home.route) {
             HomeScreen(
@@ -30,7 +31,8 @@ fun NavGraphBuilder.homeNavGraph(navActions: NavActions) {
                             id
                         )
                     )
-                }, onWEngineDetailClick = { id ->
+                },
+                onWEngineDetailClick = { id ->
                     navActions.navigationToRoute(
                         Screen.WEngineDetail.createRoute(
                             id

@@ -40,14 +40,18 @@ fun HoYoLabSyncScreenSingle(
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             TopBarScaffold(
-                title = stringResource(Res.string.hoyolab_sync), onBackClick = {
+                title = stringResource(Res.string.hoyolab_sync),
+                onBackClick = {
                     onAction(HoYoLabSyncAction.ClickBack)
                 }
             )
         }
     }) { scaffoldPadding ->
         Column(
-            modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+            modifier =
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .contentPaddingInScaffold(scaffoldPadding),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
@@ -63,10 +67,13 @@ fun HoYoLabSyncScreenSingle(
                     onSubmit = { serverRegion, lToken, ltUid ->
                         onAction(
                             HoYoLabSyncAction.ConnectToHoYoLabAndAdd(
-                                serverRegion, lToken, ltUid
+                                region = serverRegion,
+                                lToken = lToken,
+                                ltUid = ltUid
                             )
                         )
-                    })
+                    }
+                )
             }
 
             Column(verticalArrangement = Arrangement.spacedBy(contentGap())) {
@@ -83,7 +90,8 @@ fun HoYoLabSyncScreenSingle(
                         },
                         delete = {
                             onAction(HoYoLabSyncAction.DeleteAccount(account.uid))
-                        })
+                        }
+                    )
                 }
                 if (uiState.syncedAccounts.isNotEmpty()) {
                     ZzzPrimaryButton(
@@ -98,5 +106,4 @@ fun HoYoLabSyncScreenSingle(
             })
         }
     }
-
 }

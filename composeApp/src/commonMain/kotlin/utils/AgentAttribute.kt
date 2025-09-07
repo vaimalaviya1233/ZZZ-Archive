@@ -21,7 +21,6 @@ import zzzarchive.composeapp.generated.resources.ice
 import zzzarchive.composeapp.generated.resources.physical
 import zzzarchive.composeapp.generated.resources.unknown
 
-
 enum class AgentAttribute(val textRes: StringResource, val iconRes: DrawableResource) {
     Ether(Res.string.ether, Res.drawable.ic_attribute_ether),
     Fire(Res.string.fire, Res.drawable.ic_attribute_fire),
@@ -31,18 +30,15 @@ enum class AgentAttribute(val textRes: StringResource, val iconRes: DrawableReso
     None(Res.string.unknown, Res.drawable.ic_help)
 }
 
-fun findAgentAttribute(attribute: String): AgentAttribute {
-    return AgentAttribute.entries.find { it.name.lowercase().lowercase() == attribute }
+fun findAgentAttribute(attribute: String): AgentAttribute =
+    AgentAttribute.entries.find { it.name.lowercase().lowercase() == attribute }
         ?: AgentAttribute.None
-}
 
-fun findAgentAttributeFromHoYoLab(attributeId: Int): AgentAttribute {
-    return when (attributeId) {
-        200 -> AgentAttribute.Physical
-        201 -> AgentAttribute.Fire
-        202 -> AgentAttribute.Ice
-        203 -> AgentAttribute.Electric
-        205 -> AgentAttribute.Ether
-        else -> AgentAttribute.None
-    }
+fun findAgentAttributeFromHoYoLab(attributeId: Int): AgentAttribute = when (attributeId) {
+    200 -> AgentAttribute.Physical
+    201 -> AgentAttribute.Fire
+    202 -> AgentAttribute.Ice
+    203 -> AgentAttribute.Electric
+    205 -> AgentAttribute.Ether
+    else -> AgentAttribute.None
 }

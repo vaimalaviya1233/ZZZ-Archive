@@ -58,7 +58,8 @@ fun HomeScreen(
 
 @Composable
 private fun HomeScreenContent(
-    uiState: HomeState, onAction: (HomeAction) -> Unit
+    uiState: HomeState,
+    onAction: (HomeAction) -> Unit
 ) {
     val banner = uiState.banner
     val openBannerDialog = remember { mutableStateOf(false) }
@@ -73,7 +74,8 @@ private fun HomeScreenContent(
     }
     when {
         openBannerDialog.value -> {
-            BannerDialog(message = banner?.title ?: "",
+            BannerDialog(
+                message = banner?.title ?: "",
                 url = banner?.url ?: "",
                 urlDesc = banner?.urlDesc ?: "",
                 route = banner?.route ?: "",
@@ -81,8 +83,8 @@ private fun HomeScreenContent(
                 onNavigate = {
                     onAction(HomeAction.NavigateTo(it))
                 },
-                onDismiss = { openBannerDialog.value = false })
+                onDismiss = { openBannerDialog.value = false }
+            )
         }
     }
 }
-

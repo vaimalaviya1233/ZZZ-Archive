@@ -5,21 +5,19 @@
 
 package feature.drive.presentation
 
-
 import MainDispatcherRule
 import feature.drive.data.database.stubDrivesListItemEntity
 import feature.drive.domain.DrivesListUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
-import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import kotlinx.coroutines.flow.flowOf
+import org.junit.Rule
 
 class DrivesListViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 

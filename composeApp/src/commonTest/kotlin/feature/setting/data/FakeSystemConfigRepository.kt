@@ -16,7 +16,6 @@ class FakeSystemConfigRepository : SystemConfigRepository {
     private var bangbooListDBVersion = 1
     private var driveListDBVersion = 1
 
-
     override fun getBannerIgnoreId(): Flow<Int> = flow {
         emit(bannerIgnoreId)
     }

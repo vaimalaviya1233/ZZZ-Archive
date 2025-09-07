@@ -21,26 +21,33 @@ import ui.theme.AppTheme
 
 @Composable
 fun ZzzArchiveBottomNavigationBar(
-    selectedMainFlow: String, navigationActions: NavActions
+    selectedMainFlow: String,
+    navigationActions: NavActions
 ) {
     NavigationBar(
-        modifier = Modifier.fillMaxWidth(), containerColor = AppTheme.colors.surface
+        modifier = Modifier.fillMaxWidth(),
+        containerColor = AppTheme.colors.surface
     ) {
         NAV_BOTTOM_MAIN_FLOW.forEach { destination ->
             val isSelected = selectedMainFlow == destination.route
-            NavigationBarItem(selected = isSelected, onClick = {
-                navigationActions.navigationToMainScreen(destination)
-            }, icon = {
-                Icon(
-                    imageVector = vectorResource(destination.iconRes),
-                    contentDescription = stringResource(destination.textRes)
-                )
-            }, label = {
-                Text(
-                    text = stringResource(destination.textRes),
-                    style = if (isSelected) AppTheme.typography.labelMedium else AppTheme.typography.labelSmall
-                )
-            }, colors = navigationBarItemColors()
+            NavigationBarItem(
+                selected = isSelected,
+                onClick = {
+                    navigationActions.navigationToMainScreen(destination)
+                },
+                icon = {
+                    Icon(
+                        imageVector = vectorResource(destination.iconRes),
+                        contentDescription = stringResource(destination.textRes)
+                    )
+                },
+                label = {
+                    Text(
+                        text = stringResource(destination.textRes),
+                        style = if (isSelected) AppTheme.typography.labelMedium else AppTheme.typography.labelSmall
+                    )
+                },
+                colors = navigationBarItemColors()
             )
         }
     }

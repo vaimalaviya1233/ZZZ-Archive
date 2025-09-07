@@ -3,7 +3,6 @@
  * License: MIT License
  */
 
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
@@ -16,7 +15,6 @@ import ui.theme.AppTheme
 import ui.theme.ZzzArchiveTheme
 import utils.imageLoaderDiskCache
 
-
 @Composable
 fun ZzzArchiveApp() {
     // Initialize the Coil3 image loader
@@ -24,8 +22,6 @@ fun ZzzArchiveApp() {
         imageLoaderDiskCache(context)
     }
     ZzzArchiveTheme {
-
-
         val viewModel: InitViewModel = koinViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         var isDark by AppTheme.isDark

@@ -28,22 +28,38 @@ fun PttList(pttList: List<PttForumListState>) {
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
     ) {
         pttList.forEach { pttItem ->
-            PttListItem(modifier = Modifier.clickable {
-                urlHandler.openUri(pttItem.link)
-            }, ptt = pttItem)
+            PttListItem(
+                modifier =
+                Modifier.clickable {
+                    urlHandler.openUri(pttItem.link)
+                },
+                ptt = pttItem
+            )
         }
     }
 }
 
 @Composable
-private fun PttListItem(modifier: Modifier = Modifier, ptt: PttForumListState) {
-    val popularColor = if (ptt.popularity.toInt() > 100) AppTheme.colors.alert
-    else if (ptt.popularity.toInt() >= 10) AppTheme.colors.secondary
-    else AppTheme.colors.primary
+private fun PttListItem(
+    modifier: Modifier = Modifier,
+    ptt: PttForumListState
+) {
+    val popularColor =
+        if (ptt.popularity.toInt() > 100) {
+            AppTheme.colors.alert
+        } else if (ptt.popularity.toInt() >= 10) {
+            AppTheme.colors.secondary
+        } else {
+            AppTheme.colors.primary
+        }
 
     Row(
-        modifier = modifier.fillMaxWidth().clip(AppTheme.shape.r200)
-            .background(AppTheme.colors.surfaceContainer).padding(AppTheme.spacing.s350),
+        modifier =
+        modifier
+            .fillMaxWidth()
+            .clip(AppTheme.shape.r200)
+            .background(AppTheme.colors.surfaceContainer)
+            .padding(AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {

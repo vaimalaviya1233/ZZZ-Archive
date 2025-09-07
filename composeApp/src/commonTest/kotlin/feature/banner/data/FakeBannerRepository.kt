@@ -5,7 +5,6 @@
 
 package feature.banner.data
 
-
 class FakeBannerRepository : BannerRepository {
     private var isError = false
 
@@ -13,11 +12,9 @@ class FakeBannerRepository : BannerRepository {
         this.isError = isError
     }
 
-    override suspend fun getBanner(languageCode: String): Result<BannerResponse> {
-        return if (isError) {
-            Result.failure(Exception())
-        } else {
-            Result.success(stubBannerResponse)
-        }
+    override suspend fun getBanner(languageCode: String): Result<BannerResponse> = if (isError) {
+        Result.failure(Exception())
+    } else {
+        Result.success(stubBannerResponse)
     }
 }

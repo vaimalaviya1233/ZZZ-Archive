@@ -39,8 +39,12 @@ fun ZzzFilterChip(
     onClick: () -> Unit
 ) {
     Row(
-        modifier = modifier.clip(zzzChipShape).pointerHoverIcon(PointerIcon.Hand)
-            .clickable(onClick = onClick).background(
+        modifier =
+        modifier
+            .clip(zzzChipShape)
+            .pointerHoverIcon(PointerIcon.Hand)
+            .clickable(onClick = onClick)
+            .background(
                 color = if (selected) AppTheme.colors.primaryContainer else AppTheme.colors.surface
             ).border(
                 width = 1.dp,
@@ -49,7 +53,8 @@ fun ZzzFilterChip(
             ).padding(
                 horizontal = AppTheme.spacing.s350,
                 vertical = AppTheme.spacing.s250
-            ), horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+            ),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
         iconRes?.let {

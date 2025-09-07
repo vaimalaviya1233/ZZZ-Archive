@@ -24,7 +24,8 @@ fun BangbooDetailScreen(onBackClick: () -> Unit) {
             onAction = { viewModel.onAction(BangbooDetailAction.Retry) },
             onBack = {
                 onBackClick()
-            })
+            }
+        )
     } else {
         BangbooDetailContent(uiState, onAction = { action ->
             when (action) {
@@ -37,7 +38,8 @@ fun BangbooDetailScreen(onBackClick: () -> Unit) {
 
 @Composable
 private fun BangbooDetailContent(
-    uiState: BangbooDetailState, onAction: (BangbooDetailAction) -> Unit
+    uiState: BangbooDetailState,
+    onAction: (BangbooDetailAction) -> Unit
 ) {
     if (AppTheme.contentType == ContentType.Single) {
         BangbooDetailScreenSingle(uiState, onAction)

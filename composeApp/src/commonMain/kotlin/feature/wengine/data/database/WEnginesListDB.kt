@@ -10,7 +10,8 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [WEnginesListItemEntity::class], version = 1
+    entities = [WEnginesListItemEntity::class],
+    version = 1
 )
 @ConstructedBy(WEnginesListDBConstructor::class)
 abstract class WEnginesListDB : RoomDatabase() {

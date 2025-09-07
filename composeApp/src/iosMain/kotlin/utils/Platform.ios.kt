@@ -7,7 +7,7 @@ package utils
 
 import platform.UIKit.UIDevice
 
-class IOSPlatform: Platform {
+class IOSPlatform : Platform {
     override val operatingSystemName: String =
         UIDevice.currentDevice.systemName() + " " + UIDevice.currentDevice.systemVersion
     override val deviceName: String = UIDevice.currentDevice.name

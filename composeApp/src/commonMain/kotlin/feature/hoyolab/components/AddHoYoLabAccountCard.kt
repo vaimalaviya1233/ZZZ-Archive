@@ -46,7 +46,10 @@ import zzzarchive.composeapp.generated.resources.sync
 import zzzarchive.composeapp.generated.resources.unknown_error
 
 @Composable
-fun AddHoYoLabAccountCard(errorMessage: String, onSubmit: (String, String, String) -> Unit) {
+fun AddHoYoLabAccountCard(
+    errorMessage: String,
+    onSubmit: (String, String, String) -> Unit
+) {
     var lToken by remember { mutableStateOf("") }
     var ltUid by remember { mutableStateOf("") }
     var selectedServerRegion by remember { mutableStateOf(ServersList.None) }
@@ -55,18 +58,24 @@ fun AddHoYoLabAccountCard(errorMessage: String, onSubmit: (String, String, Strin
     var isServerRegionError by remember { (mutableStateOf(false)) }
     val focusManager = LocalFocusManager.current
 
-    ContentCard(modifier = Modifier.pointerInput(Unit) {
-        detectTapGestures(onTap = {
-            focusManager.clearFocus()
-        })
-    }, hasDefaultPadding = false) {
+    ContentCard(
+        modifier =
+        Modifier.pointerInput(Unit) {
+            detectTapGestures(onTap = {
+                focusManager.clearFocus()
+            })
+        },
+        hasDefaultPadding = false
+    ) {
         Spacer(Modifier.size(AppTheme.spacing.s200))
-        ServerTypeItem(ServersList.entries.dropLast(1),
+        ServerTypeItem(
+            gameServerType = ServersList.entries.dropLast(1),
             isError = isServerRegionError,
             onServerSelected = {
                 selectedServerRegion = it
                 isServerRegionError = it == ServersList.None
-            })
+            }
+        )
         Column(
             modifier = Modifier.padding(AppTheme.spacing.s400),
             horizontalAlignment = Alignment.End,
@@ -81,7 +90,8 @@ fun AddHoYoLabAccountCard(errorMessage: String, onSubmit: (String, String, Strin
                 isLtUidError = it.isEmpty()
             })
             Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = errorMessage, color = AppTheme.colors.alert)
 
@@ -92,7 +102,9 @@ fun AddHoYoLabAccountCard(errorMessage: String, onSubmit: (String, String, Strin
                         isServerRegionError = selectedServerRegion == ServersList.None
                     } else {
                         onSubmit(
-                            selectedServerRegion.region, lToken, ltUid
+                            selectedServerRegion.region,
+                            lToken,
+                            ltUid
                         )
                     }
                 })
@@ -104,9 +116,13 @@ fun AddHoYoLabAccountCard(errorMessage: String, onSubmit: (String, String, Strin
 
 @Composable
 private fun SecretTextField(
-    hint: String, isError: Boolean = false, value: String, onValueChange: (String) -> Unit
+    hint: String,
+    isError: Boolean = false,
+    value: String,
+    onValueChange: (String) -> Unit
 ) {
-    ZzzTextFiled(modifier = Modifier.fillMaxWidth(),
+    ZzzTextFiled(
+        modifier = Modifier.fillMaxWidth(),
         hint = hint,
         value = value,
         onValueChange = onValueChange,
@@ -122,12 +138,15 @@ private fun SecretTextField(
                     tint = AppTheme.colors.onSurface
                 )
             }
-        })
+        }
+    )
 }
 
 @Composable
 private fun ServerTypeItem(
-    gameServerType: List<ServersList>, isError: Boolean, onServerSelected: (ServersList) -> Unit
+    gameServerType: List<ServersList>,
+    isError: Boolean,
+    onServerSelected: (ServersList) -> Unit
 ) {
     val pleaseSelectText = stringResource(Res.string.please_select)
     var selectedServerType by remember { mutableStateOf(ServersList.None) }
@@ -147,7 +166,14 @@ private fun ServerTypeItem(
                     )
                 }
                 Text(
-                    text = if (selectedServerType == ServersList.None) pleaseSelectText else selectedServerType.localName,
+                    text =
+                    if (selectedServerType ==
+                        ServersList.None
+                    ) {
+                        pleaseSelectText
+                    } else {
+                        selectedServerType.localName
+                    },
                     style = AppTheme.typography.labelMedium,
                     color = AppTheme.colors.onSurface
                 )
@@ -158,9 +184,11 @@ private fun ServerTypeItem(
                     tint = AppTheme.colors.onSurfaceVariant
                 )
             }
-            DropdownMenu(expanded = showServerTypesDropdown,
+            DropdownMenu(
+                expanded = showServerTypesDropdown,
                 containerColor = AppTheme.colors.surface,
-                onDismissRequest = { showServerTypesDropdown = false }) {
+                onDismissRequest = { showServerTypesDropdown = false }
+            ) {
                 gameServerType.forEach { gameServer ->
                     DropdownMenuItem(text = {
                         Text(

@@ -35,21 +35,30 @@ fun ZzzIconButton(
     interactionSource: MutableInteractionSource? = null,
     onClick: () -> Unit
 ) {
-    Surface(modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default).size(size),
+    Surface(
+        modifier = modifier.pointerHoverIcon(if (enabled) PointerIcon.Hand else PointerIcon.Default).size(size),
         color = AppTheme.colors.surface,
-        border = BorderStroke(
-            width = AppTheme.size.borderWidth, color = AppTheme.colors.border
+        border =
+        BorderStroke(
+            width = AppTheme.size.borderWidth,
+            color = AppTheme.colors.border
         ),
         shape = CircleShape,
         interactionSource = interactionSource,
         enabled = enabled,
-        onClick = { onClick() }) {
+        onClick = { onClick() }
+    ) {
         Icon(
             modifier = Modifier.padding(AppTheme.spacing.s300),
             imageVector = vectorResource(iconRes),
-            contentDescription = if (contentDescriptionRes == null) null else stringResource(
-                contentDescriptionRes
-            ),
+            contentDescription =
+            if (contentDescriptionRes == null) {
+                null
+            } else {
+                stringResource(
+                    contentDescriptionRes
+                )
+            },
             tint = tint.copy(alpha = if (enabled) 1f else 0.38f)
         )
     }

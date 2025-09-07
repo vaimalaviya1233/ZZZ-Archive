@@ -30,24 +30,30 @@ fun SpecialtyFilterChips(
     val specialties = AgentSpecialty.entries.toTypedArray().dropLast(1)
 
     FlowRow(
-        modifier = Modifier.fillMaxWidth().conditional(maxLine != Int.MAX_VALUE) {
-            horizontalScroll(rememberScrollState())
-        }.padding(horizontal = cardPadding()),
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .conditional(maxLine != Int.MAX_VALUE) {
+                horizontalScroll(rememberScrollState())
+            }.padding(horizontal = cardPadding()),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         specialties.forEach { specialty ->
-            ZzzFilterChip(text = stringResource(specialty.textRes),
+            ZzzFilterChip(
+                text = stringResource(specialty.textRes),
                 iconRes = specialty.iconRes,
                 selected = selectedSpecialty.contains(specialty),
                 onClick = {
-                    val newSelection = if (selectedSpecialty.contains(specialty)) {
-                        selectedSpecialty - specialty
-                    } else {
-                        selectedSpecialty + specialty
-                    }
+                    val newSelection =
+                        if (selectedSpecialty.contains(specialty)) {
+                            selectedSpecialty - specialty
+                        } else {
+                            selectedSpecialty + specialty
+                        }
                     onSelectionChanged(newSelection)
-                })
+                }
+            )
         }
     }
 }

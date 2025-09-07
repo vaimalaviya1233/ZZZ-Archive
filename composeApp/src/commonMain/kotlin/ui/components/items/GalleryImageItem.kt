@@ -15,11 +15,16 @@ import coil3.compose.LocalPlatformContext
 import ui.theme.AppTheme
 import utils.imageLoaderMemoryCache
 
-
 @Composable
-fun GalleryImageItem(url: String, onClick: () -> Unit) {
+fun GalleryImageItem(
+    url: String,
+    onClick: () -> Unit
+) {
     AsyncImage(
-        modifier = Modifier.clickable { onClick() }.height(AppTheme.size.s144)
+        modifier =
+        Modifier
+            .clickable { onClick() }
+            .height(AppTheme.size.s144)
             .background(AppTheme.colors.surface, AppTheme.shape.r400),
         imageLoader = imageLoaderMemoryCache(LocalPlatformContext.current),
         model = url,

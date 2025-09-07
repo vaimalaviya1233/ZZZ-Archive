@@ -46,7 +46,7 @@ fun OutlinedText(
     onTextLayout: ((TextLayoutResult) -> Unit)? = null,
     style: TextStyle = LocalTextStyle.current,
     borderDrawStyle: Stroke = Stroke(width = 4f, join = StrokeJoin.Round),
-    borderColor: Color = AppTheme.colors.border,
+    borderColor: Color = AppTheme.colors.border
 ) {
     Box(modifier = modifier) {
         Text(
@@ -65,10 +65,11 @@ fun OutlinedText(
             maxLines = maxLines,
             minLines = minLines,
             onTextLayout = onTextLayout,
-            style = style.copy(
+            style =
+            style.copy(
                 shadow = null,
-                drawStyle = borderDrawStyle,
-            ),
+                drawStyle = borderDrawStyle
+            )
         )
 
         Text(
@@ -87,7 +88,7 @@ fun OutlinedText(
             maxLines = maxLines,
             minLines = minLines,
             onTextLayout = onTextLayout,
-            style = style,
+            style = style
         )
     }
 }

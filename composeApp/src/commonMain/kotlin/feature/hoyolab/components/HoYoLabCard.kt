@@ -76,7 +76,6 @@ import zzzarchive.composeapp.generated.resources.scratch_card
 import zzzarchive.composeapp.generated.resources.user_profile_image
 import zzzarchive.composeapp.generated.resources.video_store
 
-
 val minFlowRowElementWidth = 200.dp
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -89,7 +88,12 @@ fun HoYoLabCard(
     onMyAgentClick: () -> Unit
 ) {
     ContentCard(modifier = Modifier.fillMaxWidth()) {
-        Header(uiState, signResult, onSignClick, onAddAccountClick)
+        Header(
+            uiState = uiState,
+            signResult = signResult,
+            onSignClick = onSignClick,
+            onAddAccountClick = onAddAccountClick
+        )
         Spacer(Modifier.size(AppTheme.spacing.s400))
         if (uiState.hasAccount) {
             FlowRow(
@@ -124,15 +128,16 @@ private fun Header(
                         modifier = Modifier.fillMaxSize().clip(AppTheme.shape.r400),
                         painter = painterResource(Res.drawable.img_hoyolab_card_preview),
                         contentDescription = null,
-                        contentScale = ContentScale.Crop,
+                        contentScale = ContentScale.Crop
                     )
                 }
-            })
+            }
+        )
         Column(
             modifier = Modifier.fillMaxSize().padding(AppTheme.spacing.s300),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            SignButton(signResult, onSignClick)
+            SignButton(signResult = signResult, onSignClick = onSignClick)
             Row(
                 horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
                 verticalAlignment = Alignment.Bottom
@@ -155,18 +160,25 @@ private fun Header(
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun PlayerInfo(
-    modifier: Modifier, uiState: GameRecordState, onAddAccountClick: () -> Unit
+    modifier: Modifier,
+    uiState: GameRecordState,
+    onAddAccountClick: () -> Unit
 ) {
     SubcomposeAsyncImage(
-        modifier = Modifier.size(AppTheme.size.s48).clip(CircleShape)
+        modifier =
+        Modifier
+            .size(AppTheme.size.s48)
+            .clip(CircleShape)
             .clickable { onAddAccountClick() },
         model = uiState.profileUrl,
         contentDescription = stringResource(Res.string.user_profile_image),
         error = {
             ImageNotFound()
-        })
+        }
+    )
     Column(
-        modifier = modifier, verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         OutlinedText(
             text = uiState.nickname,
@@ -194,14 +206,20 @@ private fun PlayerEnergy(uiState: GameRecordState) {
     // Heart Rate Effect
     val infiniteTransition = rememberInfiniteTransition()
     val scale by infiniteTransition.animateFloat(
-        initialValue = 1f, targetValue = 1.4f, animationSpec = infiniteRepeatable(
+        initialValue = 1f,
+        targetValue = 1.4f,
+        animationSpec =
+        infiniteRepeatable(
             animation = tween(durationMillis = 400, easing = EaseInOut),
             repeatMode = RepeatMode.Reverse
         )
     )
 
     Row(
-        modifier = Modifier.clip(CircleShape).background(AppTheme.colors.hoveredMask)
+        modifier =
+        Modifier
+            .clip(CircleShape)
+            .background(AppTheme.colors.hoveredMask)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s250),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
@@ -211,7 +229,7 @@ private fun PlayerEnergy(uiState: GameRecordState) {
         Image(
             modifier = Modifier.scale(if (isFull) scale else 1f).size(AppTheme.size.icon),
             painter = painterResource(Res.drawable.img_battery_charge),
-            contentDescription = null,
+            contentDescription = null
         )
         Text(
             text = "${uiState.energy.progress.current} / ${uiState.energy.progress.max}",
@@ -221,24 +239,31 @@ private fun PlayerEnergy(uiState: GameRecordState) {
     }
 }
 
-
 @Composable
-private fun DailyMission(modifier: Modifier, uiState: GameRecordState) {
+private fun DailyMission(
+    modifier: Modifier,
+    uiState: GameRecordState
+) {
     Column(modifier = modifier.clip(AppTheme.shape.r400).widthIn(min = minFlowRowElementWidth)) {
-        val videoStoreText = when (uiState.vhsSale.saleState) {
-            "SaleStateDone" -> stringResource(Res.string.ready_to_settle)
-            "SaleStateDoing" -> stringResource(Res.string.operating)
-            "SaleStateNo" -> stringResource(Res.string.not_operating)
-            else -> "???"
-        }
+        val videoStoreText =
+            when (uiState.vhsSale.saleState) {
+                "SaleStateDone" -> stringResource(Res.string.ready_to_settle)
+                "SaleStateDoing" -> stringResource(Res.string.operating)
+                "SaleStateNo" -> stringResource(Res.string.not_operating)
+                else -> "???"
+            }
         PlayerTodoItem(
             title = stringResource(Res.string.engagement_today),
             content = "${uiState.vitality.current} / ${uiState.vitality.max}"
         )
         PlayerTodoItem(
             title = stringResource(Res.string.scratch_card),
-            content = if (uiState.cardSign == "CardSignNo") stringResource(Res.string.purchasable)
-            else stringResource(Res.string.purchased)
+            content =
+            if (uiState.cardSign == "CardSignNo") {
+                stringResource(Res.string.purchasable)
+            } else {
+                stringResource(Res.string.purchased)
+            }
         )
         PlayerTodoItem(
             title = stringResource(Res.string.video_store),
@@ -250,7 +275,9 @@ private fun DailyMission(modifier: Modifier, uiState: GameRecordState) {
 
 @Composable
 private fun WeeklyMission(
-    modifier: Modifier, uiState: GameRecordState, onMyAgentClick: () -> Unit
+    modifier: Modifier,
+    uiState: GameRecordState,
+    onMyAgentClick: () -> Unit
 ) {
     val remainOneDay = uiState.weeklyTask.refreshTime < 86400
     Column(
@@ -273,10 +300,14 @@ private fun WeeklyMission(
         }
 
         Row(
-            modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand).clickable {
-                onMyAgentClick()
-            }.padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s300),
-            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300, Alignment.End),
+            modifier =
+            Modifier
+                .fillMaxWidth()
+                .pointerHoverIcon(PointerIcon.Hand)
+                .clickable {
+                    onMyAgentClick()
+                }.padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s300),
+            horizontalArrangement = Arrangement.spacedBy(space = AppTheme.spacing.s300, alignment = Alignment.End),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -292,7 +323,6 @@ private fun WeeklyMission(
             )
         }
     }
-
 }
 
 @Composable
@@ -304,7 +334,10 @@ fun PlayerTodoItem(
     isWarning: Boolean = false
 ) {
     Row(
-        modifier = modifier.fillMaxWidth().background(AppTheme.colors.surface)
+        modifier =
+        modifier
+            .fillMaxWidth()
+            .background(AppTheme.colors.surface)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
@@ -342,25 +375,42 @@ fun PlayerTodoItem(
 }
 
 @Composable
-private fun SignButton(signResult: String?, onSignClick: () -> Unit) {
+private fun SignButton(
+    signResult: String?,
+    onSignClick: () -> Unit
+) {
     Row(
-        modifier = Modifier.clip(CircleShape).clickable {
-            if (signResult == null) {
-                onSignClick()
-            }
-        }.pointerHoverIcon(PointerIcon.Hand).background(AppTheme.colors.hoveredMask, CircleShape)
+        modifier =
+        Modifier
+            .clip(CircleShape)
+            .clickable {
+                if (signResult == null) {
+                    onSignClick()
+                }
+            }.pointerHoverIcon(PointerIcon.Hand)
+            .background(color = AppTheme.colors.hoveredMask, shape = CircleShape)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s250),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
             modifier = Modifier.size(AppTheme.size.icon),
-            imageVector = vectorResource(if (signResult == "OK") Res.drawable.ic_check_circle else Res.drawable.ic_calendar_clock),
+            imageVector =
+            vectorResource(
+                if (signResult ==
+                    "OK"
+                ) {
+                    Res.drawable.ic_check_circle
+                } else {
+                    Res.drawable.ic_calendar_clock
+                }
+            ),
             contentDescription = null,
             tint = if (signResult == "OK") AppTheme.colors.primary else AppTheme.colors.onHoveredMask
         )
         Text(
-            text = when (signResult) {
+            text =
+            when (signResult) {
                 null -> stringResource(Res.string.check_in)
                 "OK" -> stringResource(Res.string.check_in_success)
                 else -> signResult

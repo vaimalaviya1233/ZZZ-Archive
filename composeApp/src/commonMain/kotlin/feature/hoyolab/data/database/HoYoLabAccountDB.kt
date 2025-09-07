@@ -11,7 +11,8 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(
-    entities = [HoYoLabAccountEntity::class], version = 1
+    entities = [HoYoLabAccountEntity::class],
+    version = 1
 )
 @ConstructedBy(HoYoLabAccountDBConstructor::class)
 @TypeConverters(ByteArrayConverter::class)

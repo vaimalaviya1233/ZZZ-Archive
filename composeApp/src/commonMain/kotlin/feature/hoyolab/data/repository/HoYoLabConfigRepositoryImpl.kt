@@ -16,28 +16,30 @@ import kotlinx.coroutines.flow.Flow
 import network.HoYoLabHttp
 
 class HoYoLabConfigRepositoryImpl(
-    private val httpClient: HoYoLabHttp, private val hoYoLabAccountDao: HoYoLabAccountDao
+    private val httpClient: HoYoLabHttp,
+    private val hoYoLabAccountDao: HoYoLabAccountDao
 ) : HoYoLabConfigRepository {
     override suspend fun requestUserGameRolesByLToken(
-        region: String, lToken: String, ltUid: String
-    ): Result<List<PlayerBasicInfo>> {
-        return try {
-            val result = httpClient.requestUserGameRolesByLToken(region, lToken, ltUid)
-            Result.success(result.data.list.map { it.toPlayerAccountInfo() })
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+        region: String,
+        lToken: String,
+        ltUid: String
+    ): Result<List<PlayerBasicInfo>> = try {
+        val result = httpClient.requestUserGameRolesByLToken(region = region, lToken = lToken, ltUid = ltUid)
+        Result.success(result.data.list.map { it.toPlayerAccountInfo() })
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 
     override suspend fun requestPlayerDetail(
-        uid: Int, region: String, lToken: String, ltUid: String
-    ): Result<PlayerDetailResponse> {
-        return try {
-            val result = httpClient.requestPlayerDetail(uid, region, lToken, ltUid)
-            Result.success(result)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+        uid: Int,
+        region: String,
+        lToken: String,
+        ltUid: String
+    ): Result<PlayerDetailResponse> = try {
+        val result = httpClient.requestPlayerDetail(uid = uid, region = region, lToken = lToken, ltUid = ltUid)
+        Result.success(result)
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 
     override suspend fun requestGameRecord(
@@ -45,33 +47,27 @@ class HoYoLabConfigRepositoryImpl(
         region: String,
         lToken: String,
         ltUid: String
-    ): Result<GameRecordResponse> {
-        return try {
-            val result = httpClient.requestGameRecord(uid, region, lToken, ltUid)
-            Result.success(result)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    ): Result<GameRecordResponse> = try {
+        val result = httpClient.requestGameRecord(uid = uid, region = region, lToken = lToken, ltUid = ltUid)
+        Result.success(result)
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 
     override suspend fun requestSign(
         languageCode: String,
         lToken: String,
         ltUid: String
-    ): Result<SignResponse> {
-        return try {
-            val result = httpClient.requestSign(languageCode, lToken, ltUid)
-            Result.success(result)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    ): Result<SignResponse> = try {
+        val result = httpClient.requestSign(languageCode = languageCode, lToken = lToken, ltUid = ltUid)
+        Result.success(result)
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 
-    override suspend fun getAllAccountsFromDB(): Flow<List<HoYoLabAccountEntity>> =
-        hoYoLabAccountDao.getAccountList()
+    override suspend fun getAllAccountsFromDB(): Flow<List<HoYoLabAccountEntity>> = hoYoLabAccountDao.getAccountList()
 
-    override suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity?> =
-        hoYoLabAccountDao.getAccount(uid)
+    override suspend fun getAccountFromDB(uid: Int): Flow<HoYoLabAccountEntity?> = hoYoLabAccountDao.getAccount(uid)
 
     override suspend fun addAccountToDB(
         uid: Int,

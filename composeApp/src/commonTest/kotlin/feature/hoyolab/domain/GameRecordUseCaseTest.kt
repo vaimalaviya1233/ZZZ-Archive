@@ -13,11 +13,11 @@ import feature.hoyolab.model.stubGameRecordResponse
 import feature.hoyolab.model.stubSignResponse
 import feature.setting.data.FakePreferenceRepository
 import feature.setting.domain.FakeLanguageUseCase
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.runTest
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
 
 class GameRecordUseCaseTest {
     private val hoYoLabRepository = FakeHoYoLabConfigRepository()
@@ -25,9 +25,14 @@ class GameRecordUseCaseTest {
     private val preferencesRepository = FakePreferenceRepository()
     private val zzzCrypto = FakeZzzCrypto()
     private val languageUseCase = FakeLanguageUseCase()
-    private val useCase = GameRecordUseCase(
-        hoYoLabRepository, accountDao, preferencesRepository, zzzCrypto, languageUseCase
-    )
+    private val useCase =
+        GameRecordUseCase(
+            hoYoLabConfigRepository = hoYoLabRepository,
+            accountDao = accountDao,
+            preferencesRepository = preferencesRepository,
+            zzzCrypto = zzzCrypto,
+            languageUseCase = languageUseCase
+        )
 
     @BeforeTest
     fun `Insert account to database`() = runTest {

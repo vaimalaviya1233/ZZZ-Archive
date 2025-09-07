@@ -10,16 +10,11 @@ import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
 
 class ByteArrayConverter {
+    @OptIn(ExperimentalEncodingApi::class)
+    @TypeConverter
+    fun fromByteArray(byteArray: ByteArray): String = Base64.Default.encode(byteArray)
 
     @OptIn(ExperimentalEncodingApi::class)
     @TypeConverter
-    fun fromByteArray(byteArray: ByteArray): String {
-        return Base64.Default.encode(byteArray)
-    }
-
-    @OptIn(ExperimentalEncodingApi::class)
-    @TypeConverter
-    fun toByteArray(encodedString: String): ByteArray {
-        return Base64.Default.decode(encodedString)
-    }
+    fun toByteArray(encodedString: String): ByteArray = Base64.Default.decode(encodedString)
 }

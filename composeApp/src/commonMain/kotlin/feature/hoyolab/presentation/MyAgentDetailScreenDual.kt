@@ -15,14 +15,14 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import feature.hoyolab.components.my_agent_detail.MyAgentDetailTopBar
-import feature.hoyolab.components.my_agent_detail.MyAgentDrivesCard
-import feature.hoyolab.components.my_agent_detail.MyAgentFooterCard
-import feature.hoyolab.components.my_agent_detail.MyAgentImageCard
-import feature.hoyolab.components.my_agent_detail.MyAgentPropertiesCard
-import feature.hoyolab.components.my_agent_detail.MyAgentSkillCard
-import feature.hoyolab.components.my_agent_detail.MyAgentWeaponScoreCard
-import feature.hoyolab.model.my_agent_detail.MyAgentDetailState
+import feature.hoyolab.components.agent.MyAgentDetailTopBar
+import feature.hoyolab.components.agent.MyAgentDrivesCard
+import feature.hoyolab.components.agent.MyAgentFooterCard
+import feature.hoyolab.components.agent.MyAgentImageCard
+import feature.hoyolab.components.agent.MyAgentPropertiesCard
+import feature.hoyolab.components.agent.MyAgentSkillCard
+import feature.hoyolab.components.agent.MyAgentWeaponScoreCard
+import feature.hoyolab.model.agent.MyAgentDetailState
 import ui.theme.AppTheme
 import ui.utils.contentGap
 import ui.utils.horizontalSafePadding
@@ -34,7 +34,10 @@ fun MyAgentDetailScreenDual(
     onAction: (MyAgentDetailAction) -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth().background(AppTheme.colors.surface)
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .background(AppTheme.colors.surface)
             .padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(contentGap())
     ) {
@@ -42,7 +45,6 @@ fun MyAgentDetailScreenDual(
             modifier = Modifier.weight(1f).padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
-
             MyAgentDetailTopBar(uiState, onAction)
             MyAgentImageCard(
                 modifier = Modifier.weight(1f),
@@ -50,7 +52,8 @@ fun MyAgentDetailScreenDual(
                 onApply = { onAction(MyAgentDetailAction.AdjustImageDone) }
             )
             MyAgentSkillCard(
-                modifier = Modifier.fillMaxWidth(), skills = uiState.agentDetail.skills
+                modifier = Modifier.fillMaxWidth(),
+                skills = uiState.agentDetail.skills
             )
             MyAgentWeaponScoreCard(
                 weapon = uiState.agentDetail.weapon,
@@ -74,6 +77,3 @@ fun MyAgentDetailScreenDual(
         }
     }
 }
-
-
-

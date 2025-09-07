@@ -17,7 +17,6 @@ import zzzarchive.composeapp.generated.resources.slash
 import zzzarchive.composeapp.generated.resources.strike
 import zzzarchive.composeapp.generated.resources.unknown
 
-
 enum class AgentAttackType(val textRes: StringResource, val iconRes: DrawableResource) {
     Pierce(Res.string.pierce, Res.drawable.ic_attack_type_pierce),
     Slash(Res.string.slash, Res.drawable.ic_attack_type_slash),
@@ -25,7 +24,6 @@ enum class AgentAttackType(val textRes: StringResource, val iconRes: DrawableRes
     None(Res.string.unknown, Res.drawable.ic_help)
 }
 
-fun findAgentAttackType(attackType: String): AgentAttackType {
-    return AgentAttackType.entries.find { it.name.lowercase() == attackType }
+fun findAgentAttackType(attackType: String): AgentAttackType =
+    AgentAttackType.entries.find { it.name.lowercase() == attackType }
         ?: AgentAttackType.None
-}

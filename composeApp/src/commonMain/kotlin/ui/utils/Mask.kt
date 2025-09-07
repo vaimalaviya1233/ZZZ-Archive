@@ -12,7 +12,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import ui.theme.ColorScheme
 
-
 // Draw an Mask on the start and end of list depend on list status
 fun Modifier.drawRowListMask(
     colorScheme: ColorScheme,
@@ -23,20 +22,27 @@ fun Modifier.drawRowListMask(
     drawContent()
     if (startEnable) {
         drawRect(
-            brush = Brush.horizontalGradient(
+            brush =
+            Brush.horizontalGradient(
                 listOf(
                     colorScheme.surfaceContainer,
-                    colorScheme.surfaceContainer.copy(alpha = 0.0f),
-                ), startX = 0f, endX = width.toPx()
+                    colorScheme.surfaceContainer.copy(alpha = 0.0f)
+                ),
+                startX = 0f,
+                endX = width.toPx()
             )
         )
     }
     if (endEnable) {
         drawRect(
-            brush = Brush.horizontalGradient(
+            brush =
+            Brush.horizontalGradient(
                 listOf(
-                    colorScheme.surfaceContainer.copy(alpha = 0.0f), colorScheme.surfaceContainer
-                ), startX = size.width - width.toPx(), endX = size.width
+                    colorScheme.surfaceContainer.copy(alpha = 0.0f),
+                    colorScheme.surfaceContainer
+                ),
+                startX = size.width - width.toPx(),
+                endX = size.width
             )
         )
     }
@@ -52,20 +58,27 @@ fun Modifier.drawColumnListMask(
     drawContent()
     if (topEnable) {
         drawRect(
-            brush = Brush.verticalGradient(
+            brush =
+            Brush.verticalGradient(
                 listOf(
                     colorScheme.surfaceContainer,
-                    colorScheme.surfaceContainer.copy(alpha = 0.0f),
-                ), startY = 0f, endY = height.toPx()
+                    colorScheme.surfaceContainer.copy(alpha = 0.0f)
+                ),
+                startY = 0f,
+                endY = height.toPx()
             )
         )
     }
     if (bottomEnable) {
         drawRect(
-            brush = Brush.verticalGradient(
+            brush =
+            Brush.verticalGradient(
                 listOf(
-                    colorScheme.surfaceContainer.copy(alpha = 0.0f), colorScheme.surfaceContainer
-                ), startY = size.height - height.toPx(), endY = size.height
+                    colorScheme.surfaceContainer.copy(alpha = 0.0f),
+                    colorScheme.surfaceContainer
+                ),
+                startY = size.height - height.toPx(),
+                endY = size.height
             )
         )
     }
@@ -77,11 +90,14 @@ fun Modifier.drawBottomMask(
 ) = this.drawWithContent {
     drawContent()
     drawRect(
-        brush = Brush.verticalGradient(
+        brush =
+        Brush.verticalGradient(
             listOf(
-                colorScheme.surfaceContainer.copy(alpha = 0.0f), colorScheme.surfaceContainer
-            ), startY = size.height - height.toPx(), endY = size.height
+                colorScheme.surfaceContainer.copy(alpha = 0.0f),
+                colorScheme.surfaceContainer
+            ),
+            startY = size.height - height.toPx(),
+            endY = size.height
         )
     )
-
 }

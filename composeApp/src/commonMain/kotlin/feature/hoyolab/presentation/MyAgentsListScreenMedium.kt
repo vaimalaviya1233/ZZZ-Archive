@@ -31,7 +31,8 @@ fun MyAgentsListScreenMedium(
     onAction: (MyAgentsListAction) -> Unit
 ) {
     Column(
-        modifier = Modifier
+        modifier =
+        Modifier
             .fillMaxSize()
             .background(AppTheme.colors.surface)
             .verticalScroll(rememberScrollState())

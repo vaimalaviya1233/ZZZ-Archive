@@ -26,12 +26,15 @@ fun UnderDevelopScreen() {
             style = AppTheme.typography.headlineMedium
         )
         DVDScreensaver(
-            modifier = Modifier.fillMaxSize(), colors = listOf(
+            modifier = Modifier.fillMaxSize(),
+            colors =
+            listOf(
                 AppTheme.colors.primary,
                 AppTheme.colors.onSurfaceVariant,
                 AppTheme.colors.secondary,
                 AppTheme.colors.onSurface
-            ), imageSize = 64
+            ),
+            imageSize = 64
         )
     }
 }

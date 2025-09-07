@@ -10,7 +10,8 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [BangbooListItemEntity::class], version = 1
+    entities = [BangbooListItemEntity::class],
+    version = 1
 )
 @ConstructedBy(BangbooListDBConstructor::class)
 abstract class BangbooListDB : RoomDatabase() {

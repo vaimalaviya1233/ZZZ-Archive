@@ -5,23 +5,21 @@
 
 package feature.wengine.presentation
 
-
 import MainDispatcherRule
 import feature.wengine.domain.WEnginesListUseCase
 import feature.wengine.model.stubWEnginesList
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import utils.AgentSpecialty
 import utils.ZzzRarity
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class WEnginesListItemViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
@@ -33,7 +31,9 @@ class WEnginesListItemViewModelTest {
         coEvery { wEnginesListUseCase.invoke() } returns flowOf(stubWEnginesList)
         every {
             wEnginesListUseCase.filterWEnginesList(
-                any(), any(), any()
+                any(),
+                any(),
+                any()
             )
         } returns stubWEnginesList.take(1)
         viewModel = WEnginesListViewModel(wEnginesListUseCase)

@@ -53,9 +53,9 @@ fun SettingCard(
     onRestart: () -> Unit
 ) {
     ContentCard(hasDefaultPadding = false) {
-        LanguageSettingItem(uiState.language, onLanguageChange, onRestart)
+        LanguageSettingItem(language = uiState.language, onLanguageChange = onLanguageChange, onRestart = onRestart)
         ColorSettingItem(uiState.isDark, onColorChange)
-        FontScaleItem(uiState.uiScale, uiState.fontScale, onScaleChange)
+        FontScaleItem(uiScaleValue = uiState.uiScale, fontScaleValue = uiState.fontScale, onScaleChange = onScaleChange)
         HoYoLabSettingItem(onHoYoLabClick)
     }
 }
@@ -87,9 +87,11 @@ private fun LanguageSettingItem(
                     tint = AppTheme.colors.onSurfaceVariant
                 )
             }
-            DropdownMenu(expanded = showLanguageList,
+            DropdownMenu(
+                expanded = showLanguageList,
                 containerColor = AppTheme.colors.surface,
-                onDismissRequest = { showLanguageList = false }) {
+                onDismissRequest = { showLanguageList = false }
+            ) {
                 languagesList.forEach { languageItem ->
                     DropdownMenuItem(text = {
                         Text(
@@ -133,14 +135,15 @@ private fun LanguageSettingItem(
 private fun FontScaleItem(
     uiScaleValue: Float,
     fontScaleValue: Float,
-    onScaleChange: (Float, Float) -> Unit,
+    onScaleChange: (Float, Float) -> Unit
 ) {
     val openUiScaleDialog = remember { mutableStateOf(false) }
-    val actionText = if (uiScaleValue == 1f && fontScaleValue == 1f) {
-        stringResource(Res.string.default_value)
-    } else {
-        stringResource(Res.string.customize)
-    }
+    val actionText =
+        if (uiScaleValue == 1f && fontScaleValue == 1f) {
+            stringResource(Res.string.default_value)
+        } else {
+            stringResource(Res.string.customize)
+        }
     SettingItem(title = stringResource(Res.string.ui_scale), content = {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -169,26 +172,35 @@ private fun FontScaleItem(
                 },
                 onDismiss = {
                     openUiScaleDialog.value = false
-                })
+                }
+            )
         }
     }
 }
 
 @Composable
-private fun ColorSettingItem(isDarkTheme: Boolean, onColorChange: (Boolean) -> Unit) {
+private fun ColorSettingItem(
+    isDarkTheme: Boolean,
+    onColorChange: (Boolean) -> Unit
+) {
     var showColorThemeDropdown by remember { mutableStateOf(false) }
     SettingItem(title = stringResource(Res.string.color_theme), content = {
         Column(horizontalAlignment = Alignment.End) {
-            //var isDarkTheme by AppTheme.isDark
+            // var isDarkTheme by AppTheme.isDark
             val colorThemeList = listOf(Res.string.dark_theme, Res.string.light_theme)
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
             ) {
                 Text(
-                    text = if (isDarkTheme) stringResource(Res.string.dark_theme) else stringResource(
-                        Res.string.light_theme
-                    ),
+                    text =
+                    if (isDarkTheme) {
+                        stringResource(Res.string.dark_theme)
+                    } else {
+                        stringResource(
+                            Res.string.light_theme
+                        )
+                    },
                     style = AppTheme.typography.labelMedium,
                     color = AppTheme.colors.onSurface
                 )
@@ -199,9 +211,11 @@ private fun ColorSettingItem(isDarkTheme: Boolean, onColorChange: (Boolean) -> U
                     tint = AppTheme.colors.onSurfaceVariant
                 )
             }
-            DropdownMenu(expanded = showColorThemeDropdown,
+            DropdownMenu(
+                expanded = showColorThemeDropdown,
                 containerColor = AppTheme.colors.surface,
-                onDismissRequest = { showColorThemeDropdown = false }) {
+                onDismissRequest = { showColorThemeDropdown = false }
+            ) {
                 colorThemeList.forEach { colorTheme ->
                     DropdownMenuItem(text = {
                         Text(

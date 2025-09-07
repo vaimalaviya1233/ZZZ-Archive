@@ -35,19 +35,24 @@ fun Banner(
     onActionClicked: () -> Unit,
     onClosed: () -> Unit
 ) {
-    val containerColor = when (bannerLevel) {
-        BannerLevel.Normal -> AppTheme.colors.primaryContainer
-        BannerLevel.Warning -> AppTheme.colors.secondary
-        BannerLevel.Alert -> AppTheme.colors.alert
-    }
-    val contentColor = when (bannerLevel) {
-        BannerLevel.Normal -> AppTheme.colors.onPrimaryContainer
-        BannerLevel.Warning -> AppTheme.colors.onSecondary
-        BannerLevel.Alert -> AppTheme.colors.onAlert
-    }
+    val containerColor =
+        when (bannerLevel) {
+            BannerLevel.Normal -> AppTheme.colors.primaryContainer
+            BannerLevel.Warning -> AppTheme.colors.secondary
+            BannerLevel.Alert -> AppTheme.colors.alert
+        }
+    val contentColor =
+        when (bannerLevel) {
+            BannerLevel.Normal -> AppTheme.colors.onPrimaryContainer
+            BannerLevel.Warning -> AppTheme.colors.onSecondary
+            BannerLevel.Alert -> AppTheme.colors.onAlert
+        }
 
     Row(
-        modifier = modifier.clip(AppTheme.shape.r400).fillMaxWidth()
+        modifier =
+        modifier
+            .clip(AppTheme.shape.r400)
+            .fillMaxWidth()
             .background(containerColor)
             .padding(start = AppTheme.spacing.s400, end = AppTheme.spacing.s200),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
@@ -63,7 +68,9 @@ fun Banner(
         )
         actionTextRes?.let {
             Text(
-                modifier = Modifier.clickable(onClick = onActionClicked)
+                modifier =
+                Modifier
+                    .clickable(onClick = onActionClicked)
                     .padding(vertical = AppTheme.spacing.s200),
                 text = stringResource(actionTextRes),
                 color = contentColor,

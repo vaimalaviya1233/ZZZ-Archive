@@ -11,6 +11,11 @@ import kotlinx.coroutines.flow.Flow
 
 interface WEngineRepository {
     suspend fun getWEnginesList(languagePath: String): Flow<List<WEnginesListItem>>
+
     suspend fun requestAndUpdateWEnginesListDB(languagePath: String): Result<Unit>
-    suspend fun getWEngineDetail(id: Int, languagePath: String): Result<WEngineDetail>
+
+    suspend fun getWEngineDetail(
+        id: Int,
+        languagePath: String
+    ): Result<WEngineDetail>
 }

@@ -6,9 +6,12 @@
 package ui.utils
 
 enum class AdaptiveLayoutType {
-    Compact, Medium, Expanded
+    Compact,
+    Medium,
+    Expanded
 }
 
 enum class ContentType {
-    Single, Dual
+    Single,
+    Dual
 }

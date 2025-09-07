@@ -42,7 +42,7 @@ fun AgentDetailScreen(
 @Composable
 private fun AgentDetailContent(
     uiState: AgentDetailState,
-    onAction: (AgentDetailAction) -> Unit,
+    onAction: (AgentDetailAction) -> Unit
 ) {
     if (AppTheme.contentType == ContentType.Single) {
         AgentDetailScreenSingle(uiState, onAction)

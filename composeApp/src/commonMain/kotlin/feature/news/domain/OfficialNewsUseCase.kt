@@ -21,11 +21,12 @@ class OfficialNewsUseCase(
 ) {
     suspend fun getNews(amount: Int): Result<OfficialNewsResponse> {
         val languageNewsCode = languageUseCase.getLanguage().first().officialCode
-        return officialNewsRepository.getNews(amount, languageNewsCode)
+        return officialNewsRepository.getNews(amount = amount, languagePath = languageNewsCode)
     }
 
     fun getNewsPeriodically(
-        perMinutes: Int, amount: Int
+        perMinutes: Int,
+        amount: Int
     ): Flow<Result<OfficialNewsResponse>> = flow {
         while (true) {
             emit(getNews(amount))
@@ -33,14 +34,13 @@ class OfficialNewsUseCase(
         }
     }
 
-    suspend fun getNewsList(amount: Int): Result<List<OfficialNewsListItem>> {
-        return getNews(amount).map { response ->
-            response.toOfficialNewsList()
-        }
+    suspend fun getNewsList(amount: Int): Result<List<OfficialNewsListItem>> = getNews(amount).map { response ->
+        response.toOfficialNewsList()
     }
 
     fun getNewsListPeriodically(
-        perMinutes: Int, amount: Int
+        perMinutes: Int,
+        amount: Int
     ): Flow<Result<List<OfficialNewsListItem>>> = flow {
         while (true) {
             emit(getNewsList(amount))

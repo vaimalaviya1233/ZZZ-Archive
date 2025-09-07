@@ -12,4 +12,3 @@ import ui.components.UnderDevelopScreen
 fun FunctionScreenSingle() {
     UnderDevelopScreen()
 }
-

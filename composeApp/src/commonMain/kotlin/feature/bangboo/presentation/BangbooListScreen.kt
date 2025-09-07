@@ -20,7 +20,7 @@ fun BangbooListScreen(
 ) {
     val viewModel: BangbooListViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    BangbooListContent(uiState, onAction = { action ->
+    BangbooListContent(uiState = uiState, onAction = { action ->
         when (action) {
             BangbooListAction.ClickBack -> onBackClick()
             is BangbooListAction.ClickBangboo -> onBangbooClick(action.bangbooId)
@@ -32,15 +32,17 @@ fun BangbooListScreen(
 @Composable
 private fun BangbooListContent(
     uiState: BangbooListState,
-    onAction: (BangbooListAction) -> Unit,
+    onAction: (BangbooListAction) -> Unit
 ) {
     if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
         BangbooListScreenSingle(
-            uiState = uiState, onAction
+            uiState = uiState,
+            onAction = onAction
         )
     } else {
         BangbooListScreenDual(
-            uiState = uiState, onAction
+            uiState = uiState,
+            onAction = onAction
         )
     }
 }

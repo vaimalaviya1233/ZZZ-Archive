@@ -38,10 +38,14 @@ import zzzarchive.composeapp.generated.resources.ic_add
 
 @Composable
 fun HoYoLabSyncScreenDual(
-    uiState: HoYoLabSyncState, onAction: (HoYoLabSyncAction) -> Unit
+    uiState: HoYoLabSyncState,
+    onAction: (HoYoLabSyncAction) -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxSize().background(AppTheme.colors.surface)
+        modifier =
+        Modifier
+            .fillMaxSize()
+            .background(AppTheme.colors.surface)
             .padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(containerGap())
     ) {
@@ -56,14 +60,15 @@ fun HoYoLabSyncScreenDual(
             HoYoLabAnnouncementCard()
 
             if (uiState.syncedAccounts.isEmpty()) {
-                AddHoYoLabAccountCard(
-                    errorMessage = uiState.errorMessage, onSubmit = { serverRegion, lToken, ltUid ->
-                        onAction(
-                            HoYoLabSyncAction.ConnectToHoYoLabAndAdd(
-                                serverRegion, lToken, ltUid
-                            )
+                AddHoYoLabAccountCard(errorMessage = uiState.errorMessage, onSubmit = { serverRegion, lToken, ltUid ->
+                    onAction(
+                        HoYoLabSyncAction.ConnectToHoYoLabAndAdd(
+                            region = serverRegion,
+                            lToken = lToken,
+                            ltUid = ltUid
                         )
-                    })
+                    )
+                })
             }
 
             LazyColumn(verticalArrangement = Arrangement.spacedBy(contentGap())) {
@@ -80,7 +85,8 @@ fun HoYoLabSyncScreenDual(
                         },
                         delete = {
                             onAction(HoYoLabSyncAction.DeleteAccount(account.uid))
-                        })
+                        }
+                    )
                 }
                 item {
                     if (uiState.syncedAccounts.isNotEmpty()) {
@@ -92,7 +98,6 @@ fun HoYoLabSyncScreenDual(
                     }
                 }
             }
-
         }
         Column(
             Modifier.weight(1f).verticalScroll(rememberScrollState()).padding(verticalSafePadding())
@@ -102,5 +107,4 @@ fun HoYoLabSyncScreenDual(
             })
         }
     }
-
 }

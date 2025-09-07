@@ -7,6 +7,8 @@ package feature.drive.presentation
 
 sealed interface DrivesListAction {
     data class ClickDriveDetail(val id: Int) : DrivesListAction
+
     data object DismissDriveDetail : DrivesListAction
+
     data object ClickBack : DrivesListAction
 }

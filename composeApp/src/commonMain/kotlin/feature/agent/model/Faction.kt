@@ -21,35 +21,28 @@ import zzzarchive.composeapp.generated.resources.unknown
 import zzzarchive.composeapp.generated.resources.victoria_housekeeping
 import zzzarchive.composeapp.generated.resources.yunkui_summit
 
-data class Faction(
-    val id: Int
-) {
-    fun getFactionNameRes(): StringResource {
-        return when (id) {
-            1 -> Res.string.gentle_house
-            2 -> Res.string.victoria_housekeeping
-            3 -> Res.string.belobog_heavy_industries
-            4 -> Res.string.obol_squad
-            5 -> Res.string.section_6
-            6 -> Res.string.criminal_investigation_special_response_team
-            7 -> Res.string.sons_of_calydon
-            8 -> Res.string.stars_of_lyra
-            9 -> Res.string.silver_squad
-            10 -> Res.string.mockingbird
-            11 -> Res.string.yunkui_summit
-            else -> Res.string.unknown
-        }
+data class Faction(val id: Int) {
+    fun getFactionNameRes(): StringResource = when (id) {
+        1 -> Res.string.gentle_house
+        2 -> Res.string.victoria_housekeeping
+        3 -> Res.string.belobog_heavy_industries
+        4 -> Res.string.obol_squad
+        5 -> Res.string.section_6
+        6 -> Res.string.criminal_investigation_special_response_team
+        7 -> Res.string.sons_of_calydon
+        8 -> Res.string.stars_of_lyra
+        9 -> Res.string.silver_squad
+        10 -> Res.string.mockingbird
+        11 -> Res.string.yunkui_summit
+        else -> Res.string.unknown
     }
 
-    fun getFactionIconUrl(path: String = ZzzConfig.ASSET_PATH): String {
-        return "https://raw.githubusercontent.com/$path/Agent/Faction/Icon/$id.webp"
-    }
+    fun getFactionIconUrl(path: String = ZzzConfig.ASSET_PATH): String =
+        "https://raw.githubusercontent.com/$path/Agent/Faction/Icon/$id.webp"
 
-    fun getFactionThumbnailUrl(path: String = ZzzConfig.ASSET_PATH): String {
-        return "https://raw.githubusercontent.com/$path/Agent/Faction/Thumbnail/$id.webp"
-    }
+    fun getFactionThumbnailUrl(path: String = ZzzConfig.ASSET_PATH): String =
+        "https://raw.githubusercontent.com/$path/Agent/Faction/Thumbnail/$id.webp"
 
-    fun getFactionFullUrl(path: String = ZzzConfig.ASSET_PATH): String {
-        return "https://raw.githubusercontent.com/$path/Agent/Faction/Full/$id.webp"
-    }
+    fun getFactionFullUrl(path: String = ZzzConfig.ASSET_PATH): String =
+        "https://raw.githubusercontent.com/$path/Agent/Faction/Full/$id.webp"
 }

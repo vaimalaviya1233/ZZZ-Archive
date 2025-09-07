@@ -7,7 +7,6 @@ package feature.drive.model
 
 import feature.drive.data.database.DrivesListItemEntity
 
-
 data class DrivesListState(
     val drivesList: List<DrivesListItemEntity> = emptyList(),
     val selectedDrive: DrivesListItemEntity? = null,

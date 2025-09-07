@@ -16,10 +16,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import network.ZzzHttp
 
-class AgentRepositoryImpl(
-    private val httpClient: ZzzHttp, private val agentsListDB: AgentsListDao
-) : AgentRepository {
-
+class AgentRepositoryImpl(private val httpClient: ZzzHttp, private val agentsListDB: AgentsListDao) : AgentRepository {
     override suspend fun getAgentsList(languagePath: String): Flow<List<AgentListItem>> {
         val cachedAgentsList = agentsListDB.getAgentsList()
         if (cachedAgentsList.first().isEmpty()) {
@@ -40,13 +37,13 @@ class AgentRepositoryImpl(
         }
     }
 
-
-    override suspend fun getAgentDetail(id: Int, languagePath: String): Result<AgentDetail> {
-        return try {
-            val result = httpClient.requestAgentDetail(id, languagePath)
-            Result.success(result.toAgentDetail())
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override suspend fun getAgentDetail(
+        id: Int,
+        languagePath: String
+    ): Result<AgentDetail> = try {
+        val result = httpClient.requestAgentDetail(id, languagePath)
+        Result.success(result.toAgentDetail())
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 }

@@ -8,18 +8,15 @@ package feature.agent.domain
 import feature.agent.data.repository.FakeAgentRepository
 import feature.agent.model.stubAgentDetail
 import feature.setting.domain.FakeLanguageUseCase
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
-
+import kotlinx.coroutines.test.runTest
 
 class AgentDetailUseCaseTest {
-
     private val agentRepository = FakeAgentRepository()
     private val languageUseCase = FakeLanguageUseCase()
     private val agentsDetailUseCase = AgentDetailUseCase(agentRepository, languageUseCase)
-
 
     @Test
     fun `Get agents list success`() = runTest {

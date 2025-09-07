@@ -12,12 +12,10 @@ class OfficialNewsRepositoryImpl(private val httpClient: OfficialWebHttp) : Offi
     override suspend fun getNews(
         amount: Int,
         languagePath: String
-    ): Result<OfficialNewsResponse> {
-        return try {
-            val result = httpClient.requestNews(amount, languagePath)
-            Result.success(result)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    ): Result<OfficialNewsResponse> = try {
+        val result = httpClient.requestNews(amount, languagePath)
+        Result.success(result)
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 }

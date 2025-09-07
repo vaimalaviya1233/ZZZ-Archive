@@ -8,7 +8,6 @@ package feature.bangboo.model
 import utils.AgentAttribute
 import utils.ZzzRarity
 
-
 data class BangbooListState(
     val bangbooList: List<BangbooListItem> = emptyList(),
     val filteredBangbooList: List<BangbooListItem> = emptyList(),

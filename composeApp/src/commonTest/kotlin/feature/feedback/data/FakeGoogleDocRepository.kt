@@ -5,7 +5,6 @@
 
 package feature.feedback.data
 
-
 class FakeGoogleDocRepository : GoogleDocRepository {
     private var isError = false
 
@@ -21,11 +20,9 @@ class FakeGoogleDocRepository : GoogleDocRepository {
         appVersion: String,
         deviceName: String,
         operatingSystem: String
-    ): Result<Unit> {
-        return if (isError) {
-            Result.failure(Exception("Fake Error"))
-        } else {
-            Result.success(Unit)
-        }
+    ): Result<Unit> = if (isError) {
+        Result.failure(Exception("Fake Error"))
+    } else {
+        Result.success(Unit)
     }
 }

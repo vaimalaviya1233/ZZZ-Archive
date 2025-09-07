@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DrivesListDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun setDrivesList(agentsList: List<DrivesListItemEntity>)
 

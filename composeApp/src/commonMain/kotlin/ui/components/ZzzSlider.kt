@@ -28,12 +28,14 @@ fun ZzzSlider(
     @IntRange(from = 0) steps: Int = 0,
     valueRange: ClosedFloatingPointRange<Float> = 0f..1f
 ) {
-    Slider(modifier = modifier,
+    Slider(
+        modifier = modifier,
         value = value,
         onValueChange = onValueChange,
         valueRange = valueRange,
         steps = steps,
-        colors = SliderDefaults.colors(
+        colors =
+        SliderDefaults.colors(
             thumbColor = AppTheme.colors.primary,
             activeTrackColor = AppTheme.colors.primary,
             inactiveTrackColor = AppTheme.colors.surface,
@@ -46,5 +48,6 @@ fun ZzzSlider(
                 contentDescription = null,
                 tint = AppTheme.colors.primary
             )
-        })
+        }
+    )
 }

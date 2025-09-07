@@ -8,23 +8,18 @@ enum class ZzzRarity(val level: Int, val code: String) {
     RARITY_C(2, "C"),
     RARITY_B(3, "B"),
     RARITY_A(4, "A"),
-    RARITY_S(5, "S");
+    RARITY_S(5, "S")
+    ;
 
-    fun getColor(colorScheme: ColorScheme): Color {
-        return when (this) {
-            RARITY_D -> colorScheme.rarityD
-            RARITY_C -> colorScheme.rarityC
-            RARITY_B -> colorScheme.rarityB
-            RARITY_A -> colorScheme.rarityA
-            RARITY_S -> colorScheme.rarityS
-        }
+    fun getColor(colorScheme: ColorScheme): Color = when (this) {
+        RARITY_D -> colorScheme.rarityD
+        RARITY_C -> colorScheme.rarityC
+        RARITY_B -> colorScheme.rarityB
+        RARITY_A -> colorScheme.rarityA
+        RARITY_S -> colorScheme.rarityS
     }
 }
 
-fun findRarity(level: Int): ZzzRarity {
-    return ZzzRarity.entries.find { it.level == level } ?: ZzzRarity.RARITY_D
-}
+fun findRarity(level: Int): ZzzRarity = ZzzRarity.entries.find { it.level == level } ?: ZzzRarity.RARITY_D
 
-fun findRarityFromHoYoLab(level: String): ZzzRarity {
-    return ZzzRarity.entries.find { it.code == level } ?: ZzzRarity.RARITY_D
-}
+fun findRarityFromHoYoLab(level: String): ZzzRarity = ZzzRarity.entries.find { it.code == level } ?: ZzzRarity.RARITY_D

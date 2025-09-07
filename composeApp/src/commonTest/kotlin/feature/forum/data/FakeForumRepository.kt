@@ -10,11 +10,9 @@ class FakeForumRepository : ForumRepository {
         this.isError = isError
     }
 
-    override suspend fun getAllForumList(): Result<AllForumResponse> {
-        return if (isError) {
-            Result.failure(Exception("Fake error"))
-        } else {
-            Result.success(stubAllForumResponse)
-        }
+    override suspend fun getAllForumList(): Result<AllForumResponse> = if (isError) {
+        Result.failure(Exception("Fake error"))
+    } else {
+        Result.success(stubAllForumResponse)
     }
 }

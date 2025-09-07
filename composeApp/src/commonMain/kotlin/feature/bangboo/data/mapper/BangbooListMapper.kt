@@ -12,8 +12,8 @@ import feature.bangboo.model.BangbooListItemResponse
 import utils.findAgentAttribute
 import utils.findRarity
 
-fun BangbooListItemResponse.toBangbooListItemEntity(path: String = ZzzConfig.ASSET_PATH): BangbooListItemEntity {
-    return BangbooListItemEntity(
+fun BangbooListItemResponse.toBangbooListItemEntity(path: String = ZzzConfig.ASSET_PATH): BangbooListItemEntity =
+    BangbooListItemEntity(
         id = id,
         name = name,
         imageUrl = "https://raw.githubusercontent.com/$path/Bangboo/Profile/$id.webp",
@@ -21,15 +21,12 @@ fun BangbooListItemResponse.toBangbooListItemEntity(path: String = ZzzConfig.ASS
         rarity = rarity,
         attribute = attribute
     )
-}
 
-fun BangbooListItemEntity.toBangbooListItem(): BangbooListItem {
-    return BangbooListItem(
-        id = id,
-        name = name,
-        imageUrl = imageUrl,
-        isLeak = isLeak,
-        rarity = findRarity(rarity),
-        attribute = findAgentAttribute(attribute)
-    )
-}
+fun BangbooListItemEntity.toBangbooListItem(): BangbooListItem = BangbooListItem(
+    id = id,
+    name = name,
+    imageUrl = imageUrl,
+    isLeak = isLeak,
+    rarity = findRarity(rarity),
+    attribute = findAgentAttribute(attribute)
+)

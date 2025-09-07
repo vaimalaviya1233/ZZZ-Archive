@@ -13,10 +13,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import network.ZzzHttp
 
-class DriveRepositoryImpl(
-    private val httpClient: ZzzHttp,
-    private val drivesListDB: DrivesListDao
-) : DriveRepository {
+class DriveRepositoryImpl(private val httpClient: ZzzHttp, private val drivesListDB: DrivesListDao) : DriveRepository {
     override suspend fun getDrivesList(languagePath: String): Flow<List<DrivesListItemEntity>> {
         val cachedDrivesList = drivesListDB.getDrivesList()
         if (cachedDrivesList.first().isEmpty()) {
@@ -25,13 +22,11 @@ class DriveRepositoryImpl(
         return drivesListDB.getDrivesList().map { it.reversed() }
     }
 
-    override suspend fun requestAndUpdateDrivesListDB(languagePath: String): Result<Unit> {
-        return try {
-            val result = httpClient.requestDrivesList(languagePath)
-            drivesListDB.setDrivesList(result.drives.map { it.toDriveListEntity() })
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    override suspend fun requestAndUpdateDrivesListDB(languagePath: String): Result<Unit> = try {
+        val result = httpClient.requestDrivesList(languagePath)
+        drivesListDB.setDrivesList(result.drives.map { it.toDriveListEntity() })
+        Result.success(Unit)
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 }

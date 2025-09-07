@@ -16,7 +16,8 @@ import ui.navigation.graph.sharedNavGraph
 
 fun NavGraphBuilder.wikiNavGraph(navActions: NavActions) {
     navigation(
-        route = MainFlow.Wiki.route, startDestination = MainFlow.Wiki.startScreen.route
+        route = MainFlow.Wiki.route,
+        startDestination = MainFlow.Wiki.startScreen.route
     ) {
         composable(Screen.Wiki.route) {
             WikiScreen(
@@ -26,11 +27,14 @@ fun NavGraphBuilder.wikiNavGraph(navActions: NavActions) {
                 onDrivesOverviewClick = { navActions.navigationTo(Screen.DrivesList) },
                 onAgentDetailClick = { id ->
                     navActions.navigationToRoute(Screen.AgentDetail.createRoute(id))
-                }, onWEngineDetailClick = { id ->
+                },
+                onWEngineDetailClick = { id ->
                     navActions.navigationToRoute(Screen.WEngineDetail.createRoute(id))
-                }, onBangbooDetailClick = { id ->
+                },
+                onBangbooDetailClick = { id ->
                     navActions.navigationToRoute(Screen.BangbooDetail.createRoute(id))
-                })
+                }
+            )
         }
         sharedNavGraph(navActions)
     }

@@ -14,8 +14,8 @@ import utils.findAgentAttribute
 import utils.findAgentSpecialty
 import utils.findRarity
 
-fun AgentListItemResponse.toAgentsListItemEntity(path: String = ZzzConfig.ASSET_PATH): AgentsListItemEntity {
-    return AgentsListItemEntity(
+fun AgentListItemResponse.toAgentsListItemEntity(path: String = ZzzConfig.ASSET_PATH): AgentsListItemEntity =
+    AgentsListItemEntity(
         id = id,
         name = name,
         fullName = fullName,
@@ -27,19 +27,16 @@ fun AgentListItemResponse.toAgentsListItemEntity(path: String = ZzzConfig.ASSET_
         attackType = attackType,
         factionId = factionId
     )
-}
 
-fun AgentsListItemEntity.toAgentListItem(): AgentListItem {
-    return AgentListItem(
-        id = id,
-        name = name,
-        fullName = fullName,
-        imageUrl = imageUrl,
-        isLeak = isLeak,
-        rarity = findRarity(rarity),
-        specialty = findAgentSpecialty(specialty),
-        attribute = findAgentAttribute(attribute),
-        attackType = findAgentAttackType(attackType),
-        factionId = factionId
-    )
-}
+fun AgentsListItemEntity.toAgentListItem(): AgentListItem = AgentListItem(
+    id = id,
+    name = name,
+    fullName = fullName,
+    imageUrl = imageUrl,
+    isLeak = isLeak,
+    rarity = findRarity(rarity),
+    specialty = findAgentSpecialty(specialty),
+    attribute = findAgentAttribute(attribute),
+    attackType = findAgentAttackType(attackType),
+    factionId = factionId
+)

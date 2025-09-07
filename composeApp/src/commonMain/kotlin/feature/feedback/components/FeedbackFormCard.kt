@@ -83,7 +83,8 @@ private fun IssueTextField(
     onEmailChanged: (String) -> Unit
 ) {
     Column(
-        modifier = Modifier.padding(
+        modifier =
+        Modifier.padding(
             horizontal = AppTheme.spacing.s400,
             vertical = AppTheme.spacing.s350
         ),
@@ -132,9 +133,11 @@ private fun IssueTypeItem(
                     tint = AppTheme.colors.onSurfaceVariant
                 )
             }
-            DropdownMenu(expanded = showIssueTypesDropdown,
+            DropdownMenu(
+                expanded = showIssueTypesDropdown,
                 containerColor = AppTheme.colors.surface,
-                onDismissRequest = { showIssueTypesDropdown = false }) {
+                onDismissRequest = { showIssueTypesDropdown = false }
+            ) {
                 feedbackIssueTypes.forEach { issueType ->
                     DropdownMenuItem(text = {
                         Text(
@@ -156,9 +159,14 @@ private fun IssueTypeItem(
 }
 
 @Composable
-private fun SettingItemText(title: String, content: String) {
+private fun SettingItemText(
+    title: String,
+    content: String
+) {
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier =
+        Modifier
+            .fillMaxWidth()
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically

@@ -31,9 +31,10 @@ fun ErrorScreen(
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(
-            AppTheme.spacing.s300,
-            Alignment.CenterVertically
+        verticalArrangement =
+        Arrangement.spacedBy(
+            space = AppTheme.spacing.s300,
+            alignment = Alignment.CenterVertically
         )
     ) {
         Text(

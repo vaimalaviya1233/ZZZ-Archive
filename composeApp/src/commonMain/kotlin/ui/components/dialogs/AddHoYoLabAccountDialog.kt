@@ -23,11 +23,14 @@ import zzzarchive.composeapp.generated.resources.ic_close
 
 @Composable
 fun AddHoYoLabAccountDialog(
-    errorMessage: String, onSubmit: (String, String, String) -> Unit, onDismiss: () -> Unit
+    errorMessage: String,
+    onSubmit: (String, String, String) -> Unit,
+    onDismiss: () -> Unit
 ) {
     BasicDialog(onDismissRequest = {}) {
         Box(
-            Modifier.fillMaxWidth()
+            Modifier
+                .fillMaxWidth()
                 .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350)
         ) {
             Text(

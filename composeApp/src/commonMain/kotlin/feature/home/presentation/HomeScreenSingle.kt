@@ -12,7 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.banner.components.AnnouncementBanner
-import feature.cover_image.components.CoverImageCard
+import feature.cover.components.CoverImageCard
 import feature.forum.compoenents.AllForumCard
 import feature.forum.compoenents.TwitterCard
 import feature.hoyolab.components.HoYoLabCard
@@ -25,7 +25,9 @@ import ui.utils.verticalSafePadding
 
 @Composable
 fun HomeScreenSingle(
-    uiState: HomeState, onAction: (HomeAction) -> Unit, onOpenBannerDialog: () -> Unit
+    uiState: HomeState,
+    onAction: (HomeAction) -> Unit,
+    onOpenBannerDialog: () -> Unit
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(horizontalSafePadding()),
@@ -33,10 +35,9 @@ fun HomeScreenSingle(
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         item {
-            AnnouncementBanner(
-                uiState.banner, onActionClicked = onOpenBannerDialog, onClosed = {
-                    onAction(HomeAction.DismissBanner(it))
-                })
+            AnnouncementBanner(uiState.banner, onActionClicked = onOpenBannerDialog, onClosed = {
+                onAction(HomeAction.DismissBanner(it))
+            })
         }
         item {
             CoverImageCard(uiState.coverImage)

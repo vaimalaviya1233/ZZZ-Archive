@@ -14,15 +14,23 @@ import kotlinx.coroutines.flow.Flow
 
 interface HoYoLabConfigRepository {
     suspend fun requestUserGameRolesByLToken(
-        region: String, lToken: String, ltUid: String
+        region: String,
+        lToken: String,
+        ltUid: String
     ): Result<List<PlayerBasicInfo>>
 
     suspend fun requestPlayerDetail(
-        uid: Int, region: String, lToken: String, ltUid: String
+        uid: Int,
+        region: String,
+        lToken: String,
+        ltUid: String
     ): Result<PlayerDetailResponse>
 
     suspend fun requestGameRecord(
-        uid: Int, region: String, lToken: String, ltUid: String
+        uid: Int,
+        region: String,
+        lToken: String,
+        ltUid: String
     ): Result<GameRecordResponse>
 
     suspend fun requestSign(

@@ -49,13 +49,16 @@ fun BangbooListScreenSingle(
                     onAction(BangbooListAction.ClickBack)
                 },
                 actions = {
-                    ZzzIconButton(iconRes = if (isFiltered) Res.drawable.ic_filter_filled else Res.drawable.ic_filter,
+                    ZzzIconButton(
+                        iconRes = if (isFiltered) Res.drawable.ic_filter_filled else Res.drawable.ic_filter,
                         contentDescriptionRes = Res.string.filter,
                         tint = if (isFiltered) AppTheme.colors.primary else AppTheme.colors.onSurface,
                         onClick = {
                             showBottomSheet = true
-                        })
-                })
+                        }
+                    )
+                }
+            )
         }
     }) { scaffoldPadding ->
         Column(
@@ -77,7 +80,8 @@ fun BangbooListScreenSingle(
             )
         }
         if (showBottomSheet) {
-            BangbooFilterBottomSheet(sheetState = sheetState,
+            BangbooFilterBottomSheet(
+                sheetState = sheetState,
                 uiState = uiState,
                 onRarityChipSelectionChanged = {
                     onAction(BangbooListAction.ChangeRarityFilter(it))
@@ -85,7 +89,8 @@ fun BangbooListScreenSingle(
                 onAttributeChipSelectionChanged = {
                     onAction(BangbooListAction.ChangeAttributeFilter(it))
                 },
-                onDismiss = { showBottomSheet = false })
+                onDismiss = { showBottomSheet = false }
+            )
         }
     }
 }

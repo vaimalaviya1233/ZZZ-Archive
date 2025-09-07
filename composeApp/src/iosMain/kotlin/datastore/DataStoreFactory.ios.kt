@@ -14,27 +14,29 @@ import platform.Foundation.NSUserDomainMask
 actual class DataStoreFactory {
     actual fun getPreferenceDataStore() = createDataStore(
         producePath = {
-            val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
-                directory = NSDocumentDirectory,
-                inDomain = NSUserDomainMask,
-                appropriateForURL = null,
-                create = false,
-                error = null,
-            )
-            requireNotNull(documentDirectory).path + "/$dataStorePreferenceFileName"
+            val documentDirectory: NSURL? =
+                NSFileManager.defaultManager.URLForDirectory(
+                    directory = NSDocumentDirectory,
+                    inDomain = NSUserDomainMask,
+                    appropriateForURL = null,
+                    create = false,
+                    error = null
+                )
+            requireNotNull(documentDirectory).path + "/$DATA_STORE_PREF_FILE_NAME"
         }
     )
 
     actual fun getConfigDataStore() = createDataStore(
         producePath = {
-            val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
-                directory = NSDocumentDirectory,
-                inDomain = NSUserDomainMask,
-                appropriateForURL = null,
-                create = false,
-                error = null,
-            )
-            requireNotNull(documentDirectory).path + "/$dataStoreConfigFileName"
+            val documentDirectory: NSURL? =
+                NSFileManager.defaultManager.URLForDirectory(
+                    directory = NSDocumentDirectory,
+                    inDomain = NSUserDomainMask,
+                    appropriateForURL = null,
+                    create = false,
+                    error = null
+                )
+            requireNotNull(documentDirectory).path + "/$DATA_STORE_CONFIG_FILE_NAME"
         }
     )
 }

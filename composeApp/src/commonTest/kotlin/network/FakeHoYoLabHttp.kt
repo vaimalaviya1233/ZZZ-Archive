@@ -10,8 +10,8 @@ import feature.hoyolab.model.MyAgentListResponse
 import feature.hoyolab.model.PlayerDetailResponse
 import feature.hoyolab.model.SignResponse
 import feature.hoyolab.model.UserGameRolesResponse
-import feature.hoyolab.model.my_agent_detail.MyAgentDetailResponse
-import feature.hoyolab.model.my_agent_detail.stubMyAgentDetailResponse
+import feature.hoyolab.model.agent.MyAgentDetailResponse
+import feature.hoyolab.model.agent.stubMyAgentDetailResponse
 import feature.hoyolab.model.stubGameRecordResponse
 import feature.hoyolab.model.stubMyAgentListResponse
 import feature.hoyolab.model.stubPlayerDetailResponse
@@ -20,12 +20,15 @@ import feature.hoyolab.model.stubUserGameRolesResponse
 
 class FakeHoYoLabHttp : HoYoLabHttp {
     private var isError = false
+
     fun setError(isError: Boolean) {
         this.isError = isError
     }
 
     override suspend fun requestUserGameRolesByLToken(
-        region: String, lToken: String, ltUid: String
+        region: String,
+        lToken: String,
+        ltUid: String
     ): UserGameRolesResponse {
         if (isError) {
             throw Exception("Fake error")
@@ -34,7 +37,10 @@ class FakeHoYoLabHttp : HoYoLabHttp {
     }
 
     override suspend fun requestPlayerDetail(
-        uid: Int, region: String, lToken: String, ltUid: String
+        uid: Int,
+        region: String,
+        lToken: String,
+        ltUid: String
     ): PlayerDetailResponse {
         if (isError) {
             throw Exception("Fake error")

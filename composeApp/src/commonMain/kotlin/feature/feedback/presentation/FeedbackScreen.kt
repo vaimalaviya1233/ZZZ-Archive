@@ -31,12 +31,15 @@ fun FeedbackScreen(onBackClick: () -> Unit) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val focusManager = LocalFocusManager.current
     Column(
-        modifier = Modifier.fillMaxSize().pointerInput(Unit) {
-            detectTapGestures(onTap = {
-                focusManager.clearFocus()
-            })
-        }.background(AppTheme.colors.surface),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier =
+        Modifier
+            .fillMaxSize()
+            .pointerInput(Unit) {
+                detectTapGestures(onTap = {
+                    focusManager.clearFocus()
+                })
+            }.background(AppTheme.colors.surface),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         FeedbackScreenContent(uiState, onAction = { actions ->
             when (actions) {

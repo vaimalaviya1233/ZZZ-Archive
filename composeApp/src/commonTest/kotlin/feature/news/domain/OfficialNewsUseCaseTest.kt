@@ -9,30 +9,28 @@ import feature.news.data.FakeOfficialNewsRepository
 import feature.news.data.mapper.toOfficialNewsList
 import feature.news.model.stubOfficialNewsDataResponseResponse
 import feature.setting.domain.FakeLanguageUseCase
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
-
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
 
 class OfficialNewsUseCaseTest {
-
     private val newsRepository = FakeOfficialNewsRepository()
     private val languageUseCase = FakeLanguageUseCase()
-    private val officialNewsUseCase = OfficialNewsUseCase(newsRepository, languageUseCase)
-
+    private val officialNewsUseCase =
+        OfficialNewsUseCase(officialNewsRepository = newsRepository, languageUseCase = languageUseCase)
 
     @Test
     fun `Get news success`() = runTest {
-        val result = officialNewsUseCase.getNewsPeriodically(10, 0).first().getOrNull()
+        val result = officialNewsUseCase.getNewsPeriodically(perMinutes = 10, amount = 0).first().getOrNull()
         assertEquals(stubOfficialNewsDataResponseResponse, result)
     }
 
     @Test
     fun `Get news fail`() = runTest {
         newsRepository.setError(true)
-        val result = officialNewsUseCase.getNewsPeriodically(10, 0).first().getOrNull()
+        val result = officialNewsUseCase.getNewsPeriodically(perMinutes = 10, amount = 0).first().getOrNull()
         assertNull(result)
     }
 
@@ -57,7 +55,7 @@ class OfficialNewsUseCaseTest {
 
     @Test
     fun `Get news list periodically success`() = runTest {
-        val result = officialNewsUseCase.getNewsListPeriodically(10, 0).first().getOrNull()
+        val result = officialNewsUseCase.getNewsListPeriodically(perMinutes = 10, amount = 0).first().getOrNull()
         assertEquals(stubOfficialNewsDataResponseResponse.toOfficialNewsList(), result)
     }
 }

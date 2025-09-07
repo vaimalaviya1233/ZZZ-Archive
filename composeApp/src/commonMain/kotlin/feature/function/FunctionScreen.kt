@@ -8,7 +8,6 @@ package feature.function
 import androidx.compose.runtime.Composable
 
 @Composable
-fun FunctionScreen(
-) {
+fun FunctionScreen() {
     FunctionScreenSingle()
 }

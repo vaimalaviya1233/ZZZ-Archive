@@ -9,8 +9,8 @@ import com.mrfatworm.zzzarchive.ZzzConfig
 import feature.drive.data.database.DrivesListItemEntity
 import feature.drive.model.DriveListItemResponse
 
-fun DriveListItemResponse.toDriveListEntity(path: String = ZzzConfig.ASSET_PATH): DrivesListItemEntity {
-    return DrivesListItemEntity(
+fun DriveListItemResponse.toDriveListEntity(path: String = ZzzConfig.ASSET_PATH): DrivesListItemEntity =
+    DrivesListItemEntity(
         id = id,
         name = name,
         imageUrl = "https://raw.githubusercontent.com/$path/Drive/$id.webp",
@@ -18,4 +18,3 @@ fun DriveListItemResponse.toDriveListEntity(path: String = ZzzConfig.ASSET_PATH)
         pieceSetTwo = pieceSetTwo,
         pieceSetFour = pieceSetFour
     )
-}

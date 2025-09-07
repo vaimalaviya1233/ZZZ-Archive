@@ -28,9 +28,14 @@ fun BahamutList(bahamutList: List<BahamutForumListState>) {
     val urlHandler = LocalUriHandler.current
     Column(verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)) {
         for (index in bahamutList.indices) {
-            BahamutListItem(modifier = Modifier.clickable {
-                urlHandler.openUri(bahamutList[index].link)
-            }, bahamut = bahamutList[index], isVariantColor = index % 2 == 0)
+            BahamutListItem(
+                modifier =
+                Modifier.clickable {
+                    urlHandler.openUri(bahamutList[index].link)
+                },
+                bahamut = bahamutList[index],
+                isVariantColor = index % 2 == 0
+            )
         }
     }
 }
@@ -42,7 +47,8 @@ private fun BahamutListItem(
     isVariantColor: Boolean = false
 ) {
     Row(
-        modifier = modifier
+        modifier =
+        modifier
             .background(if (isVariantColor) AppTheme.colors.itemVariant else AppTheme.colors.surfaceContainer)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
@@ -57,15 +63,23 @@ private fun BahamutListItem(
                 maxLines = 2
             )
             Row(
-                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(
-                    AppTheme.spacing.s300, Alignment.End
-                ), verticalAlignment = Alignment.CenterVertically
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement =
+                Arrangement.spacedBy(
+                    space = AppTheme.spacing.s300,
+                    alignment = Alignment.End
+                ),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 if (bahamut.category.isNotEmpty()) {
                     Text(
-                        modifier = Modifier.clip(CircleShape).background(AppTheme.colors.surface)
+                        modifier =
+                        Modifier
+                            .clip(CircleShape)
+                            .background(AppTheme.colors.surface)
                             .padding(
-                                horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200
+                                horizontal = AppTheme.spacing.s300,
+                                vertical = AppTheme.spacing.s200
                             ),
                         text = bahamut.category,
                         color = AppTheme.colors.onSurface,
@@ -88,4 +102,3 @@ private fun BahamutListItem(
         }
     }
 }
-

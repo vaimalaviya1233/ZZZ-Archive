@@ -19,7 +19,10 @@ import ui.theme.AppTheme
 
 @Composable
 fun ZzzTextFiled(
-    modifier: Modifier, hint: String, value: String, onValueChange: (String) -> Unit,
+    modifier: Modifier,
+    hint: String,
+    value: String,
+    onValueChange: (String) -> Unit,
     enabled: Boolean = true,
     isError: Boolean = false,
     maxLines: Int = Int.MAX_VALUE,
@@ -32,7 +35,8 @@ fun ZzzTextFiled(
     interactionSource: MutableInteractionSource? = null
 ) {
     OutlinedTextField(
-        modifier = modifier.border(
+        modifier =
+        modifier.border(
             AppTheme.size.borderWidth,
             if (isError) AppTheme.colors.alert else AppTheme.colors.border,
             AppTheme.shape.r400
@@ -58,7 +62,8 @@ fun ZzzTextFiled(
         keyboardActions = keyboardActions,
         interactionSource = interactionSource,
         shape = AppTheme.shape.r400,
-        colors = OutlinedTextFieldDefaults.colors().copy(
+        colors =
+        OutlinedTextFieldDefaults.colors().copy(
             unfocusedTextColor = AppTheme.colors.onSurface,
             unfocusedContainerColor = AppTheme.colors.surface,
             unfocusedIndicatorColor = AppTheme.colors.surface,
@@ -68,7 +73,7 @@ fun ZzzTextFiled(
             cursorColor = AppTheme.colors.primary,
             errorTextColor = AppTheme.colors.onSurface,
             errorContainerColor = AppTheme.colors.surface,
-            errorIndicatorColor = AppTheme.colors.alert,
+            errorIndicatorColor = AppTheme.colors.alert
         )
     )
 }

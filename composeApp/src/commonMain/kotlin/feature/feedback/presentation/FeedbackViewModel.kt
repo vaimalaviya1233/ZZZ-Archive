@@ -26,7 +26,6 @@ class FeedbackViewModel(
     private val googleDocRepository: GoogleDocRepository,
     private val languageUseCase: LanguageUseCase
 ) : ViewModel() {
-
     private var _uiState = MutableStateFlow(FeedbackState())
     val uiState = _uiState.asStateFlow()
 
@@ -80,15 +79,16 @@ class FeedbackViewModel(
 
     private suspend fun postGoogleDoc(issueType: FeedbackIssueType) {
         _uiState.update { it.copy(isLoading = true) }
-        val result = googleDocRepository.submitFeedbackForm(
-            issueType = issueType.chtString,
-            language = uiState.value.language,
-            issueDesc = uiState.value.issueTextFieldValue,
-            email = uiState.value.emailTextFieldValue,
-            appVersion = uiState.value.appVersion,
-            deviceName = uiState.value.deviceName,
-            operatingSystem = uiState.value.operatingSystem
-        )
+        val result =
+            googleDocRepository.submitFeedbackForm(
+                issueType = issueType.chtString,
+                language = uiState.value.language,
+                issueDesc = uiState.value.issueTextFieldValue,
+                email = uiState.value.emailTextFieldValue,
+                appVersion = uiState.value.appVersion,
+                deviceName = uiState.value.deviceName,
+                operatingSystem = uiState.value.operatingSystem
+            )
         result.fold(onSuccess = {
             _uiState.update {
                 it.copy(
@@ -102,7 +102,9 @@ class FeedbackViewModel(
         }, onFailure = {
             _uiState.update {
                 it.copy(
-                    invalidForm = true, invalidMessage = Res.string.unknown_error, isLoading = false
+                    invalidForm = true,
+                    invalidMessage = Res.string.unknown_error,
+                    isLoading = false
                 )
             }
         })

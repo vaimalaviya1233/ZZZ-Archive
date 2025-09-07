@@ -40,15 +40,22 @@ import zzzarchive.composeapp.generated.resources.ic_rare
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun AgentImageCard(agentDetail: AgentDetail, onBackClick: () -> Unit) {
+fun AgentImageCard(
+    agentDetail: AgentDetail,
+    onBackClick: () -> Unit
+) {
     ContentCard {
         ZzzIconButton(
-            iconRes = Res.drawable.ic_arrow_back, contentDescriptionRes = Res.string.back
+            iconRes = Res.drawable.ic_arrow_back,
+            contentDescriptionRes = Res.string.back
         ) {
             onBackClick()
         }
         Box(
-            modifier = Modifier.aspectRatio(1.33f).drawBottomMask(AppTheme.colors)
+            modifier =
+            Modifier
+                .aspectRatio(1.33f)
+                .drawBottomMask(AppTheme.colors)
                 .verticalScroll(state = rememberScrollState(), enabled = false)
         ) {
             AsyncImage(
@@ -62,7 +69,7 @@ fun AgentImageCard(agentDetail: AgentDetail, onBackClick: () -> Unit) {
                 modifier = Modifier.fillMaxWidth(),
                 imageLoader = imageLoaderMemoryCache(LocalPlatformContext.current),
                 model = agentDetail.portraitUrl,
-                contentDescription = null,
+                contentDescription = null
             )
         }
         Spacer(Modifier.size(AppTheme.spacing.s300))

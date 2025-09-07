@@ -9,6 +9,9 @@ import feature.hoyolab.data.crypto.ZzzCrypto
 import feature.hoyolab.data.database.HoYoLabAccountEntity
 import feature.hoyolab.data.repository.HoYoLabConfigRepository
 import feature.setting.data.PreferencesRepository
+import kotlin.time.Clock
+import kotlin.time.ExperimentalTime
+import kotlin.time.Instant
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
@@ -17,9 +20,6 @@ import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.number
 import kotlinx.datetime.toLocalDateTime
-import kotlin.time.Clock
-import kotlin.time.ExperimentalTime
-import kotlin.time.Instant
 
 class HoYoLabManageUseCase(
     private val hoYoLabConfigRepository: HoYoLabConfigRepository,
@@ -27,19 +27,26 @@ class HoYoLabManageUseCase(
     private val preferencesRepository: PreferencesRepository
 ) {
     suspend fun requestUserInfoAndSave(
-        region: String, lToken: String, ltUid: String
+        region: String,
+        lToken: String,
+        ltUid: String
     ): Result<Unit> {
-        val result = hoYoLabConfigRepository.requestUserGameRolesByLToken(region, lToken, ltUid)
+        val result = hoYoLabConfigRepository.requestUserGameRolesByLToken(
+            region = region,
+            lToken = lToken,
+            ltUid = ltUid
+        )
         result.fold(onSuccess = { accountInfo ->
             if (accountInfo.isEmpty()) {
                 return Result.failure(Exception("No account found"))
             } else {
-                val playerDetailResult = hoYoLabConfigRepository.requestPlayerDetail(
-                    accountInfo.first().uid.toInt(),
-                    region,
-                    lToken,
-                    ltUid
-                )
+                val playerDetailResult =
+                    hoYoLabConfigRepository.requestPlayerDetail(
+                        accountInfo.first().uid.toInt(),
+                        region,
+                        lToken,
+                        ltUid
+                    )
                 playerDetailResult.fold(onSuccess = { playerDetail ->
                     encryptAndSaveToDatabase(
                         accountInfo.first().uid,
@@ -108,17 +115,19 @@ class HoYoLabManageUseCase(
         }
     }
 
-
     suspend fun deleteAccountFromDB(uid: Int) {
         hoYoLabConfigRepository.deleteAccountFromDB(uid)
         resetDefaultIfDeletedDefaultAccount(uid)
     }
 
-
     private suspend fun resetDefaultIfDeletedDefaultAccount(uid: Int) {
         if (preferencesRepository.getDefaultHoYoLabAccountUid().first() == uid) {
             preferencesRepository.setDefaultHoYoLabAccountUid(
-                hoYoLabConfigRepository.getAllAccountsFromDB().firstOrNull()?.firstOrNull()?.uid
+                hoYoLabConfigRepository
+                    .getAllAccountsFromDB()
+                    .firstOrNull()
+                    ?.firstOrNull()
+                    ?.uid
                     ?: 0
             )
         }
@@ -126,12 +135,13 @@ class HoYoLabManageUseCase(
 
     @OptIn(ExperimentalTime::class)
     fun convertToLocalDatetime(
-        timestamp: Long, timeZone: TimeZone = TimeZone.currentSystemDefault()
+        timestamp: Long,
+        timeZone: TimeZone = TimeZone.currentSystemDefault()
     ): String {
         val instant = Instant.fromEpochMilliseconds(timestamp)
         val datetimeInSystemZone: LocalDateTime = instant.toLocalDateTime(timeZone)
         return datetimeInSystemZone.run {
-            "${year}-${month.number}-$day ${hour}:${minute}"
+            "$year-${month.number}-$day $hour:$minute"
         }
     }
 }

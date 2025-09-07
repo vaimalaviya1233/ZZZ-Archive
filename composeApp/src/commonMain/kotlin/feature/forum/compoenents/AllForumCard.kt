@@ -30,12 +30,13 @@ import zzzarchive.composeapp.generated.resources.nga
 import zzzarchive.composeapp.generated.resources.ptt
 import zzzarchive.composeapp.generated.resources.reddit
 
-val forumSite = listOf(
-    Res.string.reddit,
-    Res.string.bahamut,
-    Res.string.ptt,
-    Res.string.nga
-)
+val forumSite =
+    listOf(
+        Res.string.reddit,
+        Res.string.bahamut,
+        Res.string.ptt,
+        Res.string.nga
+    )
 
 @Composable
 fun AllForumCard(uiState: AllForumState) {
@@ -58,7 +59,8 @@ fun AllForumCard(uiState: AllForumState) {
                 coroutineScope.launch {
                     pagerState.animateScrollToPage(it)
                 }
-            })
+            }
+        )
         HorizontalPager(
             modifier = Modifier.pointerHoverIcon(PointerIcon.Hand),
             state = pagerState,
@@ -75,27 +77,29 @@ fun AllForumCard(uiState: AllForumState) {
     }
 }
 
-
 @Composable
 private fun ForumIndicator(
-    modifier: Modifier, pageCount: Int, currentPage: Int, onClick: (Int) -> Unit
+    modifier: Modifier,
+    pageCount: Int,
+    currentPage: Int,
+    onClick: (Int) -> Unit
 ) {
     Row(
         modifier.fillMaxWidth().padding(
             start = AppTheme.spacing.s400,
             end = AppTheme.spacing.s400,
             bottom = AppTheme.spacing.s300
-        ), horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
+        ),
+        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         for (page in 0 until pageCount) {
             val isSelect = page == currentPage
             ZzzFilterChip(
                 text = stringResource(forumSite[page]),
-                selected = isSelect,
+                selected = isSelect
             ) {
                 onClick(page)
             }
         }
     }
 }
-

@@ -5,7 +5,6 @@
 
 package feature.setting.data
 
-
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -13,9 +12,7 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class SystemConfigRepositoryImpl(private val dataStore: DataStore<Preferences>) :
-    SystemConfigRepository {
-
+class SystemConfigRepositoryImpl(private val dataStore: DataStore<Preferences>) : SystemConfigRepository {
     companion object {
         const val DEFAULT_BANNER_IGNORE_ID = 0
         const val DEFAULT_COVER_IMAGE_DB_VERSION = 0
@@ -31,7 +28,6 @@ class SystemConfigRepositoryImpl(private val dataStore: DataStore<Preferences>) 
     private val wEngineListDBVersion = intPreferencesKey("w_engine_list_db_version")
     private val bangbooListDBVersion = intPreferencesKey("bangboo_list_db_version")
     private val driveListDBVersion = intPreferencesKey("drive_list_db_version")
-
 
     override fun getBannerIgnoreId(): Flow<Int> = dataStore.data.map {
         it[bannerIgnoreId] ?: DEFAULT_BANNER_IGNORE_ID
@@ -85,4 +81,3 @@ class SystemConfigRepositoryImpl(private val dataStore: DataStore<Preferences>) 
         dataStore.edit { it.clear() }
     }
 }
-

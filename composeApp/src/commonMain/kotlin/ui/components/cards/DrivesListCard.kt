@@ -37,7 +37,6 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.all_drives
 import zzzarchive.composeapp.generated.resources.drives
 
-
 @Composable
 fun DrivesListCard(
     drivesList: List<DrivesListItemEntity>,
@@ -56,14 +55,17 @@ fun DrivesListCard(
         HoveredIndicatorHeader(
             title = stringResource(Res.string.drives),
             isHovered = isHovered.value,
-            lazyListState = lazyListState,
+            lazyListState = lazyListState
         ) {
             if (showViewAll) {
                 Text(
-                    modifier = Modifier.clip(AppTheme.shape.r300)
-                        .clickable { onDrivesOverviewClick() }.pointerHoverIcon(PointerIcon.Hand)
+                    modifier =
+                    Modifier
+                        .clip(AppTheme.shape.r300)
+                        .clickable { onDrivesOverviewClick() }
+                        .pointerHoverIcon(PointerIcon.Hand)
                         .background(AppTheme.colors.surface)
-                        .border(1.dp, AppTheme.colors.border, AppTheme.shape.r300)
+                        .border(width = 1.dp, color = AppTheme.colors.border, shape = AppTheme.shape.r300)
                         .padding(AppTheme.spacing.s300),
                     text = stringResource(Res.string.all_drives),
                     style = AppTheme.typography.labelMedium,
@@ -84,17 +86,21 @@ fun DrivesListCard(
                     onClick = {
                         openDetailDialog.value = true
                         selectedDriveId.value = drive.id
-                    })
+                    }
+                )
             }
         }
     }
     when {
         openDetailDialog.value -> {
-            DriveDetailDialog(drivesListItemEntity = drivesList.find { it.id == selectedDriveId.value }
-                ?: emptyDriveListItemEntity, onDismiss = {
-                openDetailDialog.value = false
-            })
+            DriveDetailDialog(
+                drivesListItemEntity =
+                drivesList.find { it.id == selectedDriveId.value }
+                    ?: emptyDriveListItemEntity,
+                onDismiss = {
+                    openDetailDialog.value = false
+                }
+            )
         }
     }
 }
-

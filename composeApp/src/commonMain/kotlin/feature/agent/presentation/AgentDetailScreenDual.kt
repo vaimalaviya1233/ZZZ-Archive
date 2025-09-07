@@ -36,15 +36,21 @@ import zzzarchive.composeapp.generated.resources.agent_background
 @Composable
 fun AgentDetailScreenDual(
     uiState: AgentDetailState,
-    onAction: (AgentDetailAction) -> Unit,
+    onAction: (AgentDetailAction) -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxSize().background(AppTheme.colors.surface)
+        modifier =
+        Modifier
+            .fillMaxSize()
+            .background(AppTheme.colors.surface)
             .padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+            modifier =
+            Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
                 .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
@@ -55,7 +61,10 @@ fun AgentDetailScreenDual(
         }
 
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+            modifier =
+            Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
                 .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
@@ -71,6 +80,3 @@ fun AgentDetailScreenDual(
         }
     }
 }
-
-
-

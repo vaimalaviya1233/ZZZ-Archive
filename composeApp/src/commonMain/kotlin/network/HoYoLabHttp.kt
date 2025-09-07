@@ -10,28 +10,49 @@ import feature.hoyolab.model.MyAgentListResponse
 import feature.hoyolab.model.PlayerDetailResponse
 import feature.hoyolab.model.SignResponse
 import feature.hoyolab.model.UserGameRolesResponse
-import feature.hoyolab.model.my_agent_detail.MyAgentDetailResponse
+import feature.hoyolab.model.agent.MyAgentDetailResponse
 
 interface HoYoLabHttp {
     suspend fun requestUserGameRolesByLToken(
-        region: String, lToken: String, ltUid: String
+        region: String,
+        lToken: String,
+        ltUid: String
     ): UserGameRolesResponse
 
     suspend fun requestPlayerDetail(
-        uid: Int, region: String, lToken: String, ltUid: String
+        uid: Int,
+        region: String,
+        lToken: String,
+        ltUid: String
     ): PlayerDetailResponse
 
     suspend fun requestGameRecord(
-        uid: Int, region: String, lToken: String, ltUid: String
+        uid: Int,
+        region: String,
+        lToken: String,
+        ltUid: String
     ): GameRecordResponse
 
-    suspend fun requestSign(languageCode: String, lToken: String, ltUid: String): SignResponse
+    suspend fun requestSign(
+        languageCode: String,
+        lToken: String,
+        ltUid: String
+    ): SignResponse
 
     suspend fun requestMyAgentList(
-        languageCode: String, uid: Int, region: String, lToken: String, ltUid: String
+        languageCode: String,
+        uid: Int,
+        region: String,
+        lToken: String,
+        ltUid: String
     ): MyAgentListResponse
 
     suspend fun requestMyAgentDetail(
-        languageCode: String, uid: Int, region: String, agentId: Int, lToken: String, ltUid: String
+        languageCode: String,
+        uid: Int,
+        region: String,
+        agentId: Int,
+        lToken: String,
+        ltUid: String
     ): MyAgentDetailResponse
 }

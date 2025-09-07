@@ -54,7 +54,9 @@ fun ZzzBottomSheet(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.icon)
+                    modifier =
+                    Modifier
+                        .size(AppTheme.size.icon)
                         .graphicsLayer { rotationZ = 45f },
                     imageVector = vectorResource(Res.drawable.ic_do_not_disturb_on),
                     contentDescription = null,
@@ -68,7 +70,9 @@ fun ZzzBottomSheet(
                     color = AppTheme.colors.onSurface
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.icon)
+                    modifier =
+                    Modifier
+                        .size(AppTheme.size.icon)
                         .graphicsLayer { rotationZ = 45f },
                     imageVector = vectorResource(Res.drawable.ic_do_not_disturb_on),
                     contentDescription = null,

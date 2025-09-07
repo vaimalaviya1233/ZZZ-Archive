@@ -3,20 +3,11 @@
  * License: MIT
  */
 
-package feature.setting.domain/*
- * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT
- */
+package feature.setting.domain
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import utils.Language
-
-/*
- * Copyright 2024 The ZZZ Archive Open Source Project by mrfatworm
- * License: MIT License
- */
-
 
 class FakeLanguageUseCase : LanguageUseCase {
     private var language = Language.English

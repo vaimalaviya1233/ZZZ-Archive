@@ -206,11 +206,7 @@ feature/
 ### Unit Tests
 
 ```bash
-# Run all tests
-./gradlew test
-
-# Run specific test
-./gradlew test --tests "com.example.FeatureTest"
+./gradlew :composeApp:testDevDebugUnitTest
 ```
 
 ### Test Guidelines

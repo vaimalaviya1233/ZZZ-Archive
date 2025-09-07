@@ -37,107 +37,123 @@ data class Typography(
 
 @Composable
 fun provideTypography(scale: Float = 1f): Typography {
-    val noToSansTc = FontFamily(
-        Font(Res.font.noto_sans_regular, FontWeight.Normal),
-        Font(Res.font.noto_sans_medium, FontWeight.Medium),
-        Font(Res.font.noto_sans_bold, FontWeight.Bold),
-        Font(Res.font.noto_sans_black, FontWeight.Black)
-    )
+    val noToSansTc =
+        FontFamily(
+            Font(Res.font.noto_sans_regular, FontWeight.Normal),
+            Font(Res.font.noto_sans_medium, FontWeight.Medium),
+            Font(Res.font.noto_sans_bold, FontWeight.Bold),
+            Font(Res.font.noto_sans_black, FontWeight.Black)
+        )
 
     return Typography(
-        displayLarge = TextStyle(
+        displayLarge =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Black,
             fontSize = 57.sp * scale,
             lineHeight = 64.sp * scale,
-            letterSpacing = -(0.25).sp,
+            letterSpacing = -(0.25).sp
         ),
-        displayMedium = TextStyle(
+        displayMedium =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Black,
             fontSize = 45.sp * scale,
             lineHeight = 52.sp * scale
         ),
-        displaySmall = TextStyle(
+        displaySmall =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Black,
             fontSize = 36.sp * scale,
             lineHeight = 44.sp * scale
         ),
-        headlineLarge = TextStyle(
+        headlineLarge =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Bold,
             fontSize = 32.sp * scale,
             lineHeight = 40.sp * scale
         ),
-        headlineMedium = TextStyle(
+        headlineMedium =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Bold,
             fontSize = 28.sp * scale,
             lineHeight = 36.sp * scale
         ),
-        headlineSmall = TextStyle(
+        headlineSmall =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Bold,
             fontSize = 24.sp * scale,
             lineHeight = 32.sp * scale
         ),
-        titleLarge = TextStyle(
+        titleLarge =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Medium,
             fontSize = 22.sp * scale,
             lineHeight = 28.sp * scale
         ),
-        titleMedium = TextStyle(
+        titleMedium =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Medium,
             fontSize = 16.sp * scale,
             lineHeight = 24.sp * scale,
             letterSpacing = 0.15.sp
         ),
-        titleSmall = TextStyle(
+        titleSmall =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Medium,
             fontSize = 14.sp * scale,
             lineHeight = 20.sp * scale,
             letterSpacing = 0.1.sp
         ),
-        labelLarge = TextStyle(
+        labelLarge =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp * scale,
             lineHeight = 16.sp * scale,
             letterSpacing = 0.1.sp
         ),
-        labelMedium = TextStyle(
+        labelMedium =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Bold,
             fontSize = 14.sp * scale,
             lineHeight = 14.sp * scale,
             letterSpacing = 0.5.sp
         ),
-        labelSmall = TextStyle(
+        labelSmall =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Medium,
             fontSize = 12.sp * scale,
             lineHeight = 12.sp * scale,
             letterSpacing = 0.5.sp
         ),
-        bodyLarge = TextStyle(
+        bodyLarge =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp * scale,
             lineHeight = 24.sp * scale,
             letterSpacing = 0.5.sp
         ),
-        bodyMedium = TextStyle(
+        bodyMedium =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Normal,
             fontSize = 14.sp * scale,
             lineHeight = 20.sp * scale,
             letterSpacing = 0.25.sp
         ),
-        bodySmall = TextStyle(
+        bodySmall =
+        TextStyle(
             fontFamily = noToSansTc,
             fontWeight = FontWeight.Normal,
             fontSize = 12.sp * scale,

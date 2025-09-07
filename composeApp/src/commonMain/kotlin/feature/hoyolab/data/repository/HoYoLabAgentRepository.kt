@@ -6,7 +6,7 @@
 package feature.hoyolab.data.repository
 
 import feature.hoyolab.model.MyAgentListItem
-import feature.hoyolab.model.my_agent_detail.MyAgentDetailListItem
+import feature.hoyolab.model.agent.MyAgentDetailListItem
 
 interface HoYoLabAgentRepository {
     suspend fun requestPlayerAgentList(

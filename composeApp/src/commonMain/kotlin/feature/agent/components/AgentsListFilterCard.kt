@@ -50,7 +50,7 @@ fun AgentsListFilterCard(
 ) {
     ContentCard(
         modifier = modifier,
-        hasDefaultPadding = false,
+        hasDefaultPadding = false
     ) {
         AnimatedVisibility(visible = !invisibleFilter) {
             Column(
@@ -84,7 +84,8 @@ fun AgentsListFilterCard(
             LazyVerticalGrid(
                 state = lazyGridState,
                 columns = GridCells.Adaptive(AppTheme.size.s100),
-                modifier = Modifier.fillMaxSize().drawColumnListMask(
+                modifier =
+                Modifier.fillMaxSize().drawColumnListMask(
                     colorScheme = AppTheme.colors,
                     topEnable = lazyGridState.canScrollBackward,
                     bottomEnable = lazyGridState.canScrollForward
@@ -93,8 +94,10 @@ fun AgentsListFilterCard(
                 horizontalArrangement = gridListHorizontalGap(),
                 verticalArrangement = gridListVerticalGap()
             ) {
-                items(count = uiState.filteredAgentsList.size,
-                    key = { index -> uiState.filteredAgentsList[index].id }) { index ->
+                items(
+                    count = uiState.filteredAgentsList.size,
+                    key = { index -> uiState.filteredAgentsList[index].id }
+                ) { index ->
                     val agent = uiState.filteredAgentsList[index]
                     RarityItem(
                         modifier = Modifier.animateItem(),
@@ -104,7 +107,8 @@ fun AgentsListFilterCard(
                         imgUrl = agent.imageUrl,
                         onClick = {
                             onAgentClick(agent.id)
-                        })
+                        }
+                    )
                 }
             }
         }

@@ -42,4 +42,3 @@ fun BangbooAttributesCard(bangbooDetail: BangbooDetail) {
         Spacer(Modifier.size(AppTheme.spacing.s200))
     }
 }
-

@@ -20,7 +20,8 @@ fun AgentsListScreen(
 ) {
     val viewModel: AgentsListViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    AgentsListContent(uiState = uiState,
+    AgentsListContent(
+        uiState = uiState,
         onAction = { action ->
             when (action) {
                 is AgentsListAction.ClickAgent -> {
@@ -30,13 +31,14 @@ fun AgentsListScreen(
                 AgentsListAction.ClickBack -> onBackClick()
                 else -> viewModel.onAction(action)
             }
-        })
+        }
+    )
 }
 
 @Composable
 fun AgentsListContent(
     uiState: AgentsListState,
-    onAction: (AgentsListAction) -> Unit,
+    onAction: (AgentsListAction) -> Unit
 ) {
     if (AppTheme.contentType == ContentType.Single) {
         AgentsListScreenSingle(uiState = uiState, onAction)

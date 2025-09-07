@@ -7,7 +7,9 @@ package network
 
 import feature.news.model.OfficialNewsResponse
 
-
 interface OfficialWebHttp {
-    suspend fun requestNews(amount: Int, languagePath: String): OfficialNewsResponse
+    suspend fun requestNews(
+        amount: Int,
+        languagePath: String
+    ): OfficialNewsResponse
 }

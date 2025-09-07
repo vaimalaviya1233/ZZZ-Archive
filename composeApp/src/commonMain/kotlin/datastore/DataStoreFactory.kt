@@ -15,11 +15,12 @@ import okio.Path.Companion.toPath
 
 expect class DataStoreFactory {
     fun getPreferenceDataStore(): DataStore<Preferences>
+
     fun getConfigDataStore(): DataStore<Preferences>
 }
 
-internal const val dataStorePreferenceFileName = "zzz.preferences_pb"
-internal const val dataStoreConfigFileName = "zzz.configs_pb"
+internal const val DATA_STORE_PREF_FILE_NAME = "zzz.preferences_pb"
+internal const val DATA_STORE_CONFIG_FILE_NAME = "zzz.configs_pb"
 private lateinit var dataStore: DataStore<Preferences>
 
 @OptIn(InternalCoroutinesApi::class)
@@ -29,15 +30,12 @@ private val lock = SynchronizedObject()
  * Gets the singleton DataStore instance, creating it if necessary.
  */
 @OptIn(InternalCoroutinesApi::class)
-fun createDataStore(producePath: () -> String): DataStore<Preferences> =
-    synchronized(lock) {
-        if (::dataStore.isInitialized) {
-            dataStore
-        } else {
-            PreferenceDataStoreFactory.createWithPath(produceFile = { producePath().toPath() })
-                .also { dataStore = it }
-        }
+fun createDataStore(producePath: () -> String): DataStore<Preferences> = synchronized(lock) {
+    if (::dataStore.isInitialized) {
+        dataStore
+    } else {
+        PreferenceDataStoreFactory
+            .createWithPath(produceFile = { producePath().toPath() })
+            .also { dataStore = it }
     }
-
-
-
+}

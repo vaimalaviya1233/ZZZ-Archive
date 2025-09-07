@@ -14,17 +14,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import ui.theme.AppTheme
 
-
 @Composable
 fun BasicDialog(
     modifier: Modifier = basicDialogModifier(),
     onDismissRequest: () -> Unit,
-    content: @Composable () -> Unit,
+    content: @Composable () -> Unit
 ) {
     Dialog(onDismissRequest = onDismissRequest) {
         Card(
             modifier = modifier,
-            colors = CardDefaults.cardColors(
+            colors =
+            CardDefaults.cardColors(
                 containerColor = AppTheme.colors.surfaceContainer,
                 contentColor = AppTheme.colors.onSurfaceContainer
             )
@@ -35,6 +35,6 @@ fun BasicDialog(
 }
 
 @Composable
-private fun basicDialogModifier() = Modifier.widthIn(max = AppTheme.size.s320)
+private fun basicDialogModifier() = Modifier
+    .widthIn(max = AppTheme.size.s320)
     .heightIn(max = AppTheme.size.s512)
-

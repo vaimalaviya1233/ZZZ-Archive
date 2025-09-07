@@ -48,7 +48,8 @@ class BangbooDetailViewModel(
                 _uiState.update {
                     it.copy(bangbooDetail = bangbooDetail)
                 }
-            }, onFailure = { throwable ->
+            },
+            onFailure = { throwable ->
                 _uiState.update {
                     it.copy(isLoading = false, error = throwable.message ?: "Unknown Error")
                 }

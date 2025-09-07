@@ -17,20 +17,23 @@ data class BangbooListItem(
     val attribute: AgentAttribute
 )
 
-val stubBangbooList = listOf(
-    BangbooListItem(
-        id = 1,
-        name = "企鵝布",
-        imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Bangboo/Profile/1.webp",
-        isLeak = false,
-        rarity = ZzzRarity.RARITY_A,
-        attribute = AgentAttribute.Ice
-    ), BangbooListItem(
-        id = 2,
-        name = "巴特勒",
-        imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Bangboo/Profile/2.webp",
-        isLeak = false,
-        rarity = ZzzRarity.RARITY_S,
-        attribute = AgentAttribute.Physical
+@Suppress("ktlint:standard:max-line-length")
+val stubBangbooList =
+    listOf(
+        BangbooListItem(
+            id = 1,
+            name = "企鵝布",
+            imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Bangboo/Profile/1.webp",
+            isLeak = false,
+            rarity = ZzzRarity.RARITY_A,
+            attribute = AgentAttribute.Ice
+        ),
+        BangbooListItem(
+            id = 2,
+            name = "巴特勒",
+            imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Bangboo/Profile/2.webp",
+            isLeak = false,
+            rarity = ZzzRarity.RARITY_S,
+            attribute = AgentAttribute.Physical
+        )
     )
-)

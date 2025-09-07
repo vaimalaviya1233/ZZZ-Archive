@@ -6,9 +6,9 @@
 package feature.hoyolab.model
 
 enum class ServersList(val localName: String, val region: String) {
-    ASIA("Asia", "prod_gf_jp"),
-    AMERICA("America", "prod_gf_us"),
-    EUROPE("Europe", "prod_gf_eu"),
-    TW_HK_MO("TW,HK,MO", "prod_gf_sg"),
-    None("", "")
+    ASIA(localName = "Asia", region = "prod_gf_jp"),
+    AMERICA(localName = "America", region = "prod_gf_us"),
+    EUROPE(localName = "Europe", region = "prod_gf_eu"),
+    TW_HK_MO(localName = "TW,HK,MO", region = "prod_gf_sg"),
+    None(localName = "", region = "")
 }

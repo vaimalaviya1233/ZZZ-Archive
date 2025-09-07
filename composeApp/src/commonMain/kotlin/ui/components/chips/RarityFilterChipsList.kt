@@ -21,7 +21,8 @@ import zzzarchive.composeapp.generated.resources.ic_rare
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RarityFilterChipsList(
-    selectedRarity: Set<ZzzRarity>, onSelectionChanged: (Set<ZzzRarity>) -> Unit
+    selectedRarity: Set<ZzzRarity>,
+    onSelectionChanged: (Set<ZzzRarity>) -> Unit
 ) {
     val rarities = listOf(ZzzRarity.RARITY_S, ZzzRarity.RARITY_A)
     FlowRow(
@@ -30,17 +31,20 @@ fun RarityFilterChipsList(
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         rarities.forEach { rarity ->
-            ZzzFilterChip(text = rarity.code,
+            ZzzFilterChip(
+                text = rarity.code,
                 iconRes = Res.drawable.ic_rare,
                 selected = selectedRarity.contains(rarity),
                 onClick = {
-                    val newSelection = if (selectedRarity.contains(rarity)) {
-                        selectedRarity - rarity
-                    } else {
-                        selectedRarity + rarity
-                    }
+                    val newSelection =
+                        if (selectedRarity.contains(rarity)) {
+                            selectedRarity - rarity
+                        } else {
+                            selectedRarity + rarity
+                        }
                     onSelectionChanged(newSelection)
-                })
+                }
+            )
         }
     }
 }

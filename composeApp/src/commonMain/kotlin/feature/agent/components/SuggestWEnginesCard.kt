@@ -25,7 +25,10 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.suggest_w_engines
 
 @Composable
-fun SuggestWEnginesCard(wEnginesList: List<RarityItem>, wEngineClick: (Int) -> Unit) {
+fun SuggestWEnginesCard(
+    wEnginesList: List<RarityItem>,
+    wEngineClick: (Int) -> Unit
+) {
     val lazyListState = rememberLazyListState()
     val interactionSource = remember { MutableInteractionSource() }
     val isHovered = interactionSource.collectIsHoveredAsState()

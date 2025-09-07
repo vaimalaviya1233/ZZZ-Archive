@@ -26,7 +26,7 @@ fun MyAgentsListCard(
 ) {
     ContentCard(
         modifier = modifier,
-        hasDefaultPadding = false,
+        hasDefaultPadding = false
     ) {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(AppTheme.size.s100),
@@ -37,7 +37,8 @@ fun MyAgentsListCard(
         ) {
             items(
                 count = uiState.agentsList.size,
-                key = { index -> uiState.agentsList[index].id }) { index ->
+                key = { index -> uiState.agentsList[index].id }
+            ) { index ->
                 val agent = uiState.agentsList[index]
                 MyAgentItem(
                     modifier = Modifier.animateItem(),
@@ -48,7 +49,8 @@ fun MyAgentsListCard(
                     imgUrl = agent.imageUrl,
                     onClick = {
                         onAgentClick(agent.id)
-                    })
+                    }
+                )
             }
         }
     }

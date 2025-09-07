@@ -52,10 +52,12 @@ class WEngineDetailViewModel(
                         wEngineDetail = wEngine
                     )
                 }
-            }, onFailure = { throwable ->
+            },
+            onFailure = { throwable ->
                 _uiState.update {
                     it.copy(
-                        isLoading = false, error = throwable.message ?: "Unknown error"
+                        isLoading = false,
+                        error = throwable.message ?: "Unknown error"
                     )
                 }
             }

@@ -24,7 +24,7 @@ class InitViewModel(
     val uiState = _uiState.asStateFlow()
 
     init {
-        //settingsRepository.clear() // For test
+        // settingsRepository.clear() // For test
         viewModelScope.launch {
             launch { initIsDarkTheme() }
             launch { initUiScale() }

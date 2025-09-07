@@ -5,23 +5,21 @@
 
 package feature.bangboo.presentation
 
-
 import MainDispatcherRule
 import feature.bangboo.domain.BangbooListUseCase
 import feature.bangboo.model.stubBangbooList
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
 import utils.AgentAttribute
 import utils.ZzzRarity
-import kotlin.test.BeforeTest
-import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class BangbooListViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 

@@ -41,7 +41,8 @@ fun BannerDialog(
 ) {
     BasicDialog(onDismissRequest = onDismiss) {
         Box(
-            Modifier.fillMaxWidth()
+            Modifier
+                .fillMaxWidth()
                 .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350)
         ) {
             Text(
@@ -59,12 +60,12 @@ fun BannerDialog(
             }
         }
         Column(
-            Modifier.padding(
-                start = AppTheme.spacing.s500,
-                end = AppTheme.spacing.s500,
-                bottom = AppTheme.spacing.s400
-            )
-                .verticalScroll(rememberScrollState()),
+            Modifier
+                .padding(
+                    start = AppTheme.spacing.s500,
+                    end = AppTheme.spacing.s500,
+                    bottom = AppTheme.spacing.s400
+                ).verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
             Text(
@@ -85,7 +86,8 @@ fun BannerDialog(
 
             if (route != "") {
                 ZzzOutlineButton(
-                    modifier = Modifier.fillMaxWidth(), text = routeDesc
+                    modifier = Modifier.fillMaxWidth(),
+                    text = routeDesc
                 ) {
                     onNavigate(route)
                     onDismiss()
@@ -94,4 +96,3 @@ fun BannerDialog(
         }
     }
 }
-

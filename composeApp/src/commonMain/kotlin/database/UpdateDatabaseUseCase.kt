@@ -7,7 +7,7 @@ package database
 
 import feature.agent.data.repository.AgentRepository
 import feature.bangboo.data.repository.BangbooRepository
-import feature.cover_image.data.repository.CoverImageRepository
+import feature.cover.data.repository.CoverImageRepository
 import feature.drive.data.respository.DriveRepository
 import feature.home.data.AssetVersionRepository
 import feature.setting.data.SystemConfigRepository
@@ -28,35 +28,45 @@ class UpdateDatabaseUseCase(
     suspend fun updateAssetsIfNewVersionAvailable() {
         val language = languageUseCase.getLanguage().first().officialCode
         assetVersionRepository.requestAssetVersion().onSuccess { assetVersionResponse ->
-            if (assetVersionResponse.coverImagesList > systemConfigRepository.getCoverImageDBVersion()
+            if (assetVersionResponse.coverImagesList >
+                systemConfigRepository
+                    .getCoverImageDBVersion()
                     .first()
             ) {
                 coverImageRepository.requestAndUpdateCoverImagesListDB().onSuccess {
                     systemConfigRepository.setCoverImageDBVersion(assetVersionResponse.coverImagesList)
                 }
             }
-            if (assetVersionResponse.agentsList > systemConfigRepository.getAgentListDBVersion()
+            if (assetVersionResponse.agentsList >
+                systemConfigRepository
+                    .getAgentListDBVersion()
                     .first()
             ) {
                 agentRepository.requestAndUpdateAgentsListDB(language).onSuccess {
                     systemConfigRepository.setAgentListDBVersion(assetVersionResponse.agentsList)
                 }
             }
-            if (assetVersionResponse.wEnginesList > systemConfigRepository.getWEngineListDBVersion()
+            if (assetVersionResponse.wEnginesList >
+                systemConfigRepository
+                    .getWEngineListDBVersion()
                     .first()
             ) {
                 wEngineRepository.requestAndUpdateWEnginesListDB(language).onSuccess {
                     systemConfigRepository.setWEngineListDBVersion(assetVersionResponse.wEnginesList)
                 }
             }
-            if (assetVersionResponse.bangbooList > systemConfigRepository.getBangbooListDBVersion()
+            if (assetVersionResponse.bangbooList >
+                systemConfigRepository
+                    .getBangbooListDBVersion()
                     .first()
             ) {
                 bangbooRepository.requestAndUpdateBangbooListDB(language).onSuccess {
                     systemConfigRepository.setBangbooListDBVersion(assetVersionResponse.bangbooList)
                 }
             }
-            if (assetVersionResponse.drivesList > systemConfigRepository.getDriveListDBVersion()
+            if (assetVersionResponse.drivesList >
+                systemConfigRepository
+                    .getDriveListDBVersion()
                     .first()
             ) {
                 driveRepository.requestAndUpdateDrivesListDB(language).onSuccess {

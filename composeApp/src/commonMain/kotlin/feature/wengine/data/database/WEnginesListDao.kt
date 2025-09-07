@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface WEnginesListDao {
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun setWEnginesList(agentsList: List<WEnginesListItemEntity>)
 

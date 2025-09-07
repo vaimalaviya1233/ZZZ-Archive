@@ -18,7 +18,8 @@ class BannerUseCase(
 ) {
     suspend fun invoke(): Result<BannerResponse> {
         val bannerResponse =
-            bannerRepository.getBanner(languageUseCase.getLanguage().first().officialCode)
+            bannerRepository
+                .getBanner(languageUseCase.getLanguage().first().officialCode)
                 .getOrNull()
         if (getBannerIgnoreId().first() < (bannerResponse?.id ?: 0)) {
             return Result.success(bannerResponse!!)
@@ -27,9 +28,7 @@ class BannerUseCase(
         }
     }
 
-
     private fun getBannerIgnoreId() = systemConfigRepository.getBannerIgnoreId()
 
     suspend fun setBannerIgnoreId(id: Int) = systemConfigRepository.setBannerIgnoreId(id)
-
 }

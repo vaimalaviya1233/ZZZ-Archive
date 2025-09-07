@@ -31,12 +31,13 @@ fun DrivesListCard(
 ) {
     ContentCard(
         modifier = modifier,
-        hasDefaultPadding = false,
+        hasDefaultPadding = false
     ) {
         LazyVerticalGrid(
             state = lazyGridState,
             columns = GridCells.Adaptive(AppTheme.size.s100),
-            modifier = Modifier.fillMaxSize().drawColumnListMask(
+            modifier =
+            Modifier.fillMaxSize().drawColumnListMask(
                 colorScheme = AppTheme.colors,
                 topEnable = lazyGridState.canScrollBackward,
                 bottomEnable = lazyGridState.canScrollForward
@@ -47,7 +48,8 @@ fun DrivesListCard(
         ) {
             items(
                 count = uiState.drivesList.size,
-                key = { index -> uiState.drivesList[index].id }) { index ->
+                key = { index -> uiState.drivesList[index].id }
+            ) { index ->
                 val drive = uiState.drivesList[index]
                 RarityItem(
                     modifier = Modifier.animateItem(),
@@ -55,7 +57,8 @@ fun DrivesListCard(
                     imgUrl = drive.imageUrl,
                     onClick = {
                         onDriveClick(drive.id)
-                    })
+                    }
+                )
             }
         }
     }

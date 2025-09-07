@@ -16,24 +16,34 @@ data class BangbooDetailState(
     val error: String? = null
 )
 
-val emptyBangbooDetail = BangbooDetail(
-    id = 0,
-    name = "",
-    imageUrl = "",
-    isLeak = false,
-    rarity = ZzzRarity.RARITY_D,
-    attribute = AgentAttribute.None,
-    basicData = AgentBasicData(
-        hp = 0, atk = 0, def = 0
-    ),
-    activeSkill = NameAndDesc(
-        name = "", description = ""
-    ),
-    additionalAbility = NameAndDesc(
-        name = "", description = ""
-    ),
-    chainAttack = NameAndDesc(
-        name = "", description = ""
-    ),
-    levelMaterials = emptyList()
-)
+val emptyBangbooDetail =
+    BangbooDetail(
+        id = 0,
+        name = "",
+        imageUrl = "",
+        isLeak = false,
+        rarity = ZzzRarity.RARITY_D,
+        attribute = AgentAttribute.None,
+        basicData =
+        AgentBasicData(
+            hp = 0,
+            atk = 0,
+            def = 0
+        ),
+        activeSkill =
+        NameAndDesc(
+            name = "",
+            description = ""
+        ),
+        additionalAbility =
+        NameAndDesc(
+            name = "",
+            description = ""
+        ),
+        chainAttack =
+        NameAndDesc(
+            name = "",
+            description = ""
+        ),
+        levelMaterials = emptyList()
+    )

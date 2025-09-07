@@ -23,19 +23,18 @@ class FakeBangbooRepository : BangbooRepository {
         emit(stubBangbooList)
     }
 
-    override suspend fun requestAndUpdateBangbooListDB(languagePath: String): Result<Unit> {
-        return if (isError) {
-            Result.failure(Exception())
-        } else {
-            Result.success(Unit)
-        }
+    override suspend fun requestAndUpdateBangbooListDB(languagePath: String): Result<Unit> = if (isError) {
+        Result.failure(Exception())
+    } else {
+        Result.success(Unit)
     }
 
-    override suspend fun getBangbooDetail(id: Int, languagePath: String): Result<BangbooDetail> {
-        return if (isError) {
-            Result.failure(Exception())
-        } else {
-            Result.success(stubBangbooDetail)
-        }
+    override suspend fun getBangbooDetail(
+        id: Int,
+        languagePath: String
+    ): Result<BangbooDetail> = if (isError) {
+        Result.failure(Exception())
+    } else {
+        Result.success(stubBangbooDetail)
     }
 }

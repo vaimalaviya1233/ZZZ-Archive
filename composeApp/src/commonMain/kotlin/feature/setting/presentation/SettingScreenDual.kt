@@ -25,14 +25,18 @@ import ui.utils.verticalSafePadding
 
 @Composable
 fun SettingScreenDual(
-    uiState: SettingState, onAction: (SettingAction) -> Unit
+    uiState: SettingState,
+    onAction: (SettingAction) -> Unit
 ) {
     Row(
         modifier = Modifier.padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(containerGap())
     ) {
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+            modifier =
+            Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
                 .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
@@ -54,7 +58,10 @@ fun SettingScreenDual(
         }
 
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+            modifier =
+            Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
                 .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
@@ -62,8 +69,3 @@ fun SettingScreenDual(
         }
     }
 }
-
-
-
-
-

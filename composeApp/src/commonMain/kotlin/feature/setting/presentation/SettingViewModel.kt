@@ -24,26 +24,28 @@ import kotlinx.coroutines.flow.update
 import utils.AppActionsUseCase
 
 class SettingViewModel(
-    private val themeUseCase: ThemeUseCase, private val uiScaleUseCase: UiScaleUseCase,
+    private val themeUseCase: ThemeUseCase,
+    private val uiScaleUseCase: UiScaleUseCase,
     private val appInfoUseCase: AppInfoUseCase,
     private val appActionsUseCase: AppActionsUseCase,
     private val languageUseCase: LanguageUseCase,
     private val updateDatabaseUseCase: UpdateDatabaseUseCase
 ) : ViewModel() {
-
     private var isDarkThemeJob: Job? = null
     private var languageJob: Job? = null
     private var uiScaleJob: Job? = null
     private var fontScaleJob: Job? = null
 
     private var _uiState = MutableStateFlow(settingState)
-    val uiState = _uiState.onStart {
-        observeIsDarkTheme()
-        observeLanguage()
-        observeUiScale()
-        observeFontScale()
-        updateAppVersion()
-    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), _uiState.value)
+    val uiState =
+        _uiState
+            .onStart {
+                observeIsDarkTheme()
+                observeLanguage()
+                observeUiScale()
+                observeFontScale()
+                updateAppVersion()
+            }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), _uiState.value)
 
     suspend fun onAction(action: SettingAction) {
         when (action) {
@@ -70,31 +72,42 @@ class SettingViewModel(
 
     private fun observeIsDarkTheme() {
         isDarkThemeJob?.cancel()
-        isDarkThemeJob = themeUseCase.getPreferenceIsDarkTheme().onEach { isDark ->
-            _uiState.update { it.copy(isDark = isDark) }
-        }.launchIn(viewModelScope)
+        isDarkThemeJob =
+            themeUseCase
+                .getPreferenceIsDarkTheme()
+                .onEach { isDark ->
+                    _uiState.update { it.copy(isDark = isDark) }
+                }.launchIn(viewModelScope)
     }
 
     private fun observeLanguage() {
         languageJob?.cancel()
-        languageJob = languageUseCase.getLanguage().onEach { language ->
-            _uiState.update { it.copy(language = language) }
-        }.launchIn(viewModelScope)
+        languageJob =
+            languageUseCase
+                .getLanguage()
+                .onEach { language ->
+                    _uiState.update { it.copy(language = language) }
+                }.launchIn(viewModelScope)
     }
 
     private fun observeUiScale() {
         uiScaleJob?.cancel()
-        uiScaleJob = uiScaleUseCase.getUiScale().onEach { uiScale ->
-            _uiState.update { it.copy(uiScale = uiScale) }
-        }.launchIn(viewModelScope)
+        uiScaleJob =
+            uiScaleUseCase
+                .getUiScale()
+                .onEach { uiScale ->
+                    _uiState.update { it.copy(uiScale = uiScale) }
+                }.launchIn(viewModelScope)
     }
 
     private fun observeFontScale() {
         fontScaleJob?.cancel()
-        fontScaleJob = uiScaleUseCase.getFontScale().onEach { fontScale ->
-            _uiState.update { it.copy(fontScale = fontScale) }
-        }.launchIn(viewModelScope)
-
+        fontScaleJob =
+            uiScaleUseCase
+                .getFontScale()
+                .onEach { fontScale ->
+                    _uiState.update { it.copy(fontScale = fontScale) }
+                }.launchIn(viewModelScope)
     }
 
     private fun updateAppVersion() {

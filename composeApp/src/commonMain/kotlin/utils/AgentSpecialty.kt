@@ -27,19 +27,16 @@ enum class AgentSpecialty(val textRes: StringResource, val iconRes: DrawableReso
     None(Res.string.unknown, Res.drawable.ic_help)
 }
 
-fun findAgentSpecialty(specialty: String): AgentSpecialty {
-    return AgentSpecialty.entries.find { it.name.lowercase() == specialty }
+fun findAgentSpecialty(specialty: String): AgentSpecialty =
+    AgentSpecialty.entries.find { it.name.lowercase() == specialty }
         ?: AgentSpecialty.None
-}
 
-fun findAgentSpecialtyFromHoYoLab(specialtyId: Int): AgentSpecialty {
-    return when (specialtyId) {
-        1 -> AgentSpecialty.Attack
-        2 -> AgentSpecialty.Stun
-        3 -> AgentSpecialty.Anomaly
-        4 -> AgentSpecialty.Support
-        5 -> AgentSpecialty.Defense
-        6 -> AgentSpecialty.Rupture
-        else -> AgentSpecialty.None
-    }
+fun findAgentSpecialtyFromHoYoLab(specialtyId: Int): AgentSpecialty = when (specialtyId) {
+    1 -> AgentSpecialty.Attack
+    2 -> AgentSpecialty.Stun
+    3 -> AgentSpecialty.Anomaly
+    4 -> AgentSpecialty.Support
+    5 -> AgentSpecialty.Defense
+    6 -> AgentSpecialty.Rupture
+    else -> AgentSpecialty.None
 }

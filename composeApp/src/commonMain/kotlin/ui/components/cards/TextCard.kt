@@ -14,7 +14,11 @@ import ui.theme.AppTheme
 import ui.utils.cardPaddingWithHeader
 
 @Composable
-fun TextCard(title: String, content: String, subTitle: String = "") {
+fun TextCard(
+    title: String,
+    content: String,
+    subTitle: String = ""
+) {
     ContentCard(
         hasDefaultPadding = false
     ) {

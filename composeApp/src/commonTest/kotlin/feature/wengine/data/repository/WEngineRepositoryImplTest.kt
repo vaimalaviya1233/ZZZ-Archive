@@ -6,16 +6,16 @@
 package feature.wengine.data.repository
 
 import feature.wengine.data.database.FakeWEnginesListDao
+import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
-import kotlin.test.Test
-import kotlin.test.assertEquals
 
 class WEngineRepositoryImplTest {
     private val httpClient = FakeZzzHttp()
     private val database = FakeWEnginesListDao()
-    private val repository = WEngineRepositoryImpl(httpClient, database)
+    private val repository = WEngineRepositoryImpl(httpClient = httpClient, wEnginesListDao = database)
     // Remote: 2 W-Engines, Local: 1 W-Engine
 
     @Test
@@ -32,12 +32,11 @@ class WEngineRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN W-Engines list DB is empty WHEN Get W-Engines list THEN Auto request and return updated DB`() =
-        runTest {
-            database.deleteWEnginesList()
-            val result = repository.getWEnginesList("").first()
-            assertEquals(2, result.size)
-        }
+    fun `GIVEN W-Engines list DB is empty WHEN Get W-Engines list THEN Auto request and return updated DB`() = runTest {
+        database.deleteWEnginesList()
+        val result = repository.getWEnginesList("").first()
+        assertEquals(2, result.size)
+    }
 
     @Test
     fun `WHEN Request W-Engines list error THEN return local DB`() = runTest {
@@ -47,11 +46,10 @@ class WEngineRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN W-Engines list DB is empty WHEN Request W-Engines list error THEN return empty DB`() =
-        runTest {
-            httpClient.setError(true)
-            database.deleteWEnginesList()
-            val result = repository.getWEnginesList("").first()
-            assertEquals(0, result.size)
-        }
+    fun `GIVEN W-Engines list DB is empty WHEN Request W-Engines list error THEN return empty DB`() = runTest {
+        httpClient.setError(true)
+        database.deleteWEnginesList()
+        val result = repository.getWEnginesList("").first()
+        assertEquals(0, result.size)
+    }
 }

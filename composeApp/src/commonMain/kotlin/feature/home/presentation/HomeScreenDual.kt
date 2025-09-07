@@ -14,7 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.banner.components.AnnouncementBanner
-import feature.cover_image.components.CoverImageCard
+import feature.cover.components.CoverImageCard
 import feature.forum.compoenents.AllForumCard
 import feature.forum.compoenents.TwitterCard
 import feature.hoyolab.components.HoYoLabCard
@@ -29,10 +29,15 @@ import ui.utils.verticalSafePadding
 
 @Composable
 fun HomeScreenDual(
-    uiState: HomeState, onAction: (HomeAction) -> Unit, onOpenBannerDialog: () -> Unit
+    uiState: HomeState,
+    onAction: (HomeAction) -> Unit,
+    onOpenBannerDialog: () -> Unit
 ) {
     Column(
-        modifier = Modifier.verticalScroll(rememberScrollState()).padding(horizontalSafePadding())
+        modifier =
+        Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(horizontalSafePadding())
             .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {

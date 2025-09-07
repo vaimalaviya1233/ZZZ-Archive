@@ -7,5 +7,6 @@ package feature.hoyolab.presentation
 
 sealed class MyAgentsListAction {
     data class ClickAgent(val agentId: Int) : MyAgentsListAction()
+
     data object ClickBack : MyAgentsListAction()
 }

@@ -7,7 +7,6 @@ package network
 
 import feature.pixiv.model.PixivTopicResponse
 
-
 interface PixivHttp {
     suspend fun requestZzzTopic(zzzTag: String): PixivTopicResponse
 }

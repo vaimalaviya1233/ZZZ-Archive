@@ -19,7 +19,7 @@ class GoogleDocHttpImpl(engine: HttpClientEngine) : GoogleDocHttp {
         issueType: String,
         language: String,
         issueContent: String,
-        nickname: String,
+        email: String,
         appVersion: String,
         deviceName: String,
         operatingSystem: String
@@ -32,7 +32,7 @@ class GoogleDocHttpImpl(engine: HttpClientEngine) : GoogleDocHttp {
             parameter("entry.484308305", issueType)
             parameter("entry.1106620463", language)
             parameter("entry.1327077448", issueContent)
-            parameter("entry.1637450330", nickname)
+            parameter("entry.1637450330", email)
             parameter("entry.58201369", appVersion)
             parameter("entry.1615440715", deviceName)
             parameter("entry.1501925155", operatingSystem)
@@ -40,5 +40,3 @@ class GoogleDocHttpImpl(engine: HttpClientEngine) : GoogleDocHttp {
         }
     }
 }
-
-

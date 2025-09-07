@@ -14,14 +14,8 @@ import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
 
-
-class AgentsListUseCase(
-    private val agentRepository: AgentRepository,
-    private val languageUseCase: LanguageUseCase
-) {
-
-    suspend fun invoke() =
-        agentRepository.getAgentsList(languageUseCase.getLanguage().first().officialCode)
+class AgentsListUseCase(private val agentRepository: AgentRepository, private val languageUseCase: LanguageUseCase) {
+    suspend fun invoke() = agentRepository.getAgentsList(languageUseCase.getLanguage().first().officialCode)
 
     suspend fun updateAgentsList() = agentRepository.requestAndUpdateAgentsListDB(
         languageUseCase.getLanguage().first().officialCode
@@ -40,17 +34,18 @@ class AgentsListUseCase(
         selectedSpecialties: Set<AgentSpecialty>,
         selectedFactionId: Int
     ): List<AgentListItem> {
-        val filteredAgents = agentsList.filter { agent ->
-            val matchRarity =
-                selectedRarities.isEmpty() || selectedRarities.any { it == agent.rarity }
-            val matchAttribute =
-                selectedAttributes.isEmpty() || selectedAttributes.any { it == agent.attribute }
-            val matchSpecialty =
-                selectedSpecialties.isEmpty() || selectedSpecialties.any { it == agent.specialty }
-            val matchFaction = selectedFactionId == 0 || selectedFactionId == agent.factionId
+        val filteredAgents =
+            agentsList.filter { agent ->
+                val matchRarity =
+                    selectedRarities.isEmpty() || selectedRarities.any { it == agent.rarity }
+                val matchAttribute =
+                    selectedAttributes.isEmpty() || selectedAttributes.any { it == agent.attribute }
+                val matchSpecialty =
+                    selectedSpecialties.isEmpty() || selectedSpecialties.any { it == agent.specialty }
+                val matchFaction = selectedFactionId == 0 || selectedFactionId == agent.factionId
 
-            matchRarity && matchAttribute && matchSpecialty && matchFaction
-        }
+                matchRarity && matchAttribute && matchSpecialty && matchFaction
+            }
         return filteredAgents
     }
 }

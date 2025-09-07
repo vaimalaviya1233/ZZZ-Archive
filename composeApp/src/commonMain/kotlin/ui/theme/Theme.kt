@@ -37,36 +37,45 @@ private val localFontScale = compositionLocalOf { mutableStateOf(1f) }
 private val localUiScale = compositionLocalOf { mutableStateOf(1f) }
 
 object AppTheme {
-
     val colors: ColorScheme
-        @Composable @ReadOnlyComposable get() = localColorScheme.current
+        @Composable @ReadOnlyComposable
+        get() = localColorScheme.current
 
     val typography: Typography
-        @Composable @ReadOnlyComposable get() = localTypography.current
+        @Composable @ReadOnlyComposable
+        get() = localTypography.current
 
     val shape: Shape
-        @Composable @ReadOnlyComposable get() = localShape.current
+        @Composable @ReadOnlyComposable
+        get() = localShape.current
 
     val spacing: Spacing
-        @Composable @ReadOnlyComposable get() = localSpacing.current
+        @Composable @ReadOnlyComposable
+        get() = localSpacing.current
 
     val size: Size
-        @Composable @ReadOnlyComposable get() = localSize.current
+        @Composable @ReadOnlyComposable
+        get() = localSize.current
 
     val adaptiveLayoutType: AdaptiveLayoutType
-        @Composable @ReadOnlyComposable get() = localAdaptiveLayoutType.current.value
+        @Composable @ReadOnlyComposable
+        get() = localAdaptiveLayoutType.current.value
 
     val contentType: ContentType
-        @Composable @ReadOnlyComposable get() = localContentType.current.value
+        @Composable @ReadOnlyComposable
+        get() = localContentType.current.value
 
     val isDark: MutableState<Boolean>
-        @Composable @ReadOnlyComposable get() = localThemeIsDark.current
+        @Composable @ReadOnlyComposable
+        get() = localThemeIsDark.current
 
     val fontScale: MutableState<Float>
-        @Composable @ReadOnlyComposable get() = localFontScale.current
+        @Composable @ReadOnlyComposable
+        get() = localFontScale.current
 
     val uiScale: MutableState<Float>
-        @Composable @ReadOnlyComposable get() = localUiScale.current
+        @Composable @ReadOnlyComposable
+        get() = localUiScale.current
 }
 
 @Composable
@@ -93,10 +102,11 @@ fun ZzzArchiveTheme(content: @Composable () -> Unit) {
         localContentType provides contentType,
         localThemeIsDark provides isDark,
         localFontScale provides fontScale,
-        localUiScale provides uiScale,
+        localUiScale provides uiScale
     ) {
         Box(
-            modifier = Modifier
+            modifier =
+            Modifier
                 .fillMaxSize()
                 .background(color = AppTheme.colors.surface)
         ) {

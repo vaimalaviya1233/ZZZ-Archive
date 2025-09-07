@@ -5,7 +5,7 @@
 
 package utils
 
-class JVMPlatform: Platform {
+class JVMPlatform : Platform {
     override val operatingSystemName: String =
         "${System.getProperty("os.name")} ${System.getProperty("os.version")} ${System.getProperty("os.arch")}"
     override val deviceName: String = "Java ${System.getProperty("java.version")}"

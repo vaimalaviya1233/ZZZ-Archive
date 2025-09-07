@@ -11,15 +11,13 @@ import utils.findAgentAttributeFromHoYoLab
 import utils.findAgentSpecialtyFromHoYoLab
 import utils.findRarityFromHoYoLab
 
-fun MyAgentListItemResponse.toMyAgentListItem(): MyAgentListItem {
-    return MyAgentListItem(
-        id = id,
-        name = nameMi18n,
-        level = level,
-        rank = rank,
-        imageUrl = roleSquareUrl,
-        rarity = findRarityFromHoYoLab(rarity),
-        specialty = findAgentSpecialtyFromHoYoLab(avatarProfession),
-        attribute = findAgentAttributeFromHoYoLab(elementType)
-    )
-}
+fun MyAgentListItemResponse.toMyAgentListItem(): MyAgentListItem = MyAgentListItem(
+    id = id,
+    name = nameMi18n,
+    level = level,
+    rank = rank,
+    imageUrl = roleSquareUrl,
+    rarity = findRarityFromHoYoLab(rarity),
+    specialty = findAgentSpecialtyFromHoYoLab(avatarProfession),
+    attribute = findAgentAttributeFromHoYoLab(elementType)
+)

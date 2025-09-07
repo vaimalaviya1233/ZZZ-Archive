@@ -22,7 +22,7 @@ import ui.utils.verticalSafePadding
 @Composable
 fun DrivesListScreenDual(
     uiState: DrivesListState,
-    onAction: (DrivesListAction) -> Unit,
+    onAction: (DrivesListAction) -> Unit
 ) {
     Row(
         modifier = Modifier.padding(horizontalSafePadding()).padding(verticalSafePadding()),

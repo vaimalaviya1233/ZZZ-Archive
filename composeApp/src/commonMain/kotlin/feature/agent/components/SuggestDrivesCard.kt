@@ -66,10 +66,14 @@ fun SuggestDrivesCard(
 
         when {
             openDetailDialog.value -> {
-                DriveDetailDialog(drivesListItemEntity = drivesList.find { it.id == selectedDriveId.value }
-                    ?: emptyDriveListItemEntity, onDismiss = {
-                    openDetailDialog.value = false
-                })
+                DriveDetailDialog(
+                    drivesListItemEntity =
+                    drivesList.find { it.id == selectedDriveId.value }
+                        ?: emptyDriveListItemEntity,
+                    onDismiss = {
+                        openDetailDialog.value = false
+                    }
+                )
             }
         }
     }

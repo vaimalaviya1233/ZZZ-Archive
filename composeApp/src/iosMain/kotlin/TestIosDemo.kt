@@ -3,11 +3,9 @@
  * License: MIT License
  */
 
-fun selectAiGenderIos(genderCode: Int): String {
-    return when(genderCode) {
-        0 -> "Female"
-        1 -> "Male"
-        2 -> "Android"
-        else -> "Unknown"
-    }
+fun selectAiGenderIos(genderCode: Int): String = when (genderCode) {
+    0 -> "Female"
+    1 -> "Male"
+    2 -> "Android"
+    else -> "Unknown"
 }

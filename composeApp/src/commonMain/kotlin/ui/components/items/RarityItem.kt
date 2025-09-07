@@ -47,7 +47,6 @@ import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
 
-
 @Composable
 fun RarityItem(
     modifier: Modifier = Modifier,
@@ -63,7 +62,9 @@ fun RarityItem(
     val isHovered = interactionSource.collectIsHoveredAsState()
 
     Column(
-        modifier = modifier.width(AppTheme.size.s100)
+        modifier =
+        modifier
+            .width(AppTheme.size.s100)
             .pointerHoverIcon(PointerIcon.Hand)
             .clickable(interactionSource = interactionSource, indication = null) {
                 onClick()
@@ -72,18 +73,26 @@ fun RarityItem(
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s250)
     ) {
         Box(
-            modifier = Modifier.aspectRatio(1f).fillMaxSize().background(
-                AppTheme.colors.imageBackground
-            ).border(
-                AppTheme.size.borderWidth, AppTheme.colors.imageBorder, shape = AppTheme.shape.r300
-            ).clip(AppTheme.shape.r300)
+            modifier =
+            Modifier
+                .aspectRatio(1f)
+                .fillMaxSize()
+                .background(
+                    AppTheme.colors.imageBackground
+                ).border(
+                    AppTheme.size.borderWidth,
+                    AppTheme.colors.imageBorder,
+                    shape = AppTheme.shape.r300
+                ).clip(AppTheme.shape.r300)
         ) {
-            SubcomposeAsyncImage(modifier = Modifier.fillMaxSize(),
+            SubcomposeAsyncImage(
+                modifier = Modifier.fillMaxSize(),
                 model = imgUrl,
                 contentDescription = name,
                 error = {
                     placeHolder()
-                })
+                }
+            )
 
             if (attribute != null) {
                 AttributeTag(Modifier.align(Alignment.TopEnd), attribute.textRes, attribute.iconRes)
@@ -93,7 +102,9 @@ fun RarityItem(
 
             rarity?.let {
                 RarityIndicator(
-                    Modifier.align(Alignment.BottomStart), rarity, isHovered.value
+                    Modifier.align(Alignment.BottomStart),
+                    rarity,
+                    isHovered.value
                 )
             }
         }
@@ -110,12 +121,19 @@ fun RarityItem(
 }
 
 @Composable
-private fun AttributeTag(modifier: Modifier, textRes: StringResource, iconRes: DrawableResource) {
+private fun AttributeTag(
+    modifier: Modifier,
+    textRes: StringResource,
+    iconRes: DrawableResource
+) {
     Icon(
-        modifier = modifier.background(
-            AppTheme.colors.imageTagContainer,
-            RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
-        ).padding(AppTheme.spacing.s200).size(AppTheme.size.icon),
+        modifier =
+        modifier
+            .background(
+                AppTheme.colors.imageTagContainer,
+                RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
+            ).padding(AppTheme.spacing.s200)
+            .size(AppTheme.size.icon),
         imageVector = vectorResource(iconRes),
         contentDescription = stringResource(textRes),
         tint = AppTheme.colors.imageOnTagContainer
@@ -123,7 +141,11 @@ private fun AttributeTag(modifier: Modifier, textRes: StringResource, iconRes: D
 }
 
 @Composable
-private fun RarityIndicator(modifier: Modifier, rarity: ZzzRarity, isFocus: Boolean = false) {
+private fun RarityIndicator(
+    modifier: Modifier,
+    rarity: ZzzRarity,
+    isFocus: Boolean = false
+) {
     val animatedHeight by animateDpAsState(targetValue = if (isFocus) AppTheme.spacing.s300 else 0.dp)
 
     Spacer(

@@ -4,7 +4,7 @@ import feature.hoyolab.data.crypto.ZzzCrypto
 import feature.hoyolab.data.database.HoYoLabAccountDao
 import feature.hoyolab.data.repository.HoYoLabAgentRepository
 import feature.hoyolab.model.MyAgentListItem
-import feature.hoyolab.model.my_agent_detail.MyAgentDetailListItem
+import feature.hoyolab.model.agent.MyAgentDetailListItem
 import feature.setting.data.PreferencesRepository
 import feature.setting.domain.LanguageUseCase
 import kotlinx.coroutines.flow.filterNotNull
@@ -17,7 +17,6 @@ class HoYoLabAgentUseCase(
     private val zzzCrypto: ZzzCrypto,
     private val languageUseCase: LanguageUseCase
 ) {
-
     suspend fun getAgentsList(): Result<List<MyAgentListItem>> {
         val defaultAccountUid = preferencesRepository.getDefaultHoYoLabAccountUid().first()
         val account = accountDao.getAccount(defaultAccountUid).filterNotNull().first()
@@ -26,7 +25,13 @@ class HoYoLabAgentUseCase(
         val lToken = zzzCrypto.decryptData(account.lToken)
         val ltUid = zzzCrypto.decryptData(account.ltUid)
         val uid = account.uid
-        val result = repository.requestPlayerAgentList(languageCode, uid, region, lToken, ltUid)
+        val result = repository.requestPlayerAgentList(
+            languageCode = languageCode,
+            uid = uid,
+            region = region,
+            lToken = lToken,
+            ltUid = ltUid
+        )
         result.fold(onSuccess = {
             return Result.success(it)
         }, onFailure = {
@@ -43,7 +48,14 @@ class HoYoLabAgentUseCase(
         val ltUid = zzzCrypto.decryptData(account.ltUid)
         val uid = account.uid
         val result =
-            repository.requestPlayerAgentDetail(languageCode, uid, region, lToken, ltUid, agentId)
+            repository.requestPlayerAgentDetail(
+                languageCode = languageCode,
+                uid = uid,
+                region = region,
+                lToken = lToken,
+                ltUid = ltUid,
+                agentId = agentId
+            )
         result.fold(onSuccess = {
             return Result.success(it)
         }, onFailure = {

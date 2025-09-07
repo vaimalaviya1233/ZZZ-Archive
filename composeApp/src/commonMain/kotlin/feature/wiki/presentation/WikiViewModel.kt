@@ -23,7 +23,6 @@ class WikiViewModel(
     private val bangbooListUseCase: BangbooListUseCase,
     private val drivesListUseCase: DrivesListUseCase
 ) : ViewModel() {
-
     private var agentsListJob: Job? = null
     private var wEnginesListJob: Job? = null
     private var bangbooListJob: Job? = null
@@ -37,51 +36,53 @@ class WikiViewModel(
         observeWEnginesList()
         observeBangbooList()
         observeDrivesList()
-
     }
 
     private fun observeAgentsList() {
         agentsListJob?.cancel()
-        agentsListJob = viewModelScope.launch {
-            agentsListUseCase.invoke().collect { agentsList ->
-                _uiState.update {
-                    it.copy(agentsList = agentsList)
+        agentsListJob =
+            viewModelScope.launch {
+                agentsListUseCase.invoke().collect { agentsList ->
+                    _uiState.update {
+                        it.copy(agentsList = agentsList)
+                    }
                 }
             }
-        }
     }
 
     private fun observeWEnginesList() {
         wEnginesListJob?.cancel()
-        wEnginesListJob = viewModelScope.launch {
-            wEnginesListUseCase.invoke().collect { wEnginesList ->
-                _uiState.update {
-                    it.copy(wEnginesList = wEnginesList)
+        wEnginesListJob =
+            viewModelScope.launch {
+                wEnginesListUseCase.invoke().collect { wEnginesList ->
+                    _uiState.update {
+                        it.copy(wEnginesList = wEnginesList)
+                    }
                 }
             }
-        }
     }
-
 
     private fun observeBangbooList() {
         bangbooListJob?.cancel()
-        bangbooListJob = viewModelScope.launch {
-            bangbooListUseCase.invoke().collect { bangbooList ->
-                _uiState.update {
-                    it.copy(bangbooList = bangbooList)
+        bangbooListJob =
+            viewModelScope.launch {
+                bangbooListUseCase.invoke().collect { bangbooList ->
+                    _uiState.update {
+                        it.copy(bangbooList = bangbooList)
+                    }
                 }
             }
-        }
     }
 
     private fun observeDrivesList() {
         drivesListJob?.cancel()
-        drivesListJob = viewModelScope.launch {
-            drivesListUseCase.invoke().collect { drivesList ->
-                _uiState.update {
-                    it.copy(drivesList = drivesList)
+        drivesListJob =
+            viewModelScope.launch {
+                drivesListUseCase.invoke().collect { drivesList ->
+                    _uiState.update {
+                        it.copy(drivesList = drivesList)
+                    }
                 }
             }
-        }
     }
 }

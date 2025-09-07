@@ -32,10 +32,14 @@ import zzzarchive.composeapp.generated.resources.ic_arrow_back
 import zzzarchive.composeapp.generated.resources.ic_rare
 
 @Composable
-fun WEngineImageCard(wEngineDetail: WEngineDetail, onBackClick: () -> Unit) {
+fun WEngineImageCard(
+    wEngineDetail: WEngineDetail,
+    onBackClick: () -> Unit
+) {
     ContentCard {
         ZzzIconButton(
-            iconRes = Res.drawable.ic_arrow_back, contentDescriptionRes = Res.string.back
+            iconRes = Res.drawable.ic_arrow_back,
+            contentDescriptionRes = Res.string.back
         ) {
             onBackClick()
         }
@@ -43,10 +47,13 @@ fun WEngineImageCard(wEngineDetail: WEngineDetail, onBackClick: () -> Unit) {
             modifier = Modifier.fillMaxWidth()
         ) {
             AsyncImage(
-                modifier = Modifier.widthIn(min = 120.dp, max = 240.dp).aspectRatio(1f)
+                modifier =
+                Modifier
+                    .widthIn(min = 120.dp, max = 240.dp)
+                    .aspectRatio(1f)
                     .align(Alignment.TopCenter),
                 model = wEngineDetail.imageUrl,
-                contentDescription = null,
+                contentDescription = null
             )
         }
 

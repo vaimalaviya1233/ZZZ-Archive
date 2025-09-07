@@ -5,7 +5,6 @@
 
 package feature.feedback.presentation
 
-
 import MainDispatcherRule
 import feature.feedback.data.GoogleDocRepository
 import feature.feedback.model.feedbackIssueTypes
@@ -14,16 +13,15 @@ import feature.setting.domain.LanguageUseCase
 import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
-import org.junit.Rule
-import utils.Language
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import kotlinx.coroutines.flow.flowOf
+import org.junit.Rule
+import utils.Language
 
 class FeedbackViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
@@ -40,7 +38,13 @@ class FeedbackViewModelTest {
         coEvery { languageUseCase.getLanguage() } returns flowOf(Language.English)
         coEvery {
             googleDocRepository.submitFeedbackForm(
-                any(), any(), any(), any(), any(), any(), any()
+                issueType = any(),
+                language = any(),
+                issueDesc = any(),
+                email = any(),
+                appVersion = any(),
+                deviceName = any(),
+                operatingSystem = any()
             )
         } returns Result.success(Unit)
 

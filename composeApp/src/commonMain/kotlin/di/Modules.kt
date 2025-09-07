@@ -26,10 +26,10 @@ import feature.bangboo.presentation.BangbooListViewModel
 import feature.banner.data.BannerRepository
 import feature.banner.data.BannerRepositoryImpl
 import feature.banner.domain.BannerUseCase
-import feature.cover_image.data.database.CoverImagesListDB
-import feature.cover_image.data.repository.CoverImageRepository
-import feature.cover_image.data.repository.CoverImageRepositoryImpl
-import feature.cover_image.domain.CoverImageUseCase
+import feature.cover.data.database.CoverImagesListDB
+import feature.cover.data.repository.CoverImageRepository
+import feature.cover.data.repository.CoverImageRepositoryImpl
+import feature.cover.domain.CoverImageUseCase
 import feature.drive.data.database.DrivesListDB
 import feature.drive.data.respository.DriveRepository
 import feature.drive.data.respository.DriveRepositoryImpl
@@ -93,102 +93,115 @@ import root.MainContainerViewModel
 
 expect val platformModule: Module
 
-val sharedModule = module {
-    // Database
-    single {
-        get<RoomDatabaseFactory>().createAgentListDatabase().setDriver(BundledSQLiteDriver())
-            .build()
-    }
-    single {
-        get<RoomDatabaseFactory>().createWEnginesListDatabase().setDriver(BundledSQLiteDriver())
-            .build()
-    }
-    single {
-        get<RoomDatabaseFactory>().createBangbooListDatabase().setDriver(BundledSQLiteDriver())
-            .build()
-    }
-    single {
-        get<RoomDatabaseFactory>().createDrivesListDatabase().setDriver(BundledSQLiteDriver())
-            .build()
-    }
-    single {
-        get<RoomDatabaseFactory>().createCoverImagesListDatabase().setDriver(BundledSQLiteDriver())
-            .build()
-    }
-    single {
-        get<RoomDatabaseFactory>().createHoYoLabAccountDatabase().setDriver(BundledSQLiteDriver())
-            .build()
-    }
-    single { get<AgentsListDB>().agentsListDao }
-    single { get<WEnginesListDB>().wEnginesListDao }
-    single { get<BangbooListDB>().bangbooListDao }
-    single { get<DrivesListDB>().drivesListDao }
-    single { get<CoverImagesListDB>().coverImagesListDao }
-    single { get<HoYoLabAccountDB>().hoYoLabAccountDao }
+val sharedModule =
+    module {
+        // Database
+        single {
+            get<RoomDatabaseFactory>()
+                .createAgentListDatabase()
+                .setDriver(BundledSQLiteDriver())
+                .build()
+        }
+        single {
+            get<RoomDatabaseFactory>()
+                .createWEnginesListDatabase()
+                .setDriver(BundledSQLiteDriver())
+                .build()
+        }
+        single {
+            get<RoomDatabaseFactory>()
+                .createBangbooListDatabase()
+                .setDriver(BundledSQLiteDriver())
+                .build()
+        }
+        single {
+            get<RoomDatabaseFactory>()
+                .createDrivesListDatabase()
+                .setDriver(BundledSQLiteDriver())
+                .build()
+        }
+        single {
+            get<RoomDatabaseFactory>()
+                .createCoverImagesListDatabase()
+                .setDriver(BundledSQLiteDriver())
+                .build()
+        }
+        single {
+            get<RoomDatabaseFactory>()
+                .createHoYoLabAccountDatabase()
+                .setDriver(BundledSQLiteDriver())
+                .build()
+        }
+        single { get<AgentsListDB>().agentsListDao }
+        single { get<WEnginesListDB>().wEnginesListDao }
+        single { get<BangbooListDB>().bangbooListDao }
+        single { get<DrivesListDB>().drivesListDao }
+        single { get<CoverImagesListDB>().coverImagesListDao }
+        single { get<HoYoLabAccountDB>().hoYoLabAccountDao }
 
-    // DataStore
-    single(named("PreferenceDataStore")) { get<DataStoreFactory>().getPreferenceDataStore() }
-    single(named("ConfigDataStore")) { get<DataStoreFactory>().getConfigDataStore() }
+        // DataStore
+        single(named("PreferenceDataStore")) { get<DataStoreFactory>().getPreferenceDataStore() }
+        single(named("ConfigDataStore")) { get<DataStoreFactory>().getConfigDataStore() }
 
-    // Repositories
-    single<SystemConfigRepository> { SystemConfigRepositoryImpl(get(named("ConfigDataStore"))) }
-    single<PreferencesRepository> { PreferencesRepositoryImpl(get(named("PreferenceDataStore"))) }
-    single<AssetVersionRepository> { AssetVersionRepositoryImpl(get()) }
-    single<BannerRepository> { BannerRepositoryImpl(get()) }
-    single<OfficialNewsRepository> { OfficialNewsRepositoryImpl(get()) }
-    single<PixivRepository> { PixivRepositoryImpl(get()) }
-    single<CoverImageRepository> { CoverImageRepositoryImpl(get(), get()) }
-    single<AgentRepository> { AgentRepositoryImpl(get(), get()) }
-    single<WEngineRepository> { WEngineRepositoryImpl(get(), get()) }
-    single<BangbooRepository> { BangbooRepositoryImpl(get(), get()) }
-    single<DriveRepository> { DriveRepositoryImpl(get(), get()) }
-    single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
-    single<HoYoLabConfigRepository> { HoYoLabConfigRepositoryImpl(get(), get()) }
-    single<HoYoLabAgentRepository> { HoYoLabAgentRepositoryImpl(get()) }
-    single<ForumRepository> { ForumRepositoryImpl(get()) }
-    single<ZzzCrypto> { ZzzCryptoImpl() }
+        // Repositories
+        single<SystemConfigRepository> { SystemConfigRepositoryImpl(get(named("ConfigDataStore"))) }
+        single<PreferencesRepository> { PreferencesRepositoryImpl(get(named("PreferenceDataStore"))) }
+        single<AssetVersionRepository> { AssetVersionRepositoryImpl(get()) }
+        single<BannerRepository> { BannerRepositoryImpl(get()) }
+        single<OfficialNewsRepository> { OfficialNewsRepositoryImpl(get()) }
+        single<PixivRepository> { PixivRepositoryImpl(get()) }
+        single<CoverImageRepository> { CoverImageRepositoryImpl(get(), get()) }
+        single<AgentRepository> { AgentRepositoryImpl(get(), get()) }
+        single<WEngineRepository> { WEngineRepositoryImpl(get(), get()) }
+        single<BangbooRepository> { BangbooRepositoryImpl(get(), get()) }
+        single<DriveRepository> { DriveRepositoryImpl(get(), get()) }
+        single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
+        single<HoYoLabConfigRepository> { HoYoLabConfigRepositoryImpl(get(), get()) }
+        single<HoYoLabAgentRepository> { HoYoLabAgentRepositoryImpl(get()) }
+        single<ForumRepository> { ForumRepositoryImpl(get()) }
+        single<ZzzCrypto> { ZzzCryptoImpl() }
 
-    // Use cases
-    single<CoverImageUseCase> { CoverImageUseCase(get()) }
-    single<BannerUseCase> { BannerUseCase(get(), get(), get()) }
-    single<LanguageUseCase> { LanguageUseCaseImpl(get()) }
-    single<OfficialNewsUseCase> { OfficialNewsUseCase(get(), get()) }
-    single<AgentsListUseCase> { AgentsListUseCase(get(), get()) }
-    single<AgentDetailUseCase> { AgentDetailUseCase(get(), get()) }
-    single<BangbooListUseCase> { BangbooListUseCase(get(), get()) }
-    single<BangbooDetailUseCase> { BangbooDetailUseCase(get(), get()) }
-    single<WEnginesListUseCase> { WEnginesListUseCase(get(), get()) }
-    single<WEngineDetailUseCase> { WEngineDetailUseCase(get(), get()) }
-    single<DrivesListUseCase> { DrivesListUseCase(get(), get()) }
-    single<AppInfoUseCase> { AppInfoUseCase() }
-    single<ThemeUseCase> { ThemeUseCase(get()) }
-    single<UpdateDatabaseUseCase> {
-        UpdateDatabaseUseCase(get(), get(), get(), get(), get(), get(), get(), get())
+        // Use cases
+        single<CoverImageUseCase> { CoverImageUseCase(get()) }
+        single<BannerUseCase> { BannerUseCase(get(), get(), get()) }
+        single<LanguageUseCase> { LanguageUseCaseImpl(get()) }
+        single<OfficialNewsUseCase> { OfficialNewsUseCase(get(), get()) }
+        single<AgentsListUseCase> { AgentsListUseCase(get(), get()) }
+        single<AgentDetailUseCase> { AgentDetailUseCase(get(), get()) }
+        single<BangbooListUseCase> { BangbooListUseCase(get(), get()) }
+        single<BangbooDetailUseCase> { BangbooDetailUseCase(get(), get()) }
+        single<WEnginesListUseCase> { WEnginesListUseCase(get(), get()) }
+        single<WEngineDetailUseCase> { WEngineDetailUseCase(get(), get()) }
+        single<DrivesListUseCase> { DrivesListUseCase(get(), get()) }
+        single<AppInfoUseCase> { AppInfoUseCase() }
+        single<ThemeUseCase> { ThemeUseCase(get()) }
+        single<UpdateDatabaseUseCase> {
+            UpdateDatabaseUseCase(get(), get(), get(), get(), get(), get(), get(), get())
+        }
+        single<UiScaleUseCase> { UiScaleUseCase(get()) }
+        single<HoYoLabManageUseCase> { HoYoLabManageUseCase(get(), get(), get()) }
+        single<HoYoLabAgentUseCase> { HoYoLabAgentUseCase(get(), get(), get(), get(), get()) }
+        single<HoYoLabPreferenceUseCase> { HoYoLabPreferenceUseCase(get()) }
+        single<GameRecordUseCase> { GameRecordUseCase(get(), get(), get(), get(), get()) }
+        single<ForumUseCase> { ForumUseCase(get()) }
+
+        single<CoroutineDispatcher> { Dispatchers.IO }
+
+        // ViewModels
+        viewModelOf(::InitViewModel)
+        viewModelOf(::MainContainerViewModel)
+        viewModelOf(::HomeViewModel)
+        viewModelOf(::WikiViewModel)
+        viewModelOf(::AgentsListViewModel)
+        viewModelOf(::AgentDetailViewModel)
+        viewModelOf(::WEnginesListViewModel)
+        viewModelOf(::WEngineDetailViewModel)
+        viewModelOf(::BangbooListViewModel)
+        viewModelOf(::BangbooDetailViewModel)
+        viewModelOf(::DrivesListViewModel)
+        viewModelOf(::SettingViewModel)
+        viewModelOf(::FeedbackViewModel)
+        viewModelOf(::HoYoLabSyncViewModel)
+        viewModelOf(::MyAgentsListViewModel)
+        viewModelOf(::MyAgentDetailViewModel)
     }
-    single<UiScaleUseCase> { UiScaleUseCase(get()) }
-    single<HoYoLabManageUseCase> { HoYoLabManageUseCase(get(), get(), get()) }
-    single<HoYoLabAgentUseCase> { HoYoLabAgentUseCase(get(), get(), get(), get(), get()) }
-    single<HoYoLabPreferenceUseCase> { HoYoLabPreferenceUseCase(get()) }
-    single<GameRecordUseCase> { GameRecordUseCase(get(), get(), get(), get(), get()) }
-    single<ForumUseCase> { ForumUseCase(get()) }
-
-    single<CoroutineDispatcher> { Dispatchers.IO }
-
-    // ViewModels
-    viewModelOf(::InitViewModel)
-    viewModelOf(::MainContainerViewModel)
-    viewModelOf(::HomeViewModel)
-    viewModelOf(::WikiViewModel)
-    viewModelOf(::AgentsListViewModel)
-    viewModelOf(::AgentDetailViewModel)
-    viewModelOf(::WEnginesListViewModel)
-    viewModelOf(::WEngineDetailViewModel)
-    viewModelOf(::BangbooListViewModel)
-    viewModelOf(::BangbooDetailViewModel)
-    viewModelOf(::DrivesListViewModel)
-    viewModelOf(::SettingViewModel)
-    viewModelOf(::FeedbackViewModel)
-    viewModelOf(::HoYoLabSyncViewModel)
-    viewModelOf(::MyAgentsListViewModel)
-    viewModelOf(::MyAgentDetailViewModel)
-}

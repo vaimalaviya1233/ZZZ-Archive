@@ -20,9 +20,16 @@ import ui.components.ZzzSwitch
 import ui.theme.AppTheme
 
 @Composable
-fun SettingItem(title: String, content: @Composable () -> Unit, onClick: () -> Unit) {
+fun SettingItem(
+    title: String,
+    content: @Composable () -> Unit,
+    onClick: () -> Unit
+) {
     Row(
-        modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand)
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .pointerHoverIcon(PointerIcon.Hand)
             .clickable(onClick = onClick)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -38,9 +45,15 @@ fun SettingItem(title: String, content: @Composable () -> Unit, onClick: () -> U
 }
 
 @Composable
-fun SettingSwitchItem(title: String, state: Boolean, onCheckChange: (Boolean) -> Unit) {
+fun SettingSwitchItem(
+    title: String,
+    state: Boolean,
+    onCheckChange: (Boolean) -> Unit
+) {
     Row(
-        modifier = Modifier.fillMaxWidth()
+        modifier =
+        Modifier
+            .fillMaxWidth()
             .padding(horizontal = AppTheme.spacing.s400),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically

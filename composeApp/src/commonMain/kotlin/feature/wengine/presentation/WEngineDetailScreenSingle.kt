@@ -31,11 +31,16 @@ import zzzarchive.composeapp.generated.resources.w_engine_effect
 
 @Composable
 fun WEngineDetailScreenSingle(
-    uiState: WEngineDetailState, onAction: (WEngineDetailAction) -> Unit
+    uiState: WEngineDetailState,
+    onAction: (WEngineDetailAction) -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .background(AppTheme.colors.surface).padding(horizontalSafePadding())
+        modifier =
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .background(AppTheme.colors.surface)
+            .padding(horizontalSafePadding())
             .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {

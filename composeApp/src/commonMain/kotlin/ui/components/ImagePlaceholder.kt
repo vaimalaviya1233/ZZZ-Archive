@@ -14,30 +14,36 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
+private val firstColorRow =
+    listOf(
+        Color(0XFFFFFFFF),
+        Color(0XFFF7F21E),
+        Color(0XFF61D0E4),
+        Color(0XFF6ED340),
+        Color(0XFFD351B1),
+        Color(0XFFEC2326),
+        Color(0XFF3E61C0)
+    )
 
-private val firstColorRow = listOf(
-    Color(0XFFFFFFFF),
-    Color(0XFFF7F21E),
-    Color(0XFF61D0E4),
-    Color(0XFF6ED340),
-    Color(0XFFD351B1),
-    Color(0XFFEC2326),
-    Color(0XFF3E61C0)
-)
+private val secondColorRow =
+    listOf(
+        Color(0XFF3E61C0),
+        Color(0XFF000000),
+        Color(0XFFD351B1),
+        Color(0XFF000000),
+        Color(0XFF61D0E4),
+        Color(0XFF000000),
+        Color(0XFFFFFFFF)
+    )
 
-private val secondColorRow = listOf(
-    Color(0XFF3E61C0),
-    Color(0XFF000000),
-    Color(0XFFD351B1),
-    Color(0XFF000000),
-    Color(0XFF61D0E4),
-    Color(0XFF000000),
-    Color(0XFFFFFFFF)
-)
-
-private val thirdColorRow = listOf(
-    Color(0XFF182343), Color(0XFFFFFFFF), Color(0XFF4D0D8E), Color(0XFF3E3E3E), Color(0XFF000000)
-)
+private val thirdColorRow =
+    listOf(
+        Color(0XFF182343),
+        Color(0XFFFFFFFF),
+        Color(0XFF4D0D8E),
+        Color(0XFF3E3E3E),
+        Color(0XFF000000)
+    )
 
 @Composable
 fun ImageNotFound() {

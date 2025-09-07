@@ -8,21 +8,18 @@ package feature.bangboo.domain
 import feature.bangboo.data.repository.FakeBangbooRepository
 import feature.bangboo.model.stubBangbooList
 import feature.setting.domain.FakeLanguageUseCase
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import utils.AgentAttribute
 import utils.ZzzRarity
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
-
 
 class BangbooListUseCaseTest {
-
     private val bangbooRepository = FakeBangbooRepository()
     private val languageUseCase = FakeLanguageUseCase()
     private val bangbooListUseCase = BangbooListUseCase(bangbooRepository, languageUseCase)
-
 
     @Test
     fun `Get bangboo list success`() = runTest {
@@ -45,44 +42,47 @@ class BangbooListUseCaseTest {
 
     @Test
     fun `Filter default`() {
-        val result = bangbooListUseCase.filterBangbooList(
-            bangbooList = stubBangbooList,
-            selectedRarities = emptySet(),
-            selectedAttributes = emptySet(),
-        )
+        val result =
+            bangbooListUseCase.filterBangbooList(
+                bangbooList = stubBangbooList,
+                selectedRarities = emptySet(),
+                selectedAttributes = emptySet()
+            )
         assertEquals(2, result.size)
-
     }
 
     @Test
     fun `Filter Penguinboo`() {
-        val result = bangbooListUseCase.filterBangbooList(
-            bangbooList = stubBangbooList,
-            selectedRarities = setOf(ZzzRarity.RARITY_A),
-            selectedAttributes = setOf(AgentAttribute.Ice),
-        )
+        val result =
+            bangbooListUseCase.filterBangbooList(
+                bangbooList = stubBangbooList,
+                selectedRarities = setOf(ZzzRarity.RARITY_A),
+                selectedAttributes = setOf(AgentAttribute.Ice)
+            )
         assertEquals("企鵝布", result.first().name)
         assertEquals(1, result.size)
     }
 
     @Test
     fun `Filter Butler`() {
-        val result = bangbooListUseCase.filterBangbooList(
-            bangbooList = stubBangbooList,
-            selectedRarities = setOf(ZzzRarity.RARITY_S),
-            selectedAttributes = setOf(AgentAttribute.Physical)
-        )
+        val result =
+            bangbooListUseCase.filterBangbooList(
+                bangbooList = stubBangbooList,
+                selectedRarities = setOf(ZzzRarity.RARITY_S),
+                selectedAttributes = setOf(AgentAttribute.Physical)
+            )
         assertEquals("巴特勒", result.first().name)
         assertEquals(1, result.size)
     }
 
     @Test
     fun `Filter not match`() {
-        val result = bangbooListUseCase.filterBangbooList(
-            bangbooList = stubBangbooList,
-            selectedRarities = setOf(ZzzRarity.RARITY_S),
-            selectedAttributes = setOf(AgentAttribute.Ether)
-        )
+        val result =
+            bangbooListUseCase.filterBangbooList(
+                bangbooList = stubBangbooList,
+                selectedRarities = setOf(ZzzRarity.RARITY_S),
+                selectedAttributes = setOf(AgentAttribute.Ether)
+            )
         assertEquals(emptyList(), result)
     }
 }

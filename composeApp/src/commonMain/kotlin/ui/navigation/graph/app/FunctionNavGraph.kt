@@ -16,7 +16,8 @@ import ui.navigation.graph.sharedNavGraph
 
 fun NavGraphBuilder.functionNavGraph(navActions: NavActions) {
     navigation(
-        route = MainFlow.Function.route, startDestination = MainFlow.Function.startScreen.route
+        route = MainFlow.Function.route,
+        startDestination = MainFlow.Function.startScreen.route
     ) {
         composable(Screen.Function.route) {
             FunctionScreen()

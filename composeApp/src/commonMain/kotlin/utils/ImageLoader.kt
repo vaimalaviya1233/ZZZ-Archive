@@ -19,42 +19,45 @@ import okio.FileSystem
 fun imageLoaderMemoryCache(
     context: PlatformContext,
     debug: Boolean = false
-): ImageLoader {
-    return ImageLoader.Builder(context).memoryCachePolicy(CachePolicy.ENABLED).memoryCache {
-        MemoryCache.Builder()
+): ImageLoader = ImageLoader
+    .Builder(context)
+    .memoryCachePolicy(CachePolicy.ENABLED)
+    .memoryCache {
+        MemoryCache
+            .Builder()
             // Set the max size to 25% of the app's available memory.
-            .maxSizePercent(context, percent = 0.25).strongReferencesEnabled(true).build()
+            .maxSizePercent(context, percent = 0.25)
+            .strongReferencesEnabled(true)
+            .build()
     }
-        // Show a short crossfade when loading images asynchronously.
-        .crossfade(true)
-        .apply {
-            if (debug) {
-                logger(DebugLogger())
-            }
-        }.build()
-}
+    // Show a short crossfade when loading images asynchronously.
+    .crossfade(true)
+    .apply {
+        if (debug) {
+            logger(DebugLogger())
+        }
+    }.build()
 
 fun imageLoaderDiskCache(
     context: PlatformContext,
     debug: Boolean = false
-): ImageLoader {
-    return ImageLoader.Builder(context)
-        .diskCachePolicy(CachePolicy.ENABLED)
-        .networkCachePolicy(CachePolicy.ENABLED)
-        .diskCache {
-            newDiskCache()
+): ImageLoader = ImageLoader
+    .Builder(context)
+    .diskCachePolicy(CachePolicy.ENABLED)
+    .networkCachePolicy(CachePolicy.ENABLED)
+    .diskCache {
+        newDiskCache()
+    }
+    // Show a short crossfade when loading images asynchronously.
+    .crossfade(true)
+    .apply {
+        if (debug) {
+            logger(DebugLogger())
         }
-        // Show a short crossfade when loading images asynchronously.
-        .crossfade(true)
-        .apply {
-            if (debug) {
-                logger(DebugLogger())
-            }
-        }.build()
-}
+    }.build()
 
-fun newDiskCache(): DiskCache {
-    return DiskCache.Builder().directory(FileSystem.SYSTEM_TEMPORARY_DIRECTORY / "image_cache")
-        .maxSizeBytes(512L * 1024 * 1024) // 512MB
-        .build()
-}
+fun newDiskCache(): DiskCache = DiskCache
+    .Builder()
+    .directory(FileSystem.SYSTEM_TEMPORARY_DIRECTORY / "image_cache")
+    .maxSizeBytes(512L * 1024 * 1024) // 512MB
+    .build()

@@ -5,19 +5,17 @@
 
 package feature.hoyolab.presentation
 
-
 import MainDispatcherRule
 import feature.hoyolab.domain.HoYoLabAgentUseCase
 import feature.hoyolab.model.stubMyAgentsList
 import io.mockk.coEvery
 import io.mockk.mockk
-import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.junit.Rule
 
 class MyAgentsListViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 

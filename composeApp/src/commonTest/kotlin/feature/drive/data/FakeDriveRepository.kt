@@ -18,16 +18,13 @@ class FakeDriveRepository : DriveRepository {
         this.isError = isError
     }
 
-    override suspend fun getDrivesList(languagePath: String): Flow<List<DrivesListItemEntity>> =
-        flow {
+    override suspend fun getDrivesList(languagePath: String): Flow<List<DrivesListItemEntity>> = flow {
         emit(listOf(stubDrivesListItemEntity))
     }
 
-    override suspend fun requestAndUpdateDrivesListDB(languagePath: String): Result<Unit> {
-        return if (isError) {
-            Result.failure(Exception())
-        } else {
-            Result.success(Unit)
-        }
+    override suspend fun requestAndUpdateDrivesListDB(languagePath: String): Result<Unit> = if (isError) {
+        Result.failure(Exception())
+    } else {
+        Result.success(Unit)
     }
 }

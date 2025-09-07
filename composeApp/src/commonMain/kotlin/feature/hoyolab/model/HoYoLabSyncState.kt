@@ -20,5 +20,5 @@ data class SyncedAccountsListItem(
     val nickname: String,
     val profileUrl: String,
     val cardUrl: String,
-    val datetime: String,
+    val datetime: String
 )

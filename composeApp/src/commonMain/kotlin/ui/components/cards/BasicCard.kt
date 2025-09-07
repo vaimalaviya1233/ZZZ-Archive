@@ -35,7 +35,6 @@ import zzzarchive.composeapp.generated.resources.ic_arrow_back
 import zzzarchive.composeapp.generated.resources.ic_arrow_next
 import zzzarchive.composeapp.generated.resources.previous
 
-
 @Composable
 fun ContentCard(
     modifier: Modifier = Modifier,
@@ -43,7 +42,9 @@ fun ContentCard(
     content: @Composable ColumnScope.() -> Unit
 ) {
     Column(
-        modifier = modifier.clip(AppTheme.shape.r400)
+        modifier =
+        modifier
+            .clip(AppTheme.shape.r400)
             .background(AppTheme.colors.surfaceContainer)
             .padding(if (hasDefaultPadding) cardPadding() else 0.dp)
     ) {
@@ -58,7 +59,10 @@ fun CardHeader(
     endContent: @Composable RowScope.() -> Unit = {}
 ) {
     Row(
-        modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp)
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .heightIn(min = 56.dp)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
@@ -84,7 +88,10 @@ fun HoveredIndicatorHeader(
 ) {
     val coroutineScope = rememberCoroutineScope()
     Row(
-        modifier = Modifier.fillMaxWidth().heightIn(min = 56.dp)
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .heightIn(min = 56.dp)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically

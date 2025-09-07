@@ -40,38 +40,51 @@ data class DvdState(
 )
 
 @Composable
-fun DVDScreensaver(modifier: Modifier, colors: List<Color>, imageSize: Int = 24) {
+fun DVDScreensaver(
+    modifier: Modifier,
+    colors: List<Color>,
+    imageSize: Int = 24
+) {
     BoxWithConstraints(modifier = modifier) {
         var currentColorIndex by remember { mutableStateOf(0) }
         var dvdState by remember { mutableStateOf(DvdState(size = imageSize)) }
-        val statusBarHeight = WindowInsets.statusBars.asPaddingValues().calculateTopPadding().value
+        val statusBarHeight =
+            WindowInsets.statusBars
+                .asPaddingValues()
+                .calculateTopPadding()
+                .value
         val screenWidth = with(LocalDensity.current) { maxWidth.toPx() }
         val screenHeight = with(LocalDensity.current) { maxHeight.toPx() }
 
         LaunchedEffect(key1 = dvdState) {
             while (true) {
                 delay(8) // ~60 FPS
-                dvdState = updateDVDPosition(
-                    dvdState,
-                    screenWidth,
-                    screenHeight,
-                    statusBarHeight,
-                    onBounce = {
-                    currentColorIndex = (currentColorIndex + 1) % colors.size
-                })
+                dvdState =
+                    updateDVDPosition(
+                        dvdState,
+                        screenWidth,
+                        screenHeight,
+                        statusBarHeight,
+                        onBounce = {
+                            currentColorIndex = (currentColorIndex + 1) % colors.size
+                        }
+                    )
             }
         }
         Icon(
-            modifier = Modifier.size(imageSize.dp).graphicsLayer {
-                translationX = dvdState.offsetX
-                translationY = dvdState.offsetY
-            }.background(colors[currentColorIndex], CircleShape).padding(AppTheme.spacing.s300),
+            modifier =
+            Modifier
+                .size(imageSize.dp)
+                .graphicsLayer {
+                    translationX = dvdState.offsetX
+                    translationY = dvdState.offsetY
+                }.background(colors[currentColorIndex], CircleShape)
+                .padding(AppTheme.spacing.s300),
             imageVector = vectorResource(Res.drawable.ic_bangboo), // Replace with your logo
             contentDescription = "DVD screen saver logo",
             tint = AppTheme.colors.surface
         )
     }
-
 }
 
 private fun updateDVDPosition(

@@ -33,15 +33,22 @@ import zzzarchive.composeapp.generated.resources.w_engine_effect
 
 @Composable
 fun WEngineDetailScreenDual(
-    uiState: WEngineDetailState, onAction: (WEngineDetailAction) -> Unit
+    uiState: WEngineDetailState,
+    onAction: (WEngineDetailAction) -> Unit
 ) {
     Row(
-        modifier = Modifier.fillMaxSize().background(AppTheme.colors.surface)
+        modifier =
+        Modifier
+            .fillMaxSize()
+            .background(AppTheme.colors.surface)
             .padding(horizontalSafePadding()),
         horizontalArrangement = Arrangement.spacedBy(containerGap())
     ) {
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+            modifier =
+            Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
                 .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
@@ -52,18 +59,19 @@ fun WEngineDetailScreenDual(
         }
 
         Column(
-            modifier = Modifier.weight(1f).verticalScroll(rememberScrollState())
+            modifier =
+            Modifier
+                .weight(1f)
+                .verticalScroll(rememberScrollState())
                 .padding(verticalSafePadding()),
             verticalArrangement = Arrangement.spacedBy(contentGap())
         ) {
             HighLightTextCard(
-                stringResource(Res.string.w_engine_effect), uiState.wEngineDetail.skill
+                stringResource(Res.string.w_engine_effect),
+                uiState.wEngineDetail.skill
             )
             MaterialsListCard(uiState.wEngineDetail.levelMaterials)
             TextCard(stringResource(Res.string.additional_info), uiState.wEngineDetail.background)
         }
     }
 }
-
-
-

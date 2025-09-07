@@ -28,7 +28,7 @@ fun DrivesListScreen(onBackClick: () -> Unit) {
 @Composable
 private fun DrivesListContent(
     uiState: DrivesListState,
-    onAction: (DrivesListAction) -> Unit,
+    onAction: (DrivesListAction) -> Unit
 ) {
     if (AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
         DrivesListScreenSingle(uiState, onAction)

@@ -35,16 +35,21 @@ import zzzarchive.composeapp.generated.resources.piece_set
 
 @Composable
 fun DriveDetailCard(
-    modifier: Modifier = Modifier, drivesListItemEntity: DrivesListItemEntity, onDismiss: () -> Unit
+    modifier: Modifier = Modifier,
+    drivesListItemEntity: DrivesListItemEntity,
+    onDismiss: () -> Unit
 ) {
     Card(
-        modifier = modifier, colors = CardDefaults.cardColors(
+        modifier = modifier,
+        colors =
+        CardDefaults.cardColors(
             containerColor = AppTheme.colors.surfaceContainer,
             contentColor = AppTheme.colors.onSurfaceContainer
         )
     ) {
         Box(
-            Modifier.fillMaxWidth()
+            Modifier
+                .fillMaxWidth()
                 .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350)
         ) {
             Text(
@@ -62,12 +67,12 @@ fun DriveDetailCard(
             }
         }
         Column(
-            Modifier.padding(
-                start = AppTheme.spacing.s450,
-                end = AppTheme.spacing.s450,
-                bottom = AppTheme.spacing.s450
-            )
-                .verticalScroll(rememberScrollState()),
+            Modifier
+                .padding(
+                    start = AppTheme.spacing.s450,
+                    end = AppTheme.spacing.s450,
+                    bottom = AppTheme.spacing.s450
+                ).verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)
         ) {
@@ -84,7 +89,9 @@ fun DriveDetailCard(
                     color = AppTheme.colors.onSurfaceVariant
                 )
                 Text(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier =
+                    Modifier
+                        .fillMaxWidth()
                         .clip(AppTheme.shape.r400)
                         .background(AppTheme.colors.surface)
                         .padding(
@@ -104,7 +111,9 @@ fun DriveDetailCard(
                     color = AppTheme.colors.onSurfaceVariant
                 )
                 Text(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier =
+                    Modifier
+                        .fillMaxWidth()
                         .clip(AppTheme.shape.r400)
                         .background(AppTheme.colors.surface)
                         .padding(

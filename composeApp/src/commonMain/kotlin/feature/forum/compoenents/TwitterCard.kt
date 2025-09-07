@@ -81,26 +81,28 @@ fun TwitterCard(twitterList: List<TwitterForumListState>) {
 }
 
 @Composable
-private fun Header(isHovered: Boolean, lazyListState: LazyListState) {
-    HoveredIndicatorHeader(
-        title = null, isHovered = isHovered, lazyListState = lazyListState, startContent = {
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    modifier = Modifier.size(AppTheme.size.iconLarge),
-                    imageVector = vectorResource(Res.drawable.ic_twitter),
-                    contentDescription = "X",
-                    tint = AppTheme.colors.onSurfaceVariant
-                )
-                Text(
-                    text = stringResource(Res.string.popular),
-                    style = AppTheme.typography.titleMedium,
-                    color = AppTheme.colors.onSurfaceVariant
-                )
-            }
-        })
+private fun Header(
+    isHovered: Boolean,
+    lazyListState: LazyListState
+) {
+    HoveredIndicatorHeader(title = null, isHovered = isHovered, lazyListState = lazyListState, startContent = {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                modifier = Modifier.size(AppTheme.size.iconLarge),
+                imageVector = vectorResource(Res.drawable.ic_twitter),
+                contentDescription = "X",
+                tint = AppTheme.colors.onSurfaceVariant
+            )
+            Text(
+                text = stringResource(Res.string.popular),
+                style = AppTheme.typography.titleMedium,
+                color = AppTheme.colors.onSurfaceVariant
+            )
+        }
+    })
 }
 
 @Composable
@@ -109,7 +111,7 @@ private fun TwitterListItem(
     artworkName: String,
     artworkUrl: String,
     profileName: String,
-    profileUrl: String,
+    profileUrl: String
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val urlHandler = LocalUriHandler.current
@@ -119,11 +121,16 @@ private fun TwitterListItem(
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {
         Box(
-            modifier = Modifier.fillMaxSize().aspectRatio(1f).clip(AppTheme.shape.r400)
+            modifier =
+            Modifier
+                .fillMaxSize()
+                .aspectRatio(1f)
+                .clip(AppTheme.shape.r400)
                 .pointerHoverIcon(PointerIcon.Hand)
                 .clickable(interactionSource = interactionSource, indication = null) {
                     urlHandler.openUri(artworkUrl)
-                }) {
+                }
+        ) {
             AsyncImage(
                 modifier = Modifier.matchParentSize().blur(8.dp),
                 model = imageUrl,
@@ -138,10 +145,14 @@ private fun TwitterListItem(
                 contentDescription = artworkName,
                 error = {
                     ImageNotFound()
-                })
+                }
+            )
         }
         Text(
-            modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand)
+            modifier =
+            Modifier
+                .fillMaxWidth()
+                .pointerHoverIcon(PointerIcon.Hand)
                 .clickable(interactionSource = interactionSource, indication = null) {
                     urlHandler.openUri(artworkUrl)
                 },
@@ -152,7 +163,8 @@ private fun TwitterListItem(
             maxLines = 1
         )
         Text(
-            modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand).clickable {
+            modifier =
+            Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand).clickable {
                 urlHandler.openUri(profileUrl)
             },
             text = profileName,
@@ -163,4 +175,3 @@ private fun TwitterListItem(
         )
     }
 }
-

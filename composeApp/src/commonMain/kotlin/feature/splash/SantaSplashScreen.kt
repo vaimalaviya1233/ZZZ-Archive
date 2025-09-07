@@ -26,8 +26,10 @@ import zzzarchive.composeapp.generated.resources.img_snow
 @Composable
 fun SantaSplashScreen() {
     Box(
-        modifier = Modifier.fillMaxSize()
-            .background(Brush.verticalGradient(listOf(Color(0xFF000223), Color(0xFF0C0934)))),
+        modifier =
+        Modifier
+            .fillMaxSize()
+            .background(Brush.verticalGradient(listOf(Color(0xFF000223), Color(0xFF0C0934))))
     ) {
         Image(
             modifier = Modifier.fillMaxSize(),
@@ -36,10 +38,13 @@ fun SantaSplashScreen() {
             contentScale = ContentScale.Crop
         )
         Image(
-            modifier = Modifier.align(Alignment.Center).widthIn(max = 480.dp)
+            modifier =
+            Modifier
+                .align(Alignment.Center)
+                .widthIn(max = 480.dp)
                 .fillMaxWidth(0.5f),
             painter = painterResource(Res.drawable.img_santa_lucy),
-            contentDescription = null,
+            contentDescription = null
         )
     }
 }

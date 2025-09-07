@@ -5,13 +5,12 @@
 
 package network
 
-
 interface GoogleDocHttp {
     suspend fun submitFeedbackForm(
         issueType: String,
         language: String,
         issueContent: String,
-        nickname: String,
+        email: String,
         appVersion: String,
         deviceName: String,
         operatingSystem: String

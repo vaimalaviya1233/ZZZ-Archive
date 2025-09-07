@@ -33,7 +33,12 @@ class GameRecordUseCase(
         try {
             val lToken = zzzCrypto.decryptData(account.lToken)
             val ltUid = zzzCrypto.decryptData(account.ltUid)
-            hoYoLabConfigRepository.requestGameRecord(uid, region, lToken, ltUid).fold(onSuccess = {
+            hoYoLabConfigRepository.requestGameRecord(
+                uid = uid,
+                region = region,
+                lToken = lToken,
+                ltUid = ltUid
+            ).fold(onSuccess = {
                 return Result.success(it.data)
             }, onFailure = {
                 return Result.failure(it)
@@ -43,7 +48,6 @@ class GameRecordUseCase(
             preferencesRepository.setDefaultHoYoLabAccountUid(0)
             return Result.failure(e)
         }
-
     }
 
     fun getGameRecordPeriodically(perMinutes: Int): Flow<Result<GameRecordData>> = flow {
@@ -59,7 +63,7 @@ class GameRecordUseCase(
         val languageCode = languageUseCase.getLanguage().first().officialCode
         val lToken = zzzCrypto.decryptData(account.first().lToken)
         val ltUid = zzzCrypto.decryptData(account.first().ltUid)
-        val result = hoYoLabConfigRepository.requestSign(languageCode, lToken, ltUid)
+        val result = hoYoLabConfigRepository.requestSign(languageCode = languageCode, lToken = lToken, ltUid = ltUid)
         result.fold(onSuccess = {
             return Result.success(it)
         }, onFailure = {

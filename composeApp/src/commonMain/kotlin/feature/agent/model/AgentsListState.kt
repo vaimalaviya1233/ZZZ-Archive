@@ -9,7 +9,6 @@ import utils.AgentAttribute
 import utils.AgentSpecialty
 import utils.ZzzRarity
 
-
 data class AgentsListState(
     val agentsList: List<AgentListItem> = emptyList(),
     val filteredAgentsList: List<AgentListItem> = emptyList(),

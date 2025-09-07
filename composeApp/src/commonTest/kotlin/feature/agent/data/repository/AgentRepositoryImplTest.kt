@@ -7,12 +7,12 @@ package feature.agent.data.repository
 
 import feature.agent.data.database.FakeAgentListDao
 import feature.agent.model.stubAgentDetail
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.runTest
-import network.FakeZzzHttp
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
+import network.FakeZzzHttp
 
 class AgentRepositoryImplTest {
     private val httpClient = FakeZzzHttp()
@@ -34,12 +34,11 @@ class AgentRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN Agents list DB is empty WHEN Get agents list THEN Auto request and return updated DB`() =
-        runTest {
-            agentsListDao.deleteAgentsList()
-            val result = repository.getAgentsList("").first()
-            assertEquals(3, result.size)
-        }
+    fun `GIVEN Agents list DB is empty WHEN Get agents list THEN Auto request and return updated DB`() = runTest {
+        agentsListDao.deleteAgentsList()
+        val result = repository.getAgentsList("").first()
+        assertEquals(3, result.size)
+    }
 
     @Test
     fun `WHEN Request agents list error THEN return local DB`() = runTest {
@@ -49,13 +48,12 @@ class AgentRepositoryImplTest {
     }
 
     @Test
-    fun `GIVEN Agents list DB is empty WHEN Request agents list error THEN return empty DB`() =
-        runTest {
-            httpClient.setError(true)
-            agentsListDao.deleteAgentsList()
-            val result = repository.getAgentsList("").first()
-            assertEquals(0, result.size)
-        }
+    fun `GIVEN Agents list DB is empty WHEN Request agents list error THEN return empty DB`() = runTest {
+        httpClient.setError(true)
+        agentsListDao.deleteAgentsList()
+        val result = repository.getAgentsList("").first()
+        assertEquals(0, result.size)
+    }
 
     @Test
     fun `Get agent detail success`() = runTest {

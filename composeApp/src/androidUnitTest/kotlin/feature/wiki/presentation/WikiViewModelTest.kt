@@ -5,7 +5,6 @@
 
 package feature.wiki.presentation
 
-
 import MainDispatcherRule
 import feature.agent.domain.AgentsListUseCase
 import feature.agent.model.stubAgentsList
@@ -17,15 +16,14 @@ import feature.wengine.domain.WEnginesListUseCase
 import feature.wengine.model.stubWEnginesList
 import io.mockk.coEvery
 import io.mockk.mockk
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.onEach
-import org.junit.Rule
 import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.onEach
+import org.junit.Rule
 
 class WikiViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
@@ -41,9 +39,13 @@ class WikiViewModelTest {
         coEvery { wEnginesListUseCase.invoke() } returns flowOf(stubWEnginesList)
         coEvery { bangbooListUseCase.invoke() } returns flowOf(stubBangbooList)
         coEvery { drivesListUseCase.invoke() } returns flowOf(listOf(stubDrivesListItemEntity))
-        viewModel = WikiViewModel(
-            agentsListUseCase, wEnginesListUseCase, bangbooListUseCase, drivesListUseCase
-        )
+        viewModel =
+            WikiViewModel(
+                agentsListUseCase,
+                wEnginesListUseCase,
+                bangbooListUseCase,
+                drivesListUseCase
+            )
     }
 
     @Test

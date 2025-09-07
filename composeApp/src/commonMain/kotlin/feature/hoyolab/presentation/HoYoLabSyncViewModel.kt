@@ -21,7 +21,6 @@ class HoYoLabSyncViewModel(
     private val hoYoLabManageUseCase: HoYoLabManageUseCase,
     private val hoYoLabPreferenceUseCase: HoYoLabPreferenceUseCase
 ) : ViewModel() {
-
     private var _uiState = MutableStateFlow(HoYoLabSyncState())
     val uiState = _uiState.asStateFlow()
 
@@ -36,7 +35,7 @@ class HoYoLabSyncViewModel(
         when (action) {
             is HoYoLabSyncAction.ConnectToHoYoLabAndAdd -> {
                 viewModelScope.launch {
-                    connectToHoYoLabAndSaveToDB(action.region, action.lToken, action.ltUid)
+                    connectToHoYoLabAndSaveToDB(server = action.region, lToken = action.lToken, ltUid = action.ltUid)
                 }
             }
 
@@ -77,27 +76,35 @@ class HoYoLabSyncViewModel(
     private suspend fun observeAccountList() {
         hoYoLabManageUseCase.getAllAccountsFromDB().collect { accountList ->
             _uiState.update { state ->
-                state.copy(syncedAccounts = accountList.map {
-                    SyncedAccountsListItem(
-                        uid = it.uid.toString(),
-                        regionName = it.regionName,
-                        level = it.level.toString(),
-                        nickname = it.nickName,
-                        profileUrl = it.profileUrl,
-                        cardUrl = it.cardUrl,
-                        datetime = hoYoLabManageUseCase.convertToLocalDatetime(it.updatedAt)
-                    )
-                })
+                state.copy(
+                    syncedAccounts =
+                    accountList.map {
+                        SyncedAccountsListItem(
+                            uid = it.uid.toString(),
+                            regionName = it.regionName,
+                            level = it.level.toString(),
+                            nickname = it.nickName,
+                            profileUrl = it.profileUrl,
+                            cardUrl = it.cardUrl,
+                            datetime = hoYoLabManageUseCase.convertToLocalDatetime(it.updatedAt)
+                        )
+                    }
+                )
             }
         }
     }
 
-    private suspend fun connectToHoYoLabAndSaveToDB(server: String, lToken: String, ltUid: String) {
-        val result = hoYoLabManageUseCase.requestUserInfoAndSave(server, lToken, ltUid)
+    private suspend fun connectToHoYoLabAndSaveToDB(
+        server: String,
+        lToken: String,
+        ltUid: String
+    ) {
+        val result = hoYoLabManageUseCase.requestUserInfoAndSave(region = server, lToken = lToken, ltUid = ltUid)
         result.fold(onSuccess = {
             _uiState.update { state ->
                 state.copy(
-                    openAddAccountDialog = false, errorMessage = ""
+                    openAddAccountDialog = false,
+                    errorMessage = ""
                 )
             }
         }, onFailure = {

@@ -22,10 +22,11 @@ data class AssetVersionResponse(
     val coverImagesList: Int
 )
 
-val stubAssetVersionResponse = AssetVersionResponse(
-    agentsList = 2,
-    wEnginesList = 2,
-    bangbooList = 2,
-    drivesList = 2,
-    coverImagesList = 2
-)
+val stubAssetVersionResponse =
+    AssetVersionResponse(
+        agentsList = 2,
+        wEnginesList = 2,
+        bangbooList = 2,
+        drivesList = 2,
+        coverImagesList = 2
+    )

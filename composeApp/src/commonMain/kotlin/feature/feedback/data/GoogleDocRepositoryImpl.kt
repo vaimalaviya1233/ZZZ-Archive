@@ -8,7 +8,6 @@ package feature.feedback.data
 import network.GoogleDocHttp
 
 class GoogleDocRepositoryImpl(private val httpClient: GoogleDocHttp) : GoogleDocRepository {
-
     override suspend fun submitFeedbackForm(
         issueType: String,
         language: String,
@@ -17,20 +16,18 @@ class GoogleDocRepositoryImpl(private val httpClient: GoogleDocHttp) : GoogleDoc
         appVersion: String,
         deviceName: String,
         operatingSystem: String
-    ): Result<Unit> {
-        return try {
-                httpClient.submitFeedbackForm(
-                    issueType,
-                    language,
-                    issueDesc,
-                    email,
-                    appVersion,
-                    deviceName,
-                    operatingSystem
-                )
-            Result.success(Unit)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
+    ): Result<Unit> = try {
+        httpClient.submitFeedbackForm(
+            issueType = issueType,
+            language = language,
+            issueContent = issueDesc,
+            email = email,
+            appVersion = appVersion,
+            deviceName = deviceName,
+            operatingSystem = operatingSystem
+        )
+        Result.success(Unit)
+    } catch (e: Exception) {
+        Result.failure(e)
     }
 }

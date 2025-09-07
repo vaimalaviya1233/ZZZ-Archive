@@ -24,21 +24,23 @@ data class WEnginesListItemResponse(
     val specialty: String
 )
 
-val stubWEnginesListResponse = WEnginesListResponse(
-    wEngines = listOf(
-        WEnginesListItemResponse(
-            id = 44,
-            name = "好鬥的阿炮",
-            isLeak = false,
-            rarity = 4,
-            specialty = "support",
-        ),
-        WEnginesListItemResponse(
-            id = 47,
-            name = "玉壺青冰",
-            isLeak = false,
-            rarity = 5,
-            specialty = "stun",
+val stubWEnginesListResponse =
+    WEnginesListResponse(
+        wEngines =
+        listOf(
+            WEnginesListItemResponse(
+                id = 44,
+                name = "好鬥的阿炮",
+                isLeak = false,
+                rarity = 4,
+                specialty = "support"
+            ),
+            WEnginesListItemResponse(
+                id = 47,
+                name = "玉壺青冰",
+                isLeak = false,
+                rarity = 5,
+                specialty = "stun"
+            )
         )
     )
-)

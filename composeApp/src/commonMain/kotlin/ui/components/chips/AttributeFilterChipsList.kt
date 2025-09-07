@@ -30,25 +30,31 @@ fun AttributeFilterChipsList(
     val attributes = AgentAttribute.entries.toTypedArray().dropLast(1)
 
     FlowRow(
-        modifier = Modifier.fillMaxWidth().conditional(maxLine != Int.MAX_VALUE) {
-            horizontalScroll(rememberScrollState())
-        }.padding(horizontal = cardPadding()),
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .conditional(maxLine != Int.MAX_VALUE) {
+                horizontalScroll(rememberScrollState())
+            }.padding(horizontal = cardPadding()),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         maxLines = maxLine
     ) {
         attributes.forEach { attribute ->
-            ZzzFilterChip(text = stringResource(attribute.textRes),
+            ZzzFilterChip(
+                text = stringResource(attribute.textRes),
                 iconRes = attribute.iconRes,
                 selected = selectedAttributes.contains(attribute),
                 onClick = {
-                    val newSelection = if (selectedAttributes.contains(attribute)) {
-                        selectedAttributes - attribute
-                    } else {
-                        selectedAttributes + attribute
-                    }
+                    val newSelection =
+                        if (selectedAttributes.contains(attribute)) {
+                            selectedAttributes - attribute
+                        } else {
+                            selectedAttributes + attribute
+                        }
                     onSelectionChanged(newSelection)
-                })
+                }
+            )
         }
     }
 }

@@ -7,6 +7,8 @@ package utils
 
 sealed class ZzzResult<out R> {
     data object Loading : ZzzResult<Nothing>()
+
     data class Success<out T>(val data: T) : ZzzResult<T>()
+
     data class Error(val message: String) : ZzzResult<Nothing>()
 }

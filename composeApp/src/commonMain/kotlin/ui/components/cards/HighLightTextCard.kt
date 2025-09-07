@@ -15,7 +15,11 @@ import ui.utils.cardPaddingWithHeader
 import ui.utils.highlightText
 
 @Composable
-fun HighLightTextCard(title: String, content: String, subTitle: String = "") {
+fun HighLightTextCard(
+    title: String,
+    content: String,
+    subTitle: String = ""
+) {
     ContentCard(
         hasDefaultPadding = false
     ) {
@@ -29,7 +33,6 @@ fun HighLightTextCard(title: String, content: String, subTitle: String = "") {
             )
         }
 
-
         Text(
             modifier = Modifier.fillMaxWidth().padding(cardPaddingWithHeader()),
             text = highlightText(content, AppTheme.colors),
@@ -38,4 +41,3 @@ fun HighLightTextCard(title: String, content: String, subTitle: String = "") {
         )
     }
 }
-

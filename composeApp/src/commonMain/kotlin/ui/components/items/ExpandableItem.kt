@@ -33,11 +33,18 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_arrow_down_ios
 
 @Composable
-fun ExpandableItem(title: String, subtitle: String, description: String) {
+fun ExpandableItem(
+    title: String,
+    subtitle: String,
+    description: String
+) {
     var expanded by remember { mutableStateOf(false) }
     Column {
         Row(
-            modifier = Modifier.fillMaxWidth().pointerHoverIcon(PointerIcon.Hand)
+            modifier =
+            Modifier
+                .fillMaxWidth()
+                .pointerHoverIcon(PointerIcon.Hand)
                 .clickable { expanded = !expanded }
                 .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300),
             horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400),
@@ -56,7 +63,8 @@ fun ExpandableItem(title: String, subtitle: String, description: String) {
                 color = AppTheme.colors.onSurfaceVariant
             )
             Icon(
-                modifier = Modifier.size(AppTheme.size.iconSmall).graphicsLayer {
+                modifier =
+                Modifier.size(AppTheme.size.iconSmall).graphicsLayer {
                     rotationZ = if (expanded) 180f else 0f
                 },
                 imageVector = vectorResource(Res.drawable.ic_arrow_down_ios),
@@ -66,7 +74,8 @@ fun ExpandableItem(title: String, subtitle: String, description: String) {
         }
         AnimatedVisibility(visible = expanded) {
             Text(
-                modifier = Modifier.padding(
+                modifier =
+                Modifier.padding(
                     start = AppTheme.spacing.s400,
                     top = AppTheme.spacing.s300,
                     end = AppTheme.spacing.s400,

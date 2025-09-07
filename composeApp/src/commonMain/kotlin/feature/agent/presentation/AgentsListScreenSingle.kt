@@ -40,7 +40,9 @@ fun AgentsListScreenSingle(
     val sheetState = rememberModalBottomSheetState()
     var showBottomSheet by remember { mutableStateOf(false) }
     val isFiltered =
-        uiState.selectedRarity.isNotEmpty() || uiState.selectedAttributes.isNotEmpty() || uiState.selectedSpecialties.isNotEmpty() || uiState.selectedFactionId != 0
+        uiState.selectedRarity.isNotEmpty() || uiState.selectedAttributes.isNotEmpty() ||
+            uiState.selectedSpecialties.isNotEmpty() ||
+            uiState.selectedFactionId != 0
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         AnimatedVisibility(AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact) {
             TopBarScaffold(
@@ -49,13 +51,16 @@ fun AgentsListScreenSingle(
                     onAction(AgentsListAction.ClickBack)
                 },
                 actions = {
-                    ZzzIconButton(iconRes = if (isFiltered) Res.drawable.ic_filter_filled else Res.drawable.ic_filter,
+                    ZzzIconButton(
+                        iconRes = if (isFiltered) Res.drawable.ic_filter_filled else Res.drawable.ic_filter,
                         contentDescriptionRes = Res.string.filter,
                         tint = if (isFiltered) AppTheme.colors.primary else AppTheme.colors.onSurface,
                         onClick = {
                             showBottomSheet = true
-                        })
-                })
+                        }
+                    )
+                }
+            )
         }
     }) { scaffoldPadding ->
         Column(
@@ -80,7 +85,8 @@ fun AgentsListScreenSingle(
             )
         }
         if (showBottomSheet) {
-            AgentFilterBottomSheet(sheetState = sheetState,
+            AgentFilterBottomSheet(
+                sheetState = sheetState,
                 uiState = uiState,
                 onRarityChipSelectionChanged = {
                     onAction(AgentsListAction.ChangeRarityFilter(it))
@@ -94,7 +100,8 @@ fun AgentsListScreenSingle(
                 onFactionChipSelectionChanged = {
                     onAction(AgentsListAction.ChangeFactionFilter(it))
                 },
-                onDismiss = { showBottomSheet = false })
+                onDismiss = { showBottomSheet = false }
+            )
         }
     }
 }

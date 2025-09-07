@@ -30,7 +30,6 @@ import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.back
 import zzzarchive.composeapp.generated.resources.ic_arrow_back
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopBarScaffold(
@@ -39,30 +38,36 @@ fun TopBarScaffold(
     onBackClick: () -> Unit = {},
     actions: @Composable RowScope.() -> Unit = {}
 ) {
-    CenterAlignedTopAppBar(title = {
-        title?.let {
-            Text(
-                text = title, style = AppTheme.typography.titleLarge
-            )
-        }
-    }, navigationIcon = {
-        if (hasBack) {
-            ZzzIconButton(
-                modifier = Modifier.padding(start = AppTheme.spacing.s400),
-                iconRes = Res.drawable.ic_arrow_back,
-                contentDescriptionRes = Res.string.back,
-                onClick = onBackClick
-            )
-        }
-    }, actions = {
-        actions()
-        Spacer(Modifier.size(AppTheme.spacing.s400))
-    }, colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-        containerColor = AppTheme.colors.surfaceContainer,
-        navigationIconContentColor = AppTheme.colors.onSurfaceContainer,
-        titleContentColor = AppTheme.colors.onSurfaceContainer,
-        actionIconContentColor = AppTheme.colors.onSurfaceContainer,
-    )
+    CenterAlignedTopAppBar(
+        title = {
+            title?.let {
+                Text(
+                    text = title,
+                    style = AppTheme.typography.titleLarge
+                )
+            }
+        },
+        navigationIcon = {
+            if (hasBack) {
+                ZzzIconButton(
+                    modifier = Modifier.padding(start = AppTheme.spacing.s400),
+                    iconRes = Res.drawable.ic_arrow_back,
+                    contentDescriptionRes = Res.string.back,
+                    onClick = onBackClick
+                )
+            }
+        },
+        actions = {
+            actions()
+            Spacer(Modifier.size(AppTheme.spacing.s400))
+        },
+        colors =
+        TopAppBarDefaults.centerAlignedTopAppBarColors(
+            containerColor = AppTheme.colors.surfaceContainer,
+            navigationIconContentColor = AppTheme.colors.onSurfaceContainer,
+            titleContentColor = AppTheme.colors.onSurfaceContainer,
+            actionIconContentColor = AppTheme.colors.onSurfaceContainer
+        )
     )
 }
 
@@ -74,7 +79,10 @@ fun TopBarRound(
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     Box(
-        modifier = Modifier.fillMaxWidth().clip(CircleShape)
+        modifier =
+        Modifier
+            .fillMaxWidth()
+            .clip(CircleShape)
             .background(AppTheme.colors.surfaceContainer)
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s300)
     ) {

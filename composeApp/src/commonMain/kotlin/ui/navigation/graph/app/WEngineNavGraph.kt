@@ -13,7 +13,8 @@ import ui.navigation.graph.sharedNavGraph
 
 fun NavGraphBuilder.wEngineNavGraph(navActions: NavActions) {
     navigation(
-        route = MainFlow.WEngine.route, startDestination = MainFlow.WEngine.startScreen.route
+        route = MainFlow.WEngine.route,
+        startDestination = MainFlow.WEngine.startScreen.route
     ) {
         sharedNavGraph(navActions)
     }

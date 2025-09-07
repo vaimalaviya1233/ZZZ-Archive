@@ -14,7 +14,6 @@ import zzzarchive.composeapp.generated.resources.please_select
 import zzzarchive.composeapp.generated.resources.suggestion
 import zzzarchive.composeapp.generated.resources.unknown_error
 
-
 data class FeedbackState(
     val issueTypes: List<FeedbackIssueType> = feedbackIssueTypes,
     val language: String = "",
@@ -30,15 +29,13 @@ data class FeedbackState(
     val selectedIssue: FeedbackIssueType = feedbackIssueTypes.first()
 )
 
-data class FeedbackIssueType(
-    val localStringRes: StringResource,
-    val chtString: String
-)
+data class FeedbackIssueType(val localStringRes: StringResource, val chtString: String)
 
-val feedbackIssueTypes = listOf(
-    FeedbackIssueType(Res.string.please_select, "未選擇類型"),
-    FeedbackIssueType(Res.string.crash_or_bug, "閃退或 Bug"),
-    FeedbackIssueType(Res.string.incorrect_content, "文本、內容錯誤"),
-    FeedbackIssueType(Res.string.suggestion, "建議"),
-    FeedbackIssueType(Res.string.other, "其他")
-)
+val feedbackIssueTypes =
+    listOf(
+        FeedbackIssueType(localStringRes = Res.string.please_select, chtString = "未選擇類型"),
+        FeedbackIssueType(localStringRes = Res.string.crash_or_bug, chtString = "閃退或 Bug"),
+        FeedbackIssueType(localStringRes = Res.string.incorrect_content, chtString = "文本、內容錯誤"),
+        FeedbackIssueType(localStringRes = Res.string.suggestion, chtString = "建議"),
+        FeedbackIssueType(localStringRes = Res.string.other, chtString = "其他")
+    )

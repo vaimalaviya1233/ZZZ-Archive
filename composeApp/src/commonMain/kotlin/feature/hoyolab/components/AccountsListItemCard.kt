@@ -48,7 +48,6 @@ import zzzarchive.composeapp.generated.resources.unsync
 import zzzarchive.composeapp.generated.resources.update_at
 import zzzarchive.composeapp.generated.resources.user_profile_image
 
-
 @Composable
 fun AccountsListItemCard(
     modifier: Modifier = Modifier,
@@ -62,15 +61,16 @@ fun AccountsListItemCard(
     var openDeleteDialog by remember { mutableStateOf(false) }
     ContentCard(modifier = modifier) {
         Column(verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)) {
-            BasicInfo(uiState, syncable, sync, isDefault)
-            Action(uiState, isDefault, setAsDefault) {
+            BasicInfo(uiState = uiState, syncable = syncable, sync = sync, isDefault = isDefault)
+            Action(uiState = uiState, isDefault = isDefault, setAsDefault = setAsDefault) {
                 openDeleteDialog = true
             }
         }
     }
     when {
         openDeleteDialog -> {
-            DoubleActionDialog(text = stringResource(Res.string.remove_account_hint),
+            DoubleActionDialog(
+                text = stringResource(Res.string.remove_account_hint),
                 primaryActionText = stringResource(Res.string.unsync),
                 secondaryActionText = stringResource(Res.string.no),
                 onPrimaryAction = {
@@ -82,14 +82,18 @@ fun AccountsListItemCard(
                 },
                 onDismiss = {
                     openDeleteDialog = false
-                })
+                }
+            )
         }
     }
 }
 
 @Composable
 private fun BasicInfo(
-    uiState: SyncedAccountsListItem, syncable: Boolean = true, sync: () -> Unit, isDefault: Boolean
+    uiState: SyncedAccountsListItem,
+    syncable: Boolean = true,
+    sync: () -> Unit,
+    isDefault: Boolean
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),
@@ -97,13 +101,16 @@ private fun BasicInfo(
         verticalAlignment = Alignment.CenterVertically
     ) {
         SubcomposeAsyncImage(
-            modifier = Modifier.size(AppTheme.size.s48)
-            .clip(CircleShape),
+            modifier =
+            Modifier
+                .size(AppTheme.size.s48)
+                .clip(CircleShape),
             model = uiState.profileUrl,
             contentDescription = stringResource(Res.string.user_profile_image),
             error = {
                 ImageNotFound()
-            })
+            }
+        )
         Column {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -116,11 +123,14 @@ private fun BasicInfo(
                     style = AppTheme.typography.labelLarge
                 )
                 Icon(
-                    modifier = Modifier.size(AppTheme.size.icon).clickable {
-                        if (syncable) {
-                            sync()
-                        }
-                    },
+                    modifier =
+                    Modifier
+                        .size(AppTheme.size.icon)
+                        .clickable {
+                            if (syncable) {
+                                sync()
+                            }
+                        },
                     imageVector = vectorResource(Res.drawable.ic_refresh),
                     contentDescription = stringResource(Res.string.sync),
                     tint = AppTheme.colors.onSurfaceVariant.copy(alpha = if (syncable) 1f else 0.5f)
@@ -128,9 +138,13 @@ private fun BasicInfo(
                 Spacer(Modifier.weight(1f))
                 if (isDefault) {
                     Text(
-                        modifier = Modifier.clip(CircleShape)
-                            .background(AppTheme.colors.primaryContainer).padding(
-                                horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200
+                        modifier =
+                        Modifier
+                            .clip(CircleShape)
+                            .background(AppTheme.colors.primaryContainer)
+                            .padding(
+                                horizontal = AppTheme.spacing.s300,
+                                vertical = AppTheme.spacing.s200
                             ),
                         text = stringResource(Res.string.default),
                         color = AppTheme.colors.onPrimaryContainer,
@@ -178,12 +192,13 @@ private fun Action(
         )
         ZzzIconButton(
             iconRes = Res.drawable.ic_delete,
-            contentDescriptionRes = Res.string.delete,
+            contentDescriptionRes = Res.string.delete
         ) {
             openDeleteDialog()
         }
         ZzzOutlineButton(
-            text = stringResource(Res.string.set_as_default), enabled = !isDefault
+            text = stringResource(Res.string.set_as_default),
+            enabled = !isDefault
         ) {
             setAsDefault()
         }

@@ -38,13 +38,17 @@ fun FeedbackScreenCompact(
 ) {
     Scaffold(containerColor = AppTheme.colors.surface, topBar = {
         TopBarScaffold(
-            title = stringResource(Res.string.feedback), onBackClick = {
+            title = stringResource(Res.string.feedback),
+            onBackClick = {
                 onAction(FeedbackAction.ClickBack)
             }
         )
     }) { scaffoldPadding ->
         Column(
-            modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
+            modifier =
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
                 .contentPaddingInScaffold(scaffoldPadding),
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
         ) {

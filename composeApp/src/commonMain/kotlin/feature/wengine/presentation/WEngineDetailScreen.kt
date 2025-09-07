@@ -24,7 +24,8 @@ fun WEngineDetailScreen(onBackClick: () -> Unit) {
             onAction = { viewModel.onAction(WEngineDetailAction.Retry) },
             onBack = {
                 onBackClick()
-            })
+            }
+        )
     } else {
         WEngineDetailContent(uiState) { actions ->
             when (actions) {
@@ -37,7 +38,8 @@ fun WEngineDetailScreen(onBackClick: () -> Unit) {
 
 @Composable
 private fun WEngineDetailContent(
-    uiState: WEngineDetailState, onAction: (WEngineDetailAction) -> Unit
+    uiState: WEngineDetailState,
+    onAction: (WEngineDetailAction) -> Unit
 ) {
     if (AppTheme.contentType == ContentType.Single) {
         WEngineDetailScreenSingle(uiState, onAction)

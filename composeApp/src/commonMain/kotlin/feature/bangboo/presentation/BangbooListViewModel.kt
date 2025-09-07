@@ -15,10 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class BangbooListViewModel(
-    private val bangbooListUseCase: BangbooListUseCase
-) : ViewModel() {
-
+class BangbooListViewModel(private val bangbooListUseCase: BangbooListUseCase) : ViewModel() {
     private var bangbooListJob: Job? = null
 
     private var _uiState = MutableStateFlow(BangbooListState())
@@ -51,22 +48,27 @@ class BangbooListViewModel(
 
     private fun observeBangbooList() {
         bangbooListJob?.cancel()
-        bangbooListJob = viewModelScope.launch {
-            bangbooListUseCase.invoke().collect { bangbooList ->
-                _uiState.update {
-                    it.copy(
-                        bangbooList = bangbooList, filteredBangbooList = bangbooList
-                    )
+        bangbooListJob =
+            viewModelScope.launch {
+                bangbooListUseCase.invoke().collect { bangbooList ->
+                    _uiState.update {
+                        it.copy(
+                            bangbooList = bangbooList,
+                            filteredBangbooList = bangbooList
+                        )
+                    }
                 }
             }
-        }
     }
 
     private fun filterBangbooList() {
         _uiState.update {
             it.copy(
-                filteredBangbooList = bangbooListUseCase.filterBangbooList(
-                    it.bangbooList, it.selectedRarity, it.selectedAttributes
+                filteredBangbooList =
+                bangbooListUseCase.filterBangbooList(
+                    bangbooList = it.bangbooList,
+                    selectedRarities = it.selectedRarity,
+                    selectedAttributes = it.selectedAttributes
                 )
             )
         }

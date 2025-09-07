@@ -16,15 +16,13 @@ class FakeGoogleDocHttp : GoogleDocHttp {
         issueType: String,
         language: String,
         issueContent: String,
-        nickname: String,
+        email: String,
         appVersion: String,
         deviceName: String,
         operatingSystem: String
-    ) {
-        return if (isError) {
-            throw Exception()
-        } else {
-            Unit
-        }
+    ) = if (isError) {
+        throw Exception()
+    } else {
+        Unit
     }
 }

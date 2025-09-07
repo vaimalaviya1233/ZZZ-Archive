@@ -5,7 +5,6 @@
 
 package feature.setting.data
 
-
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -16,9 +15,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
-    PreferencesRepository {
-
+class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) : PreferencesRepository {
     companion object {
         const val DEFAULT_IS_DARK_THEME = true
         const val DEFAULT_LANGUAGE = ""
@@ -32,7 +29,6 @@ class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
     private val uiScaleKey = floatPreferencesKey("ui_scale")
     private val fontScaleKey = floatPreferencesKey("font_scale")
     private val defaultHoYoLabAccountUidKey = intPreferencesKey("default_hoyolab_account_uid")
-
 
     override fun getIsDarkTheme(): Flow<Boolean> = dataStore.data.map {
         it[isDarkThemeKey] ?: DEFAULT_IS_DARK_THEME
@@ -51,7 +47,7 @@ class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
     }
 
     override fun getUiScale(): Flow<Float> = dataStore.data.map {
-        it[uiScaleKey]?.toFloat() ?: DEFAULT_UI_SCALE
+        it[uiScaleKey] ?: DEFAULT_UI_SCALE
     }
 
     override suspend fun setUiScale(value: Float) {
@@ -59,7 +55,7 @@ class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
     }
 
     override fun getFontScale(): Flow<Float> = dataStore.data.map {
-        it[fontScaleKey]?.toFloat() ?: DEFAULT_FONT_SCALE
+        it[fontScaleKey] ?: DEFAULT_FONT_SCALE
     }
 
     override suspend fun setFontScale(value: Float) {
@@ -67,7 +63,7 @@ class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
     }
 
     override fun getDefaultHoYoLabAccountUid(): Flow<Int> = dataStore.data.map {
-        it[defaultHoYoLabAccountUidKey]?.toInt() ?: DEFAULT_HOYOLAB_ACCOUNT_UID
+        it[defaultHoYoLabAccountUidKey] ?: DEFAULT_HOYOLAB_ACCOUNT_UID
     }
 
     override suspend fun setDefaultHoYoLabAccountUid(value: Int) {
@@ -78,4 +74,3 @@ class PreferencesRepositoryImpl(private val dataStore: DataStore<Preferences>) :
         dataStore.edit { it.clear() }
     }
 }
-

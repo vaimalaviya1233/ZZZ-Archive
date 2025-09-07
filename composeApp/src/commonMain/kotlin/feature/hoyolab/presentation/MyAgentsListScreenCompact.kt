@@ -30,7 +30,8 @@ fun MyAgentsListScreenCompact(
             title = stringResource(Res.string.agents),
             onBackClick = {
                 onAction(MyAgentsListAction.ClickBack)
-            })
+            }
+        )
     }) { scaffoldPadding ->
         Column(
             modifier = Modifier.contentPaddingInScaffold(scaffoldPadding)

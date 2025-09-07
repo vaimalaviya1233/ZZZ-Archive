@@ -9,13 +9,13 @@ import feature.hoyolab.data.database.FakeHoYoLabAccountDao
 import feature.hoyolab.data.database.stubHoYoLabAccountEntity
 import feature.hoyolab.model.stubPlayerBasicInfo
 import feature.hoyolab.model.stubPlayerDetailResponse
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.test.runTest
 import network.FakeHoYoLabHttp
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertNull
 
 class HoYoLabConfigRepositoryTest {
     private val dao = FakeHoYoLabAccountDao()
@@ -25,7 +25,11 @@ class HoYoLabConfigRepositoryTest {
     @Test
     fun `Request user game roles by LToken THEN success`() = runTest {
         val result =
-            repository.requestUserGameRolesByLToken("prod_gf_jp", "fake_ltoken", "fake_lt_uid")
+            repository.requestUserGameRolesByLToken(
+                region = "prod_gf_jp",
+                lToken = "fake_ltoken",
+                ltUid = "fake_lt_uid"
+            )
         assertEquals(Result.success(listOf(stubPlayerBasicInfo)), result)
     }
 
@@ -33,25 +37,39 @@ class HoYoLabConfigRepositoryTest {
     fun `Request user game roles by LToken THEN failed`() = runTest {
         httpClient.setError(true)
         val result =
-            repository.requestUserGameRolesByLToken("prod_gf_jp", "fake_ltoken", "fake_lt_uid")
+            repository
+                .requestUserGameRolesByLToken(
+                    region = "prod_gf_jp",
+                    lToken = "fake_ltoken",
+                    ltUid = "fake_lt_uid"
+                )
                 .getOrNull()
         assertNull(result)
     }
 
     @Test
     fun `Request player detail THEN success`() = runTest {
-        val result = repository.requestPlayerDetail(
-            1300051361, "prod_gf_jp", "fake_ltoken", "fake_lt_uid"
-        )
+        val result =
+            repository.requestPlayerDetail(
+                uid = 1300051361,
+                region = "prod_gf_jp",
+                lToken = "fake_ltoken",
+                ltUid = "fake_lt_uid"
+            )
         assertEquals(Result.success(stubPlayerDetailResponse), result)
     }
 
     @Test
     fun `Request player detail THEN failed`() = runTest {
         httpClient.setError(true)
-        val result = repository.requestPlayerDetail(
-            1300051361, "prod_gf_jp", "fake_ltoken", "fake_lt_uid"
-        ).getOrNull()
+        val result =
+            repository
+                .requestPlayerDetail(
+                    uid = 1300051361,
+                    region = "prod_gf_jp",
+                    lToken = "fake_ltoken",
+                    ltUid = "fake_lt_uid"
+                ).getOrNull()
         assertNull(result)
     }
 

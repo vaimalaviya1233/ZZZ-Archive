@@ -10,7 +10,6 @@ import di.initKoin
 import org.koin.android.ext.koin.androidContext
 
 class ZzzApplication : Application() {
-
     override fun onCreate() {
         super.onCreate()
         initKoin {

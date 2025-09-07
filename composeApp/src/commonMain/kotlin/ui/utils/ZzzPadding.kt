@@ -20,7 +20,8 @@ import ui.theme.AppTheme
 // Horizontal padding for Container
 @Composable
 fun horizontalSafePadding() = PaddingValues(
-    horizontal = when (AppTheme.adaptiveLayoutType) {
+    horizontal =
+    when (AppTheme.adaptiveLayoutType) {
         AdaptiveLayoutType.Expanded -> AppTheme.spacing.s400
         AdaptiveLayoutType.Medium -> AppTheme.spacing.s350
         AdaptiveLayoutType.Compact -> AppTheme.spacing.s300
@@ -34,15 +35,25 @@ fun verticalSafePadding(): PaddingValues {
     val bottomPadding = WindowInsets.systemBars.asPaddingValues().calculateBottomPadding()
     val spacing = AppTheme.spacing
     return PaddingValues(
-        top = if (topPadding > 0.dp) topPadding else when (AppTheme.adaptiveLayoutType) {
-            AdaptiveLayoutType.Expanded -> spacing.s400
-            AdaptiveLayoutType.Medium -> spacing.s350
-            AdaptiveLayoutType.Compact -> spacing.s300
+        top =
+        if (topPadding > 0.dp) {
+            topPadding
+        } else {
+            when (AppTheme.adaptiveLayoutType) {
+                AdaptiveLayoutType.Expanded -> spacing.s400
+                AdaptiveLayoutType.Medium -> spacing.s350
+                AdaptiveLayoutType.Compact -> spacing.s300
+            }
         },
-        bottom = if (bottomPadding > 0.dp) bottomPadding else when (AppTheme.adaptiveLayoutType) {
-            AdaptiveLayoutType.Expanded -> spacing.s400
-            AdaptiveLayoutType.Medium -> spacing.s350
-            AdaptiveLayoutType.Compact -> spacing.s300
+        bottom =
+        if (bottomPadding > 0.dp) {
+            bottomPadding
+        } else {
+            when (AppTheme.adaptiveLayoutType) {
+                AdaptiveLayoutType.Expanded -> spacing.s400
+                AdaptiveLayoutType.Medium -> spacing.s350
+                AdaptiveLayoutType.Compact -> spacing.s300
+            }
         }
     )
 }
@@ -50,7 +61,6 @@ fun verticalSafePadding(): PaddingValues {
 // Horizontal gap for dual or more panel layout
 @Composable
 fun containerGap() = AppTheme.spacing.s400
-
 
 // Padding for each container inside scaffold
 @Composable
@@ -78,7 +88,10 @@ fun cardPadding() = AppTheme.spacing.s400
 
 @Composable
 fun cardPaddingWithHeader() = PaddingValues(
-    start = cardPadding(), top = 0.dp, end = cardPadding(), bottom = cardPadding()
+    start = cardPadding(),
+    top = 0.dp,
+    end = cardPadding(),
+    bottom = cardPadding()
 )
 
 @Composable

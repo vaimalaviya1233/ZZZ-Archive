@@ -10,7 +10,10 @@ import feature.drive.components.DriveDetailCard
 import feature.drive.data.database.DrivesListItemEntity
 
 @Composable
-fun DriveDetailDialog(drivesListItemEntity: DrivesListItemEntity, onDismiss: () -> Unit) {
+fun DriveDetailDialog(
+    drivesListItemEntity: DrivesListItemEntity,
+    onDismiss: () -> Unit
+) {
     BasicDialog(onDismissRequest = onDismiss) {
         DriveDetailCard(
             drivesListItemEntity = drivesListItemEntity,

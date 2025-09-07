@@ -6,13 +6,12 @@
 package feature.setting.domain
 
 import feature.setting.data.FakePreferenceRepository
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.runTest
 
 class UiScaleUseCaseTest {
-
     private val repository = FakePreferenceRepository()
     private val useCase = UiScaleUseCase(repository)
 

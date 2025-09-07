@@ -11,36 +11,36 @@ import java.io.File
 
 actual class DataStoreFactory {
     actual fun getPreferenceDataStore(): DataStore<Preferences> {
-
         val os = System.getProperty("os.name").lowercase()
         val userHome = System.getProperty("user.home")
-        val appDataDir = when {
-            os.contains("win") -> File(System.getenv("APPDATA"), "ZZZ Archive")
-            os.contains("mac") -> File(userHome, "Library/Application Support/ZZZ Archive")
-            else -> File(userHome, ".local/share/ZZZ Archive")
-        }
+        val appDataDir =
+            when {
+                os.contains("win") -> File(System.getenv("APPDATA"), "ZZZ Archive")
+                os.contains("mac") -> File(userHome, "Library/Application Support/ZZZ Archive")
+                else -> File(userHome, ".local/share/ZZZ Archive")
+            }
 
         if (!appDataDir.exists()) {
             appDataDir.mkdirs()
         }
-        val dbFile = File(appDataDir, dataStorePreferenceFileName)
+        val dbFile = File(appDataDir, DATA_STORE_PREF_FILE_NAME)
         return createDataStore { dbFile.absolutePath }
     }
 
     actual fun getConfigDataStore(): DataStore<Preferences> {
-
         val os = System.getProperty("os.name").lowercase()
         val userHome = System.getProperty("user.home")
-        val appDataDir = when {
-            os.contains("win") -> File(System.getenv("APPDATA"), "ZZZ Archive")
-            os.contains("mac") -> File(userHome, "Library/Application Support/ZZZ Archive")
-            else -> File(userHome, ".local/share/ZZZ Archive")
-        }
+        val appDataDir =
+            when {
+                os.contains("win") -> File(System.getenv("APPDATA"), "ZZZ Archive")
+                os.contains("mac") -> File(userHome, "Library/Application Support/ZZZ Archive")
+                else -> File(userHome, ".local/share/ZZZ Archive")
+            }
 
         if (!appDataDir.exists()) {
             appDataDir.mkdirs()
         }
-        val dbFile = File(appDataDir, dataStoreConfigFileName)
+        val dbFile = File(appDataDir, DATA_STORE_CONFIG_FILE_NAME)
         return createDataStore { dbFile.absolutePath }
     }
 }

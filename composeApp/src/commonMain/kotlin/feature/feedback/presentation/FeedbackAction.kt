@@ -11,8 +11,12 @@ sealed interface FeedbackAction {
     data object SubmitForm : FeedbackAction
 
     data object DismissDialog : FeedbackAction
+
     data object ClickBack : FeedbackAction
+
     data class OnDescTextFieldChange(val value: String) : FeedbackAction
+
     data class OnEmailTextFieldChange(val value: String) : FeedbackAction
+
     data class OnSelectedIssueChange(val value: FeedbackIssueType) : FeedbackAction
 }

@@ -27,8 +27,12 @@ fun WikiScreenSingle(
     onAction: (WikiAction) -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())
-            .padding(horizontalSafePadding()).padding(verticalSafePadding()),
+        modifier =
+        Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(horizontalSafePadding())
+            .padding(verticalSafePadding()),
         verticalArrangement = Arrangement.spacedBy(contentGap())
     ) {
         AgentsListCard(

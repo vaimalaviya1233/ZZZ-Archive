@@ -16,8 +16,7 @@ class BangbooListUseCase(
     private val bangbooRepository: BangbooRepository,
     private val languageUseCase: LanguageUseCase
 ) {
-    suspend fun invoke() =
-        bangbooRepository.getBangbooList(languageUseCase.getLanguage().first().officialCode)
+    suspend fun invoke() = bangbooRepository.getBangbooList(languageUseCase.getLanguage().first().officialCode)
 
     suspend fun updateBangbooList() = bangbooRepository.requestAndUpdateBangbooListDB(
         languageUseCase.getLanguage().first().officialCode
@@ -27,13 +26,11 @@ class BangbooListUseCase(
         bangbooList: List<BangbooListItem>,
         selectedRarities: Set<ZzzRarity>,
         selectedAttributes: Set<AgentAttribute>
-    ): List<BangbooListItem> {
-        return bangbooList.filter { bangboo ->
-            val matchRarity =
-                selectedRarities.isEmpty() || selectedRarities.any { it == bangboo.rarity }
-            val matchAttribute =
-                selectedAttributes.isEmpty() || selectedAttributes.any { it == bangboo.attribute }
-            matchRarity && matchAttribute
-        }
+    ): List<BangbooListItem> = bangbooList.filter { bangboo ->
+        val matchRarity =
+            selectedRarities.isEmpty() || selectedRarities.any { it == bangboo.rarity }
+        val matchAttribute =
+            selectedAttributes.isEmpty() || selectedAttributes.any { it == bangboo.attribute }
+        matchRarity && matchAttribute
     }
 }

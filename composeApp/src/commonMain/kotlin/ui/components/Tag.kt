@@ -22,7 +22,6 @@ import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
 
-
 @Composable
 fun ZzzTag(
     modifier: Modifier = Modifier,
@@ -30,11 +29,15 @@ fun ZzzTag(
     iconRes: DrawableResource? = null
 ) {
     Row(
-        modifier = modifier.clip(AppTheme.shape.r300).background(AppTheme.colors.surface).border(
-            width = AppTheme.size.borderWidth,
-            color = AppTheme.colors.border,
-            shape = AppTheme.shape.r300
-        ).padding(horizontal = AppTheme.spacing.s350, vertical = AppTheme.spacing.s300),
+        modifier =
+        modifier
+            .clip(AppTheme.shape.r300)
+            .background(AppTheme.colors.surface)
+            .border(
+                width = AppTheme.size.borderWidth,
+                color = AppTheme.colors.border,
+                shape = AppTheme.shape.r300
+            ).padding(horizontal = AppTheme.spacing.s350, vertical = AppTheme.spacing.s300),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalAlignment = Alignment.CenterVertically
     ) {

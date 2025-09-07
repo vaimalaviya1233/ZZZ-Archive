@@ -15,10 +15,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class WEnginesListViewModel(
-    private val wEnginesListUseCase: WEnginesListUseCase
-) : ViewModel() {
-
+class WEnginesListViewModel(private val wEnginesListUseCase: WEnginesListUseCase) : ViewModel() {
     private var wEnginesListJob: Job? = null
 
     private var _uiState = MutableStateFlow(WEnginesListState())
@@ -51,22 +48,23 @@ class WEnginesListViewModel(
 
     private fun observeWEnginesList() {
         wEnginesListJob?.cancel()
-        wEnginesListJob = viewModelScope.launch {
-            wEnginesListUseCase.invoke().collect { wEnginesList ->
-                _uiState.update {
-                    it.copy(wEnginesList = wEnginesList, filteredWEnginesList = wEnginesList)
+        wEnginesListJob =
+            viewModelScope.launch {
+                wEnginesListUseCase.invoke().collect { wEnginesList ->
+                    _uiState.update {
+                        it.copy(wEnginesList = wEnginesList, filteredWEnginesList = wEnginesList)
+                    }
                 }
             }
-        }
     }
 
-    private fun filterWEnginesList(
-    ) {
-        val filteredWEngines = wEnginesListUseCase.filterWEnginesList(
-            wEnginesList = uiState.value.wEnginesList,
-            selectedRarities = uiState.value.selectedRarity,
-            selectedSpecialties = uiState.value.selectedSpecialties
-        )
+    private fun filterWEnginesList() {
+        val filteredWEngines =
+            wEnginesListUseCase.filterWEnginesList(
+                wEnginesList = uiState.value.wEnginesList,
+                selectedRarities = uiState.value.selectedRarity,
+                selectedSpecialties = uiState.value.selectedSpecialties
+            )
         _uiState.update {
             it.copy(
                 filteredWEnginesList = filteredWEngines
