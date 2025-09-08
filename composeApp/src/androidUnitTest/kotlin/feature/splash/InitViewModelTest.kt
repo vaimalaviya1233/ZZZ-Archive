@@ -38,7 +38,13 @@ class InitViewModelTest {
         every { uiScaleUseCase.getUiScale() } returns flowOf(1f)
         every { uiScaleUseCase.getFontScale() } returns flowOf(1f)
 
-        viewModel = InitViewModel(themeUseCase, uiScaleUseCase, languageUseCase, appInfoUseCase)
+        viewModel =
+            InitViewModel(
+                themeUseCase = themeUseCase,
+                uiScaleUseCase = uiScaleUseCase,
+                languageUseCase = languageUseCase,
+                appInfoUseCase = appInfoUseCase
+            )
     }
 
     @Test

@@ -56,8 +56,8 @@ class HoYoLabSyncViewModelTest {
 
     @Test
     fun `Add account`() {
-        viewModel.onAction(HoYoLabSyncAction.ConnectToHoYoLabAndAdd("", "", ""))
-        coVerify { hoYoLabManageUseCase.requestUserInfoAndSave("", "", "") }
+        viewModel.onAction(HoYoLabSyncAction.ConnectToHoYoLabAndAdd(region = "", lToken = "", ltUid = ""))
+        coVerify { hoYoLabManageUseCase.requestUserInfoAndSave(region = "", lToken = "", ltUid = "") }
     }
 
     @Test

@@ -19,11 +19,7 @@ class BannerUseCaseTest {
     private val systemConfigRepository = FakeSystemConfigRepository()
     private val languageUseCase = FakeLanguageUseCase()
     private val bannerUseCase =
-        BannerUseCase(
-            bannerRepository = bannerRepository,
-            systemConfigRepository = systemConfigRepository,
-            languageUseCase = languageUseCase
-        )
+        BannerUseCase(bannerRepository, systemConfigRepository, languageUseCase)
 
     @Test
     fun `Get banner success`() = runTest {

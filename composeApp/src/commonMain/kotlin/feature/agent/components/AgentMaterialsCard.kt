@@ -47,7 +47,7 @@ fun AgentMaterialsCard(material: AgentLevelMaterial) {
         modifier = Modifier.hoverable(interactionSource = interactionSource),
         hasDefaultPadding = false
     ) {
-        Header(isHovered, lazyListState, checkState) {
+        Header(isHovered = isHovered, lazyListState = lazyListState, checkState = checkState) {
             checkState = it
         }
         LazyRow(

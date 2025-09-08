@@ -48,7 +48,12 @@ class FeedbackViewModelTest {
             )
         } returns Result.success(Unit)
 
-        viewModel = FeedbackViewModel(appInfoUseCase, googleDocRepository, languageUseCase)
+        viewModel =
+            FeedbackViewModel(
+                appInfoUseCase = appInfoUseCase,
+                googleDocRepository = googleDocRepository,
+                languageUseCase = languageUseCase
+            )
     }
 
     @Test

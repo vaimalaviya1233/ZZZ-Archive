@@ -40,7 +40,11 @@ class MyAgentDetailViewModelTest {
         } returns flowOf(1300051361)
 
         viewModel =
-            MyAgentDetailViewModel(savedStateHandle, hoYoLabAgentUseCase, hoYoLabPreferenceUseCase)
+            MyAgentDetailViewModel(
+                savedStateHandle = savedStateHandle,
+                hoYoLabAgentUseCase = hoYoLabAgentUseCase,
+                hoYoLabPreferenceUseCase = hoYoLabPreferenceUseCase
+            )
     }
 
     @Test

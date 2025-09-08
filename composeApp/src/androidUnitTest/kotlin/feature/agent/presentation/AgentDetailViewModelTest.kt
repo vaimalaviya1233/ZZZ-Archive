@@ -35,7 +35,12 @@ class AgentDetailViewModelTest {
     fun setup() {
         coEvery { agentDetailUseCase.invoke(any()) } returns Result.success(stubAgentDetail)
         coEvery { drivesListUseCase.invoke() } returns flowOf(listOf(stubDrivesListItemEntity))
-        viewModel = AgentDetailViewModel(savedStateHandle, agentDetailUseCase, drivesListUseCase)
+        viewModel =
+            AgentDetailViewModel(
+                savedStateHandle = savedStateHandle,
+                agentDetailUseCase = agentDetailUseCase,
+                drivesListUseCase = drivesListUseCase
+            )
     }
 
     @Test
