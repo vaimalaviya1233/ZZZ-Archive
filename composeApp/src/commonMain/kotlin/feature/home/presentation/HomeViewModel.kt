@@ -16,13 +16,11 @@ import feature.hoyolab.domain.GameRecordUseCase
 import feature.news.domain.OfficialNewsUseCase
 import feature.pixiv.data.PixivRepository
 import feature.pixiv.model.pixivTagDropdownItems
-import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
@@ -35,8 +33,7 @@ class HomeViewModel(
     private val newsUseCase: OfficialNewsUseCase,
     private val forumUseCase: ForumUseCase,
     private val updateDatabaseUseCase: UpdateDatabaseUseCase,
-    private val gameRecordUseCase: GameRecordUseCase,
-    dispatcher: CoroutineDispatcher
+    private val gameRecordUseCase: GameRecordUseCase
 ) : ViewModel() {
     private var gameRecordJob: Job? = null
     private var officialNewsJob: Job? = null
@@ -57,8 +54,7 @@ class HomeViewModel(
                 observeDefaultAccount()
                 observeCoverImage()
                 observePixivTopic()
-            }.flowOn(dispatcher)
-            .stateIn(
+            }.stateIn(
                 viewModelScope,
                 SharingStarted.WhileSubscribed(5000L),
                 _uiState.value
