@@ -8,6 +8,6 @@ package utils
 import java.util.Locale
 
 actual fun changePlatformLanguage(langCode: String) {
-    val locale = if (langCode == "") Locale(langCode) else Locale(langCode)
+    val locale = Locale.Builder().setLanguage(langCode).build()
     Locale.setDefault(locale)
 }
