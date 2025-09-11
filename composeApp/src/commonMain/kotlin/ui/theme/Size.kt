@@ -53,7 +53,7 @@ fun provideSize(scale: Float = 1f): Size = Size(
     s360 = 360.dp * scale,
     s400 = 400.dp * scale,
     s512 = 512.dp * scale,
-    borderWidth = 3.dp * scale,
+    borderWidth = 1.dp * scale,
     maxContainerWidth = 1440.dp * scale,
     iconSmall = 12.dp * scale,
     icon = 18.dp * scale,
