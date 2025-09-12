@@ -6,7 +6,6 @@
 package ui.components.navigation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -36,6 +35,7 @@ import org.jetbrains.compose.resources.vectorResource
 import ui.navigation.NAV_RAIL_MAIN_FLOW
 import ui.navigation.NavActions
 import ui.theme.AppTheme
+import ui.utils.verticalSafePadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.app_name
 import zzzarchive.composeapp.generated.resources.dark_theme
@@ -59,12 +59,11 @@ fun ModalNavigationDrawerContent(
         modifier =
         Modifier
             .fillMaxHeight()
-            .padding(AppTheme.spacing.s200)
-            .clip(AppTheme.shape.r500)
+            .clip(AppTheme.shape.r200)
             .widthIn(min = navigationDrawerMinWidth, max = navigationDrawerMaxWidth)
-            .border(width = AppTheme.size.borderWidth, color = AppTheme.colors.border, shape = AppTheme.shape.r500)
             .background(AppTheme.colors.surfaceContainer)
-            .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s450)
+            .padding(horizontal = AppTheme.spacing.s400)
+            .padding(verticalSafePadding())
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(AppTheme.spacing.s400),

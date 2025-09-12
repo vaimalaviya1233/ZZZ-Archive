@@ -6,7 +6,6 @@
 package ui.components.navigation
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -17,7 +16,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationRailItem
@@ -32,6 +30,7 @@ import org.jetbrains.compose.resources.vectorResource
 import ui.navigation.NAV_RAIL_MAIN_FLOW
 import ui.navigation.NavActions
 import ui.theme.AppTheme
+import ui.utils.verticalSafePadding
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.dark_theme
 import zzzarchive.composeapp.generated.resources.ic_moon
@@ -50,10 +49,9 @@ fun ZzzArchiveNavigationRail(
 ) {
     Column(
         modifier
-            .border(width = AppTheme.size.borderWidth, color = AppTheme.colors.border, shape = CircleShape)
-            .background(AppTheme.colors.surfaceContainer, CircleShape)
+            .background(color = AppTheme.colors.surfaceContainer, shape = AppTheme.shape.r200)
             .widthIn(min = 80.dp)
-            .padding(vertical = AppTheme.spacing.s400)
+            .padding(verticalSafePadding())
             .selectableGroup(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)

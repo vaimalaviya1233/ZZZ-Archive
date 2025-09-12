@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalNavigationDrawer
@@ -38,7 +37,6 @@ import ui.navigation.NavActions
 import ui.navigation.graph.MainNavGraph
 import ui.theme.AppTheme
 import ui.utils.AdaptiveLayoutType
-import ui.utils.verticalSafePadding
 
 @Composable
 fun MainContainer(rootNavActions: NavActions) {
@@ -132,11 +130,8 @@ fun MainFuncContent(
                     AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Expanded
             ) {
                 ZzzArchiveNavigationRail(
-                    modifier =
-                    Modifier
-                        .fillMaxHeight()
-                        .padding(start = AppTheme.spacing.s300)
-                        .padding(verticalSafePadding()),
+                    modifier = Modifier
+                        .fillMaxHeight(),
                     selectedMainFlow = selectedMainFlow,
                     navActions = mainNavActions,
                     onDrawerClicked = onDrawerClicked,
