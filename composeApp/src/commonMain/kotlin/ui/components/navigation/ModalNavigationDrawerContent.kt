@@ -24,7 +24,6 @@ import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -114,7 +113,7 @@ fun ModalNavigationDrawerContent(
             Spacer(
                 modifier = Modifier.weight(1f).heightIn(min = AppTheme.spacing.s400)
             )
-            val isDark by AppTheme.isDark
+            val isDark = AppTheme.isDark
             NavigationDrawerItem(
                 modifier = Modifier.padding(horizontal = AppTheme.spacing.s350),
                 selected = false,

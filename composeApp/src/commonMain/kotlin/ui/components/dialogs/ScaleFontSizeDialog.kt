@@ -15,8 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -45,11 +43,12 @@ fun ScaleFontSizeDialog(
     onApply: (Float, Float) -> Unit,
     onDismiss: () -> Unit
 ) {
-    var uiScale by AppTheme.uiScale
-    var fontScale by AppTheme.fontScale
+    val uiScale = AppTheme.uiScale
+    val fontScale = AppTheme.fontScale
+    val themeController = AppTheme.themeController
     BasicDialog(modifier = modifier.widthIn(max = 720.dp), onDismissRequest = {
-        uiScale = uiScaleValue
-        fontScale = fontScaleValue
+        themeController.setUiScale(uiScaleValue)
+        themeController.setFontScale(fontScaleValue)
         onDismiss()
     }) {
         Column(
@@ -64,18 +63,18 @@ fun ScaleFontSizeDialog(
         ) {
             ScalePreview()
             ScaleUiSlider(stringResource(Res.string.ui_scale), uiScale, onScaleValueChange = {
-                uiScale = it
+                themeController.setUiScale(it)
             })
             ScaleUiSlider(stringResource(Res.string.font_scale), fontScale, onScaleValueChange = {
-                fontScale = it
+                themeController.setFontScale(it)
             })
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(space = AppTheme.spacing.s300, alignment = Alignment.End)
             ) {
                 ZzzOutlineButton(text = stringResource(Res.string.default_value)) {
-                    uiScale = 1f
-                    fontScale = 1f
+                    themeController.setUiScale(1f)
+                    themeController.setFontScale(1f)
                 }
                 ZzzPrimaryButton(text = stringResource(Res.string.apply)) {
                     onApply(uiScale, fontScale)

@@ -5,12 +5,16 @@
 
 package ui.utils
 
+import androidx.compose.runtime.Stable
+
+@Stable
 enum class AdaptiveLayoutType {
     Compact,
     Medium,
     Expanded
 }
 
+@Stable
 enum class ContentType {
     Single,
     Dual

@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -65,9 +64,6 @@ fun MainContainer(rootNavActions: NavActions) {
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val viewModel: MainContainerViewModel = koinViewModel()
     val isDark by viewModel.isDark.collectAsStateWithLifecycle()
-    var isDarkComposeState by AppTheme.isDark
-    isDarkComposeState = isDark
-
     ModalNavigationDrawer(
         drawerContent = {
             ModalNavigationDrawerContent(
@@ -82,7 +78,6 @@ fun MainContainer(rootNavActions: NavActions) {
                     coroutineScope.launch {
                         viewModel.setIsDarkTheme(!isDark)
                     }
-                    isDarkComposeState = !isDark
                 }
             )
         },
@@ -104,7 +99,6 @@ fun MainContainer(rootNavActions: NavActions) {
                 coroutineScope.launch {
                     viewModel.setIsDarkTheme(!isDark)
                 }
-                isDarkComposeState = !isDark
             }
         )
     }

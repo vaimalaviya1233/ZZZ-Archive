@@ -21,7 +21,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationRailItem
 import androidx.compose.material3.NavigationRailItemDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -89,7 +88,7 @@ fun ZzzArchiveNavigationRail(
                 modifier = Modifier.weight(1f).heightIn(min = AppTheme.spacing.s400)
             )
 
-            val isDark by AppTheme.isDark
+            val isDark = AppTheme.isDark
             NavigationRailItem(selected = false, onClick = {
                 onThemeChanged()
             }, icon = {

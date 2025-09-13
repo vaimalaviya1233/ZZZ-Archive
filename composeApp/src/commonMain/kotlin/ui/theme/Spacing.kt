@@ -6,6 +6,7 @@
 
 package ui.theme
 
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
@@ -13,6 +14,7 @@ import androidx.compose.ui.unit.dp
  * Ref:
  * [felipecastilhos / pokedex-android](https://github.com/felipecastilhos/pokedex-android)
  */
+@Stable
 class Spacing(
     val s100: Dp,
     val s200: Dp,

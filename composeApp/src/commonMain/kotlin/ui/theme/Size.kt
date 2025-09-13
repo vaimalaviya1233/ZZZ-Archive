@@ -5,10 +5,12 @@
 
 package ui.theme
 
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-data class Size(
+@Stable
+class Size(
     val s24: Dp = Dp.Unspecified,
     val s36: Dp = Dp.Unspecified,
     val s32: Dp = Dp.Unspecified,

@@ -26,17 +26,18 @@ class InitViewModel(
     init {
         // settingsRepository.clear() // For test
         viewModelScope.launch {
-            launch { initIsDarkTheme() }
+            launch { observeIsDarkTheme() }
             launch { initUiScale() }
             launch { initLanguage() }
             launch { getAppVersion() }
         }
     }
 
-    private suspend fun initIsDarkTheme() {
-        val isDark = themeUseCase.getPreferenceIsDarkTheme().first()
-        _uiState.update {
-            it.copy(isDark = isDark, isLoading = false)
+    private suspend fun observeIsDarkTheme() {
+        themeUseCase.getPreferenceIsDarkTheme().collect { isDark ->
+            _uiState.update {
+                it.copy(isDark = isDark, isLoading = false)
+            }
         }
     }
 

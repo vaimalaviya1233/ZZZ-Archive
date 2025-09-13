@@ -4,8 +4,8 @@
  */
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.setSingletonImageLoaderFactory
 import feature.splash.InitViewModel
@@ -24,12 +24,16 @@ fun ZzzArchiveApp() {
     ZzzArchiveTheme {
         val viewModel: InitViewModel = koinViewModel()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-        var isDark by AppTheme.isDark
-        isDark = uiState.isDark
-        var uiScale by AppTheme.uiScale
-        uiScale = uiState.uiScale
-        var fontScale by AppTheme.fontScale
-        fontScale = uiState.fontScale
+        val themeController = AppTheme.themeController
+
+        LaunchedEffect(uiState.isDark) {
+            themeController.setTheme(uiState.isDark)
+        }
+
+        LaunchedEffect(uiState.uiScale, uiState.fontScale) {
+            themeController.setUiScale(uiState.uiScale)
+            themeController.setFontScale(uiState.fontScale)
+        }
 
         if (!uiState.isLoading) {
             RootNavGraph()

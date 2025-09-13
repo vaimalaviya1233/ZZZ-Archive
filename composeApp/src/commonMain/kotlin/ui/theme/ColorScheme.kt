@@ -5,10 +5,10 @@
 
 package ui.theme
 
-import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 
-@Immutable
+@Stable
 class ColorScheme(
     val primary: Color = Color.Unspecified,
     val onPrimary: Color = Color.Unspecified,

@@ -10,11 +10,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Modifier
 import ui.utils.AdaptiveLayoutType
 import ui.utils.ContentType
@@ -24,85 +24,126 @@ import ui.utils.ContentType
  * [Building an Efficient UI Design System with Jetpack Compose and Compose Multiplatform](https://medium.com/@ahmednasser_12958/building-an-efficient-ui-design-system-0a049b6ee3f7)
  */
 
-private val localColorScheme = compositionLocalOf { ColorScheme() }
-private val localTypography = compositionLocalOf { Typography() }
-private val localShape = compositionLocalOf { Shape.regular() }
-private val localSpacing = compositionLocalOf { Spacing.regular() }
-private val localSize = compositionLocalOf { Size() }
-private val localAdaptiveLayoutType =
-    compositionLocalOf { mutableStateOf(AdaptiveLayoutType.Compact) }
-private val localContentType = compositionLocalOf { mutableStateOf(ContentType.Single) }
-private val localThemeIsDark = compositionLocalOf { mutableStateOf(true) }
-private val localFontScale = compositionLocalOf { mutableStateOf(1f) }
-private val localUiScale = compositionLocalOf { mutableStateOf(1f) }
+@Stable
+class ThemeController(initialIsDark: Boolean = true, initialFontScale: Float = 1.0f, initialUiScale: Float = 1.0f) {
+    val isDark = mutableStateOf(initialIsDark)
+    val fontScale = mutableStateOf(initialFontScale)
+    val uiScale = mutableStateOf(initialUiScale)
 
+    fun setTheme(isDarkTheme: Boolean) {
+        isDark.value = isDarkTheme
+    }
+
+    fun setFontScale(scale: Float) {
+        fontScale.value = scale.coerceIn(0.5f, 2.0f)
+    }
+
+    fun setUiScale(scale: Float) {
+        uiScale.value = scale.coerceIn(0.5f, 2.0f)
+    }
+}
+
+private val LocalColorScheme = staticCompositionLocalOf<ColorScheme> {
+    error("No ColorScheme provided")
+}
+private val LocalTypography = staticCompositionLocalOf<Typography> {
+    error("No Typography provided")
+}
+private val LocalShape = staticCompositionLocalOf<Shape> {
+    error("No Shape provided")
+}
+private val LocalSpacing = staticCompositionLocalOf<Spacing> {
+    error("No Spacing provided")
+}
+private val LocalSize = staticCompositionLocalOf<Size> {
+    error("No Size provided")
+}
+private val LocalAdaptiveLayoutType = staticCompositionLocalOf<AdaptiveLayoutType> {
+    error("No AdaptiveLayoutType provided")
+}
+private val LocalContentType = staticCompositionLocalOf<ContentType> {
+    error("No ContentType provided")
+}
+private val LocalThemeController = staticCompositionLocalOf<ThemeController> {
+    error("No ThemeController provided")
+}
+
+@Stable
 object AppTheme {
     val colors: ColorScheme
         @Composable @ReadOnlyComposable
-        get() = localColorScheme.current
+        get() = LocalColorScheme.current
 
     val typography: Typography
         @Composable @ReadOnlyComposable
-        get() = localTypography.current
+        get() = LocalTypography.current
 
     val shape: Shape
         @Composable @ReadOnlyComposable
-        get() = localShape.current
+        get() = LocalShape.current
 
     val spacing: Spacing
         @Composable @ReadOnlyComposable
-        get() = localSpacing.current
+        get() = LocalSpacing.current
 
     val size: Size
         @Composable @ReadOnlyComposable
-        get() = localSize.current
+        get() = LocalSize.current
 
     val adaptiveLayoutType: AdaptiveLayoutType
         @Composable @ReadOnlyComposable
-        get() = localAdaptiveLayoutType.current.value
+        get() = LocalAdaptiveLayoutType.current
 
     val contentType: ContentType
         @Composable @ReadOnlyComposable
-        get() = localContentType.current.value
+        get() = LocalContentType.current
 
-    val isDark: MutableState<Boolean>
+    val themeController: ThemeController
         @Composable @ReadOnlyComposable
-        get() = localThemeIsDark.current
+        get() = LocalThemeController.current
 
-    val fontScale: MutableState<Float>
+    val isDark: Boolean
         @Composable @ReadOnlyComposable
-        get() = localFontScale.current
+        get() = themeController.isDark.value
 
-    val uiScale: MutableState<Float>
+    val fontScale: Float
         @Composable @ReadOnlyComposable
-        get() = localUiScale.current
+        get() = themeController.fontScale.value
+
+    val uiScale: Float
+        @Composable @ReadOnlyComposable
+        get() = themeController.uiScale.value
 }
 
 @Composable
 fun ZzzArchiveTheme(content: @Composable () -> Unit) {
     val adaptiveLayoutType = remember { mutableStateOf(AdaptiveLayoutType.Compact) }
     val contentType = remember { mutableStateOf(ContentType.Single) }
-    val isDark = remember { mutableStateOf(true) }
-    val colorScheme: ColorScheme = if (isDark.value) darkScheme else lightScheme
-    val fontScale = remember { mutableStateOf(1f) }
-    val typography = mutableStateOf(provideTypography(fontScale.value))
-    val uiScale = remember { mutableStateOf(1f) }
-    val fixedSize = mutableStateOf(provideSize(uiScale.value))
+
+    val themeController = remember {
+        ThemeController(
+            initialIsDark = true,
+            initialFontScale = 1.0f,
+            initialUiScale = 1.0f
+        )
+    }
+
+    val colorScheme: ColorScheme = if (themeController.isDark.value) darkScheme else lightScheme
+    val typography = provideTypography(themeController.fontScale.value)
+    val size = provideSize(themeController.uiScale.value)
 
     AdaptiveLayout(adaptiveLayoutType, contentType)
-    SystemAppearance(!isDark.value)
+    SystemAppearance(!themeController.isDark.value)
 
     CompositionLocalProvider(
-        localColorScheme provides colorScheme,
-        localTypography provides typography.value,
-        localSpacing provides Spacing.regular(),
-        localSize provides fixedSize.value,
-        localShape provides Shape.regular(),
-        localAdaptiveLayoutType provides adaptiveLayoutType,
-        localContentType provides contentType,
-        localThemeIsDark provides isDark,
-        localFontScale provides fontScale,
-        localUiScale provides uiScale
+        LocalColorScheme provides colorScheme,
+        LocalTypography provides typography,
+        LocalSpacing provides Spacing.regular(),
+        LocalSize provides size,
+        LocalShape provides Shape.regular(),
+        LocalAdaptiveLayoutType provides adaptiveLayoutType.value,
+        LocalContentType provides contentType.value,
+        LocalThemeController provides themeController
     ) {
         Box(
             modifier =

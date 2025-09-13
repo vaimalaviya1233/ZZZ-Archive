@@ -6,6 +6,7 @@
 package ui.theme
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -17,7 +18,8 @@ import zzzarchive.composeapp.generated.resources.noto_sans_bold
 import zzzarchive.composeapp.generated.resources.noto_sans_medium
 import zzzarchive.composeapp.generated.resources.noto_sans_regular
 
-data class Typography(
+@Stable
+class Typography(
     val displayLarge: TextStyle = TextStyle(),
     val displayMedium: TextStyle = TextStyle(),
     val displaySmall: TextStyle = TextStyle(),
