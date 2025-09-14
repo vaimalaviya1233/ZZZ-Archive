@@ -12,9 +12,8 @@ import ui.navigation.NavActions
 import ui.navigation.graph.sharedNavGraph
 
 fun NavGraphBuilder.driveNavGraph(navActions: NavActions) {
-    navigation(
-        route = MainFlow.Drive.route,
-        startDestination = MainFlow.Drive.startScreen.route
+    navigation<MainFlow.Drive>(
+        startDestination = MainFlow.Drive.startScreen::class
     ) {
         sharedNavGraph(navActions)
     }

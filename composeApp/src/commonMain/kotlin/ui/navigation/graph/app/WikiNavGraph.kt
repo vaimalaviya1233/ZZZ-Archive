@@ -15,24 +15,23 @@ import ui.navigation.Screen
 import ui.navigation.graph.sharedNavGraph
 
 fun NavGraphBuilder.wikiNavGraph(navActions: NavActions) {
-    navigation(
-        route = MainFlow.Wiki.route,
-        startDestination = MainFlow.Wiki.startScreen.route
+    navigation<MainFlow.Wiki>(
+        startDestination = MainFlow.Wiki.startScreen::class
     ) {
-        composable(Screen.Wiki.route) {
+        composable<Screen.Wiki> {
             WikiScreen(
                 onAgentsOverviewClick = { navActions.navigationTo(Screen.AgentsList) },
                 onWEnginesOverviewClick = { navActions.navigationTo(Screen.WEnginesList) },
                 onBangbooOverviewClick = { navActions.navigationTo(Screen.BangbooList) },
                 onDrivesOverviewClick = { navActions.navigationTo(Screen.DrivesList) },
                 onAgentDetailClick = { id ->
-                    navActions.navigationToRoute(Screen.AgentDetail.createRoute(id))
+                    navActions.navigationTo(Screen.AgentDetail(id))
                 },
                 onWEngineDetailClick = { id ->
-                    navActions.navigationToRoute(Screen.WEngineDetail.createRoute(id))
+                    navActions.navigationTo(Screen.WEngineDetail(id))
                 },
                 onBangbooDetailClick = { id ->
-                    navActions.navigationToRoute(Screen.BangbooDetail.createRoute(id))
+                    navActions.navigationTo(Screen.BangbooDetail(id))
                 }
             )
         }

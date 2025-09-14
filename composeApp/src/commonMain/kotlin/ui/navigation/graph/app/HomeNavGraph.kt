@@ -15,39 +15,26 @@ import ui.navigation.Screen
 import ui.navigation.graph.sharedNavGraph
 
 fun NavGraphBuilder.homeNavGraph(navActions: NavActions) {
-    navigation(
-        route = MainFlow.Home.route,
-        startDestination = MainFlow.Home.startScreen.route
+    navigation<MainFlow.Home>(
+        startDestination = MainFlow.Home.startScreen::class
     ) {
-        composable(Screen.Home.route) {
+        composable<Screen.Home> {
             HomeScreen(
                 onAgentsOverviewClick = { navActions.navigationToMainScreen(MainFlow.Agent) },
                 onWEnginesOverviewClick = { navActions.navigationToMainScreen(MainFlow.WEngine) },
                 onBangbooOverviewClick = { navActions.navigationToMainScreen(MainFlow.Bangboo) },
                 onDrivesOverviewClick = { navActions.navigationToMainScreen(MainFlow.Drive) },
                 onAgentDetailClick = { id ->
-                    navActions.navigationToRoute(
-                        Screen.AgentDetail.createRoute(
-                            id
-                        )
-                    )
+                    navActions.navigationTo(Screen.AgentDetail(id))
                 },
                 onWEngineDetailClick = { id ->
-                    navActions.navigationToRoute(
-                        Screen.WEngineDetail.createRoute(
-                            id
-                        )
-                    )
+                    navActions.navigationTo(Screen.WEngineDetail(id))
                 },
                 onBangbooDetailClick = { id ->
-                    navActions.navigationToRoute(
-                        Screen.BangbooDetail.createRoute(
-                            id
-                        )
-                    )
+                    navActions.navigationTo(Screen.BangbooDetail(id))
                 },
                 navigateTo = { route ->
-                    navActions.navigationToRoute(route)
+                    navActions.navigationTo(route)
                 }
             )
         }

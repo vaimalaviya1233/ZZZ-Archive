@@ -24,77 +24,70 @@ import ui.navigation.NavActions
 import ui.navigation.Screen
 
 fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
-    composable(Screen.AgentsList.route) {
+    composable<Screen.AgentsList> {
         AgentsListScreen(onAgentClick = { id ->
-            navActions.navigationToRoute(Screen.AgentDetail.createRoute(id))
+            navActions.navigationTo(Screen.AgentDetail(id))
         }, onBackClick = {
             navActions.back()
         })
     }
 
-    composable(
-        route = Screen.AgentDetail.route,
-        arguments = Screen.AgentDetail.navArguments,
+    composable<Screen.AgentDetail>(
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
         exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
     ) {
         AgentDetailScreen(wEngineClick = { id ->
-            navActions.navigationToRoute(Screen.WEngineDetail.createRoute(id))
+            navActions.navigationTo(Screen.WEngineDetail(id))
         }, onBackClick = { navActions.back() })
     }
 
-    composable(Screen.WEnginesList.route) {
+    composable<Screen.WEnginesList> {
         WEnginesListScreen(onWEngineClick = { id ->
-            navActions.navigationToRoute(
-                Screen.WEngineDetail.createRoute(id)
+            navActions.navigationTo(
+                Screen.WEngineDetail(id)
             )
         }, onBackClick = {
             navActions.back()
         })
     }
 
-    composable(
-        Screen.WEngineDetail.route,
-        arguments = Screen.WEngineDetail.navArguments,
+    composable<Screen.WEngineDetail>(
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
         exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
     ) {
         WEngineDetailScreen(onBackClick = { navActions.back() })
     }
 
-    composable(Screen.BangbooList.route) {
+    composable<Screen.BangbooList> {
         BangbooListScreen(onBangbooClick = { id ->
-            navActions.navigationToRoute(
-                Screen.BangbooDetail.createRoute(id)
+            navActions.navigationTo(
+                Screen.BangbooDetail(id)
             )
         }, onBackClick = {
             navActions.back()
         })
     }
 
-    composable(
-        route = Screen.BangbooDetail.route,
-        arguments = Screen.BangbooDetail.navArguments,
+    composable<Screen.BangbooDetail>(
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
         exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
     ) {
         BangbooDetailScreen(onBackClick = { navActions.back() })
     }
 
-    composable(Screen.DrivesList.route) {
+    composable<Screen.DrivesList> {
         DrivesListScreen(onBackClick = {
             navActions.back()
         })
     }
-    composable(Screen.Setting.route) {
+    composable<Screen.Setting> {
         SettingScreen(onFeedbackClick = {
             navActions.navigationTo(Screen.Feedback)
         }, onHoYoLabClick = {
             navActions.navigationTo(Screen.HoYoLabSync)
         })
     }
-    composable(
-        route = Screen.Feedback.route,
+    composable<Screen.Feedback>(
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
         exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
     ) {
@@ -103,8 +96,7 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         }
     }
 
-    composable(
-        route = Screen.HoYoLabSync.route,
+    composable<Screen.HoYoLabSync>(
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
         exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
     ) {
@@ -113,14 +105,13 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         })
     }
 
-    composable(
-        route = Screen.MyAgentsList.route,
+    composable<Screen.MyAgentsList>(
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
         exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
     ) {
         MyAgentsListScreen(
             onAgentClick = { id ->
-                navActions.navigationToRoute(Screen.MyAgentDetail.createRoute(id))
+                navActions.navigationTo(Screen.MyAgentDetail(id))
             },
             onBackClick = {
                 navActions.back()
@@ -128,9 +119,7 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         )
     }
 
-    composable(
-        route = Screen.MyAgentDetail.route,
-        arguments = Screen.MyAgentDetail.navArguments,
+    composable<Screen.MyAgentDetail>(
         enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
         exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
     ) {

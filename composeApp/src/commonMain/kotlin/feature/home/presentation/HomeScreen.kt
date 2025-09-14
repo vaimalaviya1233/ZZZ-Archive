@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 import ui.components.dialogs.BannerDialog
+import ui.navigation.Screen
 import ui.theme.AppTheme
 import ui.utils.ContentType
 
@@ -24,7 +25,7 @@ fun HomeScreen(
     onAgentDetailClick: (Int) -> Unit,
     onWEngineDetailClick: (Int) -> Unit,
     onBangbooDetailClick: (Int) -> Unit,
-    navigateTo: (String) -> Unit
+    navigateTo: (Screen) -> Unit
 ) {
     val viewModel: HomeViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -78,11 +79,6 @@ private fun HomeScreenContent(
                 message = banner?.title ?: "",
                 url = banner?.url ?: "",
                 urlDesc = banner?.urlDesc ?: "",
-                route = banner?.route ?: "",
-                routeDesc = banner?.routeDesc ?: "",
-                onNavigate = {
-                    onAction(HomeAction.NavigateTo(it))
-                },
                 onDismiss = { openBannerDialog.value = false }
             )
         }

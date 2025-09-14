@@ -24,12 +24,12 @@ fun RootNavGraph() {
         }
     NavHost(
         navController = rootNavController,
-        startDestination = RootFlow.MainContainer.route
+        startDestination = RootFlow.MainContainer
     ) {
-        composable(RootFlow.Splash.route) {
+        composable<RootFlow.Splash> {
             SplashScreen(startMainFlow = { rootNavActions.popAndNavigation(RootFlow.MainContainer) })
         }
-        composable(RootFlow.MainContainer.route) {
+        composable<RootFlow.MainContainer> {
             MainContainer(
                 rootNavActions = rootNavActions
             )

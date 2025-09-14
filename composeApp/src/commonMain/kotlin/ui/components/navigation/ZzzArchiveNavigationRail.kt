@@ -24,6 +24,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.navigation.NAV_RAIL_MAIN_FLOW
@@ -41,7 +44,7 @@ import zzzarchive.composeapp.generated.resources.navigation_drawer
 @Composable
 fun ZzzArchiveNavigationRail(
     modifier: Modifier,
-    selectedMainFlow: String,
+    selectedMainFlow: NavDestination?,
     navActions: NavActions,
     onDrawerClicked: () -> Unit,
     onThemeChanged: () -> Unit
@@ -68,17 +71,19 @@ fun ZzzArchiveNavigationRail(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)
         ) {
-            NAV_RAIL_MAIN_FLOW.forEach { destination ->
-                val isSelected = selectedMainFlow == destination.route
+            NAV_RAIL_MAIN_FLOW.forEach { mainFlow ->
+                val isSelected = selectedMainFlow?.hierarchy?.any {
+                    it.hasRoute(route = mainFlow.route::class)
+                } == true
                 NavigationRailItem(
                     selected = isSelected,
                     onClick = {
-                        navActions.navigationToMainScreen(destination)
+                        navActions.navigationToMainScreen(mainFlow.route)
                     },
                     icon = {
                         Icon(
-                            imageVector = vectorResource(destination.iconRes),
-                            contentDescription = stringResource(destination.textRes)
+                            imageVector = vectorResource(mainFlow.iconRes),
+                            contentDescription = stringResource(mainFlow.textRes)
                         )
                     },
                     colors = navigationRailItemColors()

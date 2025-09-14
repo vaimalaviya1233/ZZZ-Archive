@@ -5,132 +5,52 @@
 
 package ui.navigation
 
-import androidx.navigation.NamedNavArgument
-import androidx.navigation.NavType
-import androidx.navigation.navArgument
-import org.jetbrains.compose.resources.DrawableResource
-import org.jetbrains.compose.resources.StringResource
-import zzzarchive.composeapp.generated.resources.Res
-import zzzarchive.composeapp.generated.resources.agents
-import zzzarchive.composeapp.generated.resources.bangboo
-import zzzarchive.composeapp.generated.resources.drives
-import zzzarchive.composeapp.generated.resources.feedback
-import zzzarchive.composeapp.generated.resources.function
-import zzzarchive.composeapp.generated.resources.home
-import zzzarchive.composeapp.generated.resources.hoyolab_sync
-import zzzarchive.composeapp.generated.resources.ic_help
-import zzzarchive.composeapp.generated.resources.my_agent
-import zzzarchive.composeapp.generated.resources.setting
-import zzzarchive.composeapp.generated.resources.unknown
-import zzzarchive.composeapp.generated.resources.w_engines
-import zzzarchive.composeapp.generated.resources.wiki
+import kotlinx.serialization.Serializable
 
-sealed class Screen(
-    val route: String,
-    val iconRes: DrawableResource = Res.drawable.ic_help,
-    val textRes: StringResource = Res.string.unknown,
-    val navArguments: List<NamedNavArgument> = emptyList()
-) {
-    data object Home : Screen(
-        route = "home",
-        textRes = Res.string.home
-    )
+@Serializable
+sealed interface Screen {
+    @Serializable
+    data object Home : Screen
 
-    data object AgentsList : Screen(
-        route = "agentsList",
-        textRes = Res.string.agents
-    )
+    @Serializable
+    data object AgentsList : Screen
 
-    data object AgentDetail : Screen(
-        route = "agentDetail/{agentId}",
-        navArguments =
-        listOf(
-            navArgument("agentId") {
-                type = NavType.IntType
-            }
-        )
-    ) {
-        fun createRoute(agentId: Int) = "agentDetail/$agentId"
-    }
+    @Serializable
+    data class AgentDetail(val agentId: Int) : Screen
 
-    data object WEnginesList : Screen(
-        route = "wEnginesList",
-        textRes = Res.string.w_engines
-    )
+    @Serializable
+    data object WEnginesList : Screen
 
-    data object WEngineDetail : Screen(
-        route = "wEngineDetail/{wEngineId}",
-        navArguments =
-        listOf(
-            navArgument("wEngineId") {
-                type = NavType.IntType
-            }
-        )
-    ) {
-        fun createRoute(wEngineId: Int) = "wEngineDetail/$wEngineId"
-    }
+    @Serializable
+    data class WEngineDetail(val wEngineId: Int) : Screen
 
-    data object DrivesList : Screen(
-        route = "drivesList",
-        textRes = Res.string.drives
-    )
+    @Serializable
+    data object DrivesList : Screen
 
-    data object BangbooList : Screen(
-        route = "bangbooList",
-        textRes = Res.string.bangboo
-    )
+    @Serializable
+    data object BangbooList : Screen
 
-    data object BangbooDetail : Screen(
-        route = "bangbooDetail/{bangbooId}",
-        navArguments =
-        listOf(
-            navArgument("bangbooId") {
-                type = NavType.IntType
-            }
-        )
-    ) {
-        fun createRoute(bangbooId: Int) = "bangbooDetail/$bangbooId"
-    }
+    @Serializable
+    data class BangbooDetail(val bangbooId: Int) : Screen
 
-    data object Setting : Screen(
-        route = "setting",
-        textRes = Res.string.setting
-    )
+    @Serializable
+    data object Setting : Screen
 
-    data object Feedback : Screen(
-        route = "feedback",
-        textRes = Res.string.feedback
-    )
+    @Serializable
+    data object Feedback : Screen
 
-    data object Wiki : Screen(
-        route = "wiki",
-        textRes = Res.string.wiki
-    )
+    @Serializable
+    data object Wiki : Screen
 
-    data object Function : Screen(
-        route = "function",
-        textRes = Res.string.function
-    )
+    @Serializable
+    data object Function : Screen
 
-    data object HoYoLabSync : Screen(
-        route = "hoyolabSync",
-        textRes = Res.string.hoyolab_sync
-    )
+    @Serializable
+    data object HoYoLabSync : Screen
 
-    data object MyAgentsList : Screen(
-        route = "myAgent",
-        textRes = Res.string.my_agent
-    )
+    @Serializable
+    data object MyAgentsList : Screen
 
-    data object MyAgentDetail : Screen(
-        route = "myAgentDetail/{agentId}",
-        navArguments =
-        listOf(
-            navArgument("agentId") {
-                type = NavType.IntType
-            }
-        )
-    ) {
-        fun createRoute(agentId: Int) = "myAgentDetail/$agentId"
-    }
+    @Serializable
+    data class MyAgentDetail(val agentId: Int) : Screen
 }

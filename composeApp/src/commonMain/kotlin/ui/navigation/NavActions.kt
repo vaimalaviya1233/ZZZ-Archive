@@ -5,16 +5,16 @@
 
 package ui.navigation
 
+import androidx.compose.runtime.Stable
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy // Added for robustness
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 
+@Stable
 class NavActions(private val navController: NavHostController) {
     fun navigationTo(destination: Screen) {
-        navController.navigate(destination.route)
-    }
-
-    fun navigationToRoute(route: String) {
-        navController.navigate(route)
+        navController.navigate(destination)
     }
 
     fun back() {
@@ -22,55 +22,32 @@ class NavActions(private val navController: NavHostController) {
     }
 
     fun navigationToMainScreen(destination: MainFlow) {
-        val thirdRoute =
-            navController.currentBackStack.value
-                .getOrNull(3)
-                ?.destination
-                ?.route
-                ?: if (destination == MainFlow.Home) return else MainFlow.Home.route
-        val forthRoute =
-            navController.currentBackStack.value
-                .getOrNull(4)
-                ?.destination
-                ?.route
-        val fifthRoute =
-            navController.currentBackStack.value
-                .getOrNull(5)
-                ?.destination
-                ?.route
-        val currentMainFlow =
-            ALL_MAIN_FLOW.find { it.route == thirdRoute }?.route ?: MainFlow.Home.route
-        val isAlreadyInDestination =
-            ALL_MAIN_FLOW.find { it.startScreen.route == forthRoute } != null && fifthRoute == null &&
-                currentMainFlow == destination.route
+        val isAlreadyInTargetFlow = navController.currentDestination?.hierarchy?.any { navDest ->
+            navDest.hasRoute(destination::class)
+        } == true
 
-        if (isAlreadyInDestination) {
-            return
-        }
-
-        if (currentMainFlow == destination.route) {
+        if (isAlreadyInTargetFlow) {
             backToTopOfCurrentMainFlow(destination)
-            return
-        }
-
-        navController.navigate(destination.route) {
-            popUpTo(navController.graph.findStartDestination().route ?: Screen.Home.route) {
-                saveState = true
+        } else {
+            navController.navigate(destination) {
+                popUpTo(navController.graph.findStartDestination().id) {
+                    saveState = true
+                }
+                launchSingleTop = true
+                restoreState = true
             }
-            launchSingleTop = true
-            restoreState = true
         }
     }
 
     fun popAndNavigation(destination: Screen) {
-        navController.navigate(destination.route) {
-            popUpTo(navController.graph.findStartDestination().route ?: MainFlow.Home.route) {
+        navController.navigate(destination) {
+            popUpTo(navController.graph.findStartDestination().id) {
                 this.inclusive = true
             }
         }
     }
 
     private fun backToTopOfCurrentMainFlow(destination: MainFlow) {
-        navController.popBackStack(route = destination.startScreen.route, inclusive = false)
+        navController.popBackStack(route = destination.startScreen, inclusive = false)
     }
 }

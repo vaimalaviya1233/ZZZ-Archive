@@ -12,9 +12,8 @@ import ui.navigation.NavActions
 import ui.navigation.graph.sharedNavGraph
 
 fun NavGraphBuilder.wEngineNavGraph(navActions: NavActions) {
-    navigation(
-        route = MainFlow.WEngine.route,
-        startDestination = MainFlow.WEngine.startScreen.route
+    navigation<MainFlow.WEngine>(
+        startDestination = MainFlow.WEngine.startScreen::class
     ) {
         sharedNavGraph(navActions)
     }

@@ -29,6 +29,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.navigation.NAV_RAIL_MAIN_FLOW
@@ -49,7 +52,7 @@ val navigationDrawerMaxWidth = 360.dp
 
 @Composable
 fun ModalNavigationDrawerContent(
-    selectedMainFlow: String,
+    selectedMainFlow: NavDestination?,
     navigationActions: NavActions,
     onDrawerClicked: () -> Unit,
     onThemeChanged: () -> Unit
@@ -87,21 +90,23 @@ fun ModalNavigationDrawerContent(
             modifier = Modifier.fillMaxHeight().verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            NAV_RAIL_MAIN_FLOW.forEach { destination ->
-                val isSelected = selectedMainFlow == destination.route
+            NAV_RAIL_MAIN_FLOW.forEach { mainFlow ->
+                val isSelected = selectedMainFlow?.hierarchy?.any {
+                    it.hasRoute(route = mainFlow.route::class)
+                } == true
                 NavigationDrawerItem(selected = isSelected, label = {
                     Text(
                         modifier = Modifier.padding(horizontal = AppTheme.spacing.s400),
-                        text = stringResource(destination.textRes),
+                        text = stringResource(mainFlow.textRes),
                         style = if (isSelected) AppTheme.typography.labelLarge else AppTheme.typography.labelMedium
                     )
                 }, icon = {
                     Icon(
-                        imageVector = vectorResource(destination.iconRes),
-                        contentDescription = stringResource(destination.textRes)
+                        imageVector = vectorResource(mainFlow.iconRes),
+                        contentDescription = stringResource(mainFlow.textRes)
                     )
                 }, colors = navigationDrawerItemColors(), onClick = {
-                    navigationActions.navigationToMainScreen(destination)
+                    navigationActions.navigationToMainScreen(mainFlow.route)
                     onDrawerClicked()
                 })
                 HorizontalDivider(

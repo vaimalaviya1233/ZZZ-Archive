@@ -21,6 +21,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hasRoute
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -29,8 +32,6 @@ import org.koin.compose.viewmodel.koinViewModel
 import ui.components.navigation.ModalNavigationDrawerContent
 import ui.components.navigation.ZzzArchiveBottomNavigationBar
 import ui.components.navigation.ZzzArchiveNavigationRail
-import ui.navigation.ALL_MAIN_FLOW
-import ui.navigation.MainFlow
 import ui.navigation.NAV_BOTTOM_MAIN_FLOW
 import ui.navigation.NavActions
 import ui.navigation.graph.MainNavGraph
@@ -46,19 +47,7 @@ fun MainContainer(rootNavActions: NavActions) {
         }
     val navBackStackEntry by mainFunNavController.currentBackStackEntryAsState()
 
-    val selectedDestination =
-        navBackStackEntry?.destination?.route ?: MainFlow.Home.startScreen.route
-
-    // BackStack = { null, home_flow, home, [target] <-this, [target_start_destination] }
-    val fourthNavDestination =
-        mainFunNavController.currentBackStack.value
-            .getOrNull(3)
-            ?.destination
-            ?.route
-            ?: MainFlow.Home.route
-
-    val selectedMainFlow =
-        ALL_MAIN_FLOW.find { it.route == fourthNavDestination }?.route ?: MainFlow.Home.route
+    val selectedDestination = navBackStackEntry?.destination
 
     val coroutineScope = rememberCoroutineScope()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
@@ -67,7 +56,7 @@ fun MainContainer(rootNavActions: NavActions) {
     ModalNavigationDrawer(
         drawerContent = {
             ModalNavigationDrawerContent(
-                selectedMainFlow = selectedMainFlow,
+                selectedMainFlow = selectedDestination,
                 navigationActions = mainFunNavActions,
                 onDrawerClicked = {
                     coroutineScope.launch {
@@ -89,7 +78,6 @@ fun MainContainer(rootNavActions: NavActions) {
             mainNavActions = mainFunNavActions,
             rootNavActions = rootNavActions,
             selectedDestination = selectedDestination,
-            selectedMainFlow = selectedMainFlow,
             onDrawerClicked = {
                 coroutineScope.launch {
                     drawerState.open()
@@ -109,8 +97,7 @@ fun MainFuncContent(
     mainFunNavController: NavHostController,
     mainNavActions: NavActions,
     rootNavActions: NavActions,
-    selectedDestination: String,
-    selectedMainFlow: String,
+    selectedDestination: NavDestination?,
     onDrawerClicked: () -> Unit,
     onThemeChanged: () -> Unit
 ) {
@@ -126,7 +113,7 @@ fun MainFuncContent(
                 ZzzArchiveNavigationRail(
                     modifier = Modifier
                         .fillMaxHeight(),
-                    selectedMainFlow = selectedMainFlow,
+                    selectedMainFlow = selectedDestination,
                     navActions = mainNavActions,
                     onDrawerClicked = onDrawerClicked,
                     onThemeChanged = onThemeChanged
@@ -145,13 +132,17 @@ fun MainFuncContent(
             }
         }
         val isBottomNavItem =
-            NAV_BOTTOM_MAIN_FLOW.find { it.startScreen.route == selectedDestination }
+            NAV_BOTTOM_MAIN_FLOW.find { mainFlow ->
+                selectedDestination?.hierarchy?.any {
+                    it.hasRoute(route = mainFlow.route.startScreen::class)
+                } == true
+            }
         AnimatedVisibility(
             visible =
             AppTheme.adaptiveLayoutType == AdaptiveLayoutType.Compact && isBottomNavItem != null
         ) {
             ZzzArchiveBottomNavigationBar(
-                selectedMainFlow = selectedMainFlow,
+                selectedMainFlow = selectedDestination,
                 navigationActions = mainNavActions
             )
         }

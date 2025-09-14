@@ -15,11 +15,10 @@ import ui.navigation.Screen
 import ui.navigation.graph.sharedNavGraph
 
 fun NavGraphBuilder.functionNavGraph(navActions: NavActions) {
-    navigation(
-        route = MainFlow.Function.route,
-        startDestination = MainFlow.Function.startScreen.route
+    navigation<MainFlow.Function>(
+        startDestination = MainFlow.Function.startScreen::class
     ) {
-        composable(Screen.Function.route) {
+        composable<Screen.Function> {
             FunctionScreen()
         }
         sharedNavGraph(navActions)

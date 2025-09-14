@@ -12,9 +12,8 @@ import ui.navigation.NavActions
 import ui.navigation.graph.sharedNavGraph
 
 fun NavGraphBuilder.bangbooNavGraph(navActions: NavActions) {
-    navigation(
-        route = MainFlow.Bangboo.route,
-        startDestination = MainFlow.Bangboo.startScreen.route
+    navigation<MainFlow.Bangboo>(
+        startDestination = MainFlow.Bangboo.startScreen::class
     ) {
         sharedNavGraph(navActions)
     }

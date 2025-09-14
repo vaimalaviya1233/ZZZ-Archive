@@ -5,6 +5,7 @@
 
 package ui.navigation
 
+import kotlinx.serialization.Serializable
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
 import zzzarchive.composeapp.generated.resources.Res
@@ -27,95 +28,117 @@ import zzzarchive.composeapp.generated.resources.unknown
 import zzzarchive.composeapp.generated.resources.w_engines
 import zzzarchive.composeapp.generated.resources.wiki
 
-sealed class MainFlow(
-    val route: String,
-    val startScreen: Screen,
-    val iconRes: DrawableResource = Res.drawable.ic_help,
-    val textRes: StringResource = Res.string.unknown
-) {
+@Serializable
+sealed class MainFlow(val startScreen: Screen) {
+    @Serializable
     data object Home : MainFlow(
-        route = "home_flow",
-        startScreen = Screen.Home,
-        iconRes = Res.drawable.ic_home,
-        textRes = Res.string.home
+        startScreen = Screen.Home
     )
 
+    @Serializable
     data object Agent : MainFlow(
-        route = "agent_flow",
-        startScreen = Screen.AgentsList,
-        iconRes = Res.drawable.ic_people,
-        textRes = Res.string.agents
+        startScreen = Screen.AgentsList
     )
 
+    @Serializable
     data object WEngine : MainFlow(
-        route = "wEngine_flow",
-        startScreen = Screen.WEnginesList,
-        iconRes = Res.drawable.ic_w_engine,
-        textRes = Res.string.w_engines
+        startScreen = Screen.WEnginesList
     )
 
+    @Serializable
     data object Drive : MainFlow(
-        route = "drive_flow",
-        startScreen = Screen.DrivesList,
-        iconRes = Res.drawable.ic_cd,
-        textRes = Res.string.drives
+        startScreen = Screen.DrivesList
     )
 
+    @Serializable
     data object Bangboo : MainFlow(
-        route = "bangboo_flow",
-        startScreen = Screen.BangbooList,
-        iconRes = Res.drawable.ic_bangboo,
-        textRes = Res.string.bangboo
+        startScreen = Screen.BangbooList
     )
 
+    @Serializable
     data object Setting : MainFlow(
-        route = "setting_flow",
-        startScreen = Screen.Setting,
-        iconRes = Res.drawable.ic_setting,
-        textRes = Res.string.setting
+        startScreen = Screen.Setting
     )
 
+    @Serializable
     data object Wiki : MainFlow(
-        route = "wiki_flow",
-        startScreen = Screen.Wiki,
-        iconRes = Res.drawable.ic_article_scroll,
-        textRes = Res.string.wiki
+        startScreen = Screen.Wiki
     )
 
+    @Serializable
     data object Function : MainFlow(
-        route = "function_flow",
-        startScreen = Screen.Function,
-        iconRes = Res.drawable.ic_function,
-        textRes = Res.string.function
+        startScreen = Screen.Function
     )
 }
 
-val ALL_MAIN_FLOW =
-    listOf(
-        MainFlow.Home,
-        MainFlow.Agent,
-        MainFlow.WEngine,
-        MainFlow.Bangboo,
-        MainFlow.Drive,
-        MainFlow.Setting,
-        MainFlow.Wiki,
-        MainFlow.Function
-    )
+data class TopDestination<T : Any>(
+    val route: T,
+    val iconRes: DrawableResource = Res.drawable.ic_help,
+    val textRes: StringResource = Res.string.unknown
+)
+
+private val topHomeDestination = TopDestination(
+    route = MainFlow.Home,
+    iconRes = Res.drawable.ic_home,
+    textRes = Res.string.home
+)
+
+private val topAgentDestination = TopDestination(
+    route = MainFlow.Agent,
+    iconRes = Res.drawable.ic_people,
+    textRes = Res.string.agents
+)
+
+private val topWEngineDestination = TopDestination(
+    route = MainFlow.WEngine,
+    iconRes = Res.drawable.ic_w_engine,
+    textRes = Res.string.w_engines
+)
+
+private val topBangbooDestination = TopDestination(
+    route = MainFlow.Bangboo,
+    iconRes = Res.drawable.ic_bangboo,
+    textRes = Res.string.bangboo
+)
+
+private val topDriveDestination = TopDestination(
+    route = MainFlow.Drive,
+    iconRes = Res.drawable.ic_cd,
+    textRes = Res.string.drives
+)
+
+private val topSettingDestination = TopDestination(
+    route = MainFlow.Setting,
+    iconRes = Res.drawable.ic_setting,
+    textRes = Res.string.setting
+)
+
+private val topWikiDestination = TopDestination(
+    route = MainFlow.Wiki,
+    iconRes = Res.drawable.ic_article_scroll,
+    textRes = Res.string.wiki
+)
+
+private val topFunctionDestination = TopDestination(
+    route = MainFlow.Function,
+    iconRes = Res.drawable.ic_function,
+    textRes = Res.string.function
+)
 
 val NAV_RAIL_MAIN_FLOW =
     listOf(
-        MainFlow.Home,
-        MainFlow.Agent,
-        MainFlow.WEngine,
-        MainFlow.Bangboo,
-        MainFlow.Drive,
-        MainFlow.Setting
+        topHomeDestination,
+        topAgentDestination,
+        topWEngineDestination,
+        topBangbooDestination,
+        topDriveDestination,
+        topSettingDestination
     )
 
 val NAV_BOTTOM_MAIN_FLOW =
     listOf(
-        MainFlow.Home,
-        MainFlow.Wiki,
-        MainFlow.Function,
-        MainFlow.Setting
+        topHomeDestination,
+        topWikiDestination,
+        topFunctionDestination,
+        topSettingDestination
     )

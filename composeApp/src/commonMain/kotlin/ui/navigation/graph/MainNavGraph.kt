@@ -30,7 +30,7 @@ fun MainNavGraph(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = MainFlow.Home.route
+        startDestination = MainFlow.Home
     ) {
         homeNavGraph(navActions)
         agentNavGraph(navActions)

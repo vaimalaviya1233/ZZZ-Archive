@@ -34,9 +34,6 @@ fun BannerDialog(
     message: String,
     url: String,
     urlDesc: String,
-    route: String,
-    routeDesc: String,
-    onNavigate: (String) -> Unit,
     onDismiss: () -> Unit
 ) {
     BasicDialog(onDismissRequest = onDismiss) {
@@ -81,16 +78,6 @@ fun BannerDialog(
                     text = urlDesc
                 ) {
                     urlHandler.openUri(url)
-                }
-            }
-
-            if (route != "") {
-                ZzzOutlineButton(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = routeDesc
-                ) {
-                    onNavigate(route)
-                    onDismiss()
                 }
             }
         }

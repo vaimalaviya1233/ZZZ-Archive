@@ -5,8 +5,13 @@
 
 package ui.navigation
 
-sealed interface RootFlow {
-    data object Splash : Screen(route = "splash")
+import kotlinx.serialization.Serializable
 
-    data object MainContainer : Screen(route = "mainContainer")
+@Serializable
+sealed interface RootFlow {
+    @Serializable
+    data object Splash : Screen
+
+    @Serializable
+    data object MainContainer : Screen
 }
