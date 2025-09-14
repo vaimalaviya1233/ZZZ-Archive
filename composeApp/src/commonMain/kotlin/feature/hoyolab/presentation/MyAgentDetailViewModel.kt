@@ -3,6 +3,7 @@ package feature.hoyolab.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import feature.hoyolab.domain.HoYoLabAgentUseCase
 import feature.hoyolab.domain.HoYoLabPreferenceUseCase
 import feature.hoyolab.model.agent.MyAgentDetailState
@@ -10,13 +11,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ui.navigation.Screen
 
 class MyAgentDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val hoYoLabAgentUseCase: HoYoLabAgentUseCase,
     private val hoYoLabPreferenceUseCase: HoYoLabPreferenceUseCase
 ) : ViewModel() {
-    private val agentId: Int = checkNotNull(savedStateHandle["agentId"])
+    private val agentId: Int = checkNotNull(savedStateHandle.toRoute<Screen.MyAgentDetail>().id)
 
     private val _uiState = MutableStateFlow(MyAgentDetailState())
     val uiState = _uiState.asStateFlow()

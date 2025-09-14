@@ -8,6 +8,7 @@ package feature.agent.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import feature.agent.domain.AgentDetailUseCase
 import feature.agent.model.AgentDetailState
 import feature.drive.domain.DrivesListUseCase
@@ -15,13 +16,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ui.navigation.Screen
 
 class AgentDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val agentDetailUseCase: AgentDetailUseCase,
     private val drivesListUseCase: DrivesListUseCase
 ) : ViewModel() {
-    private val agentId: Int = checkNotNull(savedStateHandle["agentId"])
+    private val agentId: Int = checkNotNull(savedStateHandle.toRoute<Screen.AgentDetail>().id)
 
     private var _uiState = MutableStateFlow(AgentDetailState())
     val uiState = _uiState.asStateFlow()

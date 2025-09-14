@@ -16,13 +16,13 @@ sealed interface Screen {
     data object AgentsList : Screen
 
     @Serializable
-    data class AgentDetail(val agentId: Int) : Screen
+    data class AgentDetail(val id: Int) : Screen
 
     @Serializable
     data object WEnginesList : Screen
 
     @Serializable
-    data class WEngineDetail(val wEngineId: Int) : Screen
+    data class WEngineDetail(val id: Int) : Screen
 
     @Serializable
     data object DrivesList : Screen
@@ -31,7 +31,7 @@ sealed interface Screen {
     data object BangbooList : Screen
 
     @Serializable
-    data class BangbooDetail(val bangbooId: Int) : Screen
+    data class BangbooDetail(val id: Int) : Screen
 
     @Serializable
     data object Setting : Screen
@@ -52,5 +52,5 @@ sealed interface Screen {
     data object MyAgentsList : Screen
 
     @Serializable
-    data class MyAgentDetail(val agentId: Int) : Screen
+    data class MyAgentDetail(val id: Int) : Screen
 }

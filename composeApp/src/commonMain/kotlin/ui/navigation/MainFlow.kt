@@ -71,8 +71,8 @@ sealed class MainFlow(val startScreen: Screen) {
     )
 }
 
-data class TopDestination<T : Any>(
-    val route: T,
+data class TopDestination(
+    val route: MainFlow,
     val iconRes: DrawableResource = Res.drawable.ic_help,
     val textRes: StringResource = Res.string.unknown
 )

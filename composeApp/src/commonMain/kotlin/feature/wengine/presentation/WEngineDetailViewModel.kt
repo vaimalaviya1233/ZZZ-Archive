@@ -8,18 +8,20 @@ package feature.wengine.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import feature.wengine.domain.WEngineDetailUseCase
 import feature.wengine.model.WEngineDetailState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ui.navigation.Screen
 
 class WEngineDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val wEngineDetailUseCase: WEngineDetailUseCase
 ) : ViewModel() {
-    private val wEngineId: Int = checkNotNull(savedStateHandle["wEngineId"])
+    private val wEngineId: Int = checkNotNull(savedStateHandle.toRoute<Screen.WEngineDetail>().id)
 
     private var _uiState = MutableStateFlow(WEngineDetailState())
     val uiState = _uiState.asStateFlow()

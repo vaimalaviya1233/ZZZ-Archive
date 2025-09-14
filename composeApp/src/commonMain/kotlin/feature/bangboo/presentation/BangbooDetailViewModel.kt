@@ -8,18 +8,20 @@ package feature.bangboo.presentation
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.toRoute
 import feature.bangboo.domain.BangbooDetailUseCase
 import feature.bangboo.model.BangbooDetailState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ui.navigation.Screen
 
 class BangbooDetailViewModel(
     savedStateHandle: SavedStateHandle,
     private val bangbooDetailUseCase: BangbooDetailUseCase
 ) : ViewModel() {
-    private val bangbooId: Int = checkNotNull(savedStateHandle["bangbooId"])
+    private val bangbooId: Int = checkNotNull(savedStateHandle.toRoute<Screen.BangbooDetail>().id)
 
     private var _uiState = MutableStateFlow(BangbooDetailState())
     val uiState = _uiState.asStateFlow()
