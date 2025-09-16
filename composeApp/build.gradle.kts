@@ -165,6 +165,9 @@ android {
             resValue("string", "app_name_variant", "ZZZ Archive")
         }
     }
+    testOptions {
+        unitTests.isReturnDefaultValues = true
+    }
 }
 
 compose.desktop {

@@ -22,7 +22,7 @@ class WEngineDetailViewModelTest {
 
     private val savedStateHandle =
         SavedStateHandle().apply {
-            set("wEngineId", 47)
+            set("id", 47)
         }
     private val wEngineDetailUseCase = mockk<WEngineDetailUseCase>()
     private lateinit var viewModel: WEngineDetailViewModel

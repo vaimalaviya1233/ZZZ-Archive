@@ -25,7 +25,7 @@ class AgentDetailViewModelTest {
 
     private val savedStateHandle =
         SavedStateHandle().apply {
-            set("agentId", 20)
+            set("id", 20)
         }
     private val agentDetailUseCase = mockk<AgentDetailUseCase>()
     private val drivesListUseCase = mockk<DrivesListUseCase>()

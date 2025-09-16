@@ -22,7 +22,7 @@ class BangbooDetailViewModelTest {
 
     private val savedStateHandle =
         SavedStateHandle().apply {
-            set("bangbooId", 6)
+            set("id", 6)
         }
     private val bangbooDetailUseCase = mockk<BangbooDetailUseCase>()
     private lateinit var viewModel: BangbooDetailViewModel

@@ -26,7 +26,7 @@ class MyAgentDetailViewModelTest {
     private val hoYoLabPreferenceUseCase = mockk<HoYoLabPreferenceUseCase>()
     private val savedStateHandle =
         SavedStateHandle().apply {
-            set("agentId", 1)
+            set("id", 1)
         }
     private lateinit var viewModel: MyAgentDetailViewModel
 
