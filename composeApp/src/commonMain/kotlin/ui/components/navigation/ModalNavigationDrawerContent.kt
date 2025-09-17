@@ -111,7 +111,7 @@ fun ModalNavigationDrawerContent(
                 })
                 HorizontalDivider(
                     modifier = Modifier.padding(horizontal = AppTheme.spacing.s400),
-                    thickness = AppTheme.size.borderWidth,
+                    thickness = AppTheme.size.border,
                     color = AppTheme.colors.border
                 )
             }

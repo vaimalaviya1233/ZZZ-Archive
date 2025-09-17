@@ -164,7 +164,7 @@ private fun Score(
         Box(
             modifier =
             Modifier.size(AppTheme.size.s64).border(
-                AppTheme.size.borderWidth,
+                AppTheme.size.border,
                 scoreState.color,
                 CircleShape
             ),

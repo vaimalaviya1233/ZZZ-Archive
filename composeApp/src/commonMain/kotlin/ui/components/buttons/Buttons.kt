@@ -106,7 +106,7 @@ fun ZzzButton(
         border =
         if (hasBorder) {
             BorderStroke(
-                width = AppTheme.size.borderWidth,
+                width = AppTheme.size.border,
                 color = AppTheme.colors.buttonBorder
             )
         } else {

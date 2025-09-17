@@ -156,7 +156,7 @@ fun OpenSourceItem(
             .clickable {
                 onClick()
             }.border(
-                AppTheme.size.borderWidth,
+                AppTheme.size.border,
                 AppTheme.colors.buttonBorder,
                 AppTheme.shape.r400
             ).padding(AppTheme.spacing.s400),

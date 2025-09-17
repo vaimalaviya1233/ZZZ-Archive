@@ -56,7 +56,7 @@ fun FactionItem(
             .fillMaxWidth()
             .clip(AppTheme.shape.r400)
             .border(
-                width = AppTheme.size.borderWidth,
+                width = AppTheme.size.largeBorder,
                 color = if (isSelected) AppTheme.colors.primary else Color.Transparent,
                 shape = AppTheme.shape.r400
             ).pointerHoverIcon(PointerIcon.Hand)

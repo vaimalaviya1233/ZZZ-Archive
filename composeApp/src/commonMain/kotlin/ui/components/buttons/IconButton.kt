@@ -40,7 +40,7 @@ fun ZzzIconButton(
         color = AppTheme.colors.surface,
         border =
         BorderStroke(
-            width = AppTheme.size.borderWidth,
+            width = AppTheme.size.border,
             color = AppTheme.colors.border
         ),
         shape = CircleShape,

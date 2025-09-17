@@ -34,7 +34,7 @@ fun ZzzTag(
             .clip(AppTheme.shape.r300)
             .background(AppTheme.colors.surface)
             .border(
-                width = AppTheme.size.borderWidth,
+                width = AppTheme.size.border,
                 color = AppTheme.colors.border,
                 shape = AppTheme.shape.r300
             ).padding(horizontal = AppTheme.spacing.s350, vertical = AppTheme.spacing.s300),

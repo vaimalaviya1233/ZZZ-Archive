@@ -67,7 +67,7 @@ fun MyAgentItem(
                 .background(
                     AppTheme.colors.imageBackground
                 ).border(
-                    AppTheme.size.borderWidth,
+                    AppTheme.size.border,
                     AppTheme.colors.imageBorder,
                     shape = AppTheme.shape.r300
                 ).clip(AppTheme.shape.r300)

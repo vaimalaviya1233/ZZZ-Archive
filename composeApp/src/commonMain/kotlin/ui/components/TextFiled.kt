@@ -37,7 +37,7 @@ fun ZzzTextFiled(
     OutlinedTextField(
         modifier =
         modifier.border(
-            AppTheme.size.borderWidth,
+            AppTheme.size.border,
             if (isError) AppTheme.colors.alert else AppTheme.colors.border,
             AppTheme.shape.r400
         ),

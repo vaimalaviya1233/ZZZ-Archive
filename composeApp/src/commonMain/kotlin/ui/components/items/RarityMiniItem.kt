@@ -64,7 +64,7 @@ fun RarityMiniItem(
                 .background(
                     rarity?.getColor(AppTheme.colors) ?: Color.Transparent
                 ).border(
-                    AppTheme.size.borderWidth,
+                    AppTheme.size.border,
                     AppTheme.colors.imageBorder,
                     shape = AppTheme.shape.r300
                 )
