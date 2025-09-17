@@ -45,6 +45,7 @@ class SettingViewModel(
                 observeUiScale()
                 observeFontScale()
                 updateAppVersion()
+                updateContributorsAmount()
             }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000L), _uiState.value)
 
     suspend fun onAction(action: SettingAction) {
@@ -112,6 +113,16 @@ class SettingViewModel(
 
     private fun updateAppVersion() {
         _uiState.update { it.copy(appVersion = appInfoUseCase.getAppVersion()) }
+    }
+
+    private fun updateContributorsAmount() {
+        val contributors = _uiState.value.contributors
+        val uniqueNames = mutableSetOf<String>()
+        contributors.developer.forEach { uniqueNames.add(it.name) }
+        contributors.uiUxDesigner.forEach { uniqueNames.add(it.name) }
+        contributors.translation.forEach { uniqueNames.add(it.name) }
+        contributors.dataIntegration.forEach { uniqueNames.add(it.name) }
+        _uiState.update { it.copy(contributors = contributors.copy(contributorAmount = uniqueNames.size)) }
     }
 
     private suspend fun setIsDarkTheme(isDark: Boolean) {

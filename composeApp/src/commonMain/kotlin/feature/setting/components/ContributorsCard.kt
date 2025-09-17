@@ -67,7 +67,6 @@ fun ContributorsCard(contributors: Contributors) {
                     color = AppTheme.colors.onSurfaceVariant
                 )
             }
-            ContributorItem(title = stringResource(Res.string.author), contributorList = contributors.author)
             ContributorItem(title = stringResource(Res.string.developer), contributorList = contributors.developer)
             ContributorItem(
                 title = stringResource(Res.string.ui_ux_designers),
@@ -77,10 +76,6 @@ fun ContributorsCard(contributors: Contributors) {
             ContributorItem(
                 title = stringResource(Res.string.data_integration),
                 contributorList = contributors.dataIntegration
-            )
-            ContributorItem(
-                title = stringResource(Res.string.banner_artists),
-                contributorList = contributors.bannerArtists
             )
             ContributorItem(
                 title = stringResource(Res.string.special_thanks),

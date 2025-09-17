@@ -18,12 +18,10 @@ data class SettingState(
 
 data class Contributors(
     val contributorAmount: Int,
-    val author: List<Contributor>,
     val developer: List<Contributor>,
     val uiUxDesigner: List<Contributor>,
     val translation: List<Contributor>,
     val dataIntegration: List<Contributor>,
-    val bannerArtists: List<Contributor>,
     val specialThanks: List<Contributor>
 )
 
@@ -35,11 +33,7 @@ val settingState =
         appVersion = "Luciana 2024.11.13",
         contributors =
         Contributors(
-            contributorAmount = 4,
-            author =
-            listOf(
-                Contributor("mrfatworm")
-            ),
+            contributorAmount = 0,
             developer =
             listOf(
                 Contributor("mrfatworm")
@@ -56,11 +50,6 @@ val settingState =
             listOf(
                 Contributor("mrfatworm"),
                 Contributor("rm6alalauau")
-            ),
-            bannerArtists =
-            listOf(
-                Contributor(name = "EDIBLE", description = "リン　心象映画"),
-                Contributor(name = "咖卡CAthenal", description = "工作时间到！")
             ),
             specialThanks =
             listOf(
