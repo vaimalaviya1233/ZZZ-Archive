@@ -171,7 +171,7 @@ fun OpenSourceItem(
         )
         Text(
             text = title,
-            style = AppTheme.typography.titleSmall,
+            style = AppTheme.typography.labelSmall,
             color = AppTheme.colors.onSurfaceContainer
         )
         ZzzTag(text = label)
