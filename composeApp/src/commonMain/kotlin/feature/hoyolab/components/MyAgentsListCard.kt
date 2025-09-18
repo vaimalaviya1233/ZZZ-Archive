@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import feature.hoyolab.model.MyAgentsListState
-import ui.components.cards.ContentCard
 import ui.theme.AppTheme
 import ui.utils.cardPadding
 import ui.utils.gridListHorizontalGap
@@ -24,34 +23,29 @@ fun MyAgentsListCard(
     uiState: MyAgentsListState,
     onAgentClick: (Int) -> Unit
 ) {
-    ContentCard(
-        modifier = modifier,
-        hasDefaultPadding = false
+    LazyVerticalGrid(
+        columns = GridCells.Adaptive(AppTheme.size.s84),
+        modifier = modifier.fillMaxSize(),
+        contentPadding = PaddingValues(cardPadding()),
+        horizontalArrangement = gridListHorizontalGap(),
+        verticalArrangement = gridListVerticalGap()
     ) {
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(AppTheme.size.s100),
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(cardPadding()),
-            horizontalArrangement = gridListHorizontalGap(),
-            verticalArrangement = gridListVerticalGap()
-        ) {
-            items(
-                count = uiState.agentsList.size,
-                key = { index -> uiState.agentsList[index].id }
-            ) { index ->
-                val agent = uiState.agentsList[index]
-                MyAgentItem(
-                    modifier = Modifier.animateItem(),
-                    rarity = agent.rarity,
-                    name = agent.name,
-                    level = agent.level,
-                    rank = agent.rank,
-                    imgUrl = agent.imageUrl,
-                    onClick = {
-                        onAgentClick(agent.id)
-                    }
-                )
-            }
+        items(
+            count = uiState.agentsList.size,
+            key = { index -> uiState.agentsList[index].id }
+        ) { index ->
+            val agent = uiState.agentsList[index]
+            MyAgentItem(
+                modifier = Modifier.animateItem(),
+                rarity = agent.rarity,
+                name = agent.name,
+                level = agent.level,
+                rank = agent.rank,
+                imgUrl = agent.imageUrl,
+                onClick = {
+                    onAgentClick(agent.id)
+                }
+            )
         }
     }
 }

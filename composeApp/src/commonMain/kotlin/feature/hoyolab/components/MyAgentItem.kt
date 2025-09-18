@@ -9,7 +9,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.interaction.collectIsHoveredAsState
+import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,16 +19,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import coil3.compose.SubcomposeAsyncImage
@@ -37,78 +39,83 @@ import utils.ZzzRarity
 
 @Composable
 fun MyAgentItem(
-    modifier: Modifier = Modifier,
     name: String,
     level: Int,
     rank: Int,
+    modifier: Modifier = Modifier,
     imgUrl: String? = null,
     rarity: ZzzRarity = ZzzRarity.RARITY_D,
     placeHolder: @Composable () -> Unit = { ImageNotFound() },
     onClick: () -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val isHovered by interactionSource.collectIsHoveredAsState()
 
     Column(
         modifier =
         modifier
-            .width(AppTheme.size.s100)
+            .border(
+                width = AppTheme.size.border,
+                color = AppTheme.colors.imageBorder,
+                shape = AppTheme.shape.r300
+            )
+            .clip(AppTheme.shape.r300)
             .pointerHoverIcon(PointerIcon.Hand)
-            .clickable(interactionSource = interactionSource, indication = null) {
-                onClick()
-            },
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s250)
+            .clickable(
+                interactionSource = interactionSource,
+                indication = null,
+                onClick = onClick
+            ),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Box(
-            modifier =
-            Modifier
-                .aspectRatio(9f / 11)
-                .fillMaxSize()
-                .background(
-                    AppTheme.colors.imageBackground
-                ).border(
-                    AppTheme.size.border,
-                    AppTheme.colors.imageBorder,
-                    shape = AppTheme.shape.r300
-                ).clip(AppTheme.shape.r300)
-        ) {
+        Box {
             SubcomposeAsyncImage(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .aspectRatio(1f)
+                    .fillMaxSize(),
                 model = imgUrl,
                 contentDescription = name,
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopCenter,
                 error = {
                     placeHolder()
                 }
             )
 
             if (rank > 0) {
-                CinemaCountTag(Modifier.align(Alignment.TopEnd), rank)
+                CinemaCountTag(
+                    modifier = Modifier.align(Alignment.TopEnd),
+                    cinemaCount = rank
+                )
             }
 
-            Column(
-                modifier =
-                Modifier
-                    .align(Alignment.BottomStart)
-                    .fillMaxWidth()
-                    .background(AppTheme.colors.hoveredMask)
-                    .padding(top = AppTheme.spacing.s100),
-                verticalArrangement =
-                Arrangement.spacedBy(
-                    AppTheme.spacing.s100
-                )
+            androidx.compose.animation.AnimatedVisibility(
+                visible = isHovered || isPressed,
+                modifier = Modifier.align(Alignment.BottomCenter)
             ) {
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = "Lv $level",
-                    textAlign = TextAlign.Center,
-                    overflow = TextOverflow.Ellipsis,
-                    style = AppTheme.typography.labelMedium,
-                    color = AppTheme.colors.onHoveredMaskVariant,
-                    maxLines = 1
+                RarityIndicator(
+                    rarity = rarity
                 )
-                RarityIndicator(rarity = rarity)
             }
         }
+
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(AppTheme.colors.hoveredMask)
+                .border(
+                    width = AppTheme.size.border,
+                    color = AppTheme.colors.imageBorder
+                )
+                .padding(vertical = AppTheme.spacing.s200),
+            text = "Lv $level",
+            textAlign = TextAlign.Center,
+            overflow = TextOverflow.Ellipsis,
+            style = AppTheme.typography.labelMedium,
+            color = AppTheme.colors.onHoveredMaskVariant,
+            maxLines = 1
+        )
     }
 }
 
@@ -123,10 +130,10 @@ private fun CinemaCountTag(
             .background(
                 AppTheme.colors.hoveredMask,
                 RoundedCornerShape(bottomStart = AppTheme.spacing.s300)
-            ).padding(horizontal = AppTheme.spacing.s300, vertical = AppTheme.spacing.s200),
+            ).padding(AppTheme.spacing.s200),
         text = cinemaCount.toString(),
         color = AppTheme.colors.onHoveredMask,
-        style = AppTheme.typography.titleMedium
+        style = AppTheme.typography.labelLarge
     )
 }
 
@@ -138,7 +145,7 @@ private fun RarityIndicator(
     Spacer(
         modifier
             .fillMaxWidth()
-            .height(AppTheme.spacing.s300)
+            .height(AppTheme.size.largeBorder)
             .background(rarity.getColor(AppTheme.colors))
     )
 }
