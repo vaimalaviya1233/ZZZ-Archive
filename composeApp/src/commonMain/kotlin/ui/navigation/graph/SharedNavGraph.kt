@@ -5,7 +5,6 @@
 
 package ui.navigation.graph
 
-import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import feature.agent.presentation.AgentDetailScreen
@@ -22,6 +21,7 @@ import feature.wengine.presentation.WEngineDetailScreen
 import feature.wengine.presentation.WEnginesListScreen
 import ui.navigation.NavActions
 import ui.navigation.Screen
+import ui.navigation.slideInAnimateComposable
 
 fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
     composable<Screen.AgentsList> {
@@ -32,10 +32,7 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         })
     }
 
-    composable<Screen.AgentDetail>(
-        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
-    ) {
+    slideInAnimateComposable<Screen.AgentDetail> {
         AgentDetailScreen(wEngineClick = { id ->
             navActions.navigationTo(Screen.WEngineDetail(id))
         }, onBackClick = { navActions.back() })
@@ -51,10 +48,7 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         })
     }
 
-    composable<Screen.WEngineDetail>(
-        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
-    ) {
+    slideInAnimateComposable<Screen.WEngineDetail> {
         WEngineDetailScreen(onBackClick = { navActions.back() })
     }
 
@@ -68,10 +62,7 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         })
     }
 
-    composable<Screen.BangbooDetail>(
-        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
-    ) {
+    slideInAnimateComposable<Screen.BangbooDetail> {
         BangbooDetailScreen(onBackClick = { navActions.back() })
     }
 
@@ -80,6 +71,7 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
             navActions.back()
         })
     }
+
     composable<Screen.Setting> {
         SettingScreen(onFeedbackClick = {
             navActions.navigationTo(Screen.Feedback)
@@ -87,28 +79,20 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
             navActions.navigationTo(Screen.HoYoLabSync)
         })
     }
-    composable<Screen.Feedback>(
-        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
-    ) {
+
+    slideInAnimateComposable<Screen.Feedback> {
         FeedbackScreen {
             navActions.back()
         }
     }
 
-    composable<Screen.HoYoLabSync>(
-        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
-    ) {
+    slideInAnimateComposable<Screen.HoYoLabSync> {
         HoYoLabSyncScreen(onBackClick = { navActions.back() }, navigateToFeedback = {
             navActions.navigationTo(Screen.Feedback)
         })
     }
 
-    composable<Screen.MyAgentsList>(
-        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
-    ) {
+    slideInAnimateComposable<Screen.MyAgentsList> {
         MyAgentsListScreen(
             onAgentClick = { id ->
                 navActions.navigationTo(Screen.MyAgentDetail(id))
@@ -119,10 +103,7 @@ fun NavGraphBuilder.sharedNavGraph(navActions: NavActions) {
         )
     }
 
-    composable<Screen.MyAgentDetail>(
-        enterTransition = { slideIntoContainer(AnimatedContentTransitionScope.SlideDirection.Start) },
-        exitTransition = { slideOutOfContainer(AnimatedContentTransitionScope.SlideDirection.End) }
-    ) {
+    slideInAnimateComposable<Screen.MyAgentDetail> {
         MyAgentDetailScreen(onBackClick = {
             navActions.back()
         })

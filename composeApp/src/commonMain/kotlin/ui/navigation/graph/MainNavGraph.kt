@@ -5,6 +5,8 @@
 
 package ui.navigation.graph
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -30,7 +32,9 @@ fun MainNavGraph(
     NavHost(
         modifier = modifier,
         navController = navController,
-        startDestination = MainFlow.Home
+        startDestination = MainFlow.Home,
+        enterTransition = { EnterTransition.None },
+        exitTransition = { ExitTransition.None }
     ) {
         homeNavGraph(navActions)
         agentNavGraph(navActions)
