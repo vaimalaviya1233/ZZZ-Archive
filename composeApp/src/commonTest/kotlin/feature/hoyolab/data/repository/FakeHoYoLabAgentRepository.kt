@@ -1,8 +1,8 @@
 package feature.hoyolab.data.repository
 
 import feature.hoyolab.model.MyAgentListItem
-import feature.hoyolab.model.agent.MyAgentDetailListItem
-import feature.hoyolab.model.agent.stubMyAgentDetailListItem
+import feature.hoyolab.model.agent.MyAgentDetail
+import feature.hoyolab.model.agent.stubMyAgentDetail
 import feature.hoyolab.model.stubMyAgentsList
 
 class FakeHoYoLabAgentRepository : HoYoLabAgentRepository {
@@ -31,9 +31,9 @@ class FakeHoYoLabAgentRepository : HoYoLabAgentRepository {
         lToken: String,
         ltUid: String,
         agentId: Int
-    ): Result<MyAgentDetailListItem> = if (isError) {
+    ): Result<MyAgentDetail> = if (isError) {
         Result.failure(Exception())
     } else {
-        Result.success(stubMyAgentDetailListItem)
+        Result.success(stubMyAgentDetail)
     }
 }

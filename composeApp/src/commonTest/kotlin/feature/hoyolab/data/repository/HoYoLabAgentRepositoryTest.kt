@@ -1,6 +1,6 @@
 package feature.hoyolab.data.repository
 
-import feature.hoyolab.model.agent.stubMyAgentDetailListItem
+import feature.hoyolab.model.agent.stubMyAgentDetail
 import feature.hoyolab.model.stubMyAgentsList
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -41,7 +41,7 @@ class HoYoLabAgentRepositoryTest {
             ltUid = "",
             agentId = 0
         )
-        assertEquals(Result.success(stubMyAgentDetailListItem), result)
+        assertEquals(Result.success(stubMyAgentDetail), result)
     }
 
     @Test

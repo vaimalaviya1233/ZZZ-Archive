@@ -10,8 +10,8 @@ import utils.AgentSpecialty
 import utils.ZzzRarity
 
 data class MyAgentDetailState(
-    val agentDetail: MyAgentDetailListItem = emptyMyAgentDetailListItem,
-    val planProperties: List<MyAgentDetailEquipPlanProperty> = emptyList(),
+    val agentDetail: MyAgentDetail = emptyMyAgentDetail,
+    val planProperties: List<EquipPlanProperty> = emptyList(),
     val showUid: Boolean = false,
     val uid: String = "",
     val isCustomImage: Boolean = false,
@@ -23,20 +23,20 @@ data class MyAgentDetailState(
     val errorMessage: String = ""
 )
 
-val emptyMyAgentDetailListItem =
-    MyAgentDetailListItem(
+val emptyMyAgentDetail =
+    MyAgentDetail(
         id = 0,
         name = "",
         level = 0,
-        rank = 0,
+        mindscapes = 0,
         imageUrl = "",
-        groupImageUrl = "",
+        factionImageUrl = "",
         rarity = ZzzRarity.RARITY_D,
         specialty = AgentSpecialty.None,
         attribute = AgentAttribute.None,
         equip = emptyList(),
-        weapon = emptyMyAgentDetailWeaponResponse,
+        weapon = MyAgentDetailWeapon.Empty,
         properties = emptyList(),
         skills = emptyList(),
-        equipPlanInfo = null
+        equipPlanInfo = MyAgentDetailEquipPlan.Empty
     )

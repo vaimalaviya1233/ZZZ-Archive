@@ -5,10 +5,10 @@
 
 package feature.hoyolab.data.repository
 
-import feature.hoyolab.data.mapper.toMyAgentDetailListItem
+import feature.hoyolab.data.mapper.toMyAgentDetail
 import feature.hoyolab.data.mapper.toMyAgentListItem
 import feature.hoyolab.model.MyAgentListItem
-import feature.hoyolab.model.agent.MyAgentDetailListItem
+import feature.hoyolab.model.agent.MyAgentDetail
 import network.HoYoLabHttp
 
 class HoYoLabAgentRepositoryImpl(private val httpClient: HoYoLabHttp) : HoYoLabAgentRepository {
@@ -26,7 +26,7 @@ class HoYoLabAgentRepositoryImpl(private val httpClient: HoYoLabHttp) : HoYoLabA
             lToken = lToken,
             ltUid = ltUid
         )
-        Result.success(result.data.avatarList.map { it.toMyAgentListItem() })
+        Result.success(result.data?.avatarList?.map { it.toMyAgentListItem() } ?: emptyList())
     } catch (e: Exception) {
         Result.failure(e)
     }
@@ -38,7 +38,7 @@ class HoYoLabAgentRepositoryImpl(private val httpClient: HoYoLabHttp) : HoYoLabA
         lToken: String,
         ltUid: String,
         agentId: Int
-    ): Result<MyAgentDetailListItem> = try {
+    ): Result<MyAgentDetail> = try {
         val result =
             httpClient.requestMyAgentDetail(
                 languageCode = languageCode,
@@ -48,7 +48,9 @@ class HoYoLabAgentRepositoryImpl(private val httpClient: HoYoLabHttp) : HoYoLabA
                 lToken = lToken,
                 ltUid = ltUid
             )
-        Result.success(result.data.avatarList[0].toMyAgentDetailListItem())
+        result.data?.avatarList?.firstOrNull()?.let {
+            Result.success(it.toMyAgentDetail())
+        } ?: Result.failure(NoSuchElementException("Agent detail not found or data is null/empty"))
     } catch (e: Exception) {
         print("Error: $e")
         Result.failure(e)

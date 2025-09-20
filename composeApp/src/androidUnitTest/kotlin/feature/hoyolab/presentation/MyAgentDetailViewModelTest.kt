@@ -9,7 +9,7 @@ import MainDispatcherRule
 import androidx.lifecycle.SavedStateHandle
 import feature.hoyolab.domain.HoYoLabAgentUseCase
 import feature.hoyolab.domain.HoYoLabPreferenceUseCase
-import feature.hoyolab.model.agent.stubMyAgentDetailListItem
+import feature.hoyolab.model.agent.stubMyAgentDetail
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlin.test.BeforeTest
@@ -34,7 +34,7 @@ class MyAgentDetailViewModelTest {
     fun setup() {
         coEvery {
             hoYoLabAgentUseCase.getAgentDetail(any())
-        } returns Result.success(stubMyAgentDetailListItem)
+        } returns Result.success(stubMyAgentDetail)
         coEvery {
             hoYoLabPreferenceUseCase.getDefaultHoYoLabAccountUid()
         } returns flowOf(1300051361)
@@ -50,7 +50,7 @@ class MyAgentDetailViewModelTest {
     @Test
     fun `Init data success`() {
         val state = viewModel.uiState.value
-        assertEquals(stubMyAgentDetailListItem, state.agentDetail)
+        assertEquals(stubMyAgentDetail, state.agentDetail)
         assertEquals("1300051361", state.uid)
     }
 

@@ -9,27 +9,31 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MyAgentListResponse(@SerialName("retcode") val retCode: Int, val message: String, val data: MyAgentListData)
+data class MyAgentListResponse(
+    @SerialName("retcode") val retCode: Int? = null,
+    val message: String? = null,
+    val data: MyAgentListData? = null
+)
 
 @Serializable
-data class MyAgentListData(@SerialName("avatar_list") val avatarList: List<MyAgentListItemResponse>)
+data class MyAgentListData(@SerialName("avatar_list") val avatarList: List<MyAgentListItemResponse>? = null)
 
 @Serializable
 data class MyAgentListItemResponse(
-    val id: Int,
-    val level: Int,
-    @SerialName("name_mi18n") val nameMi18n: String,
-    @SerialName("full_name_mi18n") val fullNameMi18n: String,
-    @SerialName("element_type") val elementType: Int,
-    @SerialName("camp_name_mi18n") val campNameMi18n: String,
-    @SerialName("avatar_profession") val avatarProfession: Int,
-    val rarity: String,
-    @SerialName("group_icon_path") val groupIconPath: String,
-    @SerialName("hollow_icon_path") val hollowIconPath: String,
-    val rank: Int,
-    @SerialName("is_chosen") val isChosen: Boolean,
-    @SerialName("role_square_url") val roleSquareUrl: String,
-    @SerialName("sub_element_type") val subElementType: Int
+    val id: Int? = null,
+    val level: Int? = null,
+    @SerialName("name_mi18n") val nameMi18n: String? = null,
+    @SerialName("full_name_mi18n") val fullNameMi18n: String? = null,
+    @SerialName("element_type") val elementType: Int? = null,
+    @SerialName("camp_name_mi18n") val campNameMi18n: String? = null,
+    @SerialName("avatar_profession") val avatarProfession: Int? = null,
+    val rarity: String? = null,
+    @SerialName("group_icon_path") val groupIconPath: String? = null,
+    @SerialName("hollow_icon_path") val hollowIconPath: String? = null,
+    val rank: Int? = null,
+    @SerialName("is_chosen") val isChosen: Boolean? = null,
+    @SerialName("role_square_url") val roleSquareUrl: String? = null,
+    @SerialName("sub_element_type") val subElementType: Int? = null
 )
 
 @Suppress("ktlint:standard:max-line-length")

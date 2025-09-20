@@ -57,7 +57,7 @@ fun MyAgentDetailScreenDual(
             )
             MyAgentWeaponScoreCard(
                 weapon = uiState.agentDetail.weapon,
-                hit = uiState.agentDetail.equipPlanInfo?.validPropertyCnt
+                equipPlan = uiState.agentDetail.equipPlanInfo
             )
         }
 

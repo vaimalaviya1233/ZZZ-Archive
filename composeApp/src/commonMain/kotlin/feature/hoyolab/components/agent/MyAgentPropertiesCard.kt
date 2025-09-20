@@ -20,8 +20,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import feature.hoyolab.model.agent.MyAgentDetailEquipPlanProperty
-import feature.hoyolab.model.agent.MyAgentDetailPropertyResponse
+import feature.hoyolab.model.agent.EquipPlanProperty
+import feature.hoyolab.model.agent.MyAgentDetailProperty
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
 
@@ -29,8 +29,8 @@ import ui.theme.AppTheme
 @Composable
 fun MyAgentPropertiesCard(
     modifier: Modifier = Modifier,
-    properties: List<MyAgentDetailPropertyResponse>,
-    planProperties: List<MyAgentDetailEquipPlanProperty>
+    properties: List<MyAgentDetailProperty>,
+    planProperties: List<EquipPlanProperty>
 ) {
     if (properties.isEmpty()) return
     ContentCard(modifier = modifier, hasDefaultPadding = false) {
@@ -38,9 +38,9 @@ fun MyAgentPropertiesCard(
             Column(modifier = Modifier.weight(1f)) {
                 for (index in 0..5) {
                     MyAgentPropertyItem(
-                        title = properties[index].propertyName,
+                        title = properties[index].name,
                         value = properties[index].final,
-                        highlight = planProperties.find { it.name == properties[index].propertyName } != null,
+                        highlight = planProperties.find { it.name == properties[index].name } != null,
                         isVariantColor = index % 2 == 0
                     )
                 }
@@ -48,9 +48,9 @@ fun MyAgentPropertiesCard(
             Column(modifier = Modifier.weight(1f)) {
                 for (index in 6 until properties.size) {
                     MyAgentPropertyItem(
-                        title = properties[index].propertyName,
+                        title = properties[index].name,
                         value = properties[index].final,
-                        highlight = planProperties.find { it.name == properties[index].propertyName } != null,
+                        highlight = planProperties.find { it.name == properties[index].name } != null,
                         isVariantColor = index % 2 == 0
                     )
                 }

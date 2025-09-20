@@ -4,7 +4,7 @@ import feature.hoyolab.data.crypto.ZzzCrypto
 import feature.hoyolab.data.database.HoYoLabAccountDao
 import feature.hoyolab.data.repository.HoYoLabAgentRepository
 import feature.hoyolab.model.MyAgentListItem
-import feature.hoyolab.model.agent.MyAgentDetailListItem
+import feature.hoyolab.model.agent.MyAgentDetail
 import feature.setting.data.PreferencesRepository
 import feature.setting.domain.LanguageUseCase
 import kotlinx.coroutines.flow.filterNotNull
@@ -39,7 +39,7 @@ class HoYoLabAgentUseCase(
         })
     }
 
-    suspend fun getAgentDetail(agentId: Int): Result<MyAgentDetailListItem> {
+    suspend fun getAgentDetail(agentId: Int): Result<MyAgentDetail> {
         val defaultAccountUid = preferencesRepository.getDefaultHoYoLabAccountUid().first()
         val account = accountDao.getAccount(defaultAccountUid).filterNotNull().first()
         val languageCode = languageUseCase.getLanguage().first().officialCode

@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import feature.hoyolab.domain.HoYoLabAgentUseCase
 import feature.hoyolab.domain.HoYoLabPreferenceUseCase
+import feature.hoyolab.model.agent.EquipPlanProperty
+import feature.hoyolab.model.agent.MyAgentDetailEquipPlan
 import feature.hoyolab.model.agent.MyAgentDetailState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -57,10 +59,32 @@ class MyAgentDetailViewModel(
     private suspend fun updateMyAgentDetailFromHoYoLab() {
         hoYoLabAgentUseCase.getAgentDetail(agentId).fold(onSuccess = {
             val planProperties =
-                if (it.equipPlanInfo?.planEffectivePropertyList?.isNotEmpty() == true) {
-                    it.equipPlanInfo.planEffectivePropertyList
+                if (it.equipPlanInfo is MyAgentDetailEquipPlan.MyAgentEquipPlan &&
+                    it.equipPlanInfo.planEffectivePropertyList.isNotEmpty()
+                ) {
+                    it.equipPlanInfo.planEffectivePropertyList.map { property ->
+                        EquipPlanProperty(
+                            id = property.id,
+                            name = property.name,
+                            fullName = property.fullName,
+                            systemId = property.systemId,
+                            isSelect = property.isSelect
+                        )
+                    }
                 } else {
-                    it.equipPlanInfo?.gameDefault?.propertyList ?: emptyList()
+                    if (it.equipPlanInfo is MyAgentDetailEquipPlan.MyAgentEquipPlan) {
+                        it.equipPlanInfo.gameDefaultPropertyList.map { property ->
+                            EquipPlanProperty(
+                                id = property.id,
+                                name = property.name,
+                                fullName = property.fullName,
+                                systemId = property.systemId,
+                                isSelect = property.isSelect
+                            )
+                        }
+                    } else {
+                        emptyList()
+                    }
                 }
             _uiState.update { state ->
                 state.copy(agentDetail = it, planProperties = planProperties)

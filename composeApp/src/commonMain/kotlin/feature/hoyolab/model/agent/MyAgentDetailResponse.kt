@@ -10,45 +10,45 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MyAgentDetailResponse(
-    @SerialName("retcode") val retCode: Int,
-    val message: String,
-    val data: MyAgentDetailData
+    @SerialName("retcode") val retCode: Int? = null,
+    val message: String? = null,
+    val data: MyAgentDetailDataResponse? = null
 )
 
 @Serializable
-data class MyAgentDetailData(@SerialName("avatar_list") val avatarList: List<MyAgentDetailItemResponse>)
+data class MyAgentDetailDataResponse(@SerialName("avatar_list") val avatarList: List<MyAgentDetailItemResponse>? = null)
 
 @Serializable
 data class MyAgentDetailItemResponse(
-    val id: Int,
-    val level: Int,
-    @SerialName("name_mi18n") val nameMi18n: String,
-    @SerialName("full_name_mi18n") val fullNameMi18n: String,
-    @SerialName("element_type") val elementType: Int,
-    @SerialName("camp_name_mi18n") val campNameMi18n: String,
-    @SerialName("avatar_profession") val avatarProfession: Int,
-    val rarity: String,
-    @SerialName("group_icon_path") val groupIconPath: String,
-    @SerialName("hollow_icon_path") val hollowIconPath: String,
-    val equip: List<MyAgentDetailEquipResponse>,
+    val id: Int? = null,
+    val level: Int? = null,
+    @SerialName("name_mi18n") val nameMi18n: String? = null,
+    @SerialName("full_name_mi18n") val fullNameMi18n: String? = null,
+    @SerialName("element_type") val elementType: Int? = null,
+    @SerialName("camp_name_mi18n") val campNameMi18n: String? = null,
+    @SerialName("avatar_profession") val avatarProfession: Int? = null,
+    val rarity: String? = null,
+    @SerialName("group_icon_path") val groupIconPath: String? = null,
+    @SerialName("hollow_icon_path") val hollowIconPath: String? = null,
+    val equip: List<MyAgentDetailEquipResponse>? = null,
     val weapon: MyAgentDetailWeaponResponse? = null,
-    val properties: List<MyAgentDetailPropertyResponse>,
-    val skills: List<MyAgentDetailSkill>,
-    val rank: Int,
-    @SerialName("role_vertical_painting_url") val roleVerticalPaintingUrl: String,
+    val properties: List<MyAgentDetailPropertyResponse>? = null,
+    val skills: List<MyAgentDetailSkillResponse>? = null,
+    val rank: Int? = null,
+    @SerialName("role_vertical_painting_url") val roleVerticalPaintingUrl: String? = null,
     @SerialName("equip_plan_info") val equipPlanInfo: MyAgentDetailEquipPlanResponse? = null,
-    @SerialName("us_full_name") val usFullName: String,
-    @SerialName("vertical_painting_color") val verticalPaintingColor: String,
-    @SerialName("sub_element_type") val subElementType: Int
+    @SerialName("us_full_name") val usFullName: String? = null,
+    @SerialName("vertical_painting_color") val verticalPaintingColor: String? = null,
+    @SerialName("sub_element_type") val subElementType: Int? = null
 )
 
 @Serializable
 data class MyAgentDetailPropertyResponse(
-    @SerialName("property_name") val propertyName: String,
-    @SerialName("property_id") val propertyId: Int,
-    val base: String,
-    val add: String,
-    val final: String
+    @SerialName("property_name") val propertyName: String? = null,
+    @SerialName("property_id") val propertyId: Int? = null,
+    val base: String? = null,
+    val add: String? = null,
+    val final: String? = null
 )
 
 @Suppress("ktlint:standard:max-line-length")
@@ -57,7 +57,7 @@ val stubMyAgentDetailResponse =
         retCode = 0,
         message = "OK",
         data =
-        MyAgentDetailData(
+        MyAgentDetailDataResponse(
             avatarList =
             listOf(
                 MyAgentDetailItemResponse(
@@ -90,7 +90,7 @@ val stubMyAgentDetailResponse =
                             final = "1858"
                         )
                     ),
-                    skills = listOf(stubMyAgentDetailSkill),
+                    skills = listOf(stubMyAgentDetailSkillResponse),
                     rank = 1,
                     roleVerticalPaintingUrl = "https://act-webstatic.hoyoverse.com/game_record/zzzv2/role_vertical_painting/role_vertical_painting_1251.png",
                     equipPlanInfo = stubMyAgentDetailEquipPlanResponse,

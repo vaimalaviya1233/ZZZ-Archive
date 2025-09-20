@@ -42,23 +42,23 @@ fun MyAgentSkillCard(
         Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)) {
             MyAgentSkillItem(
                 Res.drawable.img_skill_basic_attack,
-                skills.find { it.skillType == 0 }?.level.toString()
+                skills.find { it.skillType == 0 }?.level?.toString()
             )
             MyAgentSkillItem(
                 Res.drawable.img_skill_dodge,
-                skills.find { it.skillType == 2 }?.level.toString()
+                skills.find { it.skillType == 2 }?.level?.toString()
             )
             MyAgentSkillItem(
                 Res.drawable.img_skill_quick_assist,
-                skills.find { it.skillType == 6 }?.level.toString()
+                skills.find { it.skillType == 6 }?.level?.toString()
             )
             MyAgentSkillItem(
                 Res.drawable.img_skill_special_attack,
-                skills.find { it.skillType == 1 }?.level.toString()
+                skills.find { it.skillType == 1 }?.level?.toString()
             )
             MyAgentSkillItem(
                 Res.drawable.img_skill_ultimate,
-                skills.find { it.skillType == 3 }?.level.toString()
+                skills.find { it.skillType == 3 }?.level?.toString()
             )
             Spacer(Modifier.weight(1f))
             MyAgentSkillItem(

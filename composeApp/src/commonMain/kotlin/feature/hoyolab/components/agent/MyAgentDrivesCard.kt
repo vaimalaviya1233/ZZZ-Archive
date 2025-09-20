@@ -28,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import feature.hoyolab.model.agent.MyAgentDetailEquipResponse
+import feature.hoyolab.model.agent.MyAgentDetailEquip
 import org.jetbrains.compose.resources.stringResource
 import ui.components.cards.ContentCard
 import ui.theme.AppTheme
@@ -39,7 +39,7 @@ import zzzarchive.composeapp.generated.resources.hit
 @Composable
 fun MyAgentDrivesCard(
     modifier: Modifier = Modifier,
-    drives: List<MyAgentDetailEquipResponse>
+    drives: List<MyAgentDetailEquip>
 ) {
     if (drives.isEmpty()) return
     FlowRow(
@@ -61,18 +61,18 @@ fun MyAgentDrivesCard(
 @Composable
 private fun MyAgentDriveItem(
     modifier: Modifier = Modifier,
-    drive: MyAgentDetailEquipResponse
+    drive: MyAgentDetailEquip
 ) {
     ContentCard(modifier = modifier.width(IntrinsicSize.Min), hasDefaultPadding = false) {
         Column(modifier = Modifier) {
             MyAgentDriveHeader(drive)
             MyAgentDriveMainPropertyItem(
-                title = drive.mainProperties[0].propertyName,
-                value = drive.mainProperties[0].base
+                title = drive.mainProperties.first().name,
+                value = drive.mainProperties.first().base
             )
-            for (subProperty in drive.properties) {
+            for (subProperty in drive.subProperties) {
                 MyAgentDriveSubPropertyItem(
-                    title = subProperty.propertyName,
+                    title = subProperty.name,
                     value = subProperty.base,
                     highlight = subProperty.valid
                 )
@@ -82,13 +82,13 @@ private fun MyAgentDriveItem(
 }
 
 @Composable
-private fun MyAgentDriveHeader(drive: MyAgentDetailEquipResponse) {
-    val totalHit = remember { drive.properties.filter { it.valid }.sumOf { it.level } }
+private fun MyAgentDriveHeader(drive: MyAgentDetailEquip) {
+    val totalHit = remember { drive.subProperties.filter { it.valid }.sumOf { it.level } }
 
     Row {
         AsyncImage(
             modifier = Modifier.size(AppTheme.size.s64),
-            model = drive.icon,
+            model = drive.iconUrl,
             contentDescription = null
         )
         Column(

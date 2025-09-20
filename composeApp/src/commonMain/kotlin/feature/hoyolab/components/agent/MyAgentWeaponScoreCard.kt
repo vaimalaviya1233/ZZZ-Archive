@@ -23,7 +23,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import feature.hoyolab.model.agent.MyAgentDetailWeaponResponse
+import feature.hoyolab.model.agent.MyAgentDetailEquipPlan
+import feature.hoyolab.model.agent.MyAgentDetailWeapon
 import feature.hoyolab.model.agent.getScoreState
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -39,15 +40,15 @@ import zzzarchive.composeapp.generated.resources.w_engine_not_equipped
 @Composable
 fun MyAgentWeaponScoreCard(
     modifier: Modifier = Modifier,
-    weapon: MyAgentDetailWeaponResponse?,
-    hit: Int?
+    weapon: MyAgentDetailWeapon,
+    equipPlan: MyAgentDetailEquipPlan
 ) {
     ContentCard(modifier = modifier) {
         Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s400)) {
-            if (weapon != null) {
+            if (weapon is MyAgentDetailWeapon.MyAgentWeapon) {
                 MyWeapon(
                     Modifier.weight(1f),
-                    weapon.icon,
+                    weapon.iconUrl,
                     weapon.name,
                     weapon.level,
                     weapon.star
@@ -55,7 +56,9 @@ fun MyAgentWeaponScoreCard(
             } else {
                 MyWeaponEmpty(Modifier.weight(1f))
             }
-            // Score(hit = hit ?: 0)
+            if (equipPlan is MyAgentDetailEquipPlan.MyAgentEquipPlan) {
+                Score(equipPlan = equipPlan)
+            }
         }
     }
 }
@@ -150,9 +153,10 @@ private fun MyWeaponEmpty(modifier: Modifier = Modifier) {
 @Composable
 private fun Score(
     modifier: Modifier = Modifier,
-    hit: Int
+    equipPlan: MyAgentDetailEquipPlan.MyAgentEquipPlan
 ) {
-    val scoreState = getScoreState(hit)
+    val validPropertyCnt = equipPlan.validPropertyCnt
+    val scoreState = getScoreState(validPropertyCnt)
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -164,7 +168,7 @@ private fun Score(
         Box(
             modifier =
             Modifier.size(AppTheme.size.s64).border(
-                AppTheme.size.border,
+                AppTheme.size.largeBorder,
                 scoreState.color,
                 CircleShape
             ),
@@ -187,7 +191,7 @@ private fun Score(
                 style = AppTheme.typography.bodyMedium
             )
             Text(
-                text = hit.toString(),
+                text = validPropertyCnt.toString(),
                 color = AppTheme.colors.onSurfaceContainer,
                 style = AppTheme.typography.labelLarge
             )

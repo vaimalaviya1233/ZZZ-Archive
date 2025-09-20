@@ -45,7 +45,7 @@ import coil3.compose.LocalPlatformContext
 import coil3.request.CachePolicy
 import coil3.request.ImageRequest
 import coil3.size.Size
-import feature.hoyolab.model.agent.MyAgentDetailListItem
+import feature.hoyolab.model.agent.MyAgentDetail
 import feature.hoyolab.model.agent.MyAgentDetailState
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -145,7 +145,7 @@ fun MyAgentImageCard(
 
 @Composable
 @OptIn(ExperimentalComposeUiApi::class)
-private fun AgentInfo(agentDetail: MyAgentDetailListItem) {
+private fun AgentInfo(agentDetail: MyAgentDetail) {
     Column(
         modifier = Modifier.padding(AppTheme.spacing.s400),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
@@ -172,7 +172,7 @@ private fun AgentInfo(agentDetail: MyAgentDetailListItem) {
                     horizontal = AppTheme.spacing.s300,
                     vertical = AppTheme.spacing.s200
                 ),
-            text = "M${agentDetail.rank}",
+            text = "M${agentDetail.mindscapes}",
             color = AppTheme.colors.surfaceContainer,
             style = AppTheme.typography.labelMedium
         )

@@ -10,52 +10,52 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MyAgentDetailEquipResponse(
-    val id: Int,
-    val level: Int,
-    val name: String,
-    val icon: String,
-    val rarity: String,
-    val properties: List<MyAgentPropertyResponse>,
-    @SerialName("main_properties") val mainProperties: List<MyAgentPropertyResponse>,
-    @SerialName("equip_suit") val equipSuit: MyAgentEquipSuit,
-    @SerialName("equipment_type") val equipmentType: Int,
-    @SerialName("invalid_property_cnt") val invalidPropertyCnt: Int,
-    @SerialName("all_hit") val allHit: Boolean
+    val id: Int? = null,
+    val level: Int? = null,
+    val name: String? = null,
+    val icon: String? = null,
+    val rarity: String? = null,
+    val properties: List<MyAgentPropertyResponse>? = null,
+    @SerialName("main_properties") val mainProperties: List<MyAgentPropertyResponse>? = null,
+    @SerialName("equip_suit") val equipSuit: MyAgentEquipSuitResponse? = null,
+    @SerialName("equipment_type") val equipmentType: Int? = null,
+    @SerialName("invalid_property_cnt") val invalidPropertyCnt: Int? = null,
+    @SerialName("all_hit") val allHit: Boolean? = null
 )
 
 @Serializable
 data class MyAgentDetailWeaponResponse(
-    val id: Int,
-    val level: Int,
-    val name: String,
-    val star: Int,
-    val icon: String,
-    val rarity: String,
-    val properties: List<MyAgentPropertyResponse>,
-    @SerialName("main_properties") val mainProperties: List<MyAgentPropertyResponse>,
-    @SerialName("talent_title") val talentTitle: String,
-    @SerialName("talent_content") val talentContent: String,
-    val profession: Int
+    val id: Int? = null,
+    val level: Int? = null,
+    val name: String? = null,
+    val star: Int? = null,
+    val icon: String? = null,
+    val rarity: String? = null,
+    val properties: List<MyAgentPropertyResponse>? = null,
+    @SerialName("main_properties") val mainProperties: List<MyAgentPropertyResponse>? = null,
+    @SerialName("talent_title") val talentTitle: String? = null,
+    @SerialName("talent_content") val talentContent: String? = null,
+    val profession: Int? = null
 )
 
 @Serializable
 data class MyAgentPropertyResponse(
-    @SerialName("property_name") val propertyName: String,
-    @SerialName("property_id") val propertyId: Int,
-    val base: String,
-    val level: Int,
-    val valid: Boolean,
-    @SerialName("system_id") val systemId: Int,
-    val add: Int
+    @SerialName("property_name") val propertyName: String? = null,
+    @SerialName("property_id") val propertyId: Int? = null,
+    val base: String? = null,
+    val level: Int? = null,
+    val valid: Boolean? = null,
+    @SerialName("system_id") val systemId: Int? = null,
+    val add: Int? = null
 )
 
 @Serializable
-data class MyAgentEquipSuit(
-    @SerialName("suit_id") val suitId: Int,
-    val name: String,
-    val own: Int,
-    val desc1: String,
-    val desc2: String
+data class MyAgentEquipSuitResponse(
+    @SerialName("suit_id") val suitId: Int? = null,
+    val name: String? = null,
+    val own: Int? = null,
+    val desc1: String? = null,
+    val desc2: String? = null
 )
 
 @Suppress("ktlint:standard:max-line-length")
@@ -156,7 +156,7 @@ val stubEquipResponse =
             )
         ),
         equipSuit =
-        MyAgentEquipSuit(
+        MyAgentEquipSuitResponse(
             suitId = 31200,
             name = "震星迪斯可",
             own = 4,
