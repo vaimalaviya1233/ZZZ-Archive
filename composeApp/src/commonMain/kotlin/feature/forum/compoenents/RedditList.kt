@@ -51,7 +51,10 @@ private fun RedditListItem(
             .padding(horizontal = AppTheme.spacing.s400, vertical = AppTheme.spacing.s350),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s350)
     ) {
-        ForumThumbnailImage(reddit.imgUrl)
+        val hasImageUrl = reddit.imgUrl.isNotEmpty()
+        if (hasImageUrl) {
+            ForumThumbnailImage(reddit.imgUrl)
+        }
         Column(
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
         ) {
@@ -59,7 +62,7 @@ private fun RedditListItem(
                 text = reddit.title,
                 color = AppTheme.colors.onSurfaceContainer,
                 style = AppTheme.typography.bodyMedium,
-                minLines = 2,
+                minLines = if (hasImageUrl) 2 else 1,
                 maxLines = 2
             )
             Row(
