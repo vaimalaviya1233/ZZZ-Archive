@@ -69,7 +69,7 @@ private fun CoverImage(coverImages: List<CoverImageListItemEntity>) {
     }
 
     Box(
-        modifier = Modifier.aspectRatio(1.77f).fillMaxWidth().clip(AppTheme.shape.r400)
+        modifier = Modifier.aspectRatio(16 / 9f).fillMaxWidth().clip(AppTheme.shape.r400)
     ) {
         val urlHandler = LocalUriHandler.current
         coverImages.forEachIndexed { index, image ->

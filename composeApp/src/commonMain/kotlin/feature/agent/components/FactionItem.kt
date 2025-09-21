@@ -52,7 +52,7 @@ fun FactionItem(
     Box(
         modifier =
         Modifier
-            .aspectRatio(1.8f)
+            .aspectRatio(16 / 9f)
             .fillMaxWidth()
             .clip(AppTheme.shape.r400)
             .border(

@@ -88,7 +88,7 @@ fun NewsPagerCardItem(newsState: OfficialNewsListItem) {
     val isPressed = interactionSource.collectIsPressedAsState()
     val isHovered = interactionSource.collectIsHoveredAsState()
     Box(
-        modifier = Modifier.fillMaxWidth().aspectRatio(1.7f).pointerHoverIcon(PointerIcon.Hand)
+        modifier = Modifier.fillMaxWidth().aspectRatio(16 / 9f).pointerHoverIcon(PointerIcon.Hand)
     ) {
         val urlHandler = LocalUriHandler.current
         AsyncImage(

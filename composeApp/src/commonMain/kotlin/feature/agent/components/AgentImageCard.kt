@@ -54,7 +54,7 @@ fun AgentImageCard(
         Box(
             modifier =
             Modifier
-                .aspectRatio(1.33f)
+                .aspectRatio(4 / 3f)
                 .drawBottomMask(AppTheme.colors)
                 .verticalScroll(state = rememberScrollState(), enabled = false)
         ) {

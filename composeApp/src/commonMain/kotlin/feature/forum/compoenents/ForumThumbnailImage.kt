@@ -21,7 +21,7 @@ fun ForumThumbnailImage(imgUrl: String) {
         modifier =
         Modifier
             .height(AppTheme.size.s72)
-            .aspectRatio(1.33f)
+            .aspectRatio(4 / 3f)
             .clip(AppTheme.shape.r300)
     ) {
         AsyncImage(
