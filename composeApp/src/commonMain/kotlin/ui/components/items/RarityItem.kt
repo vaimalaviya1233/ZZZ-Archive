@@ -78,7 +78,7 @@ fun RarityItem(
                 .aspectRatio(1f)
                 .fillMaxSize()
                 .background(
-                    AppTheme.colors.imageBackground
+                    AppTheme.colors.surfaceContainer
                 ).border(
                     AppTheme.size.border,
                     AppTheme.colors.imageBorder,
