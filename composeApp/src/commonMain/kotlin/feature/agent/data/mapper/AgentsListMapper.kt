@@ -9,34 +9,33 @@ import com.mrfatworm.zzzarchive.ZzzConfig
 import feature.agent.data.database.AgentsListItemEntity
 import feature.agent.model.AgentListItem
 import feature.agent.model.AgentListItemResponse
-import utils.findAgentAttackType
 import utils.findAgentAttribute
 import utils.findAgentSpecialty
 import utils.findRarity
 
 fun AgentListItemResponse.toAgentsListItemEntity(path: String = ZzzConfig.ASSET_PATH): AgentsListItemEntity =
     AgentsListItemEntity(
-        id = id,
-        name = name,
-        fullName = fullName,
+        id = id ?: 0,
+        name = name.orEmpty(),
         imageUrl = "https://raw.githubusercontent.com/$path/Agent/Profile/$id.webp",
-        isLeak = isLeak,
-        rarity = rarity,
-        specialty = specialty,
-        attribute = attribute,
-        attackType = attackType,
-        factionId = factionId
+        isHighlight = isHighlight ?: false,
+        rarity = rarity ?: 0,
+        specialty = specialty.orEmpty(),
+        attribute = attribute.orEmpty(),
+        factionId = factionId ?: 0,
+        materialId = material ?: 0,
+        weeklyMaterialId = weeklyMaterial ?: 0
     )
 
 fun AgentsListItemEntity.toAgentListItem(): AgentListItem = AgentListItem(
     id = id,
     name = name,
-    fullName = fullName,
     imageUrl = imageUrl,
-    isLeak = isLeak,
+    isHighlight = isHighlight,
     rarity = findRarity(rarity),
     specialty = findAgentSpecialty(specialty),
     attribute = findAgentAttribute(attribute),
-    attackType = findAgentAttackType(attackType),
-    factionId = factionId
+    factionId = factionId,
+    materialId = materialId,
+    weeklyMaterialId = weeklyMaterialId
 )

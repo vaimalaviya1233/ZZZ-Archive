@@ -35,8 +35,7 @@ class ZzzHttpImpl(engine: HttpClientEngine) : ZzzHttp {
 
     override suspend fun requestCoverImage(): CoverImageListResponse = requestData("CoverImagesList.json")
 
-    override suspend fun requestAgentsList(languagePath: String): AgentsListResponse =
-        requestData("Agent/$languagePath/List.json")
+    override suspend fun requestAgentsList(languagePath: String): AgentsListResponse = requestData("Agent/List.json")
 
     override suspend fun requestAgentDetail(
         id: Int,

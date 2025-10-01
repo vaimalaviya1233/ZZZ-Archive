@@ -9,9 +9,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ui.theme.AppTheme
+import ui.utils.cardPadding
 import utils.ZzzRarity
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.ic_rare
@@ -24,7 +26,7 @@ fun RarityFilterChipsList(
 ) {
     val rarities = listOf(ZzzRarity.RARITY_S, ZzzRarity.RARITY_A)
     FlowRow(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().padding(horizontal = cardPadding()),
         horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
         verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
     ) {

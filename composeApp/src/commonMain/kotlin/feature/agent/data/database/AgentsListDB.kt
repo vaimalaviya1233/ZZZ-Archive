@@ -18,6 +18,6 @@ abstract class AgentsListDB : RoomDatabase() {
     abstract val agentsListDao: AgentsListDao
 
     companion object {
-        const val DATABASE_NAME = "agents_list.db"
+        const val DATABASE_NAME = "agent_list.db"
     }
 }

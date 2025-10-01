@@ -12,14 +12,14 @@ import androidx.room.PrimaryKey
 data class AgentsListItemEntity(
     @PrimaryKey(autoGenerate = false) val id: Int,
     val name: String,
-    val fullName: String,
     val imageUrl: String,
-    val isLeak: Boolean,
+    val isHighlight: Boolean,
     val rarity: Int,
     val specialty: String,
     val attribute: String,
-    val attackType: String,
-    val factionId: Int
+    val factionId: Int,
+    val materialId: Int,
+    val weeklyMaterialId: Int
 )
 
 @Suppress("ktlint:standard:max-line-length")
@@ -27,12 +27,12 @@ val stubAgentsListItemEntity =
     AgentsListItemEntity(
         id = 3,
         name = "貓又",
-        fullName = "貓宮 又奈",
         imageUrl = "https://raw.githubusercontent.com/mrfatworm/ZZZ-Archive-Asset/refs/heads/dev/Asset/Agent/Profile/3.webp",
-        isLeak = false,
+        isHighlight = false,
         rarity = 5,
         specialty = "attack",
         attribute = "physical",
-        attackType = "slash",
-        factionId = 1
+        factionId = 1,
+        materialId = 0,
+        weeklyMaterialId = 0
     )
