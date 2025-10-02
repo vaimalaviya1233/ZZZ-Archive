@@ -10,6 +10,7 @@ import zzzarchive.composeapp.generated.resources.ic_help
 import zzzarchive.composeapp.generated.resources.ic_specialty_anomaly
 import zzzarchive.composeapp.generated.resources.ic_specialty_attack
 import zzzarchive.composeapp.generated.resources.ic_specialty_defense
+import zzzarchive.composeapp.generated.resources.ic_specialty_rupture
 import zzzarchive.composeapp.generated.resources.ic_specialty_stun
 import zzzarchive.composeapp.generated.resources.ic_specialty_support
 import zzzarchive.composeapp.generated.resources.rupture
@@ -23,7 +24,7 @@ enum class AgentSpecialty(val textRes: StringResource, val iconRes: DrawableReso
     Support(Res.string.support, Res.drawable.ic_specialty_support),
     Anomaly(Res.string.anomaly, Res.drawable.ic_specialty_anomaly),
     Defense(Res.string.defense, Res.drawable.ic_specialty_defense),
-    Rupture(Res.string.rupture, Res.drawable.ic_help),
+    Rupture(Res.string.rupture, Res.drawable.ic_specialty_rupture),
     None(Res.string.unknown, Res.drawable.ic_help)
 }
 
