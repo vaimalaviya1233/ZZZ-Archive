@@ -77,13 +77,14 @@ fun RarityItem(
             Modifier
                 .aspectRatio(1f)
                 .fillMaxSize()
+                .clip(AppTheme.shape.r300)
                 .background(
                     AppTheme.colors.surfaceContainer
                 ).border(
                     AppTheme.size.border,
                     AppTheme.colors.imageBorder,
                     shape = AppTheme.shape.r300
-                ).clip(AppTheme.shape.r300)
+                )
         ) {
             SubcomposeAsyncImage(
                 modifier = Modifier.fillMaxSize(),

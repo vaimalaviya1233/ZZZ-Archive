@@ -8,9 +8,13 @@ package feature.agent.components
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
@@ -43,8 +47,9 @@ fun AgentsListFilterCard(
 ) {
     Column(modifier = modifier) {
         AnimatedVisibility(visible = !invisibleFilter) {
-            ContentCard {
+            ContentCard(hasDefaultPadding = false) {
                 Column(
+                    modifier = Modifier.padding(vertical = AppTheme.spacing.s400),
                     verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
                 ) {
                     RarityFilterChipsList(uiState.selectedRarity, onRarityChipSelectionChanged)
@@ -69,6 +74,26 @@ fun AgentsListFilterCard(
             horizontalArrangement = gridListHorizontalGap(),
             verticalArrangement = gridListVerticalGap()
         ) {
+            item(span = { GridItemSpan(this.maxLineSpan) }) {
+                FlowRow(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+                    verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
+                ) {
+                    uiState.highlightAgentsList.forEach { agent ->
+                        RarityItem(
+                            modifier = Modifier.animateItem(),
+                            rarity = agent.rarity,
+                            name = agent.name,
+                            attribute = agent.attribute,
+                            imgUrl = agent.imageUrl,
+                            onClick = {
+                                onAgentClick(agent.id)
+                            }
+                        )
+                    }
+                }
+            }
             items(
                 count = uiState.filteredAgentsList.size,
                 key = { index -> uiState.filteredAgentsList[index].id }

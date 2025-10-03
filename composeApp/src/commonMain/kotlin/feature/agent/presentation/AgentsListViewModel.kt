@@ -30,10 +30,11 @@ class AgentsListViewModel(private val agentsListUseCase: AgentsListUseCase) : Vi
         agentsListJob =
             viewModelScope.launch {
                 agentsListUseCase.invoke().collect { agentsList ->
-                    _uiState.update {
-                        it.copy(
+                    _uiState.update { currentState ->
+                        currentState.copy(
                             agentsList = agentsList,
-                            filteredAgentsList = agentsList,
+                            highlightAgentsList = agentsList.filter { it.isHighlight },
+                            filteredAgentsList = agentsList.filterNot { it.isHighlight },
                             factionsList = agentsListUseCase.getFactionsList(agentsList)
                         )
                     }
@@ -87,9 +88,12 @@ class AgentsListViewModel(private val agentsListUseCase: AgentsListUseCase) : Vi
                 uiState.value.selectedSpecialties,
                 uiState.value.selectedFactionId
             )
+        val isHighlightAgents = filteredAgents.filter { it.isHighlight }
+        val nonHighlightAgents = filteredAgents.filterNot { it.isHighlight }
         _uiState.update {
             it.copy(
-                filteredAgentsList = filteredAgents
+                highlightAgentsList = isHighlightAgents,
+                filteredAgentsList = nonHighlightAgents
             )
         }
     }
