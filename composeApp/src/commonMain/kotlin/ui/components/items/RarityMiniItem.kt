@@ -28,7 +28,7 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import coil3.compose.AsyncImage
+import coil3.compose.SubcomposeAsyncImage
 import ui.components.ImageNotFound
 import ui.theme.AppTheme
 import utils.ZzzRarity
@@ -76,15 +76,14 @@ fun RarityMiniItem(
                     .fillMaxHeight(if (rarity == null) 1f else 0.86f)
                     .background(AppTheme.colors.imageBackground)
             ) {
-                if (imgUrl == null) {
-                    ImageNotFound()
-                } else {
-                    AsyncImage(
-                        modifier = Modifier.fillMaxSize(),
-                        model = imgUrl,
-                        contentDescription = null
-                    )
-                }
+                SubcomposeAsyncImage(
+                    modifier = Modifier.fillMaxSize(),
+                    model = imgUrl,
+                    contentDescription = null,
+                    error = {
+                        ImageNotFound()
+                    }
+                )
             }
         }
         text?.let {

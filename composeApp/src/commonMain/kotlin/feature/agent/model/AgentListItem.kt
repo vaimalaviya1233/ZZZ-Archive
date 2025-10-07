@@ -19,7 +19,10 @@ data class AgentListItem(
     val attribute: AgentAttribute,
     val faction: Faction,
     val materialUrl: String,
-    val weeklyMaterialUrl: String
+    val weeklyMaterialUrl: String,
+    val skillMaterialUrls: List<String>,
+    val levelMaterialUrls: List<String>,
+    val wEngineMaterialUrls: List<String>
 )
 
 @Suppress("ktlint:standard:max-line-length")
@@ -35,7 +38,10 @@ val stubAgentsList =
             attribute = AgentAttribute.Physical,
             faction = Faction(1),
             materialUrl = "",
-            weeklyMaterialUrl = ""
+            weeklyMaterialUrl = "",
+            skillMaterialUrls = listOf(""),
+            levelMaterialUrls = listOf(""),
+            wEngineMaterialUrls = listOf("")
         ),
         AgentListItem(
             id = 4,
@@ -47,7 +53,10 @@ val stubAgentsList =
             attribute = AgentAttribute.Electric,
             faction = Faction(1),
             materialUrl = "",
-            weeklyMaterialUrl = ""
+            weeklyMaterialUrl = "",
+            skillMaterialUrls = listOf(""),
+            levelMaterialUrls = listOf(""),
+            wEngineMaterialUrls = listOf("")
         ),
         AgentListItem(
             id = 16,
@@ -59,6 +68,9 @@ val stubAgentsList =
             attribute = AgentAttribute.Physical,
             faction = Faction(2),
             materialUrl = "",
-            weeklyMaterialUrl = ""
+            weeklyMaterialUrl = "",
+            skillMaterialUrls = listOf(""),
+            levelMaterialUrls = listOf(""),
+            wEngineMaterialUrls = listOf("")
         )
     )

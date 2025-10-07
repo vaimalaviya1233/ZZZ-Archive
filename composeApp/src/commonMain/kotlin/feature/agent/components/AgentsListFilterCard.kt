@@ -21,12 +21,18 @@ import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import feature.agent.model.AgentsListState
+import feature.agent.model.stubAgentsList
 import ui.components.cards.ContentCard
 import ui.components.chips.AttributeFilterChipsList
 import ui.components.chips.RarityFilterChipsList
 import ui.components.chips.SpecialtyFilterChips
+import ui.components.dialogs.AgentMaterialDialog
 import ui.components.items.HighlightAgentListItem
 import ui.components.items.RarityItem
 import ui.theme.AppTheme
@@ -43,11 +49,12 @@ fun AgentsListFilterCard(
     uiState: AgentsListState,
     lazyGridState: LazyGridState = rememberLazyGridState(),
     invisibleFilter: Boolean = false,
-    onAgentClick: (Int) -> Unit,
     onRarityChipSelectionChanged: (Set<ZzzRarity>) -> Unit,
     onAttributeChipSelectionChanged: (Set<AgentAttribute>) -> Unit,
     onSpecialtyChipSelectionChanged: (Set<AgentSpecialty>) -> Unit
 ) {
+    var isShowMaterialDialog by remember { mutableStateOf(false) }
+    var selectedAgent by remember { mutableStateOf(stubAgentsList[0]) }
     Column(modifier = modifier) {
         AnimatedVisibility(visible = !invisibleFilter) {
             ContentCard(hasDefaultPadding = false) {
@@ -91,7 +98,8 @@ fun AgentsListFilterCard(
                                 modifier = Modifier.weight(1f),
                                 uiState = agent,
                                 onClick = {
-                                    onAgentClick(agent.id)
+                                    selectedAgent = agent
+                                    isShowMaterialDialog = true
                                 }
                             )
                         }
@@ -112,10 +120,21 @@ fun AgentsListFilterCard(
                     attribute = agent.attribute,
                     imgUrl = agent.imageUrl,
                     onClick = {
-                        onAgentClick(agent.id)
+                        selectedAgent = agent
+                        isShowMaterialDialog = true
                     }
                 )
             }
         }
+    }
+    if (isShowMaterialDialog) {
+        AgentMaterialDialog(
+            materialUrl = selectedAgent.materialUrl,
+            weeklyMaterialUrl = selectedAgent.weeklyMaterialUrl,
+            skillMaterialUrls = selectedAgent.skillMaterialUrls,
+            levelMaterialUrls = selectedAgent.levelMaterialUrls,
+            wEngineMaterialUrls = selectedAgent.wEngineMaterialUrls,
+            onDismiss = { isShowMaterialDialog = false }
+        )
     }
 }

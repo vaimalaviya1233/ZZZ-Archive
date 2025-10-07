@@ -32,9 +32,6 @@ fun AgentsListScreenDual(
         AgentsListFilterCard(
             modifier = Modifier.weight(0.7f).padding(verticalSafePadding()),
             uiState = uiState,
-            onAgentClick = {
-                onAction(AgentsListAction.ClickAgent(it))
-            },
             onRarityChipSelectionChanged = {
                 onAction(AgentsListAction.ChangeRarityFilter(it))
             },
