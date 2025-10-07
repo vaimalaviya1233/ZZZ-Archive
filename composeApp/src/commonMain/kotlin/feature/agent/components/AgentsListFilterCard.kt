@@ -7,9 +7,11 @@ package feature.agent.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,6 +27,7 @@ import ui.components.cards.ContentCard
 import ui.components.chips.AttributeFilterChipsList
 import ui.components.chips.RarityFilterChipsList
 import ui.components.chips.SpecialtyFilterChips
+import ui.components.items.HighlightAgentListItem
 import ui.components.items.RarityItem
 import ui.theme.AppTheme
 import ui.utils.cardPadding
@@ -75,22 +78,26 @@ fun AgentsListFilterCard(
             verticalArrangement = gridListVerticalGap()
         ) {
             item(span = { GridItemSpan(this.maxLineSpan) }) {
-                FlowRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
-                    verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300)
-                ) {
-                    uiState.highlightAgentsList.forEach { agent ->
-                        RarityItem(
-                            modifier = Modifier.animateItem(),
-                            rarity = agent.rarity,
-                            name = agent.name,
-                            attribute = agent.attribute,
-                            imgUrl = agent.imageUrl,
-                            onClick = {
-                                onAgentClick(agent.id)
-                            }
-                        )
+                BoxWithConstraints {
+                    val isDualItem = maxWidth - (AppTheme.spacing.s300) >= AppTheme.size.s280 * 2
+                    FlowRow(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+                        verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s300),
+                        maxItemsInEachRow = 2
+                    ) {
+                        uiState.highlightAgentsList.forEach { agent ->
+                            HighlightAgentListItem(
+                                modifier = Modifier.weight(1f),
+                                uiState = agent,
+                                onClick = {
+                                    onAgentClick(agent.id)
+                                }
+                            )
+                        }
+                        if (isDualItem && uiState.highlightAgentsList.size % 2 == 1) {
+                            Spacer(modifier = Modifier.weight(1f))
+                        }
                     }
                 }
             }
@@ -102,7 +109,6 @@ fun AgentsListFilterCard(
                 RarityItem(
                     modifier = Modifier.animateItem(),
                     rarity = agent.rarity,
-                    name = agent.name,
                     attribute = agent.attribute,
                     imgUrl = agent.imageUrl,
                     onClick = {

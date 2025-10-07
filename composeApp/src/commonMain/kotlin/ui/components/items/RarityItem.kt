@@ -50,7 +50,7 @@ import utils.ZzzRarity
 @Composable
 fun RarityItem(
     modifier: Modifier = Modifier,
-    name: String,
+    name: String? = null,
     imgUrl: String? = null,
     rarity: ZzzRarity? = null,
     attribute: AgentAttribute? = null,
@@ -109,15 +109,17 @@ fun RarityItem(
                 )
             }
         }
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = name,
-            textAlign = TextAlign.Center,
-            overflow = TextOverflow.Ellipsis,
-            style = AppTheme.typography.labelMedium,
-            color = AppTheme.colors.onSurfaceVariant,
-            maxLines = 1
-        )
+        name?.let { name ->
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = name,
+                textAlign = TextAlign.Center,
+                overflow = TextOverflow.Ellipsis,
+                style = AppTheme.typography.labelMedium,
+                color = AppTheme.colors.onSurfaceVariant,
+                maxLines = 1
+            )
+        }
     }
 }
 

@@ -22,7 +22,7 @@ class AgentsListUseCase(private val agentRepository: AgentRepository, private va
     )
 
     fun getFactionsList(agentsList: List<AgentListItem>): List<Faction> {
-        val maxFactionId = agentsList.maxOfOrNull { it.factionId } ?: 0
+        val maxFactionId = agentsList.maxOfOrNull { it.faction.id } ?: 0
         val factionsList = List(maxFactionId) { index -> Faction(index + 1) }
         return factionsList
     }
@@ -42,7 +42,7 @@ class AgentsListUseCase(private val agentRepository: AgentRepository, private va
                     selectedAttributes.isEmpty() || selectedAttributes.any { it == agent.attribute }
                 val matchSpecialty =
                     selectedSpecialties.isEmpty() || selectedSpecialties.any { it == agent.specialty }
-                val matchFaction = selectedFactionId == 0 || selectedFactionId == agent.factionId
+                val matchFaction = selectedFactionId == 0 || selectedFactionId == agent.faction.id
 
                 matchRarity && matchAttribute && matchSpecialty && matchFaction
             }

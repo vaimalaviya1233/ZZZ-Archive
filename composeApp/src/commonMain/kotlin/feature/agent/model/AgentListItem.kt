@@ -17,9 +17,9 @@ data class AgentListItem(
     val rarity: ZzzRarity,
     val specialty: AgentSpecialty,
     val attribute: AgentAttribute,
-    val factionId: Int,
-    val materialId: Int,
-    val weeklyMaterialId: Int
+    val faction: Faction,
+    val materialUrl: String,
+    val weeklyMaterialUrl: String
 )
 
 @Suppress("ktlint:standard:max-line-length")
@@ -33,9 +33,9 @@ val stubAgentsList =
             rarity = ZzzRarity.RARITY_S,
             specialty = AgentSpecialty.Attack,
             attribute = AgentAttribute.Physical,
-            factionId = 1,
-            materialId = 151,
-            weeklyMaterialId = 100
+            faction = Faction(1),
+            materialUrl = "",
+            weeklyMaterialUrl = ""
         ),
         AgentListItem(
             id = 4,
@@ -45,9 +45,9 @@ val stubAgentsList =
             rarity = ZzzRarity.RARITY_A,
             specialty = AgentSpecialty.Stun,
             attribute = AgentAttribute.Electric,
-            factionId = 1,
-            materialId = 150,
-            weeklyMaterialId = 100
+            faction = Faction(1),
+            materialUrl = "",
+            weeklyMaterialUrl = ""
         ),
         AgentListItem(
             id = 16,
@@ -57,8 +57,8 @@ val stubAgentsList =
             rarity = ZzzRarity.RARITY_A,
             specialty = AgentSpecialty.Attack,
             attribute = AgentAttribute.Physical,
-            factionId = 2,
-            materialId = 152,
-            weeklyMaterialId = 100
+            faction = Faction(2),
+            materialUrl = "",
+            weeklyMaterialUrl = ""
         )
     )

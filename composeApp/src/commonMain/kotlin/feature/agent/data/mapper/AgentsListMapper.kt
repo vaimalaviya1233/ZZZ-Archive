@@ -9,6 +9,7 @@ import com.mrfatworm.zzzarchive.ZzzConfig
 import feature.agent.data.database.AgentsListItemEntity
 import feature.agent.model.AgentListItem
 import feature.agent.model.AgentListItemResponse
+import feature.agent.model.Faction
 import utils.findAgentAttribute
 import utils.findAgentSpecialty
 import utils.findRarity
@@ -35,7 +36,12 @@ fun AgentsListItemEntity.toAgentListItem(): AgentListItem = AgentListItem(
     rarity = findRarity(rarity),
     specialty = findAgentSpecialty(specialty),
     attribute = findAgentAttribute(attribute),
-    factionId = factionId,
-    materialId = materialId,
-    weeklyMaterialId = weeklyMaterialId
+    faction = Faction(factionId),
+    materialUrl = getMaterialUrl(id = materialId),
+    weeklyMaterialUrl = getMaterialUrl(id = weeklyMaterialId)
 )
+
+private fun getMaterialUrl(
+    path: String = ZzzConfig.ASSET_PATH,
+    id: Int
+): String = "https://raw.githubusercontent.com/$path/Material/$id.webp"
