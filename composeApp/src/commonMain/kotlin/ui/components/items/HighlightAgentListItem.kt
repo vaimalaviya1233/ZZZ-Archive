@@ -5,6 +5,7 @@
 
 package ui.components.items
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -15,8 +16,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,11 +27,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.layout.ContentScale
@@ -37,6 +42,7 @@ import feature.agent.model.AgentListItem
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import ui.theme.AppTheme
+import utils.ZzzRarity
 
 @Composable
 fun HighlightAgentListItem(
@@ -45,7 +51,7 @@ fun HighlightAgentListItem(
     onClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
-    val isHovered = interactionSource.collectIsHoveredAsState()
+    val isHovered by interactionSource.collectIsHoveredAsState()
 
     Box(
         modifier =
@@ -57,11 +63,17 @@ fun HighlightAgentListItem(
             .background(
                 AppTheme.colors.surfaceContainer
             ).border(
-                AppTheme.size.border,
-                AppTheme.colors.imageBorder,
+                width = if (isHovered) AppTheme.size.largeBorder else AppTheme.size.border,
+                color = if (isHovered) uiState.rarity.getColor(AppTheme.colors) else AppTheme.colors.imageBorder,
                 shape = AppTheme.shape.r300
             )
     ) {
+        RarityBackground(
+            modifier = Modifier.matchParentSize(),
+            rarity = uiState.rarity,
+            isFocus = isHovered
+        )
+
         // Faction Background Image
         AsyncImage(
             modifier = Modifier
@@ -118,5 +130,22 @@ fun HighlightAgentListItem(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun RarityBackground(
+    modifier: Modifier,
+    rarity: ZzzRarity,
+    isFocus: Boolean = false
+) {
+    val backgroundColors = listOf(rarity.getColor(AppTheme.colors), AppTheme.colors.surfaceContainer)
+    AnimatedVisibility(
+        modifier = modifier.fillMaxSize(),
+        visible = isFocus
+    ) {
+        Spacer(
+            modifier.fillMaxSize().background(brush = Brush.linearGradient(colors = backgroundColors))
+        )
     }
 }

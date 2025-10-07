@@ -5,7 +5,6 @@
 
 package ui.components.items
 
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -14,11 +13,9 @@ import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -35,7 +32,6 @@ import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import coil3.compose.SubcomposeAsyncImage
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
@@ -59,7 +55,7 @@ fun RarityItem(
     onClick: () -> Unit = {}
 ) {
     val interactionSource = remember { MutableInteractionSource() }
-    val isHovered = interactionSource.collectIsHoveredAsState()
+    val isHovered by interactionSource.collectIsHoveredAsState()
 
     Column(
         modifier =
@@ -81,11 +77,22 @@ fun RarityItem(
                 .background(
                     AppTheme.colors.surfaceContainer
                 ).border(
-                    AppTheme.size.border,
-                    AppTheme.colors.imageBorder,
+                    width = if (isHovered) AppTheme.size.largeBorder else AppTheme.size.border,
+                    color = if (isHovered) {
+                        rarity?.getColor(AppTheme.colors) ?: AppTheme.colors.imageBorder
+                    } else {
+                        AppTheme.colors.imageBorder
+                    },
                     shape = AppTheme.shape.r300
                 )
         ) {
+            rarity?.let {
+                RarityBackground(
+                    modifier = Modifier.matchParentSize(),
+                    rarity = rarity,
+                    isFocus = isHovered
+                )
+            }
             SubcomposeAsyncImage(
                 modifier = Modifier.fillMaxSize(),
                 model = imgUrl,
@@ -99,14 +106,6 @@ fun RarityItem(
                 AttributeTag(Modifier.align(Alignment.TopEnd), attribute.textRes, attribute.iconRes)
             } else if (specialty != null) {
                 AttributeTag(Modifier.align(Alignment.TopEnd), specialty.textRes, specialty.iconRes)
-            }
-
-            rarity?.let {
-                RarityIndicator(
-                    Modifier.align(Alignment.BottomStart),
-                    rarity,
-                    isHovered.value
-                )
             }
         }
         name?.let { name ->
@@ -140,18 +139,5 @@ private fun AttributeTag(
         imageVector = vectorResource(iconRes),
         contentDescription = stringResource(textRes),
         tint = AppTheme.colors.imageOnTagContainer
-    )
-}
-
-@Composable
-private fun RarityIndicator(
-    modifier: Modifier,
-    rarity: ZzzRarity,
-    isFocus: Boolean = false
-) {
-    val animatedHeight by animateDpAsState(targetValue = if (isFocus) AppTheme.spacing.s300 else 0.dp)
-
-    Spacer(
-        modifier.fillMaxWidth().height(animatedHeight).background(rarity.getColor(AppTheme.colors))
     )
 }
