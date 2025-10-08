@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -64,8 +65,8 @@ fun RarityMiniItem(
                 .background(
                     rarity?.getColor(AppTheme.colors) ?: Color.Transparent
                 ).border(
-                    AppTheme.size.border,
-                    AppTheme.colors.imageBorder,
+                    width = AppTheme.size.border,
+                    color = AppTheme.colors.imageBorder,
                     shape = AppTheme.shape.r300
                 )
         ) {
@@ -75,6 +76,12 @@ fun RarityMiniItem(
                     .fillMaxWidth()
                     .fillMaxHeight(if (rarity == null) 1f else 0.86f)
                     .background(AppTheme.colors.imageBackground)
+                    .border(
+                        width = AppTheme.size.largeBorder,
+                        color = AppTheme.colors.surfaceContainer,
+                        shape = AppTheme.shape.r300
+                    )
+                    .padding(AppTheme.size.largeBorder)
             ) {
                 SubcomposeAsyncImage(
                     modifier = Modifier.fillMaxSize(),
