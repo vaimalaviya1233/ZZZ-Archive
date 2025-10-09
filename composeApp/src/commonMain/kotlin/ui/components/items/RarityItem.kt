@@ -103,9 +103,17 @@ fun RarityItem(
             )
 
             if (attribute != null) {
-                AttributeTag(Modifier.align(Alignment.TopEnd), attribute.textRes, attribute.iconRes)
+                AttributeTag(
+                    modifier = Modifier.align(Alignment.TopEnd),
+                    textRes = attribute.textRes,
+                    iconRes = attribute.iconRes
+                )
             } else if (specialty != null) {
-                AttributeTag(Modifier.align(Alignment.TopEnd), specialty.textRes, specialty.iconRes)
+                AttributeTag(
+                    modifier = Modifier.align(Alignment.TopEnd),
+                    textRes = specialty.textRes,
+                    iconRes = specialty.iconRes
+                )
             }
         }
         name?.let { name ->
@@ -124,9 +132,9 @@ fun RarityItem(
 
 @Composable
 private fun AttributeTag(
-    modifier: Modifier,
     textRes: StringResource,
-    iconRes: DrawableResource
+    iconRes: DrawableResource,
+    modifier: Modifier = Modifier
 ) {
     Icon(
         modifier =

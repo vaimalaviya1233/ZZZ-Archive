@@ -5,8 +5,10 @@
 
 package utils
 
+import androidx.compose.ui.graphics.Color
 import org.jetbrains.compose.resources.DrawableResource
 import org.jetbrains.compose.resources.StringResource
+import ui.theme.ColorScheme
 import zzzarchive.composeapp.generated.resources.Res
 import zzzarchive.composeapp.generated.resources.electric
 import zzzarchive.composeapp.generated.resources.ether
@@ -27,7 +29,16 @@ enum class AgentAttribute(val textRes: StringResource, val iconRes: DrawableReso
     Ice(Res.string.ice, Res.drawable.ic_attribute_ice),
     Electric(Res.string.electric, Res.drawable.ic_attribute_electric),
     Physical(Res.string.physical, Res.drawable.ic_attribute_physical),
-    None(Res.string.unknown, Res.drawable.ic_help)
+    None(Res.string.unknown, Res.drawable.ic_help);
+
+    fun getColor(colorScheme: ColorScheme): Color = when (this) {
+        Ether -> colorScheme.ether
+        Fire -> colorScheme.fire
+        Ice -> colorScheme.ice
+        Electric -> colorScheme.electric
+        Physical -> colorScheme.physical
+        else -> colorScheme.onSurfaceVariant
+    }
 }
 
 fun findAgentAttribute(attribute: String): AgentAttribute =

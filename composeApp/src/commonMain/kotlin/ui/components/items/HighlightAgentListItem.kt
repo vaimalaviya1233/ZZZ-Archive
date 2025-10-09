@@ -112,15 +112,15 @@ fun HighlightAgentListItem(
                 Row(horizontalArrangement = Arrangement.spacedBy(AppTheme.spacing.s200)) {
                     Icon(
                         modifier = Modifier.size(AppTheme.size.icon),
-                        imageVector = vectorResource(uiState.attribute.iconRes),
-                        contentDescription = stringResource(uiState.attribute.textRes),
-                        tint = AppTheme.colors.onSurfaceVariant
+                        imageVector = vectorResource(uiState.specialty.iconRes),
+                        contentDescription = stringResource(uiState.specialty.textRes),
+                        tint = AppTheme.colors.onSurfaceContainer
                     )
                     Icon(
                         modifier = Modifier.size(AppTheme.size.icon),
-                        imageVector = vectorResource(uiState.specialty.iconRes),
-                        contentDescription = stringResource(uiState.specialty.textRes),
-                        tint = AppTheme.colors.onSurfaceVariant
+                        imageVector = vectorResource(uiState.attribute.iconRes),
+                        contentDescription = stringResource(uiState.attribute.textRes),
+                        tint = uiState.attribute.getColor(AppTheme.colors)
                     )
                 }
 
