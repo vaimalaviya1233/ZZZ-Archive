@@ -16,6 +16,7 @@ import zzzarchive.composeapp.generated.resources.obol_squad
 import zzzarchive.composeapp.generated.resources.section_6
 import zzzarchive.composeapp.generated.resources.silver_squad
 import zzzarchive.composeapp.generated.resources.sons_of_calydon
+import zzzarchive.composeapp.generated.resources.spook_shack
 import zzzarchive.composeapp.generated.resources.stars_of_lyra
 import zzzarchive.composeapp.generated.resources.unknown
 import zzzarchive.composeapp.generated.resources.victoria_housekeeping
@@ -34,6 +35,7 @@ data class Faction(val id: Int) {
         9 -> Res.string.silver_squad
         10 -> Res.string.mockingbird
         11 -> Res.string.yunkui_summit
+        12 -> Res.string.spook_shack
         else -> Res.string.unknown
     }
 
