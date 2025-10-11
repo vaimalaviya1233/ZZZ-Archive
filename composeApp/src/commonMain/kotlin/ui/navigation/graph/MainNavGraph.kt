@@ -14,13 +14,8 @@ import androidx.navigation.compose.NavHost
 import ui.navigation.MainFlow
 import ui.navigation.NavActions
 import ui.navigation.graph.app.agentNavGraph
-import ui.navigation.graph.app.bangbooNavGraph
-import ui.navigation.graph.app.driveNavGraph
-import ui.navigation.graph.app.functionNavGraph
 import ui.navigation.graph.app.homeNavGraph
 import ui.navigation.graph.app.settingNavGraph
-import ui.navigation.graph.app.wEngineNavGraph
-import ui.navigation.graph.app.wikiNavGraph
 
 @Composable
 fun MainNavGraph(
@@ -38,11 +33,6 @@ fun MainNavGraph(
     ) {
         homeNavGraph(navActions)
         agentNavGraph(navActions)
-        wEngineNavGraph(navActions)
-        bangbooNavGraph(navActions)
-        driveNavGraph(navActions)
-        wikiNavGraph(navActions)
-        functionNavGraph(navActions)
         settingNavGraph(navActions)
     }
 }

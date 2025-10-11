@@ -20,19 +20,6 @@ fun NavGraphBuilder.homeNavGraph(navActions: NavActions) {
     ) {
         composable<Screen.Home> {
             HomeScreen(
-                onAgentsOverviewClick = { navActions.navigationToMainScreen(MainFlow.Agent) },
-                onWEnginesOverviewClick = { navActions.navigationToMainScreen(MainFlow.WEngine) },
-                onBangbooOverviewClick = { navActions.navigationToMainScreen(MainFlow.Bangboo) },
-                onDrivesOverviewClick = { navActions.navigationToMainScreen(MainFlow.Drive) },
-                onAgentDetailClick = { id ->
-                    navActions.navigationTo(Screen.AgentDetail(id))
-                },
-                onWEngineDetailClick = { id ->
-                    navActions.navigationTo(Screen.WEngineDetail(id))
-                },
-                onBangbooDetailClick = { id ->
-                    navActions.navigationTo(Screen.BangbooDetail(id))
-                },
                 navigateTo = { route ->
                     navActions.navigationTo(route)
                 }

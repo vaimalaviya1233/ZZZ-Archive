@@ -6,10 +6,8 @@
 package feature.agent.data.repository
 
 import feature.agent.data.database.AgentsListDao
-import feature.agent.data.mapper.toAgentDetail
 import feature.agent.data.mapper.toAgentListItem
 import feature.agent.data.mapper.toAgentsListItemEntity
-import feature.agent.model.AgentDetail
 import feature.agent.model.AgentListItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
@@ -35,15 +33,5 @@ class AgentRepositoryImpl(private val httpClient: ZzzHttp, private val agentsLis
         } catch (e: Exception) {
             return Result.failure(e)
         }
-    }
-
-    override suspend fun getAgentDetail(
-        id: Int,
-        languagePath: String
-    ): Result<AgentDetail> = try {
-        val result = httpClient.requestAgentDetail(id, languagePath)
-        Result.success(result.toAgentDetail())
-    } catch (e: Exception) {
-        Result.failure(e)
     }
 }

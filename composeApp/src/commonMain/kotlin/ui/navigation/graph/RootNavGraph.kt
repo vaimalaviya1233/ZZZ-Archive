@@ -10,7 +10,6 @@ import androidx.compose.runtime.remember
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import feature.splash.SplashScreen
 import root.MainContainer
 import ui.navigation.NavActions
 import ui.navigation.RootFlow
@@ -26,9 +25,6 @@ fun RootNavGraph() {
         navController = rootNavController,
         startDestination = RootFlow.MainContainer
     ) {
-        composable<RootFlow.Splash> {
-            SplashScreen(startMainFlow = { rootNavActions.popAndNavigation(RootFlow.MainContainer) })
-        }
         composable<RootFlow.MainContainer> {
             MainContainer(
                 rootNavActions = rootNavActions

@@ -8,20 +8,6 @@ package feature.home.presentation
 import ui.navigation.Screen
 
 sealed interface HomeAction {
-    data object ClickAgentsOverview : HomeAction
-
-    data object ClickWEnginesOverview : HomeAction
-
-    data object ClickBangbooOverview : HomeAction
-
-    data object ClickDrivesOverview : HomeAction
-
-    data class ClickAgent(val id: Int) : HomeAction
-
-    data class ClickWEngine(val id: Int) : HomeAction
-
-    data class ClickBangboo(val id: Int) : HomeAction
-
     data class ChangePixivTag(val tag: String) : HomeAction
 
     data class NavigateTo(val route: Screen) : HomeAction

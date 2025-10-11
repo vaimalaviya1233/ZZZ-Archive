@@ -3,6 +3,7 @@ package feature.agent.components
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,7 +34,9 @@ fun AgentFilterBottomSheet(
 ) {
     ZzzBottomSheet(sheetState = sheetState, onDismiss = onDismiss) {
         Column(
-            modifier = Modifier.padding(horizontal = AppTheme.spacing.s300),
+            modifier = Modifier
+                .padding(horizontal = AppTheme.spacing.s300)
+                .navigationBarsPadding(),
             verticalArrangement = Arrangement.spacedBy(AppTheme.spacing.s450)
         ) {
             RarityFilterChipsList(

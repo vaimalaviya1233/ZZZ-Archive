@@ -1,4 +1,4 @@
-package feature.splash
+package root
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,7 +6,6 @@ import feature.setting.domain.AppInfoUseCase
 import feature.setting.domain.LanguageUseCase
 import feature.setting.domain.ThemeUseCase
 import feature.setting.domain.UiScaleUseCase
-import feature.splash.model.InitState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first

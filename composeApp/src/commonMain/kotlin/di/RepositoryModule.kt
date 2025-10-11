@@ -2,14 +2,10 @@ package di
 
 import feature.agent.data.repository.AgentRepository
 import feature.agent.data.repository.AgentRepositoryImpl
-import feature.bangboo.data.repository.BangbooRepository
-import feature.bangboo.data.repository.BangbooRepositoryImpl
 import feature.banner.data.BannerRepository
 import feature.banner.data.BannerRepositoryImpl
 import feature.cover.data.repository.CoverImageRepository
 import feature.cover.data.repository.CoverImageRepositoryImpl
-import feature.drive.data.respository.DriveRepository
-import feature.drive.data.respository.DriveRepositoryImpl
 import feature.feedback.data.GoogleDocRepository
 import feature.feedback.data.GoogleDocRepositoryImpl
 import feature.forum.data.ForumRepository
@@ -30,8 +26,6 @@ import feature.setting.data.PreferencesRepository
 import feature.setting.data.PreferencesRepositoryImpl
 import feature.setting.data.SystemConfigRepository
 import feature.setting.data.SystemConfigRepositoryImpl
-import feature.wengine.data.repository.WEngineRepository
-import feature.wengine.data.repository.WEngineRepositoryImpl
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
@@ -44,9 +38,6 @@ val repositoryModule = module {
     single<PixivRepository> { PixivRepositoryImpl(get()) }
     single<CoverImageRepository> { CoverImageRepositoryImpl(get(), get()) }
     single<AgentRepository> { AgentRepositoryImpl(get(), get()) }
-    single<WEngineRepository> { WEngineRepositoryImpl(get(), get()) }
-    single<BangbooRepository> { BangbooRepositoryImpl(get(), get()) }
-    single<DriveRepository> { DriveRepositoryImpl(get(), get()) }
     single<GoogleDocRepository> { GoogleDocRepositoryImpl(get()) }
     single<HoYoLabConfigRepository> { HoYoLabConfigRepositoryImpl(get(), get()) }
     single<HoYoLabAgentRepository> { HoYoLabAgentRepositoryImpl(get()) }

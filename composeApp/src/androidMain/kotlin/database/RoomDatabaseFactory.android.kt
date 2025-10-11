@@ -9,11 +9,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import feature.agent.data.database.AgentsListDB
-import feature.bangboo.data.database.BangbooListDB
 import feature.cover.data.database.CoverImagesListDB
-import feature.drive.data.database.DrivesListDB
 import feature.hoyolab.data.database.HoYoLabAccountDB
-import feature.wengine.data.database.WEnginesListDB
 
 actual class RoomDatabaseFactory(private val context: Context) {
     private fun <T : RoomDatabase> createDB(
@@ -32,15 +29,6 @@ actual class RoomDatabaseFactory(private val context: Context) {
 
     actual fun createAgentListDatabase(): RoomDatabase.Builder<AgentsListDB> =
         createDB(AgentsListDB::class.java, AgentsListDB.DATABASE_NAME)
-
-    actual fun createWEnginesListDatabase(): RoomDatabase.Builder<WEnginesListDB> =
-        createDB(WEnginesListDB::class.java, WEnginesListDB.DATABASE_NAME)
-
-    actual fun createBangbooListDatabase(): RoomDatabase.Builder<BangbooListDB> =
-        createDB(BangbooListDB::class.java, BangbooListDB.DATABASE_NAME)
-
-    actual fun createDrivesListDatabase(): RoomDatabase.Builder<DrivesListDB> =
-        createDB(DrivesListDB::class.java, DrivesListDB.DATABASE_NAME)
 
     actual fun createCoverImagesListDatabase(): RoomDatabase.Builder<CoverImagesListDB> =
         createDB(CoverImagesListDB::class.java, CoverImagesListDB.DATABASE_NAME)

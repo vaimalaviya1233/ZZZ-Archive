@@ -8,8 +8,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.setSingletonImageLoaderFactory
-import feature.splash.InitViewModel
 import org.koin.compose.viewmodel.koinViewModel
+import root.InitViewModel
 import ui.navigation.graph.RootNavGraph
 import ui.theme.AppTheme
 import ui.theme.ZzzArchiveTheme

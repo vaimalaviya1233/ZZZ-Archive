@@ -7,11 +7,8 @@ package database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import feature.agent.data.database.AgentsListDB
-import feature.bangboo.data.database.BangbooListDB
 import feature.cover.data.database.CoverImagesListDB
-import feature.drive.data.database.DrivesListDB
 import feature.hoyolab.data.database.HoYoLabAccountDB
-import feature.wengine.data.database.WEnginesListDB
 import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
@@ -34,27 +31,6 @@ actual class RoomDatabaseFactory {
     actual fun createAgentListDatabase(): RoomDatabase.Builder<AgentsListDB> {
         val dbFile = documentDirectory() + "/${AgentsListDB.DATABASE_NAME}"
         return Room.databaseBuilder<AgentsListDB>(
-            name = dbFile
-        )
-    }
-
-    actual fun createWEnginesListDatabase(): RoomDatabase.Builder<WEnginesListDB> {
-        val dbFile = documentDirectory() + "/${WEnginesListDB.DATABASE_NAME}"
-        return Room.databaseBuilder<WEnginesListDB>(
-            name = dbFile
-        )
-    }
-
-    actual fun createBangbooListDatabase(): RoomDatabase.Builder<BangbooListDB> {
-        val dbFile = documentDirectory() + "/${BangbooListDB.DATABASE_NAME}"
-        return Room.databaseBuilder<BangbooListDB>(
-            name = dbFile
-        )
-    }
-
-    actual fun createDrivesListDatabase(): RoomDatabase.Builder<DrivesListDB> {
-        val dbFile = documentDirectory() + "/${DrivesListDB.DATABASE_NAME}"
-        return Room.databaseBuilder<DrivesListDB>(
             name = dbFile
         )
     }

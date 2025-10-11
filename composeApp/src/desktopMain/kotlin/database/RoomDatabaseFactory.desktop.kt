@@ -8,11 +8,8 @@ package database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import feature.agent.data.database.AgentsListDB
-import feature.bangboo.data.database.BangbooListDB
 import feature.cover.data.database.CoverImagesListDB
-import feature.drive.data.database.DrivesListDB
 import feature.hoyolab.data.database.HoYoLabAccountDB
-import feature.wengine.data.database.WEnginesListDB
 import java.io.File
 
 actual class RoomDatabaseFactory {
@@ -33,13 +30,6 @@ actual class RoomDatabaseFactory {
     }
 
     actual fun createAgentListDatabase(): RoomDatabase.Builder<AgentsListDB> = createDB(AgentsListDB.DATABASE_NAME)
-
-    actual fun createWEnginesListDatabase(): RoomDatabase.Builder<WEnginesListDB> =
-        createDB(WEnginesListDB.DATABASE_NAME)
-
-    actual fun createBangbooListDatabase(): RoomDatabase.Builder<BangbooListDB> = createDB(BangbooListDB.DATABASE_NAME)
-
-    actual fun createDrivesListDatabase(): RoomDatabase.Builder<DrivesListDB> = createDB(DrivesListDB.DATABASE_NAME)
 
     actual fun createCoverImagesListDatabase(): RoomDatabase.Builder<CoverImagesListDB> =
         createDB(CoverImagesListDB.DATABASE_NAME)

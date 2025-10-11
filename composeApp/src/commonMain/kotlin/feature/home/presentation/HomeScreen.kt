@@ -17,37 +17,11 @@ import ui.theme.AppTheme
 import ui.utils.ContentType
 
 @Composable
-fun HomeScreen(
-    onAgentsOverviewClick: () -> Unit,
-    onWEnginesOverviewClick: () -> Unit,
-    onBangbooOverviewClick: () -> Unit,
-    onDrivesOverviewClick: () -> Unit,
-    onAgentDetailClick: (Int) -> Unit,
-    onWEngineDetailClick: (Int) -> Unit,
-    onBangbooDetailClick: (Int) -> Unit,
-    navigateTo: (Screen) -> Unit
-) {
+fun HomeScreen(navigateTo: (Screen) -> Unit) {
     val viewModel: HomeViewModel = koinViewModel()
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     HomeScreenContent(uiState, onAction = { actions ->
         when (actions) {
-            HomeAction.ClickAgentsOverview -> onAgentsOverviewClick()
-            HomeAction.ClickWEnginesOverview -> onWEnginesOverviewClick()
-            HomeAction.ClickBangbooOverview -> onBangbooOverviewClick()
-            HomeAction.ClickDrivesOverview -> onDrivesOverviewClick()
-
-            is HomeAction.ClickAgent -> {
-                onAgentDetailClick(actions.id)
-            }
-
-            is HomeAction.ClickWEngine -> {
-                onWEngineDetailClick(actions.id)
-            }
-
-            is HomeAction.ClickBangboo -> {
-                onBangbooDetailClick(actions.id)
-            }
-
             is HomeAction.NavigateTo -> {
                 navigateTo(actions.route)
             }

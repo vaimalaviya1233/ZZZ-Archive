@@ -18,6 +18,7 @@ import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Rule
+import root.InitViewModel
 import utils.Language
 
 class InitViewModelTest {
