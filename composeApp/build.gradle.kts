@@ -120,9 +120,8 @@ kotlin {
 }
 
 
-val zzzVersionName = "Luciana 2025.06.10"
-val bundleVersionName = "1.1.36"
-val zzzVersionCode = 7
+val zzzVersionName = "1.3.0"
+val zzzVersionCode = 8
 val zzzPackageId = "com.mrfatworm.zzzarchive"
 
 android {
@@ -193,7 +192,7 @@ compose.desktop {
             }
             targetFormats(TargetFormat.Dmg, TargetFormat.Pkg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = desktopPackageName
-            packageVersion = bundleVersionName
+            packageVersion = zzzVersionName
             description = "Zenless Zone Zero Wiki App"
             copyright = "© 2024 mrfatworm. All rights reserved."
             linux {
