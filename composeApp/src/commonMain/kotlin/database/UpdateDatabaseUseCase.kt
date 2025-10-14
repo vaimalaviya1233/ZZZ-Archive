@@ -45,8 +45,5 @@ class UpdateDatabaseUseCase(
 
     suspend fun resetWikiDatabaseVersion() {
         systemConfigRepository.setAgentListDBVersion(0)
-        systemConfigRepository.setWEngineListDBVersion(0)
-        systemConfigRepository.setBangbooListDBVersion(0)
-        systemConfigRepository.setDriveListDBVersion(0)
     }
 }

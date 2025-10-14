@@ -17,17 +17,11 @@ class SystemConfigRepositoryImpl(private val dataStore: DataStore<Preferences>) 
         const val DEFAULT_BANNER_IGNORE_ID = 0
         const val DEFAULT_COVER_IMAGE_DB_VERSION = 0
         const val DEFAULT_AGENTS_LIST_DB_VERSION = 0
-        const val W_ENGINE_LIST_DB_VERSION = 0
-        const val BANGBOO_LIST_DB_VERSION = 0
-        const val DRIVE_LIST_DB_VERSION = 0
     }
 
     private val bannerIgnoreId = intPreferencesKey("banner_ignore_id")
     private val coverImageDBVersion = intPreferencesKey("cover_image_db_version")
     private val agentsListDBVersion = intPreferencesKey("agents_list_db_version")
-    private val wEngineListDBVersion = intPreferencesKey("w_engine_list_db_version")
-    private val bangbooListDBVersion = intPreferencesKey("bangboo_list_db_version")
-    private val driveListDBVersion = intPreferencesKey("drive_list_db_version")
 
     override fun getBannerIgnoreId(): Flow<Int> = dataStore.data.map {
         it[bannerIgnoreId] ?: DEFAULT_BANNER_IGNORE_ID
@@ -51,30 +45,6 @@ class SystemConfigRepositoryImpl(private val dataStore: DataStore<Preferences>) 
 
     override suspend fun setAgentListDBVersion(value: Int) {
         dataStore.edit { it[agentsListDBVersion] = value }
-    }
-
-    override fun getWEngineListDBVersion(): Flow<Int> = dataStore.data.map {
-        it[wEngineListDBVersion] ?: W_ENGINE_LIST_DB_VERSION
-    }
-
-    override suspend fun setWEngineListDBVersion(value: Int) {
-        dataStore.edit { it[wEngineListDBVersion] = value }
-    }
-
-    override fun getBangbooListDBVersion(): Flow<Int> = dataStore.data.map {
-        it[bangbooListDBVersion] ?: BANGBOO_LIST_DB_VERSION
-    }
-
-    override suspend fun setBangbooListDBVersion(value: Int) {
-        dataStore.edit { it[bangbooListDBVersion] = value }
-    }
-
-    override fun getDriveListDBVersion(): Flow<Int> = dataStore.data.map {
-        it[driveListDBVersion] ?: DRIVE_LIST_DB_VERSION
-    }
-
-    override suspend fun setDriveListDBVersion(value: Int) {
-        dataStore.edit { it[driveListDBVersion] = value }
     }
 
     override suspend fun clear() {

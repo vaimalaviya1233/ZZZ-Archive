@@ -40,30 +40,6 @@ class FakeSystemConfigRepository : SystemConfigRepository {
         agentListDBVersion = value
     }
 
-    override fun getWEngineListDBVersion(): Flow<Int> = flow {
-        emit(wEngineListDBVersion)
-    }
-
-    override suspend fun setWEngineListDBVersion(value: Int) {
-        wEngineListDBVersion = value
-    }
-
-    override fun getBangbooListDBVersion(): Flow<Int> = flow {
-        emit(bangbooListDBVersion)
-    }
-
-    override suspend fun setBangbooListDBVersion(value: Int) {
-        bangbooListDBVersion = value
-    }
-
-    override fun getDriveListDBVersion(): Flow<Int> = flow {
-        emit(driveListDBVersion)
-    }
-
-    override suspend fun setDriveListDBVersion(value: Int) {
-        driveListDBVersion = value
-    }
-
     override suspend fun clear() {
         bannerIgnoreId = 0
         coverImageDBVersion = 0

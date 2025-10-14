@@ -6,10 +6,8 @@
 package feature.agent.data.repository
 
 import feature.agent.data.database.FakeAgentListDao
-import feature.agent.model.stubAgentDetail
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertNull
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import network.FakeZzzHttp
@@ -53,18 +51,5 @@ class AgentRepositoryImplTest {
         agentsListDao.deleteAgentsList()
         val result = repository.getAgentsList("").first()
         assertEquals(0, result.size)
-    }
-
-    @Test
-    fun `Get agent detail success`() = runTest {
-        val result = repository.getAgentDetail(20, "").getOrNull()
-        assertEquals(stubAgentDetail, result)
-    }
-
-    @Test
-    fun `Get agent detail error`() = runTest {
-        httpClient.setError(true)
-        val result = repository.getAgentDetail(20, "").getOrNull()
-        assertNull(result)
     }
 }
